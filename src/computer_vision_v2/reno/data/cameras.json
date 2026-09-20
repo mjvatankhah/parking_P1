@@ -1,0 +1,26 @@
+{
+  "model_path": "yolov8n.pt",
+  "cameras": [
+    {
+      "id": "cam2",
+      "type": "video",
+      "source": "src/computer_vision_v2/video/c5.mp4",
+      "line": [
+        [
+          0.1,
+          0.8
+        ],
+        [
+          0.7,
+          0.8
+        ]
+      ],
+      "dir": "entry_exit",
+      "inside_point": [
+        0.6,
+        0.7
+      ],
+      "coordinate_space": "normalized"
+    }
+  ]
+}

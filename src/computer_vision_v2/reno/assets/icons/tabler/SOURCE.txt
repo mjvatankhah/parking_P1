@@ -1,0 +1,8 @@
+RENO icon set
+
+The sidebar icon direction is based on the open-source Tabler Icons visual language:
+https://tabler.io/icons
+https://github.com/tabler/tabler-icons
+
+Tabler Icons are MIT licensed. The files in this folder are small, local SVG/PNG assets
+used by RENO so the desktop application does not depend on an internet connection.

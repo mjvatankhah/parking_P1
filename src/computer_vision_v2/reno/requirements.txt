@@ -1,0 +1,15 @@
+# Kivy - the desktop UI framework the app is built with.
+kivy>=2.3.0
+
+# The two libraries that make Persian text render correctly:
+# arabic-reshaper joins Persian/Arabic letters into their correct
+# contextual shapes; python-bidi puts the joined text in the correct
+# right-to-left visual order. See ui/theme.py's rtl() function.
+arabic-reshaper>=3.0.0
+python-bidi>=0.4.2
+
+# Decode RTSP streams and local video files for dashboard camera cards.
+opencv-python>=4.10.0
+
+# Read the backend's committed plate events.
+psycopg[binary]>=3.3.5
