@@ -7,8 +7,11 @@ requires-python = ">=3.13"
 dependencies = [
     "arabic-reshaper>=3.0.1",
     "kivy>=2.3.1",
+    "onnx>=1.23.0",
     "onnxruntime>=1.29.0",
+    "onnxslim>=0.1.96",
     "opencv-python>=5.0.0.93",
+    "openvino>=2026.4.0",
     "psycopg>=3.3.5",
     "psycopg2-binary>=2.9.12",
     "python-bidi>=0.6.11",
