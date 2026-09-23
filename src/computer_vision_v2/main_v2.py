@@ -67,12 +67,16 @@ class Pipeline:
 
     def _run_pipline(self):
         while self.running:
+            # پیش‌نمایش منتظر مدل نمی‌ماند و فقط تصویر خام جدید را می‌گیرد.
+            raw_frames = self.camera_manager.get_all_raw_frames()
+            for frame in raw_frames:
+                self.preview.publish(frame)
+
             frames = self.camera_manager.get_all_frame()
-            if not frames :
+            if not frames and not raw_frames:
                 time.sleep(0.005)
                 continue
             for frame in frames:
-                self.preview.publish(frame)
                 self._dispatch_frame(self.line_queue,frame,"line_queue")
                 self._dispatch_frame(self.crop_queue,frame,"crop_queue")
 
@@ -125,4 +129,3 @@ def main():
 if __name__ == "__main__":
     main()
             
-

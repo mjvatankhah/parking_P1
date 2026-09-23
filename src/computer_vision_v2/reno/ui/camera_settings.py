@@ -524,6 +524,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
             line=[[x1, y1], [x2, y2]],
             inside_point=inside_point,
             coordinate_space=coordinate_space,
+            frame_step=existing.frame_step if existing else 0,
         )
 
         if is_new:

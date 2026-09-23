@@ -8,13 +8,17 @@ class CameraManager:
         self.config = config_file
         self.streams = {}
         self.last_idx = {}
+        self.last_raw_idx = {}
 
     def start_all(self):
 
         model_path = self.config["model_path"]
         for camera in self.config["cameras"]:
             
-            stream_manager = StreamManager(camera['id'],camera["source"],camera['type'],model_path)
+            stream_manager = StreamManager(
+                camera['id'], camera['source'], camera['type'], model_path,
+                frame_step=camera.get('frame_step', 0),
+            )
             
             # اگر به هر دلیلی دوربین استارت نشد باقی دوربین ها اجراشون متوقف نشه
             try:
@@ -26,6 +30,7 @@ class CameraManager:
 
             self.streams[camera['id']] = stream_manager
             self.last_idx[camera['id']] = -1
+            self.last_raw_idx[camera['id']] = -1
     def get_all_frame(self):
         frames = []
         for C_id , sm in self.streams.items():
@@ -34,6 +39,17 @@ class CameraManager:
                 continue
             self.last_idx[C_id] = f.frame_idx
             frames.append(f) 
+        return frames
+
+    def get_all_raw_frames(self):
+        """تصاویر جدید برای پیش‌نمایش؛ مستقل از نتیجهٔ Track."""
+        frames = []
+        for camera_id, stream in self.streams.items():
+            frame = stream.get_latest_raw_frame()
+            if frame is None or frame.frame_idx == self.last_raw_idx[camera_id]:
+                continue
+            self.last_raw_idx[camera_id] = frame.frame_idx
+            frames.append(frame)
         return frames
 
     def stop_all(self) :

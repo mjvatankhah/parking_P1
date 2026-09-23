@@ -68,6 +68,7 @@ class Camera:
     line: list = field(default_factory=lambda: [[0.2, 0.6], [0.8, 0.6]])
     inside_point: list | None = None
     coordinate_space: str = "normalized"
+    frame_step: int = 0
 
     def source_type_label(self) -> str:
         return SOURCE_TYPE_LABELS.get(self.source_type, self.source_type)
@@ -88,6 +89,7 @@ class Camera:
             "dir": self.role,
             "inside_point": self.inside_point,
             "coordinate_space": self.coordinate_space,
+            "frame_step": self.frame_step,
         }
 
     @staticmethod
@@ -101,4 +103,5 @@ class Camera:
             line=data.get("line", [[775, 132], [399, 561]]),
             inside_point=data.get("inside_point"),
             coordinate_space=data.get("coordinate_space", "pixels"),
+            frame_step=data.get("frame_step", 0),
         )

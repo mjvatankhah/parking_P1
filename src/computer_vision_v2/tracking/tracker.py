@@ -1,3 +1,4 @@
+import numpy as np
 from ultralytics import YOLO
 
 from .frame_info import Detection, TrackedFrame
@@ -11,6 +12,16 @@ class CameraTracker:
     def __init__(self, camera_id, model_path):
         self.camera_id = camera_id
         self.model = YOLO("yolov8n_openvino_model", task="detect")
+
+    def warmup(self):
+        # آماده‌سازی سنگین OpenVINO قبل از شروع ویدئو انجام می‌شود.
+        # تصویر سیاه وارد صف‌ها و پیش‌نمایش نمی‌شود.
+        image = np.zeros((720, 1280, 3), dtype=np.uint8)
+        for _ in range(2):
+            self.process(frame_idx=0, ts=0, image=image)
+        # سابقهٔ تصویر آزمایشی نباید روی شناسه‌های خودروهای واقعی اثر بگذارد.
+        for tracker in self.model.predictor.trackers:
+            tracker.reset()
         
     # تابع پردازش فریم
     def process(self, frame_idx, ts, image):
@@ -24,8 +35,6 @@ class CameraTracker:
             imgsz=(256,416)
             
         )
-        
-
         result = results[0]
         
         detections = []
@@ -77,4 +86,3 @@ class CameraTracker:
             image=image,
             detections=detections,
         )
-

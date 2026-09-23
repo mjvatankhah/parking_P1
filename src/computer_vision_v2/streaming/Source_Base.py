@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import math
 import cv2 as cv
 
 class BaseSource(ABC):
@@ -30,6 +31,10 @@ class VideoSource(BaseSource):
     def get_frame(self):
 
         return self.capture.read()
+
+    def get_fps(self):
+        fps = self.capture.get(cv.CAP_PROP_FPS)
+        return fps if math.isfinite(fps) and fps > 0 else 25.0
         
     
 

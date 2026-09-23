@@ -4,6 +4,7 @@
     {
       "id": "cam2",
       "type": "video",
+      "frame_step": 2,
       "source": "src/computer_vision_v2/video/c5.mp4",
       "line": [
         [

@@ -16,6 +16,8 @@ import numpy as np
 
 
 MAX_FRAME_AGE = 5.0
+PREVIEW_FPS = 30
+PREVIEW_MAX_WIDTH = 960
 
 
 def preview_path(camera_id, source):
@@ -25,7 +27,8 @@ def preview_path(camera_id, source):
 
 
 def annotate_frame(frame):
-    image = frame.image.copy()
+    # تصویر خام فقط خوانده می‌شود؛ کپی زمانی لازم است که روی تصویر رسم کنیم.
+    image = frame.image.copy() if frame.detections else frame.image
     height, width = image.shape[:2]
     for detection in frame.detections:
         if detection.class_id not in (0, 2):
@@ -39,8 +42,8 @@ def annotate_frame(frame):
         cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
         cv2.putText(image, label, (x1, max(18, y1 - 7)),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 2)
-    if width > 1280:
-        image = cv2.resize(image, (1280, max(1, round(height * 1280 / width))))
+    if width > PREVIEW_MAX_WIDTH:
+        image = cv2.resize(image, (PREVIEW_MAX_WIDTH, max(1, round(height * PREVIEW_MAX_WIDTH / width))))
     return image
 
 
@@ -73,7 +76,8 @@ class PreviewPublisher:
                 logging.getLogger(__name__).warning("Could not remove preview %s", path)
 
     def _run(self):
-        while not self._stop.wait(0.1):
+        while not self._stop.is_set():
+            started = time.monotonic()
             with self._lock:
                 pending, self._pending = self._pending, {}
             for camera_id, (frame, received_at) in pending.items():
@@ -82,6 +86,8 @@ class PreviewPublisher:
                 except Exception:
                     # Preview failures must never interrupt recognition/OCR.
                     logging.getLogger(__name__).exception("Preview failed for %s", camera_id)
+            # زمان encode هم جزو فاصلهٔ فریم‌هاست؛ هر بار ۳۳ میلی‌ثانیه اضافه نمی‌کنیم.
+            self._stop.wait(max(0, 1 / PREVIEW_FPS - (time.monotonic() - started)))
 
     @staticmethod
     def _write(path, frame, received_at):

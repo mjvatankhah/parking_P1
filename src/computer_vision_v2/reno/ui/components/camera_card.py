@@ -1,7 +1,7 @@
 """
 ui/components/camera_card.py
 
-One annotated backend preview tile inside the Cameras screen.
+One live backend preview tile inside the Cameras screen.
 """
 
 from kivy.uix.boxlayout import BoxLayout
@@ -17,7 +17,7 @@ from computer_vision_v2.reno.models.camera import Camera, STATUS_ONLINE, STATUS_
 from computer_vision_v2.reno.ui import theme
 from computer_vision_v2.reno.ui.theme import COLORS, FONT_SIZE, SPACING, rtl
 from computer_vision_v2.reno.ui.components.common import Card, StatusDot
-from computer_vision_v2.preview import preview_path, read_preview
+from computer_vision_v2.preview import PREVIEW_FPS, preview_path, read_preview
 from computer_vision_v2.reno.services.camera_service import camera_service
 
 
@@ -86,7 +86,7 @@ class CameraCard(Card):
         if self._poll_event is not None or self.parent is None:
             return
         self._apply_state("connecting")
-        self._poll_event = Clock.schedule_interval(self._update_frame, 1 / 10)
+        self._poll_event = Clock.schedule_interval(self._update_frame, 1 / PREVIEW_FPS)
         self._update_frame(0)
 
     def stop_stream(self):
@@ -100,7 +100,7 @@ class CameraCard(Card):
         if self._state == state:
             return
         self._state = state
-        labels = {"connecting": "در انتظار پردازش", "online": "پردازش زنده", "offline": "بدون تصویر"}
+        labels = {"connecting": "در انتظار تصویر", "online": "تصویر زنده", "offline": "بدون تصویر"}
         colors = {"connecting": COLORS["warning"], "online": COLORS["online"], "offline": COLORS["offline"]}
         color = colors[state]
         self._status_label.text = rtl(labels[state])
@@ -109,7 +109,7 @@ class CameraCard(Card):
         if state != "online":
             self._video_surface.opacity = 0
             self._message.opacity = 1
-            self._message.text = rtl("منتظر تصویر پردازش‌شده؛ بک‌اند باید در حال اجرا باشد")
+            self._message.text = rtl("منتظر تصویر دوربین؛ بک‌اند باید در حال اجرا باشد")
         camera_service.set_status(
             self.camera.id, STATUS_ONLINE if state == "online" else STATUS_OFFLINE,
         )
@@ -129,7 +129,10 @@ class CameraCard(Card):
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         rgb_frame = cv2.flip(rgb_frame, 0)
         frame_size = (rgb_frame.shape[1], rgb_frame.shape[0])
-        texture = Texture.create(size=frame_size, colorfmt="rgb")
+        # تا اندازهٔ تصویر ثابت است، همان Texture قبلی را به‌روزرسانی می‌کنیم.
+        texture = self._video_surface.texture
+        if texture is None or texture.size != frame_size:
+            texture = Texture.create(size=frame_size, colorfmt="rgb")
         texture.blit_buffer(
             rgb_frame.tobytes(), colorfmt="rgb", bufferfmt="ubyte"
         )
@@ -153,6 +156,10 @@ class _VideoSurface(Widget):
             Color(1, 1, 1, 1)
             self._frame_rect = Rectangle(pos=self.pos, size=self.size)
         self.bind(pos=self._redraw, size=self._redraw)
+
+    @property
+    def texture(self):
+        return self._texture
 
     @property
     def has_texture(self):
