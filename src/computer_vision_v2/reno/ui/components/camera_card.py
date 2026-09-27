@@ -68,7 +68,10 @@ class CameraCard(Card):
 
     def _build_video_area(self, camera: Camera):
         area = _RoundedArea(bg_color=theme.rgba("#10261F"))
-        self._video_surface = _VideoSurface()
+        # FloatLayout sizes children automatically, but only positions them
+        # when pos_hint is set. Keep the video inside its tile when the
+        # camera grid is laid out, scrolled, or resized.
+        self._video_surface = _VideoSurface(pos_hint={"x": 0, "y": 0})
         self._message = Label(
             text=rtl("در حال اتصال به دوربین…"),
             font_name=theme.APP_FONT_NAME,

@@ -10,6 +10,9 @@ class Detection:
     bbox: tuple
     class_id: int
     confidence: float
+    # confidence remains the last YOLO score, not optical-flow confidence.
+    is_predicted: bool = False
+    tracking_quality: float | None = None
 
 
 @dataclass
@@ -19,4 +22,3 @@ class TrackedFrame:
     ts: float
     image: object
     detections: list
-

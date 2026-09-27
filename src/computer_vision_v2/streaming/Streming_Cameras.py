@@ -8,7 +8,7 @@ from computer_vision_v2.tracking.tracker import CameraTracker
 Frame = namedtuple('Frame','camera_id frame_idx ts image detections')
 
 class StreamManager:
-    def __init__(self,camera_id, source,source_type,model_path):
+    def __init__(self,camera_id, source,source_type,model_path,detection_interval=3):
         self.camera_id = camera_id
         self.source = source
         self.source_type = source_type
@@ -17,7 +17,8 @@ class StreamManager:
         self.my_source = None
         self.frame = None
         self.frame_idx = 0
-        self.tracker = CameraTracker( camera_id=camera_id, model_path=model_path )
+        self.tracker = CameraTracker(camera_id=camera_id, model_path=model_path,
+                                     detection_interval=detection_interval)
 
         # یعنی چی اینجا
         self.lock = threading.Lock()

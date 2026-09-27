@@ -1,0 +1,172 @@
+import unittest
+import queue
+import json
+from pathlib import Path
+import tempfile
+from unittest.mock import Mock, patch
+
+import cv2
+import numpy as np
+
+from computer_vision_v2.tracking.frame_info import Detection
+from computer_vision_v2.tracking.tracker import CameraTracker
+from computer_vision_v2.Line_Manager.line_detector import LineDetector
+from computer_vision_v2.best_crop_selector import BestCropSelector
+from computer_vision_v2.workers.workers import line_worker, crop_worker
+from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
+from computer_vision_v2.tracking.optical_flow import OpticalFlow
+
+
+def scene(dx=0, dy=0):
+    image = np.zeros((180, 240, 3), dtype=np.uint8)
+    texture = np.random.default_rng(42).integers(0, 256, (60, 70, 3), dtype=np.uint8)
+    image[40 + dy:100 + dy, 50 + dx:120 + dx] = texture
+    return image
+
+
+class HybridTrackingTests(unittest.TestCase):
+    def make_tracker(self, interval=3):
+        with patch('computer_vision_v2.tracking.tracker.YOLO'):
+            tracker = CameraTracker('cam', 'unused', interval)
+        return tracker
+
+    def test_schedule_motion_and_same_id_across_detector_refresh(self):
+        tracker = self.make_tracker()
+        boxes = [Detection(7, (50 + dx, 40, 120 + dx, 100), 2, .9) for dx in (0, 9, 18)]
+        with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]) as detect:
+            frames = [tracker.process(i + 1, i / 25, scene(dx=i * 3)) for i in range(7)]
+        self.assertEqual(detect.call_count, 3)
+        self.assertEqual([f.detections[0].is_predicted for f in frames],
+                         [False, True, True, False, True, True, False])
+        for i, frame in enumerate(frames):
+            det = frame.detections[0]
+            self.assertEqual(det.track_id, 7)
+            self.assertEqual(det.confidence, .9)
+            self.assertEqual(frame.frame_idx, i + 1)
+            self.assertAlmostEqual(det.bbox[0], 50 + i * 3, delta=1)
+        self.assertGreater(frames[1].detections[0].tracking_quality, .5)
+
+    def test_crossing_on_flow_frame_reaches_crop_and_is_not_duplicated(self):
+        tracker = self.make_tracker()
+        line = LineDetector('cam', line=((0, 105), (240, 105)), direction='entry')
+        selector = BestCropSelector()
+        events = []
+        boxes = [Detection(7, (50, 40 + dy, 120, 100 + dy), 2, .9) for dy in (0, 24)]
+        with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]):
+            for i in range(4):
+                frame = tracker.process(i + 1, i / 25, scene(dy=i * 8))
+                selector.update('cam', frame)
+                events.extend(line.update(frame))
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]['frame_idx'], 2)
+        self.assertEqual(events[0]['track_id'], 7)
+        self.assertEqual(events[0]['direction'], 'entry')
+        self.assertIsNotNone(selector.get('cam', 7))
+
+    def test_crossing_on_detector_frame_still_works(self):
+        tracker = self.make_tracker()
+        line = LineDetector('cam', line=((0, 120), (240, 120)), direction='exit')
+        boxes = [Detection(7, (50, 40 + dy, 120, 100 + dy), 2, .9) for dy in (0, 24)]
+        events = []
+        with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]):
+            for i in range(4):
+                events.extend(line.update(tracker.process(i + 1, i / 25, scene(dy=i * 8))))
+        self.assertEqual([(e['frame_idx'], e['direction']) for e in events], [(4, 'exit')])
+
+    def test_both_crossing_sources_reach_ocr_and_database_queue_once(self):
+        for line_y in (105, 120):
+            with self.subTest(line_y=line_y):
+                tracker = self.make_tracker()
+                boxes = [Detection(7, (50, 40 + dy, 120, 100 + dy), 2, .9) for dy in (0, 24)]
+                with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]):
+                    frames = [tracker.process(i + 1, i / 25, scene(dy=i * 8)) for i in range(4)]
+                line_q, crop_q, cross_q, ocr_q, db_q = [queue.Queue() for _ in range(5)]
+                for frame in frames:
+                    line_q.put(frame)
+                    crop_q.put(frame)
+                line_q.put(None)
+                crop_q.put(None)
+                detector = LineDetector('cam', line=((0, line_y), (240, line_y)), direction='entry')
+                with patch('builtins.print'):
+                    line_worker(line_q, cross_q, detector, lambda: True)
+                    crop_worker(crop_q, cross_q, ocr_q, BestCropSelector(), lambda: True)
+                reader = Mock()
+                reader.read.return_value = ('TEST-PLATE', .95, 'test-crop.jpg')
+                ocr_q.put(None)
+                ocr_worker(ocr_q, db_q, reader, lambda: True)
+                self.assertEqual(db_q.qsize(), 1)
+                record = db_q.get_nowait()
+                self.assertEqual(record['track_id'], 7)
+                self.assertEqual(record['direction'], 'entry')
+                self.assertEqual(record['plate_text'], 'TEST-PLATE')
+                reader.read.assert_called_once()
+
+    def test_untrackable_image_falls_back_to_detector(self):
+        tracker = self.make_tracker()
+        with patch.object(tracker, '_detect', return_value=[Detection(7, (50, 40, 120, 100), 2, .9)]) as detect:
+            tracker.process(1, 0, scene())
+            result = tracker.process(2, .04, np.zeros_like(scene()))
+        self.assertEqual(detect.call_count, 2)
+        self.assertFalse(result.detections[0].is_predicted)
+        self.assertEqual(tracker.flow_fallbacks, 1)
+
+    def test_gap_and_resolution_change_force_detection(self):
+        for index, ts, image in [(4, .04, scene()), (2, 2, scene()),
+                                 (2, .04, cv2.resize(scene(), (120, 90)))]:
+            with self.subTest(index=index, ts=ts, shape=image.shape):
+                tracker = self.make_tracker()
+                with patch.object(tracker, '_detect', return_value=[]) as detect:
+                    tracker.process(1, 0, scene())
+                    tracker.process(index, ts, image)
+                self.assertEqual(detect.call_count, 2)
+
+    def test_empty_scene_keeps_periodic_detection_for_new_arrivals(self):
+        tracker = self.make_tracker()
+        with patch.object(tracker, '_detect', return_value=[]) as detect:
+            for i in range(7):
+                self.assertEqual(tracker.process(i + 1, i / 25, scene()).detections, [])
+        self.assertEqual(detect.call_count, 3)
+
+    def test_interval_one_is_detector_only(self):
+        tracker = self.make_tracker(1)
+        with patch.object(tracker, '_detect', return_value=[]) as detect, patch.object(tracker.flow, 'seed') as seed:
+            for i in range(4):
+                tracker.process(i + 1, i / 25, scene())
+        self.assertEqual(detect.call_count, 4)
+        seed.assert_not_called()
+
+    def test_default_fields_are_backwards_compatible(self):
+        det = Detection(1, (1, 2, 3, 4), 2, .9)
+        self.assertFalse(det.is_predicted)
+        self.assertIsNone(det.tracking_quality)
+
+    def test_invalid_intervals(self):
+        for value in (0, -1, 1.5, True):
+            with self.assertRaises(ValueError):
+                self.make_tracker(value)
+
+    def test_small_rotation_does_not_inflate_bbox(self):
+        flow = OpticalFlow()
+        flow.seed(scene(), [Detection(7, (50, 40, 120, 100), 2, .9)])
+        matrix = cv2.getRotationMatrix2D((85, 70), 5, 1)
+        rotated = cv2.warpAffine(scene(), matrix, (240, 180))
+        detections = flow.advance(rotated)
+        self.assertIsNotNone(detections)
+        x1, y1, x2, y2 = detections[0].bbox
+        self.assertAlmostEqual(x2 - x1, 70, delta=2)
+        self.assertAlmostEqual(y2 - y1, 60, delta=2)
+
+    def test_ui_save_preserves_detection_interval(self):
+        from computer_vision_v2.reno.services.camera_service import CameraService
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'cameras.json'
+            path.write_text(json.dumps({'model_path': 'test.pt', 'detection_interval': 1, 'cameras': []}))
+            service = CameraService()
+            service._store_path = str(path)
+            service._cameras = service._load()
+            service._save()
+            self.assertEqual(json.loads(path.read_text())['detection_interval'], 1)
+
+
+if __name__ == '__main__':
+    unittest.main()

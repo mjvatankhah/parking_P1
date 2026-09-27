@@ -1,0 +1,225 @@
+{
+  "scope": "decode + CameraTracker; no network, pacing, UI, OCR or database; no frame drops",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "opencv": "5.0.0",
+  "video": "src/computer_vision_v2/video/c5.mp4",
+  "model": "yolov8n_openvino_model",
+  "imgsz": [
+    256,
+    416
+  ],
+  "baseline_median_fps": 3.921935803264725,
+  "hybrid_median_fps": 8.520856152991367,
+  "speedup": 2.1726148974438533,
+  "throughput_gain_percent": 117.26148974438533,
+  "runs": [
+    {
+      "interval": 1,
+      "source_fps": 23.99980800153599,
+      "total_frames": 180,
+      "measured_frames": 165,
+      "warmup_frames": 15,
+      "fps": 3.7152186412692814,
+      "mean_frame_ms": 269.1631628060405,
+      "p95_frame_ms": 442.00799299960636,
+      "detector_frame_ms": 269.1631628060405,
+      "flow_frame_ms": null,
+      "line_crop_mean_ms": 5.35196395757146,
+      "yolo_calls": 165,
+      "flow_frames": 0,
+      "flow_fallbacks": 0,
+      "unique_ids": 6,
+      "frames_with_tracks": 174,
+      "crossing_events": [
+        {
+          "camera_id": "benchmark",
+          "track_id": 2,
+          "bbox": [
+            301.397216796875,
+            67.80570983886719,
+            724.6528930664062,
+            453.0267028808594
+          ],
+          "class_id": 2,
+          "confidence": 0.875821590423584,
+          "frame_idx": 44,
+          "ts": 2486.053679162,
+          "side": 1,
+          "direction": "entry"
+        },
+        {
+          "camera_id": "benchmark",
+          "track_id": 5,
+          "bbox": [
+            214.35452270507812,
+            100.29698181152344,
+            628.9900512695312,
+            560.2327880859375
+          ],
+          "class_id": 2,
+          "confidence": 0.4454467296600342,
+          "frame_idx": 143,
+          "ts": 2512.652186547,
+          "side": 1,
+          "direction": "entry"
+        }
+      ]
+    },
+    {
+      "interval": 3,
+      "source_fps": 23.99980800153599,
+      "total_frames": 180,
+      "measured_frames": 165,
+      "warmup_frames": 15,
+      "fps": 8.69806078039728,
+      "mean_frame_ms": 114.96815499998445,
+      "p95_frame_ms": 296.2410059999456,
+      "detector_frame_ms": 253.01775277611299,
+      "flow_frame_ms": 20.5873075407945,
+      "line_crop_mean_ms": 5.715146212115184,
+      "yolo_calls": 67,
+      "flow_frames": 98,
+      "flow_fallbacks": 21,
+      "unique_ids": 6,
+      "frames_with_tracks": 165,
+      "crossing_events": [
+        {
+          "camera_id": "benchmark",
+          "track_id": 2,
+          "bbox": [
+            43.22703853921064,
+            67.46470229308915,
+            979.0648909253804,
+            457.8533220083229
+          ],
+          "class_id": 2,
+          "confidence": 0.875821590423584,
+          "frame_idx": 46,
+          "ts": 2530.071540923,
+          "side": 1,
+          "direction": "entry"
+        },
+        {
+          "camera_id": "benchmark",
+          "track_id": 7,
+          "bbox": [
+            228.8104248046875,
+            97.75123596191406,
+            612.4283447265625,
+            556.0189208984375
+          ],
+          "class_id": 2,
+          "confidence": 0.4454467296600342,
+          "frame_idx": 143,
+          "ts": 2542.815615173,
+          "side": 1,
+          "direction": "entry"
+        }
+      ]
+    },
+    {
+      "interval": 3,
+      "source_fps": 23.99980800153599,
+      "total_frames": 180,
+      "measured_frames": 165,
+      "warmup_frames": 15,
+      "fps": 8.343651525585456,
+      "mean_frame_ms": 119.85160177573837,
+      "p95_frame_ms": 321.1582070002805,
+      "detector_frame_ms": 264.0524961193953,
+      "flow_frame_ms": 21.26527605099334,
+      "line_crop_mean_ms": 5.519927412150895,
+      "yolo_calls": 67,
+      "flow_frames": 98,
+      "flow_fallbacks": 21,
+      "unique_ids": 6,
+      "frames_with_tracks": 165,
+      "crossing_events": [
+        {
+          "camera_id": "benchmark",
+          "track_id": 2,
+          "bbox": [
+            43.22703853921064,
+            67.46470229308915,
+            979.0648909253804,
+            457.8533220083229
+          ],
+          "class_id": 2,
+          "confidence": 0.875821590423584,
+          "frame_idx": 46,
+          "ts": 2553.318012446,
+          "side": 1,
+          "direction": "entry"
+        },
+        {
+          "camera_id": "benchmark",
+          "track_id": 7,
+          "bbox": [
+            228.8104248046875,
+            97.75123596191406,
+            612.4283447265625,
+            556.0189208984375
+          ],
+          "class_id": 2,
+          "confidence": 0.4454467296600342,
+          "frame_idx": 143,
+          "ts": 2566.123847449,
+          "side": 1,
+          "direction": "entry"
+        }
+      ]
+    },
+    {
+      "interval": 1,
+      "source_fps": 23.99980800153599,
+      "total_frames": 180,
+      "measured_frames": 165,
+      "warmup_frames": 15,
+      "fps": 4.1286529652601685,
+      "mean_frame_ms": 242.20974938177804,
+      "p95_frame_ms": 347.4086100000022,
+      "detector_frame_ms": 242.20974938177804,
+      "flow_frame_ms": null,
+      "line_crop_mean_ms": 4.62077345459737,
+      "yolo_calls": 165,
+      "flow_frames": 0,
+      "flow_fallbacks": 0,
+      "unique_ids": 6,
+      "frames_with_tracks": 174,
+      "crossing_events": [
+        {
+          "camera_id": "benchmark",
+          "track_id": 2,
+          "bbox": [
+            301.397216796875,
+            67.80570983886719,
+            724.6528930664062,
+            453.0267028808594
+          ],
+          "class_id": 2,
+          "confidence": 0.875821590423584,
+          "frame_idx": 44,
+          "ts": 2584.363944067,
+          "side": 1,
+          "direction": "entry"
+        },
+        {
+          "camera_id": "benchmark",
+          "track_id": 5,
+          "bbox": [
+            214.35452270507812,
+            100.29698181152344,
+            628.9900512695312,
+            560.2327880859375
+          ],
+          "class_id": 2,
+          "confidence": 0.4454467296600342,
+          "frame_idx": 143,
+          "ts": 2607.837109111,
+          "side": 1,
+          "direction": "entry"
+        }
+      ]
+    }
+  ]
+}

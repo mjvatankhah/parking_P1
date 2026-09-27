@@ -44,6 +44,7 @@ class CameraService:
         # they are never mixed into a normal run silently.
         self._store_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "cameras.json")
         self._model_path = "yolov8n.pt"
+        self._detection_interval = 3
         self._cameras: List[Camera] = self._load()
         if MOCK_DATA_ENABLED:
             self._cameras = [
@@ -101,6 +102,7 @@ class CameraService:
             # save back using the pipeline's native config structure.
             if isinstance(data, dict):
                 self._model_path = data.get("model_path", self._model_path)
+                self._detection_interval = data.get("detection_interval", 3)
                 camera_items = data.get("cameras", [])
             else:
                 camera_items = data
@@ -120,6 +122,7 @@ class CameraService:
             json.dump(
                 {
                     "model_path": self._model_path,
+                    "detection_interval": self._detection_interval,
                     "cameras": [camera.to_dict() for camera in self._cameras],
                 },
                 handle,

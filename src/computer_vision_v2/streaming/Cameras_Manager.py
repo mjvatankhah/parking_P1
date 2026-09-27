@@ -14,7 +14,10 @@ class CameraManager:
         model_path = self.config["model_path"]
         for camera in self.config["cameras"]:
             
-            stream_manager = StreamManager(camera['id'],camera["source"],camera['type'],model_path)
+            stream_manager = StreamManager(
+                camera['id'], camera["source"], camera['type'], model_path,
+                detection_interval=self.config.get('detection_interval', 3),
+            )
             
             # اگر به هر دلیلی دوربین استارت نشد باقی دوربین ها اجراشون متوقف نشه
             try:
