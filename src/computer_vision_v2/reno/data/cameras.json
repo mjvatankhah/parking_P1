@@ -4,7 +4,7 @@
     {
       "id": "cam2",
       "type": "video",
-      "source": "src/computer_vision_v2/video/c5.mp4",
+      "source": "https://s52.nysdot.skyvdn.com/rtplive/R11_140/playlist.m3u8",
       "line": [
         [
           0.1,
