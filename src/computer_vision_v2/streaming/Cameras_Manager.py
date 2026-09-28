@@ -1,6 +1,11 @@
 
-import json
+import logging
+
 from .Streming_Cameras import StreamManager
+from computer_vision_v2.database.camera_registry import prepare_camera
+
+
+logger = logging.getLogger(__name__)
 
 class CameraManager:
 
@@ -13,18 +18,15 @@ class CameraManager:
 
         model_path = self.config["model_path"]
         for camera in self.config["cameras"]:
-            
-            stream_manager = StreamManager(
-                camera['id'], camera["source"], camera['type'], model_path,
-                detection_interval=self.config.get('detection_interval', 3),
-            )
-            
-            # اگر به هر دلیلی دوربین استارت نشد باقی دوربین ها اجراشون متوقف نشه
             try:
-            # شروع فرایند همروندی برای این دوربین
+                prepare_camera(camera)
+                stream_manager = StreamManager(
+                    camera['id'], camera["source"], camera['type'], model_path,
+                    detection_interval=self.config.get('detection_interval', 3),
+                )
                 stream_manager.start()
-            except Exception as e:
-                print (f"camera {camera['id']} fail to start: {e}")
+            except Exception as exc:
+                logger.error("Camera %s could not start: %s", camera['id'], exc)
                 continue
 
             self.streams[camera['id']] = stream_manager
@@ -40,8 +42,7 @@ class CameraManager:
         return frames
 
     def stop_all(self) :
-
-        for sm in self.streams.values():
-            sm.stop()
-
-        self.streams = {}
+        for camera_id, stream in list(self.streams.items()):
+            if stream.stop():
+                del self.streams[camera_id]
+                self.last_idx.pop(camera_id, None)

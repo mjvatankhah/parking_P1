@@ -1,121 +1,80 @@
+"""Persist recognized crossings using the schema's vehicle and session tables."""
+
+import logging
+
 from computer_vision_v2.database.connection import get_connection
+from computer_vision_v2.database import queries
+
+
+logger = logging.getLogger(__name__)
+
+
+def _save_event(cursor, item):
+    plate_number = item["plate_text"] or None
+    if plate_number is not None:
+        cursor.execute(queries.INSERT_VEHICLE, (plate_number, "car"))
+
+    cursor.execute(
+        queries.INSERT_EVENT,
+        (
+            item["camera_id"], plate_number, item["direction"], item["class_id"],
+            item["confidence"], item["image_path"],
+        ),
+    )
+    event_id = cursor.fetchone()[0]
+
+    if plate_number is None:
+        return event_id
+
+    cursor.execute(queries.SELECT_OPEN_SESSION, (plate_number,))
+    open_session = cursor.fetchone()
+    if item["direction"] == "entry" and open_session is None:
+        cursor.execute(queries.INSERT_SESSION, (plate_number, event_id))
+    elif item["direction"] == "exit":
+        if open_session is None:
+            logger.warning("No open session for plate %s", plate_number)
+        else:
+            cursor.execute(queries.UPDATE_CLOSE_SESSION, (event_id, open_session[0]))
+    return event_id
 
 
 def database_worker(db_queue, running_flag):
-    connection = get_connection()
-    cursor = connection.cursor()
-
-    while True:
-        item = db_queue.get()
-
-        if item is None:
-            break
-
-        try:
-            plate_number = item["plate_text"] or None
-            camera_id = item["camera_id"]
-            class_id = item["class_id"]
-            direction = item["direction"]
-            confidence = item["confidence"]
-            image_path = item["image_path"]
-
-            if plate_number is not None:
-                cursor.execute(
-                    """
-                    INSERT INTO vehicle (plate_number, vehicle_type)
-                    VALUES (%s, %s)
-                    ON CONFLICT (plate_number) DO NOTHING;
-                    """,
-                    (plate_number, "car")
-                )
-
-            cursor.execute(
-                """
-                INSERT INTO event (
-                    camera_id,
-                    plate_number,
-                    event_type,
-                    class_id,
-                    confidence,
-                    image_path
-                )
-                VALUES (%s, %s, %s, %s, %s, %s)
-                RETURNING id;
-                """,
-                (
-                    camera_id,
-                    plate_number,
-                    direction,
-                    class_id,
-                    confidence,
-                    image_path,
-                )
-            )
-
-            event_id = cursor.fetchone()[0]
-            
-            if plate_number is not None:
-                cursor.execute(
-                    """
-                    SELECT id
-                    FROM vehicle_session
-                    WHERE plate_number = %s
-                    AND status = 'open'
-                    ORDER BY opened_at DESC
-                    LIMIT 1;
-                    """,
-                    (plate_number,)
-                )
-                open_session = cursor.fetchone()
-                if direction == "entry":
-                    if open_session is None:
-                        cursor.execute(
-                            """
-                            INSERT INTO vehicle_session (
-                                plate_number,
-                                entry_event_id,
-                                status
-                            )
-                            VALUES (%s, %s, 'open');
-                            """,
-                            (plate_number, event_id)
-                        )
-                elif direction == "exit":
-                    if open_session is not None:
-                        session_id = open_session[0]
-
-                        cursor.execute(
-                            """
-                            UPDATE vehicle_session
-                            SET
-                                exit_event_id = %s,
-                                status = 'closed',
-                                closed_at = NOW()
-                            WHERE id = %s;
-                            """,
-                            (event_id, session_id)
-                        )
-                    else:
-                        print(
-                            f"[DATABASE] open session not found "
-                            f"for plate={plate_number}"
-                        )
-
-
-
-            connection.commit()
-
-            print(
-                f"[DATABASE] event={event_id} "
-                f"camera={camera_id} "
-                f"class_id={class_id} "
-                f"plate={plate_number} "
-                f"direction={direction}"
-            )
-
-        except Exception as error:
-            connection.rollback()
-            print("[DATABASE ERROR]", error)
-
-    cursor.close()
-    connection.close()
+    connection = None
+    cursor = None
+    try:
+        while True:
+            item = db_queue.get()
+            if item is None:
+                db_queue.task_done()
+                break
+            try:
+                if connection is None:
+                    connection = get_connection()
+                    cursor = connection.cursor()
+                    logger.info("Database connection established")
+                event_id = _save_event(cursor, item)
+                connection.commit()
+                logger.info("Saved event %s from camera %s", event_id, item["camera_id"])
+            except Exception:
+                logger.exception("Could not save event from camera %s", item.get("camera_id"))
+                if connection is not None:
+                    try:
+                        connection.rollback()
+                    except Exception:
+                        logger.warning("Database rollback failed; connection will be reopened")
+                    try:
+                        if cursor is not None:
+                            cursor.close()
+                    except Exception:
+                        logger.warning("Database cursor cleanup failed")
+                    try:
+                        connection.close()
+                    except Exception:
+                        logger.warning("Database connection cleanup failed")
+                    connection = cursor = None
+            finally:
+                db_queue.task_done()
+    finally:
+        if connection is not None:
+            cursor.close()
+            connection.close()

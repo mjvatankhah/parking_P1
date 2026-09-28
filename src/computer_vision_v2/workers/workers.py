@@ -1,41 +1,33 @@
 
 import queue
+import logging
 import time
 
+from computer_vision_v2.workers.queueing import offer_event
+
+logger = logging.getLogger(__name__)
 
 def line_worker(line_queue, cross_queue, line_manager, is_running):
     """تشخیص عبور خودرو از خط، مستقل از ترد اصلی."""
-    processed = 0
-    last_report = time.monotonic()
     while True:
         try:
             tracked_frame = line_queue.get(timeout=0.1)
-            processed += 1
             
         except queue.Empty:
             continue
         if tracked_frame is None:
+            line_queue.task_done()
             break
         try:
             events = line_manager.update(tracked_frame)
-            
-            #-------------------------------------------------
-            print(
-            f"[LINE] camera={tracked_frame.camera_id} "
-            f"events={len(events)}")
-
             for event in events:
-                print("========== CROSSING EVENT ==========")
-                print(event)
-                print("====================================")
-            #-------------------------------------------------
-                try:
-                    
-                    cross_queue.put(event, block=not is_running())
-                except queue.Full:
-                    print("[line_worker] cross_queue full, event dropped")
-        except Exception as exc:  # noqa: BLE001
-            print(f"[line_worker] error: {exc}")
+                logger.info(
+                    "Crossing camera=%s track=%s direction=%s",
+                    event["camera_id"], event["track_id"], event["direction"],
+                )
+                offer_event(cross_queue, event, "cross", stopping=not is_running())
+        except Exception:  # noqa: BLE001
+            logger.exception("Line processing failed")
         finally:
             line_queue.task_done()
 
@@ -43,7 +35,7 @@ def line_worker(line_queue, cross_queue, line_manager, is_running):
 def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_after_cross=5.0):
     """انتخاب بهترین کراپ‌ها و ارسال به OCR، مستقل از ترد اصلی."""
     pending = {}
-    dispatched = set()
+    dispatched = {}
 
     def drain_cross_events():
         while True:
@@ -60,6 +52,11 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
 
     def flush_pending(final=False):
         now = time.monotonic()
+        # Match the line detector's finite track lifetime; this state must not
+        # grow for every vehicle in a long-running RTSP session.
+        for key, dispatched_at in list(dispatched.items()):
+            if now - dispatched_at > 120:
+                del dispatched[key]
         for key, pending_data in list(pending.items()):
             camera_id, track_id = key
             event = pending_data['event']
@@ -76,21 +73,11 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
                 continue
 
             pending.pop(key, None)
-            dispatched.add(key)
-
-            try:
-                ocr_queue.put(
-                    {
-                        "event": event,
-                        "crop": best_crop,
-                    },
-                    block=final or not is_running(),
-                )
-            except queue.Full:
-                print(
-                    f"[crop_worker] ocr_queue full, "
-                    f"dropped {camera_id}/{track_id}"
-                )
+            dispatched[key] = now
+            offer_event(
+                ocr_queue, {"event": event, "crop": best_crop},
+                "ocr", stopping=final or not is_running(),
+            )
         selector._cleanup(now)
 
     while True:
@@ -106,13 +93,14 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
             # ورکر خط قبلاً تمام شده؛ رویداد تازه‌ای در راه نیست.
             drain_cross_events()
             flush_pending(final=True)
+            crop_queue.task_done()
             break
         try:
             selector.update(tracked_frame.camera_id,tracked_frame)
             
 
-        except Exception as exc:  # noqa: BLE001
-            print(f"[crop_worker] error: {exc}")
+        except Exception:  # noqa: BLE001
+            logger.exception("Crop selection failed")
         finally:
             crop_queue.task_done()
         drain_cross_events()

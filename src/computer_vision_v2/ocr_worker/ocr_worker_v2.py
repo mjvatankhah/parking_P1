@@ -1,9 +1,12 @@
+from computer_vision_v2.workers.queueing import offer_event
+
 CAR_CLASS_ID = 2
 
 def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
     while True:
         item = ocr_queue.get()
         if item is None:  # سیگنال خاموش‌شدن
+            ocr_queue.task_done()
             break
 
         event = item["event"]
@@ -15,7 +18,6 @@ def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
         plate_txt = None
         confidence = float(event.get('confidence', 0.0))
         image_path = None
-        results = []
 
         if class_id == CAR_CLASS_ID and best_crop is not None:
             
@@ -33,7 +35,7 @@ def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
 
 
 
-        db_queue.put(
+        offer_event(db_queue,
             {
                 "camera_id": camera_id,
                 "track_id": track_id,
@@ -42,5 +44,6 @@ def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
                 "plate_text": plate_txt,
                 "confidence": confidence,
                 "image_path": image_path,
-            }
+            }, "database", stopping=not running_flag(),
         )
+        ocr_queue.task_done()

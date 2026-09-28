@@ -1,5 +1,6 @@
 import json
 import queue
+import logging
 import threading
 import time
 from pathlib import Path
@@ -18,6 +19,7 @@ from computer_vision_v2.workers.workers import line_worker , crop_worker
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.database.database_worker import database_worker
 
+logger = logging.getLogger(__name__)
 
 
 
@@ -38,8 +40,8 @@ class Pipeline:
         self.db_queue = queue.Queue(maxsize=200)
 
         self.running = False
+        self._started = False
 
-        self._threads = [] # نگه داری رفرنس هر نخ برای متوقف کرن و جوین دادن اونها
         self._worker_stages = []
         self._dispatch_thread = None
         
@@ -47,10 +49,12 @@ class Pipeline:
     def _start_workers(self, target, args):
         t = threading.Thread(target = target, args = args, daemon=True)
         t.start()
-        self._threads.append(t)
         return t
 
     def start(self):
+        if self._started:
+            raise RuntimeError("Create a new Pipeline to restart after changing camera settings")
+        self._started = True
         self.running = True
         self.preview.start()
         alive = lambda: self.running 
@@ -62,6 +66,9 @@ class Pipeline:
             (self.db_queue, self._start_workers(database_worker, (self.db_queue, alive))),
         ]
         self.camera_manager.start_all()
+        if not self.camera_manager.streams:
+            self.stop()
+            raise RuntimeError("No camera could start; check camera and gate registration")
 
         self._dispatch_thread = self._start_workers(self._run_pipline, ())
 
@@ -73,11 +80,11 @@ class Pipeline:
                 continue
             for frame in frames:
                 self.preview.publish(frame)
-                self._dispatch_frame(self.line_queue,frame,"line_queue")
-                self._dispatch_frame(self.crop_queue,frame,"crop_queue")
+                self._dispatch_frame(self.line_queue,frame)
+                self._dispatch_frame(self.crop_queue,frame)
 
     @staticmethod
-    def _dispatch_frame(my_queue,frame,name):
+    def _dispatch_frame(my_queue,frame):
         try:
             my_queue.put_nowait(frame)
         except queue.Full:
@@ -92,17 +99,31 @@ class Pipeline:
     def stop(self):
         self.running = False
         if self._dispatch_thread is not None:
-            self._dispatch_thread.join()
+            self._dispatch_thread.join(timeout=5)
+            if self._dispatch_thread.is_alive():
+                logger.error("Pipeline dispatch did not stop within five seconds")
+            else:
+                self._dispatch_thread = None
 
+        self.camera_manager.stop_all()
         self.preview.stop()
 
         # هر مرحله تمام شود، سپس مرحله بعد سیگنال پایان بگیرد.
+        still_running = []
         for input_queue, worker in self._worker_stages:
-            input_queue.put(None)
-            worker.join()
-            
-        self._worker_stages.clear()
-        self.camera_manager.stop_all()
+            if not worker.is_alive():
+                logger.error("Pipeline worker %s stopped unexpectedly", worker.name)
+                continue
+            try:
+                input_queue.put(None, timeout=5)
+            except queue.Full:
+                logger.error("Pipeline worker %s did not free its queue", worker.name)
+            worker.join(timeout=5)
+            if worker.is_alive():
+                logger.error("Pipeline worker %s did not stop", worker.name)
+                still_running.append((input_queue, worker))
+
+        self._worker_stages = still_running
 
 #  راه اندازی سیستم از طریق یک کامند
 def main():
@@ -125,4 +146,3 @@ def main():
 if __name__ == "__main__":
     main()
             
-

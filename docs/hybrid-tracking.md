@@ -34,9 +34,11 @@ to the database input queue, using a fake plate reader and no database writes.
 Flow can still drift or lose identities in real scenes; a matching event count
 on one clip does not establish recognition accuracy for all cameras.
 
-The source reader still processes frames sequentially in its existing thread.
-This change does not add an asynchronous capture buffer, guarantee live-stream
-latency, or increase the dashboard's approximately 10 Hz refresh rate.
+Video files still decode and process frames sequentially. RTSP capture now runs
+independently and retains only the latest frame while tracking is busy. Skipped
+capture indices force YOLO refresh rather than optical flow, so heavy load can
+increase detector calls; this does not guarantee live-stream latency or change
+the dashboard's approximately 10 Hz refresh rate.
 
 ## Reproduce the speed comparison
 

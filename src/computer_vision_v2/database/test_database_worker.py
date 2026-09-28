@@ -43,6 +43,27 @@ class DatabaseWorkerTests(unittest.TestCase):
         self.assertIn("INSERT INTO vehicle_session", queries)
         connection.commit.assert_called_once()
 
+    def test_connection_failure_reopens_for_next_event(self):
+        item = {
+            "camera_id": "cam2", "class_id": 0, "direction": "entry",
+            "plate_text": None, "confidence": 0.87, "image_path": None,
+        }
+        items = queue.Queue()
+        items.put(dict(item))
+        items.put(dict(item))
+        items.put(None)
+        broken = MagicMock()
+        broken.cursor.return_value.execute.side_effect = OSError("connection lost")
+        recovered = MagicMock()
+        recovered.cursor.return_value.fetchone.return_value = (17,)
+        with patch.object(module, "get_connection", side_effect=[broken, recovered]) as connect:
+            with self.assertLogs("computer_vision_v2.database.database_worker", level="ERROR"):
+                module.database_worker(items, lambda: True)
+        self.assertEqual(connect.call_count, 2)
+        broken.rollback.assert_called_once()
+        recovered.commit.assert_called_once()
+        self.assertEqual(items.unfinished_tasks, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -46,9 +46,14 @@ class RTSPSource(BaseSource):
         self.capture = None
 
     def connect(self):
-        self.capture = cv.VideoCapture(self.url)
+        self.capture = cv.VideoCapture(
+            self.url,
+            cv.CAP_FFMPEG,
+            [cv.CAP_PROP_OPEN_TIMEOUT_MSEC, 5000, cv.CAP_PROP_READ_TIMEOUT_MSEC, 5000],
+        )
         if not self.capture.isOpened():
-            raise RuntimeError(f"Could not open RTSP stream: {self.url}")
+            self.disconnect()
+            raise RuntimeError("Could not open RTSP stream")
 
     def get_frame(self):
         if self.capture is None:
@@ -60,7 +65,3 @@ class RTSPSource(BaseSource):
         if self.capture is not None:
             self.capture.release()
             self.capture = None
-
-class DVRSource:
-
-    pass

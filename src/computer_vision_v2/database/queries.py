@@ -1,48 +1,47 @@
-"""SQL statements used by the database worker.
+"""SQL shared by camera preparation and event persistence.
 
-Camera IDs intentionally use TEXT because the settings JSON uses readable
-IDs such as gate-entry-1, and those IDs travel with every pipeline event.
+Gate and camera have distinct IDs. The database's UNIQUE camera.gate_id
+constraint enforces at most one camera for each gate.
 """
 
-UPSERT_CAMERA = """
-INSERT INTO camera (id, source, source_type, role, status)
-VALUES (%s, %s, %s, %s, 'on')
-ON CONFLICT (id) DO UPDATE
-SET source = EXCLUDED.source,
-    source_type = EXCLUDED.source_type,
-    role = EXCLUDED.role,
-    status = 'on',
-    updated_at = NOW();
+SELECT_CAMERA_GATE = """
+SELECT camera.gate_id
+FROM camera JOIN gate ON gate.id = camera.gate_id
+WHERE camera.id = %s
+"""
+
+UPDATE_CAMERA_SETTINGS = """
+UPDATE camera
+SET source = %s, source_type = %s, role = %s
+WHERE id = %s
 """
 
 INSERT_VEHICLE = """
 INSERT INTO vehicle (plate_number, vehicle_type)
 VALUES (%s, %s)
-ON CONFLICT (plate_number) DO NOTHING;
+ON CONFLICT (plate_number) DO NOTHING
 """
 
 INSERT_EVENT = """
 INSERT INTO event (camera_id, plate_number, event_type, class_id, confidence, image_path)
 VALUES (%s, %s, %s, %s, %s, %s)
-RETURNING id, captured_at;
+RETURNING id
 """
 
 SELECT_OPEN_SESSION = """
-SELECT id FROM parking_session
+SELECT id FROM vehicle_session
 WHERE plate_number = %s AND status = 'open'
-ORDER BY id DESC
-LIMIT 1
-FOR UPDATE;
+ORDER BY opened_at DESC
+LIMIT 1 FOR UPDATE
 """
 
 INSERT_SESSION = """
-INSERT INTO parking_session (plate_number, entry_event_id, status)
+INSERT INTO vehicle_session (plate_number, entry_event_id, status)
 VALUES (%s, %s, 'open')
-RETURNING id;
 """
 
 UPDATE_CLOSE_SESSION = """
-UPDATE parking_session
+UPDATE vehicle_session
 SET exit_event_id = %s, status = 'closed', closed_at = NOW()
-WHERE id = %s;
+WHERE id = %s
 """

@@ -63,7 +63,10 @@ class PreviewPublisher:
     def stop(self):
         self._stop.set()
         if self._thread is not None:
-            self._thread.join()
+            self._thread.join(timeout=5)
+            if self._thread.is_alive():
+                logging.getLogger(__name__).error("Preview writer did not stop within five seconds")
+                return
         with self._lock:
             self._pending.clear()
         for path in self._paths.values():

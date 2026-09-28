@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import time
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 
@@ -47,6 +47,14 @@ class PreviewTests(unittest.TestCase):
     def test_source_and_camera_isolation(self):
         self.assertNotEqual(preview_path('one', 'a'), preview_path('one', 'b'))
         self.assertNotEqual(preview_path('one', 'a'), preview_path('two', 'a'))
+
+    def test_stalled_preview_writer_does_not_block_stop(self):
+        publisher = PreviewPublisher([])
+        publisher._thread = Mock()
+        publisher._thread.is_alive.return_value = True
+        with self.assertLogs("computer_vision_v2.preview", level="ERROR"):
+            publisher.stop()
+        publisher._thread.join.assert_called_once_with(timeout=5)
 
     def test_worker_latest_frame_and_cleanup(self):
         with tempfile.TemporaryDirectory() as directory:
