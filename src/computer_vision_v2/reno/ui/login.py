@@ -1,15 +1,4 @@
-"""
-ui/login.py
-
-The Login screen: RENO branding, username, password, "remember me",
-a login button and a "forgot password" link, matching the Balsamiq
-wireframe.
-
-This screen never decides whether a username/password is correct -
-it only calls services.auth_service.auth_service.login(...) and reacts
-to the result. That is what "keep authentication behind a service
-interface" (from the brief) means in practice.
-"""
+"""Reference-branded login; authentication stays behind the existing interface."""
 
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
@@ -18,19 +7,20 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.label import Label
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.popup import Popup
-from kivy.graphics import Color, Rectangle, RoundedRectangle, Ellipse, Line
 from kivy.animation import Animation
 
 from computer_vision_v2.reno.ui import theme
-from computer_vision_v2.reno.ui.theme import COLORS, FONT_SIZE, SPACING, RADIUS, rtl, PAGE_BG_TOP, PAGE_BG_BOTTOM
+from computer_vision_v2.reno.ui.theme import COLORS, FONT_SIZE, rtl
 from computer_vision_v2.reno.ui.components.common import (
-    Card, make_gradient_texture, PrimaryButton, RoundedTextInput, RTLLabel, HoverBehavior,
+    Card, PrimaryButton, RoundedTextInput, RTLLabel, HoverBehavior,
 )
 from computer_vision_v2.reno.ui.components.icons import Icon
+from computer_vision_v2.reno.ui.components.brand import BrandMark, Brand
+from computer_vision_v2.reno.ui.components.ambient_background import AmbientBackground
 from computer_vision_v2.reno.ui.components.app_header import WindowControls
 from computer_vision_v2.reno.services.auth_service import auth_service
 
-APP_NAME = "KALPINO"
+APP_NAME = "PLAKINO"
 
 
 class LoginScreen(Screen):
@@ -45,14 +35,7 @@ class LoginScreen(Screen):
     # ------------------------------------------------------------------
     def _build(self):
         root = FloatLayout()
-        with root.canvas.before:
-            Color(1, 1, 1, 1)
-            self._bg_rect = Rectangle(
-                pos=root.pos,
-                size=root.size,
-                texture=make_gradient_texture(PAGE_BG_TOP, PAGE_BG_BOTTOM),
-            )
-        root.bind(pos=self._redraw_bg, size=self._redraw_bg)
+        root.add_widget(AmbientBackground())
         self._root = root
 
         shell = BoxLayout(
@@ -60,11 +43,12 @@ class LoginScreen(Screen):
             size_hint=(None, None),
             size=(920, 560),
             pos_hint={"center_x": 0.5, "center_y": 0.5},
-            spacing=0,
+            spacing=18,
         )
         self._shell = shell
         root.bind(size=self._resize_shell)
-        shell.add_widget(_LoginHero())
+        self._hero = _LoginHero()
+        shell.add_widget(self._hero)
 
         card = Card(
             orientation="vertical",
@@ -72,7 +56,9 @@ class LoginScreen(Screen):
             width=400,
             padding=[36, 32, 36, 28],
             spacing=10,
-            radius=0,
+            radius=10,
+            border_gradient=(COLORS["primary"], COLORS["accent_purple"]),
+            bg_color=theme.rgba(COLORS["surface"], .86),
         )
 
         card.add_widget(self._build_brand())
@@ -93,8 +79,10 @@ class LoginScreen(Screen):
         self._error_label.bind(size=lambda widget, *_: setattr(widget, "text_size", widget.size))
         card.add_widget(self._error_label)
 
-        login_button = PrimaryButton(text=rtl("ورود"), size_hint_y=None, height=48)
+        login_button = self._login_button = PrimaryButton(text=rtl("ورود"), size_hint_y=None, height=48)
         login_button.bind(on_release=self._attempt_login)
+        self._password_input.bind(on_text_validate=self._attempt_login)
+        self._username_input.bind(on_text_validate=lambda *_: setattr(self._password_input, "focus", True))
         card.add_widget(login_button)
 
         forgot = _LinkLabel(text=rtl("رمز عبور را فراموش کرده‌اید؟"))
@@ -106,20 +94,15 @@ class LoginScreen(Screen):
         root.add_widget(WindowControls(pos_hint={"right": 1, "top": 1}))
         self.add_widget(root)
 
-    def _redraw_bg(self, *_args):
-        self._bg_rect.pos = self._root.pos
-        self._bg_rect.size = self._root.size
-
     def _resize_shell(self, *_args):
         self._shell.size = (
-            min(940, max(760, self._root.width - 80)),
+            min(980, max(720, self._root.width - 80)),
             min(570, max(520, self._root.height - 60)),
         )
 
     def _build_brand(self):
         box = BoxLayout(orientation="vertical", size_hint_y=None, height=122, spacing=5)
-        icon = Icon(name="camera", color=theme.rgba(COLORS["primary"]),
-                    size_hint=(None, None), size=(44, 44), pos_hint={"center_x": 0.5})
+        icon = BrandMark(size=(44, 44), pos_hint={"center_x": 0.5})
         title = Label(
             text=APP_NAME,
             font_name=theme.APP_FONT_NAME,
@@ -241,49 +224,32 @@ class _LinkLabel(HoverBehavior, Label):
         Animation(color=target, duration=theme.ANIM_FAST, t="out_quad").start(self)
 
 
-class _LoginHero(FloatLayout):
-    """Brand panel drawn with Kivy primitives, so it stays crisp offline."""
+class _LoginHero(Card):
+    """Reference logo and type hierarchy over the shared moving ambient lights."""
 
     def __init__(self, **kwargs):
-        kwargs.setdefault("size_hint", (1, 1))
-        super().__init__(**kwargs)
-        with self.canvas.before:
-            Color(*theme.rgba(COLORS["primary_dark"]))
-            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[22])
-            Color(*theme.rgba("#76B38F"), 0.22)
-            self._orb_one = Ellipse(pos=self.pos, size=(360, 360))
-            Color(1, 1, 1, 0.08)
-            self._orb_two = Ellipse(pos=self.pos, size=(220, 220))
-            Color(1, 1, 1, 0.13)
-            self._line_one = Line(points=[], width=22)
-            self._line_two = Line(points=[], width=9)
-        self.bind(pos=self._redraw, size=self._redraw)
-
-        content = BoxLayout(
-            orientation="vertical", spacing=12,
-            size_hint=(0.76, None), height=260,
-            pos_hint={"center_x": 0.5, "center_y": 0.5},
-        )
-        badge = AnchorLayout(size_hint_y=None, height=72)
-        badge.add_widget(Icon(name="camera", color=(1, 1, 1, 1),
-                              size_hint=(None, None), size=(60, 60)))
-        content.add_widget(badge)
-        content.add_widget(Label(text=APP_NAME, font_name=theme.APP_FONT_NAME,
-                                 font_size=42, bold=True, color=(1, 1, 1, 1),
-                                 size_hint_y=None, height=58))
-        content.add_widget(RTLLabel(text="سامانه یکپارچه مدیریت تردد و پلاک‌خوانی",
-                                    font_size=18, color=(1, 1, 1, 0.88),
-                                    halign="center", size_hint_y=None, height=44))
-        content.add_widget(RTLLabel(text="کنترل دوربین‌ها، مشاهده زنده و گزارش تردد در یک نگاه",
-                                    font_size=13, color=(1, 1, 1, 0.62),
-                                    halign="center", size_hint_y=None, height=46))
-        self.add_widget(content)
-        self._redraw()
-
-    def _redraw(self, *_):
-        self._bg.pos = self.pos
-        self._bg.size = self.size
-        self._orb_one.pos = (self.x - 150, self.top - 235)
-        self._orb_two.pos = (self.right - 105, self.y - 80)
-        self._line_one.points = [self.x - 20, self.y + 95, self.x + 150, self.y + 265]
-        self._line_two.points = [self.right - 190, self.top - 30, self.right + 20, self.top - 240]
+        super().__init__(orientation='vertical', padding=[34, 42, 34, 36], spacing=14,
+                         gradient=('#102C3D', '#21132F'), bg_color=theme.rgba('#101B24', .66),
+                         border_gradient=('#008EB0', '#694599'), radius=10, **kwargs)
+        self.add_widget(Brand())
+        self.add_widget(BoxLayout())
+        mark = AnchorLayout(size_hint_y=None, height=110)
+        mark.add_widget(BrandMark(size=(92, 92)))
+        self.add_widget(mark)
+        self.add_widget(RTLLabel(text='VISION IN CONTROL', font_size=12,
+                                color=theme.rgba(COLORS['primary']), halign='center',
+                                size_hint_y=None, height=28))
+        self.add_widget(RTLLabel(text='کنترل هوشمند تردد', font_size=24,
+                                halign='center', size_hint_y=None, height=44))
+        self.add_widget(RTLLabel(text='دید کامل به مسیرها، از اولین ورود تا آخرین خروج', font_size=12,
+                                color=theme.rgba(COLORS['text_secondary']), halign='center',
+                                size_hint_y=None, height=48))
+        self.add_widget(BoxLayout())
+        features = BoxLayout(size_hint_y=None, height=42, spacing=12)
+        for icon, label in [('car', 'شناسایی پلاک'), ('camera', 'پایش زنده'), ('shield', 'کنترل تردد')]:
+            item = BoxLayout(orientation='vertical', spacing=4)
+            item.add_widget(Icon(name=icon, color=theme.rgba(COLORS['primary']),
+                                 size_hint=(None, None), size=(20, 20), pos_hint={'center_x': .5}))
+            item.add_widget(RTLLabel(text=label, font_size=9, halign='center', padding=[0, 0]))
+            features.add_widget(item)
+        self.add_widget(features)

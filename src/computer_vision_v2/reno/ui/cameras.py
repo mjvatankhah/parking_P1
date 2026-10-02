@@ -1,18 +1,19 @@
-"""Dedicated view of the backend's annotated camera frames."""
+"""Multi-camera monitoring of unprocessed file and RTSP frames."""
 
-from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
-from kivy.graphics import Color, Rectangle
+from kivy.uix.screenmanager import Screen
+from kivy.uix.button import Button
+from kivy.uix.togglebutton import ToggleButton
 
 from computer_vision_v2.reno.ui import theme
-from computer_vision_v2.reno.ui.theme import COLORS, SPACING, PAGE_BG_TOP, PAGE_BG_BOTTOM
-from computer_vision_v2.reno.ui.components.common import Card, RTLLabel, EmptyState, make_gradient_texture
-from computer_vision_v2.reno.ui.components.app_header import AppHeader
-from computer_vision_v2.reno.ui.components.sidebar import Sidebar
-from computer_vision_v2.reno.ui.components.camera_selector import build_camera_selector, ALL_CAMERAS_VALUE
-from computer_vision_v2.reno.ui.components.camera_card import CameraCard
+from computer_vision_v2.reno.ui.components.page_shell import PageShell
+from computer_vision_v2.reno.ui.theme import COLORS, SPACING
+from computer_vision_v2.reno.ui.components.common import (
+    Card, RTLLabel, EmptyState,
+)
+from computer_vision_v2.reno.ui.components.raw_camera_card import RawCameraCard
 from computer_vision_v2.reno.services.camera_service import camera_service
 
 
@@ -20,118 +21,121 @@ class CamerasScreen(Screen):
     def __init__(self, on_navigate=None, **kwargs):
         super().__init__(**kwargs)
         self.on_navigate = on_navigate
-        self._camera_filter = ALL_CAMERAS_VALUE
+        self._selected = {camera.id for camera in camera_service.get_cameras()}
+        self._cards = {}
         self._active = False
-        self._cards = []
-        root = BoxLayout(orientation="vertical")
-        with root.canvas.before:
-            Color(1, 1, 1, 1)
-            background = Rectangle(pos=root.pos, size=root.size, texture=make_gradient_texture(PAGE_BG_TOP, PAGE_BG_BOTTOM))
-        root.bind(pos=lambda widget, value: setattr(background, "pos", value),
-                  size=lambda widget, value: setattr(background, "size", value))
-        root.add_widget(AppHeader("دوربین‌ها — تصاویر تشخیص‌داده‌شده"))
-        body = BoxLayout(orientation="horizontal")
-        content = BoxLayout(orientation="vertical", padding=SPACING["lg"], spacing=SPACING["sm"])
-        content.add_widget(RTLLabel(
-            text="نمایش خروجی پردازش دوربین‌ها • انسان و خودرو",
-            size_hint_y=None, height=32,
-        ))
-        content.add_widget(self._build_camera_panel())
-        body.add_widget(content)
-        body.add_widget(Sidebar(active="cameras", on_navigate=self._handle_navigate))
-        root.add_widget(body)
-        self.add_widget(root)
+        content = BoxLayout(orientation='vertical', padding=0,
+                            spacing=SPACING['md'])
+        panel = Card(orientation='vertical', padding=SPACING['md'],
+                     spacing=SPACING['sm'])
+        panel.add_widget(RTLLabel(text='مانیتورینگ دوربین‌ها',
+                                  size_hint_y=None, height=32, bold=True))
+        toolbar = BoxLayout(size_hint_y=None, height=38, spacing=8)
+        for label, callback in [('انتخاب همه', self._select_all),
+                                ('لغو انتخاب', self._clear_selection)]:
+            button = Button(text=theme.rtl(label), font_name=theme.APP_FONT_NAME,
+                            background_normal='', background_color=theme.rgba(COLORS['surface_alt']),
+                            color=theme.rgba(COLORS['text_primary']), size_hint_x=None, width=115)
+            button.bind(on_release=lambda _button, action=callback: action())
+            toolbar.add_widget(button)
+        self._count = RTLLabel(text='', color=theme.rgba(COLORS['text_secondary']))
+        toolbar.add_widget(self._count)
+        panel.add_widget(toolbar)
+        self._choices = GridLayout(cols=4, spacing=8, size_hint_y=None)
+        self._choices.bind(minimum_height=self._choices.setter('height'))
+        panel.add_widget(self._choices)
+        self._holder = BoxLayout(orientation='vertical')
+        panel.add_widget(self._holder)
+        content.add_widget(panel)
+        self._shell = PageShell('مانیتورینگ دوربین‌ها', 'cameras', content, self._handle_navigate,
+                                subtitle='نمایش هم‌زمان یک یا چند دوربین')
+        self.add_widget(self._shell)
         camera_service.subscribe(self._on_cameras_changed)
+        self._rebuild_choices()
+        self._rebuild_grid()
 
     def on_enter(self, *_args):
         self._active = True
-        for card in self._cards:
-            card.ensure_stream_started()
+        for card in self._cards.values():
+            card.start_stream()
 
     def on_leave(self, *_args):
         self._active = False
-        for card in self._cards:
+        for card in self._cards.values():
             card.stop_stream()
 
     def _handle_navigate(self, key):
         if self.on_navigate:
             self.on_navigate(key)
 
-    def _on_camera_selected(self, value):
-        self._camera_filter = value
-        self._rebuild_camera_grid()
+    def _on_cameras_changed(self, cameras):
+        available = {camera.id for camera in cameras}
+        self._selected.intersection_update(available)
+        self._rebuild_choices()
+        self._rebuild_grid()
 
-    def _on_cameras_changed(self, _cameras):
-        self._rebuild_camera_grid()
+    def _select_all(self):
+        self._selected = {camera.id for camera in camera_service.get_cameras()}
+        self._rebuild_choices()
+        self._rebuild_grid()
 
-    def _build_camera_panel(self):
-        panel = Card(orientation="vertical", padding=[SPACING["md"], SPACING["md"], SPACING["md"], SPACING["md"]],
-                      spacing=SPACING["sm"])
+    def _clear_selection(self):
+        self._selected.clear()
+        self._rebuild_choices()
+        self._rebuild_grid()
 
-        selector_row = BoxLayout(orientation="horizontal", size_hint_y=None, height=44, spacing=SPACING["sm"])
-        label = RTLLabel(
-            text="دوربین مورد نظر را انتخاب کنید:",
-            color=theme.rgba(COLORS["text_secondary"]),
-            size_hint_x=1,
-            valign="middle",
-        )
+    def _toggle(self, camera_id, selected):
+        if selected:
+            self._selected.add(camera_id)
+        else:
+            self._selected.discard(camera_id)
+        self._rebuild_grid()
 
-        self._selector = build_camera_selector(on_select=self._on_camera_selected)
+    def _rebuild_choices(self):
+        self._choices.clear_widgets()
+        for camera in camera_service.get_cameras():
+            choice = ToggleButton(text=camera.id, font_name=theme.APP_FONT_NAME,
+                                  group=None, allow_no_selection=True,
+                                  size_hint_y=None, height=38,
+                                  background_normal='', background_down='',
+                                  background_color=theme.rgba(COLORS['primary_light'] if camera.id in self._selected else COLORS['surface_alt']),
+                                  color=theme.rgba(COLORS['text_primary']),
+                                  state='down' if camera.id in self._selected else 'normal')
+            choice.bind(on_release=lambda button, cid=camera.id:
+                        self._toggle(cid, button.state == 'down'))
+            self._choices.add_widget(choice)
+        self._choices.height = ((len(self._choices.children) + 3) // 4) * 46
 
-        selector_row.add_widget(label)
-        selector_row.add_widget(self._selector)
-
-        self._camera_grid_holder = BoxLayout(orientation="vertical")
-
-        panel.add_widget(selector_row)
-        panel.add_widget(self._camera_grid_holder)
-        self._rebuild_camera_grid()
-        return panel
-
-    def _rebuild_camera_grid(self):
-        for card in self._cards:
+    def _rebuild_grid(self):
+        cameras = camera_service.get_cameras()
+        wanted = [camera for camera in cameras if camera.id in self._selected]
+        self._count.set_text(f'{len(wanted)} دوربین از {len(cameras)} انتخاب شده')
+        for card in self._cards.values():
             card.stop_stream()
-        self._cards = []
-        self._camera_grid_holder.clear_widgets()
-        all_cameras = camera_service.get_cameras()
-        cameras = all_cameras
-        if self._camera_filter != ALL_CAMERAS_VALUE:
-            cameras = [c for c in all_cameras if c.id == self._camera_filter]
-
-        if not all_cameras:
-            # No cameras configured anywhere yet - this is a real,
-            # honest empty state (not a filtered-down view), so it
-            # gets a call-to-action straight to Camera Settings.
-            empty = EmptyState(
-                icon_name="camera",
-                title="هنوز دوربینی تنظیم نشده است",
-                subtitle="برای مشاهده تصویر دوربین‌ها، ابتدا یک دوربین اضافه کنید",
-                action_text="افزودن دوربین",
-                on_action=lambda: self._handle_navigate("camera_settings"),
-                size_hint_y=None,
-                height=220,
-            )
-            self._camera_grid_holder.add_widget(empty)
-            return
-
+        self._cards.clear()
+        self._holder.clear_widgets()
         if not cameras:
-            # A specific camera was selected in the dropdown but no
-            # longer exists (e.g. deleted from Camera Settings).
-            empty = EmptyState(icon_name="camera", title="این دوربین دیگر موجود نیست",
-                                size_hint_y=None, height=160)
-            self._camera_grid_holder.add_widget(empty)
+            self._holder.add_widget(EmptyState(
+                icon_name='camera', title='هنوز دوربینی تنظیم نشده است',
+                subtitle='از تنظیمات، دوربین و منبع تصویر آن را اضافه کنید',
+                action_text='رفتن به تنظیمات',
+                on_action=lambda: self._handle_navigate('camera_settings')))
             return
-
-        columns = 2 if len(cameras) > 1 else 1
-        grid = GridLayout(cols=columns, size_hint_y=None, spacing=SPACING["sm"], padding=[0, SPACING["sm"], 0, 0])
-        grid.bind(minimum_height=grid.setter("height"))
-        for camera in cameras:
-            card = CameraCard(camera, size_hint_y=None, height=320)
-            self._cards.append(card)
+        if not wanted:
+            self._holder.add_widget(EmptyState(
+                icon_name='camera', title='دوربینی انتخاب نشده است',
+                subtitle='یک یا چند دوربین را از بالا انتخاب کنید'))
+            return
+        grid = GridLayout(cols=1 if len(wanted) == 1 else 2,
+                          size_hint_y=None, spacing=SPACING['sm'])
+        grid.bind(minimum_height=grid.setter('height'))
+        for camera in wanted:
+            card = RawCameraCard(camera, size_hint_y=None, height=320)
+            self._cards[camera.id] = card
             grid.add_widget(card)
         scroll = ScrollView(do_scroll_x=False)
         scroll.add_widget(grid)
-        self._camera_grid_holder.add_widget(scroll)
+        self._holder.add_widget(scroll)
         if self._active:
-            for card in self._cards:
-                card.ensure_stream_started()
+            for card in self._cards.values():
+                card.start_stream()

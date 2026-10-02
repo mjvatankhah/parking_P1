@@ -31,7 +31,7 @@ class _WindowButton(HoverBehavior, ButtonBehavior, Label):
         self._action = action
         self._danger = danger
         self.color = theme.rgba(COLORS["offline"] if danger else COLORS["text_primary"])
-        self._normal_bg = theme.rgba("#FDECEF" if danger else COLORS["surface_alt"])
+        self._normal_bg = theme.rgba("#38242D" if danger else COLORS["surface_alt"])
         self._bg_rgba = self._normal_bg
         self.text_size = self.size
         with self.canvas.before:
@@ -99,66 +99,32 @@ class WindowControls(BoxLayout):
             close()
 
 
-class _HelpIcon(HoverBehavior, ButtonBehavior, BoxLayout):
-    def __init__(self, **kwargs):
-        kwargs.setdefault("size_hint", (None, None))
-        kwargs.setdefault("size", (38, 38))
+class AppHeader(BoxLayout):
+    """The HTML title hierarchy and a functional symbolic ticket action."""
+
+    def __init__(self, title, subtitle='دید کامل به مسیرها، از اولین ورود تا آخرین خروج', **kwargs):
+        kwargs.setdefault('size_hint_y', None)
+        kwargs.setdefault('height', 82)
+        kwargs.setdefault('spacing', 18)
         super().__init__(**kwargs)
-        with self.canvas.before:
-            self._color = Color(*theme.rgba(COLORS["primary_light"]))
-            self._rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[10])
-        self.bind(pos=self._redraw, size=self._redraw, hovered=self._animate, state=self._animate)
-        self.add_widget(Icon(name="help", color=theme.rgba(COLORS["primary_dark"]),
-                             size_hint=(None, None), size=(18, 18),
-                             pos_hint={"center_x": .5, "center_y": .5}))
+        self.ticket_button = SecondaryButton(text=rtl('ثبت تیکت'), font_size=11,
+            size_hint=(None, None), size=(114, 36), pos_hint={'center_y': .5},
+            bg_color_normal=theme.rgba('#0E293B', .65), border_color=theme.rgba('#285168'),
+            color=theme.rgba('#A8D9ED'), radius=5)
+        self.ticket_button.bind(on_release=self._open_ticket)
+        self.add_widget(self.ticket_button)
+        heading = BoxLayout(orientation='vertical', spacing=1)
+        heading.add_widget(RTLLabel(text='PARKING INTELLIGENCE / 01', font_size=10,
+                          color=theme.rgba(COLORS['primary']), size_hint_y=None, height=20,
+                          padding=[0, 0]))
+        heading.add_widget(RTLLabel(text=title, font_size=23, size_hint_y=None, height=34,
+                          padding=[0, 0]))
+        heading.add_widget(RTLLabel(text=subtitle, font_size=11,
+                          color=theme.rgba(COLORS['text_secondary']), size_hint_y=None, height=25,
+                          padding=[0, 0]))
+        self.add_widget(heading)
 
-    def _redraw(self, *_):
-        self._rect.pos = self.pos
-        self._rect.size = self.size
-
-    def _animate(self, *_):
-        alpha = 0.85 if self.hovered else 1
-        if self.state == "down":
-            alpha = 0.6
-        Animation.cancel_all(self, "opacity")
-        Animation(opacity=alpha, duration=theme.ANIM_FAST, t="out_quad").start(self)
-
-
-class AppHeader(Card):
-    """Header order follows the supplied wireframe: ticket/help, user, title, controls."""
-
-    def __init__(self, title, **kwargs):
-        kwargs.setdefault("orientation", "horizontal")
-        kwargs.setdefault("size_hint_y", None)
-        kwargs.setdefault("height", 64)
-        kwargs.setdefault("padding", [16, 0, 8, 0])
-        kwargs.setdefault("radius", 0)
-        super().__init__(**kwargs)
-
-        ticket_group = BoxLayout(size_hint_x=None, width=168, spacing=8)
-        ticket_group.add_widget(SecondaryButton(text=rtl("ثبت تیکت"), size_hint=(None, None), size=(112, 38),
-                                                pos_hint={"center_y": .5}))
-        ticket_group.add_widget(_HelpIcon(pos_hint={"center_y": .5}))
-
-        profile = BoxLayout(size_hint_x=None, width=188, spacing=8, padding=[4, 0, 4, 0])
-        avatar = BoxLayout(size_hint=(None, None), size=(30, 30), pos_hint={"center_y": .5})
-        with avatar.canvas.before:
-            Color(*theme.rgba(COLORS["primary"]))
-            circle = RoundedRectangle(pos=avatar.pos, size=avatar.size, radius=[15])
-        avatar.bind(pos=lambda widget, *_: setattr(circle, "pos", widget.pos),
-                    size=lambda widget, *_: setattr(circle, "size", widget.size))
-        avatar.add_widget(Label(text="A", font_name=theme.APP_FONT_NAME, bold=True,
-                                color=(1, 1, 1, 1), font_size=13))
-        profile.add_widget(avatar)
-        profile.add_widget(RTLLabel(text="سلام، ادمین", font_size=FONT_SIZE["caption"],
-                                    halign="center", valign="middle", size_hint_y=None,
-                                    height=30, pos_hint={"center_y": .5}))
-
-        page_title = RTLLabel(text=title, font_size=FONT_SIZE["title"], bold=True,
-                              valign="middle", size_hint_x=None, width=295)
-
-        self.add_widget(ticket_group)
-        self.add_widget(Widget())
-        self.add_widget(profile)
-        self.add_widget(page_title)
-        self.add_widget(WindowControls(pos_hint={"center_y": .5}))
+    def _open_ticket(self, *_):
+        from computer_vision_v2.reno.ui.components.ticket_dialog import TicketDialog
+        self.ticket_dialog = TicketDialog()
+        self.ticket_dialog.open()

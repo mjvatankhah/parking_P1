@@ -1,10 +1,4 @@
-"""RENO icon widget.
-
-The navigation icons use local Tabler-style SVG/PNG assets. Keeping the
-assets inside the application makes the desktop UI crisp and offline-safe,
-while the Kivy Color instruction lets the same white source texture be tinted
-for normal/active/hover states.
-"""
+"""The exact SVG symbols from dashboard-prototype.html, shipped as offline textures."""
 
 import os
 
@@ -16,25 +10,33 @@ from kivy.core.image import Image as CoreImage
 
 _ASSET_DIR = os.path.abspath(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-                 "assets", "icons", "tabler")
+                 "assets", "icons")
 )
 
 _ICON_FILES = {
-    "dashboard": "layout-dashboard.png",
-    "database": "database.png",
-    "search": "search.png",
-    "reports": "chart-bar.png",
-    "settings": "settings.png",
-    "logout": "logout.png",
-    "camera": "camera.png",
-    "help": "help-circle.png",
+    "dashboard": "reference/grid.png",
+    "database": "reference/log.png",
+    "log": "reference/log.png",
+    "search": "reference/icon-search.png",
+    "reports": "reference/chart.png",
+    "settings": "reference/settings.png",
+    "camera": "reference/camera.png",
+    "car": "reference/car.png",
+    "shield": "reference/shield.png",
+    "bell": "reference/bell.png",
+    "menu": "reference/menu.png",
+    "logout": "tabler/logout.png",
+    "help": "tabler/help-circle.png",
 }
+_TEXTURES = {}
+APP_ICON = os.path.join(_ASSET_DIR, "reference", "app.png")
+
 
 
 class Icon(Widget):
     name = StringProperty("dashboard")
     color = ListProperty([0.12, 0.17, 0.16, 1])
-    line_width = NumericProperty(2.0)
+    line_width = NumericProperty(1.0)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -46,12 +48,15 @@ class Icon(Widget):
         self._load_texture()
 
     def _load_texture(self):
+        self._texture = None
         filename = _ICON_FILES.get(self.name)
         if filename:
             path = os.path.join(_ASSET_DIR, filename)
             if os.path.isfile(path):
                 try:
-                    self._texture = CoreImage(path, mipmap=True).texture
+                    if path not in _TEXTURES:
+                        _TEXTURES[path] = CoreImage(path, mipmap=True).texture
+                    self._texture = _TEXTURES[path]
                 except Exception:
                     self._texture = None
         self._redraw()
@@ -69,7 +74,7 @@ class Icon(Widget):
         if self._texture is not None:
             with self.canvas:
                 self._icon_color = Color(*self.color)
-                pad = min(self.width, self.height) * 0.08
+                pad = 0
                 size = min(self.width, self.height) - pad * 2
                 x = self.x + (self.width - size) / 2
                 y = self.y + (self.height - size) / 2
@@ -84,7 +89,15 @@ class Icon(Widget):
         with self.canvas:
             Color(*self.color)
             x, y, s = self.box()
-            if self.name == "qrcode":
+            if self.name == "car":
+                Line(rounded_rectangle=(x, y+s*.2, s, s*.4, s*.08), width=self.line_width)
+                Line(points=[x+s*.15,y+s*.6,x+s*.3,y+s*.85,x+s*.7,y+s*.85,x+s*.85,y+s*.6], width=self.line_width)
+                for cx in (.2, .8):
+                    Line(circle=(x+s*cx,y+s*.2,s*.1), width=self.line_width)
+            elif self.name == "bell":
+                Line(points=[x+s*.1,y+s*.25,x+s*.25,y+s*.4,x+s*.25,y+s*.7,x+s*.4,y+s*.9,x+s*.6,y+s*.9,x+s*.75,y+s*.7,x+s*.75,y+s*.4,x+s*.9,y+s*.25,x+s*.1,y+s*.25], width=self.line_width)
+                Line(circle=(x+s*.5,y+s*.12,s*.08), width=self.line_width)
+            elif self.name == "qrcode":
                 self._draw_qrcode(x, y, s)
             elif self.name == "plus":
                 Line(points=[x + s/2, y, x + s/2, y+s], width=self.line_width)

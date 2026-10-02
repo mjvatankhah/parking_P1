@@ -27,61 +27,53 @@ import os
 # ---------------------------------------------------------------------
 # 1. COLOR PALETTE
 # ---------------------------------------------------------------------
-# Dark enterprise palette, per the product brief: dark neutral
-# background, restrained surfaces, ONE primary accent, subtle borders
-# instead of heavy shadows (Kivy's canvas can't do real blurred drop
-# shadows anyway - a hairline border + a slightly lighter surface tone
-# is what "elevation" means in this app). Status colors are semantic,
-# not decorative, and are deliberately muted rather than neon so the
-# UI reads as monitoring software, not a dashboard template.
-
+# Shared midnight glass palette and semantic neon accents.
 COLORS = {
-    # Modern light palette — bright, clean and suitable for a professional
-    # parking/ANPR desktop application.
-    "primary": "#4F866B",
-    "primary_dark": "#315D49",
-    "primary_light": "#E3F1E9",
+    "primary": "#00CEFF",
+    "primary_dark": "#087895",
+    "primary_light": "#123B50",
 
     # A very subtle petroleum-blue wash keeps full pages calm while
     # preserving the bright cards and readable Persian text.
-    "background": "#E8F1F3",
-    "surface": "#FFFFFF",
-    "surface_alt": "#F5F8F7",
-    "sidebar": "#FFFFFF",
-    "border": "#E1E9E5",
-    "border_strong": "#C9D7D1",
+    "background": "#050B10",
+    "surface": "#101B24",
+    "surface_alt": "#12202B",
+    "sidebar": "#080E13",
+    "border": "#203440",
+    "border_strong": "#00CEFF",
 
-    "text_primary": "#17251F",
-    "text_secondary": "#718079",
-    "text_on_primary": "#FFFFFF",
-    "placeholder": "#9AA8AD",
+    "text_primary": "#ECF5FA",
+    "text_secondary": "#8C9EAB",
+    "text_on_primary": "#05121A",
+    "placeholder": "#78929F",
 
-    "online": "#16B878",
-    "offline": "#E65D6A",
-    "warning": "#F1A83B",
-    "info": "#4F8FEA",
+    "online": "#58E2AE",
+    "offline": "#FF426D",
+    "warning": "#FFC66D",
+    "info": "#65C7FF",
 
-    "accent_teal": "#2FAE83",
-    "accent_blue": "#5B8DEF",
-    "accent_orange": "#F4A261",
-    "accent_red": "#E86A76",
+    "accent_teal": "#17B9CF",
+    "accent_blue": "#3299D1",
+    "accent_purple": "#A879FF",
+    "accent_orange": "#D49B5E",
+    "accent_red": "#C96672",
 
-    "hover_overlay": "#18B99A10",
-    "pressed_overlay": "#18B99A20",
-    "disabled_bg": "#EEF2F3",
-    "disabled_text": "#A7B1B5",
-    "focus_ring": "#18B99A",
+    "hover_overlay": "#00CEFF10",
+    "pressed_overlay": "#00CEFF20",
+    "disabled_bg": "#172630",
+    "disabled_text": "#708894",
+    "focus_ring": "#00CEFF",
 
-    "shadow": "#183D3114",
-    "overlay": "#18363D55",
+    "shadow": "#00000044",
+    "overlay": "#061620BB",
 
     # Decorative background washes.
-    "glow_teal": "#2FAE8314",
-    "glow_blue": "#5B8DEF12",
+    "glow_teal": "#00CEFF14",
+    "glow_blue": "#3299D112",
 }
 
-PAGE_BG_TOP = "#F3F8F9"
-PAGE_BG_BOTTOM = "#E2EEF1"
+PAGE_BG_TOP = "#080E13"
+PAGE_BG_BOTTOM = "#050B10"
 
 
 
@@ -128,10 +120,10 @@ LINE_HEIGHT_FA = 1.35
 # Every animation in the app (button feedback, hover, sidebar active
 # state, dialogs) uses one of these two durations, so motion feels
 # consistent instead of every screen inventing its own timing.
-ANIM_FAST = 0.10   # micro-feedback: button press, checkbox
+ANIM_FAST = 0.07   # micro-feedback: button press, checkbox
 ANIM_NORMAL = 0.18  # state changes: sidebar selection, card hover
 
-SIDEBAR_WIDTH = 104
+SIDEBAR_WIDTH = 188
 
 
 # ---------------------------------------------------------------------
@@ -283,3 +275,8 @@ def rtl_map(labels_by_key: dict):
         display_values.append(display)
         value_by_display[display] = key
     return display_values, value_by_display
+
+
+def fa_number(value):
+    """Persian digits for visual numbers; stored identifiers remain untouched."""
+    return str(value).translate(str.maketrans('0123456789,', '۰۱۲۳۴۵۶۷۸۹٬'))

@@ -51,7 +51,7 @@ Config.set("input", "mouse", "mouse,disable_multitouch")
 
 from kivy.app import App
 from kivy.core.window import Window
-from kivy.uix.screenmanager import ScreenManager, NoTransition
+from kivy.uix.screenmanager import ScreenManager, TransitionBase
 
 from computer_vision_v2.reno.ui.theme import register_app_font, rgba, COLORS
 from computer_vision_v2.reno.ui.login import LoginScreen
@@ -67,8 +67,25 @@ from computer_vision_v2.reno.ui.placeholder_screen import PlaceholderScreen
 Window.clearcolor = rgba(COLORS["background"])
 
 
+class InstantTransition(TransitionBase):
+    """Switch desktop pages without an OpenGL transition framebuffer."""
+
+    def start(self, manager):
+        self.manager = manager
+        self.add_screen(self.screen_in)
+        self.screen_in.pos = manager.pos
+        self.screen_in.size = manager.size
+        self.screen_in.dispatch("on_pre_enter")
+        self.screen_out.dispatch("on_pre_leave")
+        self.remove_screen(self.screen_out)
+        self.screen_in.dispatch("on_enter")
+        self.screen_out.dispatch("on_leave")
+        self.is_active = False
+
+
 class RenoApp(App):
-    title = "KALPINO"
+    title = "PLAKINO"
+    icon = str(Path(__file__).resolve().parent / "assets/icons/reference/app.png")
 
     def build(self):
         register_app_font()
@@ -77,43 +94,45 @@ class RenoApp(App):
         # Under WSLg's software renderer this can leave the manager between
         # screens and also stall OpenCV's first video decode. A direct desktop
         # page switch is stable and keeps all button hover/press animations.
-        self.screen_manager = ScreenManager(transition=NoTransition())
+        self.screen_manager = ScreenManager(transition=InstantTransition())
 
         login_screen = LoginScreen(name="login", on_login_success=self._go_to_dashboard)
         dashboard_screen = DashboardScreen(name="dashboard", on_navigate=self._navigate)
         cameras_screen = CamerasScreen(name="cameras", on_navigate=self._navigate)
         camera_settings_screen = CameraSettingsScreen(name="camera_settings", on_navigate=self._navigate)
-        # Search and Reports are real, navigable screens - just empty
-        # shells for now (see ui/placeholder_screen.py). Build the real
-        # feature into _build_content() there when it's ready; nothing
-        # else (navigation, sidebar, header) needs to change.
-        search_screen = PlaceholderScreen(
-            name="search", page_key="search", title="جستجو",
-            icon_name="search", subtitle="جستجوی پیشرفته هنوز آماده نشده است",
-            on_navigate=self._navigate,
-        )
+        # Reports stays an empty, navigable page until its feature is built.
         reports_screen = PlaceholderScreen(
             name="reports", page_key="reports", title="گزارش‌ها",
-            icon_name="reports", subtitle="بخش گزارش‌ها هنوز آماده نشده است",
             on_navigate=self._navigate,
         )
 
         for screen in (login_screen, dashboard_screen, cameras_screen, camera_settings_screen,
-                       search_screen, reports_screen):
+                       reports_screen):
             self.screen_manager.add_widget(screen)
+            # Keep every pre-built page sized even before its first transition.
+            # A deferred layout may otherwise leave the first page at Kivy's
+            # default 100×100 after login on the Windows/WSLg renderer.
+            screen.size = self.screen_manager.size
+            self.screen_manager.bind(size=screen.setter("size"))
+            page_root = screen.children[0]
+            page_root.size = screen.size
+            screen.bind(size=page_root.setter("size"))
 
         self.screen_manager.current = "login"
         return self.screen_manager
 
     # -- navigation callbacks, shared by every screen ------------------
     def _go_to_dashboard(self):
-        self.screen_manager.current = "dashboard"
+        self._show_screen("dashboard")
+
+    def _show_screen(self, name):
+        self.screen_manager.current = name
 
     def _navigate(self, screen_name: str):
         if screen_name == "logout":
-            self.screen_manager.current = "login"
+            self._show_screen("login")
             return
-        self.screen_manager.current = screen_name
+        self._show_screen(screen_name)
 
     def on_stop(self):
         self.screen_manager.get_screen("cameras").on_leave()

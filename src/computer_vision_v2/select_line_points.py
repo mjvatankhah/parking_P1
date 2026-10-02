@@ -5,7 +5,7 @@ import cv2
 
 
 # مسیر و شماره فریم دلخواهت را اینجا تغییر بده.
-VIDEO_PATH = Path(__file__).resolve().parent / "video" / "4_5840467138086702154.mp4"
+VIDEO_PATH = Path(__file__).resolve().parent / "video" / "c5.mp4"
 
 # یک فریم از ویدیو می‌خوانیم.
 video = cv2.VideoCapture(str(VIDEO_PATH))

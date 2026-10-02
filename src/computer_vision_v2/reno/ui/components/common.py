@@ -21,13 +21,16 @@ Every other component/screen in this project builds on top of these
 few classes instead of repeating this pattern.
 """
 
+import math
+from functools import lru_cache
+
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
-from kivy.graphics import Color, RoundedRectangle, Line, Ellipse, InstructionGroup
+from kivy.graphics import Color, RoundedRectangle, Line, Ellipse, InstructionGroup, Mesh
 from kivy.graphics.texture import Texture
 from kivy.properties import ListProperty, NumericProperty, StringProperty, BooleanProperty
 from kivy.animation import Animation
@@ -38,6 +41,7 @@ from computer_vision_v2.reno.ui import theme
 from computer_vision_v2.reno.ui.theme import COLORS, RADIUS, FONT_SIZE, SPACING, rtl
 
 
+@lru_cache(maxsize=32)
 def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 48):
     """Build a small vertical-gradient texture between two hex colors.
 
@@ -51,7 +55,7 @@ def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 48):
     bottom = theme.rgba(bottom_hex)
     buf = bytearray()
     for i in range(steps):
-        t = i / (steps - 1)
+        t = 1 - i / (steps - 1)
         r = round((top[0] * (1 - t) + bottom[0] * t) * 255)
         g = round((top[1] * (1 - t) + bottom[1] * t) * 255)
         b = round((top[2] * (1 - t) + bottom[2] * t) * 255)
@@ -63,56 +67,82 @@ def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 48):
 
 
 class Card(BoxLayout):
-    """A rounded-corner container with a thin border - the base shape
-    used by statistic cards, the camera panel, the records panel, and
-    the login card.
+    """Reference glass surface; optional gradient is confined to the thin frame."""
 
-    Pass `gradient=(top_hex, bottom_hex)` for a gradient fill instead
-    of the normal flat `bg_color` - used sparingly (see StatCard),
-    since a gradient on every surface is exactly the "template
-    dashboard" look the product brief asked to avoid. Most cards
-    should stay flat."""
+    bg_color = ListProperty(theme.rgba(COLORS['surface'], .78))
+    border_color = ListProperty(theme.rgba('#21323E', .9))
+    radius = NumericProperty(10)
+    _hover_amount = NumericProperty(0)
 
-    bg_color = ListProperty(theme.rgba(COLORS["surface"]))
-    border_color = ListProperty(theme.rgba(COLORS["border"]))
-    radius = NumericProperty(RADIUS["md"])
-
-    def __init__(self, gradient=None, **kwargs):
+    def __init__(self, gradient=None, border_gradient=None, hover_effect=True, **kwargs):
         super().__init__(**kwargs)
+        self._hover_enabled = hover_effect
+        self._has_fill_gradient = bool(gradient)
+        self._frame = None
         with self.canvas.before:
-            # Soft elevation: two translucent offset layers instead of a
-            # heavy shadow. It gives cards a modern floating feel.
-            Color(*theme.rgba(COLORS["shadow"], 0.55))
-            self._shadow = RoundedRectangle(
-                pos=(self.x + 0, self.y - 3),
-                size=self.size,
-                radius=[self.radius + 2],
-            )
-            if gradient:
-                Color(1, 1, 1, 1)
-                self._color = None
-                self._rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius],
-                                               texture=make_gradient_texture(*gradient))
-            else:
-                self._color = Color(*self.bg_color)
-                self._rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius])
+            self._shadow_color = Color(0, 0, 0, .18)
+            self._shadow = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius])
+            self._color = Color(1, 1, 1, self.bg_color[3]) if gradient else Color(*self.bg_color)
+            self._rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius],
+                texture=make_gradient_texture(*gradient) if gradient else None)
             self._border_color_instr = Color(*self.border_color)
-            self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=1.0)
+            self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=.65)
+            if border_gradient:
+                self._frame_color = Color(1, 1, 1, .68)
+                self._frame = Mesh(vertices=[], indices=[], mode='triangles',
+                                   texture=make_gradient_texture(*border_gradient))
+            self._shine_color = Color(1, 1, 1, .045)
+            self._shine = Line(points=[], width=.6)
+        if hover_effect:
+            Window.bind(mouse_pos=self._glass_hover)
         self.bind(pos=self._redraw, size=self._redraw, bg_color=self._redraw,
-                  border_color=self._redraw, radius=self._redraw)
+                  border_color=self._redraw, radius=self._redraw, _hover_amount=self._redraw)
+        self._redraw()
 
-    def _redraw(self, *args):
-        if self._color is not None:
-            self._color.rgba = self.bg_color
-        self._shadow.pos = (self.x, self.y - 3)
-        self._shadow.size = self.size
-        self._shadow.radius = [self.radius + 2]
-        self._rect.pos = self.pos
-        self._rect.size = self.size
-        self._rect.radius = [self.radius]
+    def _glass_hover(self, _window, position):
+        hovered = bool(self.get_root_window() and self.collide_point(*self.to_widget(*position)))
+        target = float(hovered)
+        if getattr(self, '_hover_target', None) != target:
+            self._hover_target = target
+            Animation.cancel_all(self, '_hover_amount')
+            Animation(_hover_amount=target, duration=theme.ANIM_FAST, t='out_quad').start(self)
+
+    def _redraw(self, *_):
+        self._color.rgba = (1, 1, 1, self.bg_color[3]) if self._has_fill_gradient else self.bg_color
+        self._shadow.pos, self._shadow.size = (self.x, self.y-3), self.size
+        self._shadow.radius = [self.radius]
+        self._rect.pos, self._rect.size, self._rect.radius = self.pos, self.size, [self.radius]
         self._border_color_instr.rgba = self.border_color
+        self._border_color_instr.a = min(1, self.border_color[3] + .15*self._hover_amount)
         self._border.rounded_rectangle = (*self.pos, *self.size, self.radius)
+        self._shine.points = [self.x+18, self.y+self.height-1,
+                              max(self.x+18, self.x+self.width-18), self.y+self.height-1]
+        if self._frame is not None:
+            self._frame_color.a = .68 + .3*self._hover_amount
+            self._update_gradient_frame()
 
+    def _update_gradient_frame(self):
+        # Two nested rounded paths create an actual ring, never a colored fill.
+        vertices = []
+        radius = min(self.radius, self.width/2, self.height/2)
+        thickness = 1.15 + .3*self._hover_amount
+        # Alias properties can still be stale inside a pos/size callback.
+        right, top = self.x+self.width, self.y+self.height
+        for cx, cy, start in [(right-radius, top-radius, 0),
+                              (self.x+radius, top-radius, 90),
+                              (self.x+radius, self.y+radius, 180),
+                              (right-radius, self.y+radius, 270)]:
+            for step in range(9):
+                angle = math.radians(start + step*90/8)
+                for r in (radius, max(0, radius-thickness)):
+                    x, y = cx+r*math.cos(angle), cy+r*math.sin(angle)
+                    vertices.extend((x, y, .5, (y-self.y)/max(1, self.height)))
+        n = len(vertices)//8
+        indices = []
+        for i in range(n):
+            a, b = 2*i, 2*((i+1)%n)
+            indices.extend((a, a+1, b, a+1, b+1, b))
+        self._frame.vertices, self._frame.indices = vertices, indices
 
 class HoverBehavior:
     """Adds a desktop hover state without changing touch behavior."""
@@ -146,7 +176,7 @@ class _RoundedButtonBase(HoverBehavior, ButtonBehavior, Label):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.font_name = theme.APP_FONT_NAME
-        self.font_size = FONT_SIZE["body"]
+        self.font_size = kwargs.get("font_size", FONT_SIZE["body"])
         self.padding = [8, 2]
         with self.canvas.before:
             self._color = Color(*self.bg_color_normal)
@@ -187,7 +217,7 @@ class PrimaryButton(_RoundedButtonBase):
 
     def __init__(self, **kwargs):
         kwargs.setdefault("bg_color_normal", theme.rgba(COLORS["primary"]))
-        kwargs.setdefault("bg_color_hover", theme.rgba("#5E987B"))
+        kwargs.setdefault("bg_color_hover", theme.rgba("#35D9FF"))
         kwargs.setdefault("bg_color_down", theme.rgba(COLORS["primary_dark"]))
         kwargs.setdefault("border_color", theme.rgba(COLORS["primary"]))
         kwargs.setdefault("color", theme.rgba(COLORS["text_on_primary"]))
@@ -211,7 +241,7 @@ class DangerButton(_RoundedButtonBase):
 
     def __init__(self, **kwargs):
         kwargs.setdefault("bg_color_normal", theme.rgba(COLORS["offline"]))
-        kwargs.setdefault("bg_color_hover", theme.rgba("#ED7180"))
+        kwargs.setdefault("bg_color_hover", theme.rgba("#F08C92"))
         kwargs.setdefault("bg_color_down", theme.rgba("#D45C5C"))
         kwargs.setdefault("border_color", theme.rgba(COLORS["offline"]))
         kwargs.setdefault("color", theme.rgba(COLORS["text_on_primary"]))
@@ -571,7 +601,7 @@ class _StyledSpinnerOption(SpinnerOption):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.font_name = theme.APP_FONT_NAME
-        self.font_size = FONT_SIZE["body"]
+        self.font_size = kwargs.get("font_size", FONT_SIZE["body"])
         self.background_normal = ""
         self.background_down = ""
         self.background_color = theme.rgba(COLORS["surface"])
@@ -602,7 +632,7 @@ class _StyledSpinner(HoverBehavior, Spinner):
         if self.state == "down":
             target = theme.rgba(COLORS["primary_light"])
         elif self.hovered:
-            target = theme.rgba("#EAF3EF")
+            target = theme.rgba(COLORS["primary_light"])
         else:
             target = theme.rgba(COLORS["background"])
         Animation.cancel_all(self, "background_color")

@@ -1,182 +1,222 @@
-"""
-ui/dashboard.py
-
-The main Dashboard screen: header, sidebar, three statistic cards, the
-recent
-records table.
-
-Everything shown here comes from the service layer
-(services/dashboard_service.py, services/camera_service.py,
-services/plate_service.py) - this file only arranges widgets and
-reacts to service updates. No YOLO/RTSP/PostgreSQL code belongs here.
-"""
+"""Reference-inspired Kivy dashboard backed by the RENO services."""
 
 import logging
 import threading
 from functools import partial
-
 from kivy.clock import Clock
-from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
-from kivy.graphics import Color, Rectangle
-
-from computer_vision_v2.reno.ui.theme import SPACING, PAGE_BG_TOP, PAGE_BG_BOTTOM
-from computer_vision_v2.reno.ui.components.common import make_gradient_texture
-from computer_vision_v2.reno.ui.components.app_header import AppHeader
-from computer_vision_v2.reno.ui.components.sidebar import Sidebar
-from computer_vision_v2.reno.ui.components.stat_card import (
-    StatCard, GRADIENT_TEAL, GRADIENT_BLUE, GRADIENT_ORANGE,
-)
-from computer_vision_v2.reno.ui.components.recent_records import RecentRecordsPanel
-
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.screenmanager import Screen
+from computer_vision_v2.reno.ui import theme
+from computer_vision_v2.reno.ui.theme import COLORS
+from computer_vision_v2.reno.ui.components.common import Card, RTLLabel, EmptyState, RoundedTextInput, SecondaryButton
+from computer_vision_v2.reno.ui.components.page_shell import PageShell
+from computer_vision_v2.reno.ui.components.icons import Icon
+from computer_vision_v2.reno.ui.components.stat_card import StatCard, GRADIENT_TEAL, GRADIENT_BLUE, GRADIENT_ORANGE
+from computer_vision_v2.reno.ui.components.traffic_chart import TrafficChart
+from computer_vision_v2.reno.ui.components.traffic_record import TrafficRecordRow
+from computer_vision_v2.reno.ui.components.date_picker import DatePicker
+from computer_vision_v2.reno.ui.components.camera_selector import build_camera_selector, ALL_CAMERAS_VALUE
+from computer_vision_v2.reno.models.camera import STATUS_ONLINE
 from computer_vision_v2.reno.services.camera_service import camera_service
 from computer_vision_v2.reno.services.dashboard_service import dashboard_service
 from computer_vision_v2.reno.services.plate_service import plate_service
+from computer_vision_v2.reno.services.mock_mode import MOCK_DATA_ENABLED
 
 
 class DashboardScreen(Screen):
-    """`on_navigate` is set by main.py and receives every sidebar key,
-    including "logout" - main.py's _navigate() handles that one."""
-
     def __init__(self, on_navigate=None, **kwargs):
         super().__init__(**kwargs)
         self.on_navigate = on_navigate
-        self._records_timer = None
-        self._records_active = False
-        self._records_loading = False
-        self._last_records = None
+        self._active = False
+        self._loading = False
+        self._timer = None
+        self._camera = ''
+        self._day = None
+        self._revision = 0
+        self._refresh_trigger = Clock.create_trigger(self._request_refresh, .3)
         self._build()
         camera_service.subscribe(self._on_cameras_changed)
-        camera_service.subscribe_status(self._on_camera_status_changed)
+        camera_service.subscribe_status(self._on_status_changed)
 
-    # ------------------------------------------------------------------
     def _build(self):
-        content_root = BoxLayout(orientation="vertical")
-        with content_root.canvas.before:
-            Color(1, 1, 1, 1)
-            self._bg_rect = Rectangle(
-                pos=content_root.pos,
-                size=content_root.size,
-                texture=make_gradient_texture(PAGE_BG_TOP, PAGE_BG_BOTTOM),
-            )
-        content_root.bind(pos=self._redraw_bg, size=self._redraw_bg)
-        self._content_root = content_root
+        content = BoxLayout(orientation='vertical', spacing=16)
+        stats = BoxLayout(size_hint_y=None, height=112, spacing=13)
+        self._today = StatCard('تردد امروز', 0, subtitle='مجموع ورود و خروج',
+                               icon_name='car', gradient=GRADIENT_TEAL)
+        self._unique = StatCard('خودروهای یکتا', 0, subtitle='بر اساس پلاک شناسایی‌شده',
+                                icon_name='shield', gradient=GRADIENT_BLUE)
+        self._online = StatCard('دوربین‌های فعال', 0, subtitle='در حال بررسی وضعیت دوربین‌ها',
+                                icon_name='camera', gradient=GRADIENT_TEAL, value_color=COLORS['primary'])
+        self._alerts = StatCard('هشدارها', 0, subtitle='پلاک ناخوانا و دوربین قطع',
+                                icon_name='bell', gradient=GRADIENT_ORANGE, value_color=COLORS['warning'])
+        for card in (self._today, self._unique, self._online, self._alerts):
+            stats.add_widget(card)
+        content.add_widget(stats)
 
-        content_root.add_widget(self._build_header())
+        panels = BoxLayout(spacing=18)
+        chart_panel = Card(orientation='vertical', padding=[17, 13, 17, 14], spacing=10, size_hint_x=.54)
+        heading = BoxLayout(size_hint_y=None, height=28, spacing=8)
+        heading.add_widget(RTLLabel(text='تعداد ورود بر حسب روز', font_size=9,
+                                    color=theme.rgba(COLORS['text_secondary']), halign='left', padding=[0, 0]))
+        heading.add_widget(RTLLabel(text='ورودهای هفتگی', font_size=13, padding=[0, 0]))
+        heading.add_widget(Icon(name='reports', size_hint=(None, None), size=(16, 16),
+                                pos_hint={'center_y': .5}, color=theme.rgba(COLORS['primary'])))
+        chart_panel.add_widget(heading)
+        self._chart = TrafficChart()
+        chart_panel.add_widget(self._chart)
+        self._chart_status = RTLLabel(text='در حال دریافت اطلاعات…', font_size=9,
+                                      color=theme.rgba(COLORS['text_secondary']),
+                                      size_hint_y=None, height=26, padding=[0, 0])
+        chart_panel.add_widget(self._chart_status)
+        panels.add_widget(chart_panel)
 
-        body = BoxLayout(orientation="horizontal")
+        self._record_panel = record_panel = Card(size_hint_x=.46, orientation='vertical',
+            padding=[10, 13, 10, 14], spacing=8)
+        heading = BoxLayout(size_hint_y=None, height=28, spacing=8, padding=[7, 0, 7, 0])
+        self._record_status = RTLLabel(text='در حال دریافت…', font_size=9,
+            color=theme.rgba(COLORS['text_secondary']), halign='left', padding=[0, 0], size_hint_x=None, width=110)
+        heading.add_widget(self._record_status)
+        heading.add_widget(RTLLabel(text='آخرین شناسایی‌ها', font_size=13, padding=[0, 0]))
+        heading.add_widget(Icon(name='log', size_hint=(None, None), size=(16, 16),
+                                pos_hint={'center_y': .5}, color=theme.rgba(COLORS['primary'])))
+        record_panel.add_widget(heading)
+        self._record_holder = BoxLayout(orientation='vertical')
+        record_panel.add_widget(self._record_holder)
+        record_panel.add_widget(RTLLabel(text='جزئیات هر تردد با کلیک روی ردیف', font_size=9,
+            color=theme.rgba(COLORS['text_secondary']), size_hint_y=None, height=23))
+        panels.add_widget(record_panel)
+        content.add_widget(panels)
 
-        content = BoxLayout(
-            orientation="vertical",
-            padding=[SPACING["lg"], SPACING["lg"], SPACING["lg"], SPACING["lg"]],
-            spacing=SPACING["lg"],
-        )
-        content.add_widget(self._build_top_row())
-        content.add_widget(self._build_bottom_row())
-        body.add_widget(content)
-        body.add_widget(Sidebar(active="dashboard", on_navigate=self._handle_navigate))
-        content_root.add_widget(body)
+        toolbar = BoxLayout(size_hint_y=None, height=41, spacing=10)
+        reset = SecondaryButton(text=theme.rtl('بازنشانی'), size_hint_x=None, width=60,
+                                 font_size=10, bg_color_normal=(0, 0, 0, 0), border_color=(0, 0, 0, 0),
+                                 color=theme.rgba(COLORS['primary']))
+        reset.bind(on_release=self._reset_filters)
+        toolbar.add_widget(reset)
+        self._date_picker = DatePicker(self._select_day, size_hint_x=None, width=180, font_size=11)
+        toolbar.add_widget(self._date_picker)
+        self._camera_selector = build_camera_selector(self._select_camera)
+        self._camera_selector.width = 175
+        self._camera_selector.font_size = 11
+        toolbar.add_widget(self._camera_selector)
+        self._search = RoundedTextInput(hint_text=theme.rtl('جست‌وجوی شماره پلاک…'),
+                                        halign='right', multiline=False, font_size=11)
+        self._search.bind(text=self._filters_changed)
+        toolbar.add_widget(self._search)
+        content.add_widget(toolbar)
+        footer = BoxLayout(size_hint_y=None, height=20)
+        footer.add_widget(RTLLabel(text='PLAKINO / VISION IN CONTROL', font_size=9, halign='left',
+                                   color=theme.rgba('#647F8F'), padding=[0, 0]))
+        self._data_status = RTLLabel(text='رویدادهای ثبت‌شدهٔ سامانه', font_size=9,
+                                     color=theme.rgba(COLORS['text_secondary']), padding=[0, 0])
+        footer.add_widget(self._data_status)
+        content.add_widget(footer)
+        self._shell = PageShell('داشبورد کنترل تردد', 'dashboard', content, self._navigate)
+        self.add_widget(self._shell)
+        self._set_camera_counts(camera_service.get_cameras())
 
-        # A FloatLayout wrapper so toasts (save/delete feedback, etc.)
-        # can be overlaid on top of the whole screen via pos_hint,
-        # instead of being squeezed into whatever BoxLayout happens to
-        # be nearby. See ui/components/common.py's show_toast().
-        overlay_root = FloatLayout()
-        overlay_root.add_widget(content_root)
-        self.add_widget(overlay_root)
+    def _reset_filters(self, *_):
+        self._search.text = ''
+        self._camera_selector.text = theme.rtl('همه دوربین‌ها')
+        self._date_picker.set_date(None)
 
-    def _redraw_bg(self, *_args):
-        self._bg_rect.pos = self._content_root.pos
-        self._bg_rect.size = self._content_root.size
+    def _set_camera_counts(self, cameras):
+        online = sum(camera.status == STATUS_ONLINE for camera in cameras)
+        total = len(cameras)
+        self._online.set_value(online, total=total)
+        self._online.set_subtitle(f'{theme.fa_number(total-online)} دوربین قطع' if total else 'دوربینی ثبت نشده است')
 
-    def _build_header(self):
-        return AppHeader("داشبورد سامانه کنترل تردد")
-
-    def _build_top_row(self):
-        row = BoxLayout(orientation="horizontal", spacing=SPACING["lg"], size_hint_y=None, height=112)
-
-        stats_col = GridLayout(cols=3, spacing=SPACING["lg"])
-        self._today_card = StatCard(
-            title="ورود و خروج امروز", value=0, icon_name="reports",
-            gradient=GRADIENT_TEAL, size_hint_y=1,
-        )
-        self._week_card = StatCard(
-            title="ورود و خروج این هفته", value=0, icon_name="reports",
-            gradient=GRADIENT_BLUE, size_hint_y=1,
-        )
-        self._camera_count_card = StatCard(
-            title="تعداد دوربین‌ها", value=0, icon_name="camera",
-            gradient=GRADIENT_ORANGE, size_hint_y=1,
-        )
-        stats_col.add_widget(self._camera_count_card)
-        stats_col.add_widget(self._week_card)
-        stats_col.add_widget(self._today_card)
-
-        row.add_widget(stats_col)
-        return row
-
-    def _build_bottom_row(self):
-        self._records_panel = RecentRecordsPanel()
-        return self._records_panel
-
-    # -- events -----------------------------------------------------------
-    def on_pre_enter(self, *_args):
-        self._records_active = True
-        self._refresh_stats()
-        self._refresh_records()
-        if self._records_timer is None:
-            self._records_timer = Clock.schedule_interval(self._refresh_records, 2)
-
-    def on_leave(self, *_args):
-        self._records_active = False
-        if self._records_timer is not None:
-            self._records_timer.cancel()
-            self._records_timer = None
-
-    def _handle_navigate(self, key):
+    def _navigate(self, key):
         if self.on_navigate:
             self.on_navigate(key)
 
-    def _on_cameras_changed(self, _cameras):
-        self._refresh_stats()
+    def on_pre_enter(self, *_):
+        self._active = True
+        self._request_refresh()
+        if self._timer is None:
+            self._timer = Clock.schedule_interval(self._request_refresh, 5)
 
-    def _on_camera_status_changed(self, _cameras):
-        self._refresh_stats()
+    def on_leave(self, *_):
+        self._active = False
+        if self._timer is not None:
+            self._timer.cancel()
+            self._timer = None
 
-    # -- data refresh -------------------------------------------------
-    def _refresh_stats(self):
-        stats = dashboard_service.get_statistics()
-        self._today_card.set_value(stats.today_total)
-        self._week_card.set_value(stats.week_total)
-        self._camera_count_card.set_value(stats.total_cameras)
+    def _on_cameras_changed(self, cameras):
+        self._set_camera_counts(cameras)
+        self._filters_changed()
 
-    def _refresh_records(self, *_args):
-        if not self._records_active or self._records_loading:
+    def _on_status_changed(self, cameras):
+        self._set_camera_counts(cameras)
+        self._request_refresh()
+
+    def _select_camera(self, value):
+        self._camera = '' if value == ALL_CAMERAS_VALUE else value
+        self._filters_changed()
+
+    def _select_day(self, value):
+        self._day = value
+        self._filters_changed()
+
+    def _filters_changed(self, *_):
+        self._revision += 1
+        self._refresh_trigger()
+
+    def _request_refresh(self, *_):
+        if not self._active or self._loading:
             return
-        self._records_loading = True
-        threading.Thread(target=self._load_records, daemon=True,
-                         name='recent-plate-records').start()
+        self._loading = True
+        threading.Thread(target=self._load, args=(self._revision, self._camera, self._day, self._search.text.strip()),
+                         daemon=True, name='reno-dashboard-data').start()
 
-    def _load_records(self):
+    def _load(self, revision, camera, day, plate):
         try:
-            records = plate_service.get_recent_records(limit=50)
+            stats = dashboard_service.get_statistics()
+            records = plate_service.get_recent_records(limit=20, camera=camera, day=day.isoformat() if day else '', plate=plate)
+            flow = dashboard_service.get_daily_flow(end=day, camera=camera, plate=plate)
         except Exception:
-            logging.getLogger(__name__).exception('Failed to read recent plate events')
-            Clock.schedule_once(partial(self._apply_records, None), 0)
+            logging.getLogger(__name__).exception('Dashboard database read failed')
+            Clock.schedule_once(partial(self._apply, revision, None, None, None), 0)
         else:
-            Clock.schedule_once(partial(self._apply_records, records), 0)
+            Clock.schedule_once(partial(self._apply, revision, stats, records, flow), 0)
 
-    def _apply_records(self, records, _dt):
-        self._records_loading = False
-        if not self._records_active:
+    def _apply(self, revision, stats, records, flow, _dt):
+        self._loading = False
+        if not self._active:
             return
-        if records is None:
-            self._records_panel.set_error()
+        if revision != self._revision:
+            self._request_refresh()
             return
-        if records != self._last_records:
-            self._records_panel.set_records(records)
-            self._last_records = records
-        self._records_panel.clear_error(len(records))
-
+        if stats is None:
+            self._chart.set_data([])
+            self._chart_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
+            self._record_status.set_text('خطای دریافت')
+            self._data_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
+            return
+        self._today.set_value(stats.today_total)
+        self._unique.set_value(stats.unique_vehicles)
+        self._online.set_value(stats.online_cameras, total=stats.total_cameras)
+        offline = max(0, stats.total_cameras-stats.online_cameras)
+        unread = max(0, stats.alerts-offline)
+        self._online.set_subtitle(f'{theme.fa_number(offline)} دوربین قطع' if stats.total_cameras else 'دوربینی ثبت نشده است')
+        self._alerts.set_subtitle(f'{theme.fa_number(unread)} پلاک ناخوانا · {theme.fa_number(offline)} دوربین قطع')
+        self._alerts.set_value(stats.alerts)
+        self._chart.set_data(flow)
+        self._chart_status.set_text('ترددی در این بازه ثبت نشده است' if not any(a or b for _, a, b in flow) else 'هفت روز تا تاریخ انتخابی · فیلترها بر نمودار و فهرست اعمال می‌شوند')
+        self._record_status.set_text(f'{theme.fa_number(len(records))} تردد')
+        self._data_status.set_text('حالت نمایشی · داده‌های آزمایشی' if MOCK_DATA_ENABLED else 'رویدادهای ثبت‌شدهٔ سامانه')
+        self._record_holder.clear_widgets()
+        if not records:
+            self._record_holder.add_widget(EmptyState(
+                icon_name='reports', title='هنوز ترددی ثبت نشده است',
+                subtitle='رویدادهای ثبت‌شده اینجا نمایش داده می‌شوند'))
+            return
+        scroll = ScrollView(do_scroll_x=False)
+        rows = GridLayout(cols=1, size_hint_y=None, spacing=5)
+        rows.bind(minimum_height=rows.setter('height'))
+        for record in records:
+            rows.add_widget(TrafficRecordRow(record))
+        scroll.add_widget(rows)
+        self._record_holder.add_widget(scroll)

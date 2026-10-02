@@ -7,7 +7,7 @@ The Kivy UI only polls the latest decoded frame and therefore stays responsive.
 from __future__ import annotations
 
 import threading
-import time
+from pathlib import Path
 from typing import Callable, Optional
 
 import cv2
@@ -30,9 +30,6 @@ class VideoStream:
 
     def stop(self) -> None:
         self._stop.set()
-        capture = self._capture
-        if capture is not None:
-            capture.release()
 
     def latest_frame(self):
         with self._frame_lock:
@@ -45,7 +42,20 @@ class VideoStream:
     def _run(self) -> None:
         self._set_state("connecting")
         while not self._stop.is_set():
-            capture = cv2.VideoCapture(self.camera.source)
+            source = self.camera.source
+            if self.camera.source_type == SOURCE_TYPE_VIDEO_FILE:
+                path = Path(source).expanduser()
+                if not path.is_absolute():
+                    path = Path(__file__).resolve().parents[4] / path
+                source = str(path)
+            if self.camera.source_type == SOURCE_TYPE_VIDEO_FILE:
+                capture = cv2.VideoCapture(source)
+            else:
+                capture = cv2.VideoCapture(
+                    source, cv2.CAP_FFMPEG,
+                    [cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 3000,
+                     cv2.CAP_PROP_READ_TIMEOUT_MSEC, 3000],
+                )
             self._capture = capture
             if not capture.isOpened():
                 self._set_state("offline")
@@ -73,7 +83,7 @@ class VideoStream:
                 # Avoid decoding local files as fast as the CPU permits.
                 if self.camera.source_type == SOURCE_TYPE_VIDEO_FILE:
                     fps = capture.get(cv2.CAP_PROP_FPS) or 25
-                    time.sleep(max(0.001, 1.0 / min(fps, 60)))
+                    self._stop.wait(max(0.001, 1.0 / min(fps, 60)))
 
             capture.release()
             if self.camera.source_type == SOURCE_TYPE_VIDEO_FILE:

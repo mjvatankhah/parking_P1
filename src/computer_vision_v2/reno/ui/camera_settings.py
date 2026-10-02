@@ -29,6 +29,7 @@ from kivy.properties import ListProperty
 from kivy.clock import Clock
 
 from computer_vision_v2.reno.ui import theme
+from computer_vision_v2.reno.ui.components.page_shell import PageShell
 from computer_vision_v2.reno.ui.theme import COLORS, FONT_SIZE, SPACING, rtl, rtl_map, PAGE_BG_TOP, PAGE_BG_BOTTOM
 from computer_vision_v2.reno.ui.components.common import (
     Card, make_gradient_texture, PrimaryButton, SecondaryButton, RoundedTextInput, Divider,
@@ -69,42 +70,24 @@ class CameraSettingsScreen(Screen):
 
     # ------------------------------------------------------------------
     def _build(self):
-        content_root = BoxLayout(orientation="vertical")
-        with content_root.canvas.before:
-            Color(1, 1, 1, 1)
-            self._bg_rect = Rectangle(
-                pos=content_root.pos,
-                size=content_root.size,
-                texture=make_gradient_texture(PAGE_BG_TOP, PAGE_BG_BOTTOM),
-            )
-        content_root.bind(pos=self._redraw_bg, size=self._redraw_bg)
-        self._content_root = content_root
-
-        content_root.add_widget(self._build_header())
-
-        body = BoxLayout(orientation="horizontal")
-
         content = BoxLayout(
             orientation="vertical",
-            padding=[20, 18, 20, 20],
+            padding=0, size_hint_y=None,
             spacing=SPACING["md"],
         )
         content.add_widget(self._build_form_card())
-        content.add_widget(self._build_table_card())
-        body.add_widget(content)
-        body.add_widget(Sidebar(active="camera_settings", on_navigate=self._handle_navigate))
-        content_root.add_widget(body)
-
+        table = self._build_table_card()
+        table.size_hint_y = None
+        table.height = 260
+        content.add_widget(table)
+        content.bind(minimum_height=content.setter('height'))
+        scroll = ScrollView(do_scroll_x=False)
+        scroll.add_widget(content)
+        self._shell = PageShell('تنظیمات دوربین', 'camera_settings', scroll, self._handle_navigate,
+                                subtitle='مدیریت منابع تصویر و تنظیمات گیت‌ها')
         overlay_root = FloatLayout()
-        overlay_root.add_widget(content_root)
+        overlay_root.add_widget(self._shell)
         self.add_widget(overlay_root)
-
-    def _redraw_bg(self, *_args):
-        self._bg_rect.pos = self._content_root.pos
-        self._bg_rect.size = self._content_root.size
-
-    def _build_header(self):
-        return AppHeader("تنظیمات دوربین")
 
     # -- form -------------------------------------------------------------
     def _build_form_card(self):

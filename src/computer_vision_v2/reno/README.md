@@ -1,153 +1,46 @@
-# RENO — Parking ANPR Desktop App (UI prototype)
+# PLAKINO — اپ دسکتاپ پلاک‌خوان
 
-A Kivy desktop application for a multi-camera parking ANPR system:
-Login, Dashboard (statistics + recent plate records), Cameras, and Camera
-Settings. The Cameras screen displays annotated frames from the running backend.
+اپ Kivy برای ویندوز با پوسته مشکی، آبی نئونی و بنفش، سایدبار مطابق HTML در سمت چپ، فونت وزیرمتن، داشبورد تردد و مانیتورینگ چند دوربین. در این نسخه، لاگین همان رفتار نمایشی رنو را دارد و ترددها از PostgreSQL خوانده می‌شوند.
 
----
+## نصب و اجرا روی ویندوز
 
-## 1. Requirements
+از پوشه اصلی پروژه در PowerShell اجرا کنید:
 
-- Windows 10/11 (this is the target platform; it also runs on macOS/Linux for testing)
-- Python 3.10 or newer
-
-## 2. Setup
-
-Open a terminal / PowerShell inside this folder and run:
-
-```
-python -m venv venv
-venv\Scripts\activate          (on Windows)
-# source venv/bin/activate     (on macOS/Linux, for testing)
-
-pip install -r requirements.txt
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r .\src\computer_vision_v2\reno\requirements.txt
+$env:PYTHONPATH = (Resolve-Path .\src).Path
+.\.venv\Scripts\python.exe -m computer_vision_v2.reno.main
 ```
 
-## 3. Run it
+ورود نمایشی فعلی: نام کاربری `admin` و رمز `1234`. این روش برای کنترل دسترسی واقعی مناسب نیست.
 
+## صفحه‌ها
+
+- **داشبورد:** ترددهای امروز، خودروهای یکتا، تعداد دوربین‌های فعال از کل دوربین‌ها و هشدارها، نمودار ورود هفتگی در سمت چپ و ۲۰ تردد اخیر در سمت راست، همراه با تصویر پلاک، ساعت، نوع شیء و جهت تردد.
+- **مانیتورینگ:** انتخاب یک یا چند دوربین، انتخاب همه و لغو انتخاب. تصویر خام مستقیماً از مسیر فایل ویدیو یا RTSP تنظیم‌شده خوانده می‌شود. خواندن تصویر با خروج از صفحه یا لغو انتخاب متوقف می‌شود. برای ویدیوهای محلی، مسیر نسبی از ریشه پروژه محاسبه می‌شود.
+- **گزارش‌ها:** صفحه‌ای خالی برای توسعه بعدی.
+- **تنظیمات:** افزودن، ویرایش و حذف دوربین با همان اطلاعات رنو: شناسه، نوع/آدرس منبع، نقش ورود/خروج، خط عبور و نقطه داخل پارکینگ. تنظیمات در `data/cameras.json` ذخیره می‌شود.
+
+## پایگاه داده و وضعیت‌ها
+
+اپ از اتصال فعلی پروژه در `computer_vision_v2/database/connection.py` و جدول `event` در `schema.sql` استفاده می‌کند. آمار روز با تاریخ پایگاه داده محاسبه می‌شود. اگر PostgreSQL یا جدول رویداد در دسترس نباشد، داشبورد پیام خطا نشان می‌دهد و دوباره تلاش می‌کند؛ پنجره بسته یا قفل نمی‌شود. تصاویر دوربین مستقل از پایگاه داده دریافت می‌شوند.
+
+برای راه‌اندازی نمایشی بدون پایگاه داده، پیش از اجرا `RENO_MOCK_DATA=1` را در محیط تنظیم کنید. در اجرای معمول، داده ساختگی به صفحه‌ها اضافه نمی‌شود.
+
+این نسخه از سورس روی ویندوز اجرا می‌شود و فایل EXE تولید نمی‌کند.
+
+## انطباق با طرح HTML
+
+مرجع ظاهر `dashboard-prototype.html` است: لوگوی خودرو، تمام آیکن‌های موجود در مرجع، چیدمان منو، سلسله‌مراتب عنوان‌ها، متن و توضیحات کارت‌ها و رنگ‌های اصلی از همان طرح منتقل شده‌اند. چهار کارت حاشیهٔ گرادیان دارند و نورهای محو آبی و بنفش در پس‌زمینه حرکت می‌کنند. بخش گزارش‌ها خالی است و نمایش دوربین‌ها فقط در مانیتورینگ انجام می‌شود.
+
+«ثبت تیکت» در بالای همهٔ صفحه‌ها یک فرم نمایشی باز می‌کند. پس از تکمیل موضوع و شرح، رسید `DEMO` نمایش داده می‌شود؛ هیچ درخواست پشتیبانی ارسال یا ذخیره نمی‌شود. هاور دکمهٔ ورود در ۷۰ میلی‌ثانیه پاسخ می‌دهد.
+
+آیکن‌های SVG بدون تغییر مسیرها در `assets/icons/reference` نگهداری می‌شوند. فایل‌های PNG همراه برنامه هستند و اجرای برنامه به مبدل SVG نیاز ندارد. فقط برای استخراج دوباره، `python scripts/extract_reference_icons.py` از ریشهٔ پروژه اجرا می‌شود؛ این ابزار نگهداری به کتابخانه‌های سیستم librsvg و cairo نیاز دارد.
+
+آزمون‌های رابط با نمایشگر OpenGL در دسترس:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -p 'test_reference_ui.py'
+PYTHONPATH=src python -m unittest discover -s tests -p 'test_iranian_plate.py'
 ```
-python main.py
-```
-
-A window titled **RENO** opens on the Login screen.
-
-**Demo login:**
-- Username: `admin`
-- Password: `1234`
-
-Anything else shows the Persian error message and keeps you on the
-Login screen, exactly like a real login would.
-
-## 4. Persian text / font
-
-Persian text is rendered with the bundled **Vazirmatn** font on every platform.
-
-## 5. Project structure
-
-```
-reno/
-├── main.py                    # starts the app, wires screens together — only wiring, no logic
-├── ui/
-│   ├── theme.py                # colors, spacing, font registration, the rtl() Persian helper
-│   ├── login.py                 # Login screen
-│   ├── dashboard.py             # Dashboard screen
-│   ├── camera_settings.py       # Camera Settings screen
-│   └── components/              # small reusable pieces shared by screens
-│       ├── common.py             # Card, buttons, rounded text input, status dot
-│       ├── icons.py              # hand-drawn vector icons (no icon files needed)
-│       ├── sidebar.py            # left navigation column
-│       ├── camera_selector.py    # the "All Cameras ▼" dropdown, driven by camera_service
-│       ├── camera_card.py        # one camera tile (name, status, placeholder video)
-│       ├── stat_card.py          # one statistic card (big number + icon)
-│       └── recent_records.py     # the 50-row recent plate records table
-├── services/                   # <-- connect your real backend here (see section 6)
-│   ├── auth_service.py
-│   ├── camera_service.py
-│   ├── dashboard_service.py
-│   └── plate_service.py
-├── models/
-│   ├── camera.py                # Camera dataclass
-│   └── plate_record.py          # PlateRecord dataclass
-└── assets/
-    └── fonts/                   # bundled Vazirmatn font
-```
-
-## 6. Where to connect your real backend
-
-Each file in `services/` is a small class with 2-5 methods, currently
-backed by in-memory/mock data. To connect your real backend, edit the
-**inside** of these methods only — keep the method names and return
-types the same, and every screen keeps working without changes:
-
-| File | Methods to replace | Should eventually call |
-|---|---|---|
-| `services/auth_service.py` | `login(username, password)` | your real authentication |
-| `services/camera_service.py` | `get_cameras`, `add_camera`, `update_camera`, `delete_camera` | your `CameraManager` |
-| `services/plate_service.py` | `get_recent_records(limit)` | your PostgreSQL query |
-| `services/dashboard_service.py` | `get_statistics()` | your real counters |
-
-`camera_service` also has a small publish/subscribe mechanism
-(`subscribe()` / `_notify()`): whenever you change the camera list,
-call `self._notify()` at the end, and the Dashboard's camera selector
-and camera grid will refresh themselves automatically — you do not
-need to touch `ui/dashboard.py`.
-
-## 7. What each screen does
-
-- **Login** (`ui/login.py`) — RENO branding, username/password
-  fields, "remember me", a login button and a "forgot password" link.
-  Calls `auth_service.login()`; on success it hands control back to
-  `main.py`, which switches to the Dashboard.
-- **Dashboard** (`ui/dashboard.py`) — a header with a Help & Support
-  button, three statistic cards, the live camera panel with its dynamic
-  selector, and a full-width table of the 50 most recent plate records.
-- **Camera Settings** (`ui/camera_settings.py`) — a form to add or
-  edit a camera (ID, RTSP/video-file source type, source, entry/exit
-  role) and a table of configured cameras with edit/delete actions.
-- **Search / Reports** (`ui/placeholder_screen.py`) — real, navigable
-  screens (same header + sidebar shell as every other page) with
-  nothing built into them yet on purpose — an honest "not ready yet"
-  empty state instead of a popup that interrupted navigation. Build
-  the real feature into `PlaceholderScreen._build()`'s content area
-  when it's ready; the header/sidebar/navigation wiring doesn't need
-  to change.
-
-## 8. Known limitations (by design, for this iteration)
-
-- Camera configuration is stored in `data/cameras.json`; plate records and
-  authentication still use the prototype services.
-- Search and Reports are empty placeholder screens (see above).
-
-## 9. Notes on the source files you sent me
-
-The Balsamiq wireframe (`New_Project_1.bmpr`) has three pages —
-لاگین (Login), داشبورد (Dashboard), تنظیمات (Settings) — and I built
-the layout of each screen to match its structure and control
-positions. The reference screenshot was used only for the visual
-style (colors, rounded cards, spacing), as instructed.
-
-Two small additions beyond a literal 1:1 wireframe trace, both called
-out explicitly elsewhere in your written instructions rather than
-invented by me: the **"forgot password" link** on Login, and the
-**Add/Edit/Delete/Save/Cancel buttons** on Camera Settings (the
-wireframe's Camera Settings page didn't have visible button controls
-in the exported data, but your notes explicitly asked for them).
-
-## Processed camera previews
-
-From the repository root, run the backend and UI in separate terminals:
-
-```sh
-.venv/bin/python -m computer_vision_v2.main_v2
-.venv/bin/python -m computer_vision_v2.reno.main
-```
-
-Open **دوربین‌ها** to see the backend frames with person/car bounding boxes,
-track IDs and confidence. Both processes must run as the same user on the same
-machine, using the same temporary directory. The preview bridge retains only
-the newest JPEG per camera, at up to 10 updates/second. Frames older than five
-seconds are hidden. The UI does not open another capture or run another model.
-
-The backend reads camera configuration at startup; restart it after changing
-camera settings. Preview drawing works on a copy and does not alter the images
-used by tracking, line crossing, crop selection or OCR.

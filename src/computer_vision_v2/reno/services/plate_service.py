@@ -12,7 +12,7 @@ from computer_vision_v2.reno.services.mock_mode import MOCK_DATA_ENABLED
 # A believable-looking set of Persian plate letters, used only to build
 # mock plate numbers such as "12الف345".
 _PLATE_LETTERS = ["الف", "ب", "ج", "د", "س", "ص", "ط", "ق", "ل", "م", "ن", "و", "ه", "ی"]
-_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+_PROJECT_ROOT = Path(__file__).resolve().parents[4]
 
 
 def _connect():
@@ -27,12 +27,25 @@ class PlateService:
         if MOCK_DATA_ENABLED:
             self._mock_records = self._generate_mock_records(count=50)
 
-    def get_recent_records(self, limit: int = 50) -> List[PlateRecord]:
+    def get_recent_records(self, limit: int = 50, plate: str = "", camera: str = "", day: str = "") -> List[PlateRecord]:
         """Return the most recent `limit` records, newest first."""
         if limit <= 0:
             return []
         if MOCK_DATA_ENABLED:
-            return self._mock_records[:limit]
+            return [r for r in self._mock_records
+                    if (not plate or plate in r.plate) and (not camera or r.camera == camera)
+                    and (not day or r.date == day)][:limit]
+        conditions, params = [], []
+        if plate:
+            conditions.append("strpos(COALESCE(plate_number, ''), %s) > 0")
+            params.append(plate)
+        if camera:
+            conditions.append("camera_id = %s")
+            params.append(camera)
+        if day:
+            conditions.append("captured_at >= %s::date AND captured_at < %s::date + INTERVAL '1 day'")
+            params.extend([day, day])
+        where = ' WHERE ' + ' AND '.join(conditions) if conditions else '' 
         # Each refresh has its own short transaction and connection. Never
         # share the writer's connection across threads/processes.
         with self._connect() as connection:
@@ -40,11 +53,11 @@ class PlateService:
                 cursor.execute("SET TRANSACTION READ ONLY")
                 cursor.execute("SET LOCAL statement_timeout = '5s'")
                 cursor.execute(
-                    """SELECT plate_number, captured_at, camera_id, event_type, class_id, image_path
-                       FROM event
+                    f"""SELECT plate_number, captured_at, camera_id, event_type, class_id, image_path
+                       FROM event {where}
                        ORDER BY captured_at DESC, id DESC
                        LIMIT %s""",
-                    (limit,),
+                    (*params, limit),
                 )
                 rows = cursor.fetchall()
         records = []
