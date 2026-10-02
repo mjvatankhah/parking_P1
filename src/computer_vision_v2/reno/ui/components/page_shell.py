@@ -13,8 +13,8 @@ class PageShell(FloatLayout):
         super().__init__(**kwargs)
         self.background = AmbientBackground()
         self.add_widget(self.background)
-        self.frame = Card(size_hint=(None, None), padding=0, radius=18, hover_effect=False,
-                          bg_color=theme.rgba('#071017', .68), border_color=theme.rgba('#184052'))
+        self.frame = Card(size_hint=(None, None), padding=0, radius=8, hover_effect=False,
+                          bg_color=theme.rgba(theme.COLORS['background']), border_color=theme.rgba(theme.COLORS['border']))
         self.sidebar = Sidebar(active=active, on_navigate=on_navigate)
         self.frame.add_widget(self.sidebar)
         self.main = BoxLayout(orientation='vertical', padding=[30, 26, 30, 20], spacing=20)
@@ -32,11 +32,11 @@ class PageShell(FloatLayout):
         self._layout_frame()
 
     def _layout_frame(self, *_):
-        margin = 34 if self.width >= 1200 else 16
+        margin = 20 if self.width >= 1200 else 16
         width = min(1380, max(0, self.width-2*margin))
         self.frame.size = (width, max(0, self.height-68))
         self.frame.pos = (self.x+(self.width-width)/2, self.y+24)
         compact = self.width < 1100
         self.sidebar.width = 165 if compact else 188
         self.sidebar.padding = [10 if compact else 16, 22, 10 if compact else 16, 22]
-        self.main.padding = [18 if compact else 30, 24, 18 if compact else 30, 18]
+        self.main.padding = [18 if compact else 24, 24, 18 if compact else 24, 18]

@@ -7,10 +7,10 @@ from computer_vision_v2.reno.ui import theme
 from computer_vision_v2.reno.ui.components.common import Card, RTLLabel
 from computer_vision_v2.reno.ui.components.icons import Icon
 
-GRADIENT_TEAL = ('#00CEFF', '#264653')
-GRADIENT_BLUE = ('#A879FF', '#283D61')
-GRADIENT_ORANGE = ('#FFC66D', '#574036')
-GRADIENT_CRIMSON = ('#FF426D', '#513042')
+GRADIENT_TEAL = ('#91B4DF', '#303B49')
+GRADIENT_BLUE = ('#B0A5D1', '#303B49')
+GRADIENT_ORANGE = ('#DABB89', '#303B49')
+GRADIENT_CRIMSON = ('#DF9A9F', '#303B49')
 
 
 class StatCard(Card):
@@ -24,26 +24,26 @@ class StatCard(Card):
         kwargs.setdefault('size_hint_y', None)
         kwargs.setdefault('height', 112)
         kwargs.setdefault('radius', 9)
-        kwargs['gradient'] = ('#182832', '#101A22')
-        kwargs['border_gradient'] = gradient
-        kwargs['bg_color'] = theme.rgba('#101A22', .73)
-        kwargs['border_color'] = theme.rgba('#233640')
+        kwargs['gradient'] = ('#222B37', '#191F27')
+        kwargs['hover_effect'] = False
+        kwargs['bg_color'] = theme.rgba(theme.COLORS['surface'])
+        kwargs['border_color'] = theme.rgba(theme.COLORS['border'])
         super().__init__(**kwargs)
         self._total = None
         self._target_value = value
-        self._title_label = RTLLabel(text=title, font_size=11, padding=[0, 0],
+        self._title_label = RTLLabel(text=title, font_size=12, padding=[0, 0],
                                     color=theme.rgba('#AAB8C3'), size_hint_y=None, height=22)
         self.add_widget(self._title_label)
         body = BoxLayout(size_hint_y=None, height=38, spacing=8)
         body.add_widget(Icon(name=icon_name, color=theme.rgba(gradient[0]),
-                             size_hint=(None, None), size=(26, 26), pos_hint={'center_y': .5}))
+                             size_hint=(None, None), size=(22, 22), pos_hint={'center_y': .5}))
         self._value_label = Label(text=theme.fa_number(value), markup=True,
             font_name=theme.APP_FONT_NAME, font_size=27, color=theme.rgba(value_color or theme.COLORS['text_primary']),
             halign='right', valign='middle')
         self._value_label.bind(size=lambda w, *_: setattr(w, 'text_size', w.size))
         body.add_widget(self._value_label)
         self.add_widget(body)
-        self._subtitle_label = RTLLabel(text=subtitle, font_size=9, padding=[0, 0],
+        self._subtitle_label = RTLLabel(text=subtitle, font_size=11, padding=[0, 0],
             color=theme.rgba(theme.COLORS['text_secondary']), size_hint_y=None, height=23)
         self.add_widget(self._subtitle_label)
         self.bind(_display_value=self._update_number)
@@ -54,7 +54,7 @@ class StatCard(Card):
         self._target_value = value
         Animation.cancel_all(self, '_display_value')
         self._update_number()
-        Animation(_display_value=value, duration=.32, t='out_quad').start(self)
+        Animation(_display_value=value, duration=.18, t='out_quad').start(self)
 
     def set_subtitle(self, text):
         self._subtitle_label.set_text(text)

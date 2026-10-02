@@ -28,8 +28,8 @@ class TrafficChart(FloatLayout):
         if not self.data:
             self._label('در انتظار داده', self.center_x-60, self.center_y, 120)
             return
-        left, bottom = self.x+42, self.y+52
-        width, height = max(1, self.width-68), max(1, self.height-105)
+        left, bottom = self.x+42, self.y+72
+        width, height = max(1, self.width-68), max(1, self.height-125)
         peak = max(4, *(row[1] for row in self.data))
         step = max(1, math.ceil(peak/4))
         maximum = step*4
@@ -37,26 +37,22 @@ class TrafficChart(FloatLayout):
         with self.canvas.before:
             for i in range(5):
                 y = bottom + height*i/4
-                Color(*theme.rgba(theme.COLORS['primary'], .09))
+                Color(*theme.rgba(theme.COLORS['border'], .8))
                 Line(points=[left, y, left+width, y], width=1)
         for i in range(5):
             self._label(theme.fa_number(step*i), self.x, bottom+height*i/4-12, 35)
         for i, row in enumerate(self.data):
             day = date.fromisoformat(row[0])
             weekday = ['دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه', 'یکشنبه'][day.weekday()]
-            self._label(weekday, left+width*i/6-29, bottom-30)
-            self._label(theme.fa_number(row[0][5:]), left+width*i/6-29, bottom-50)
+            self._label(weekday, left+width*i/max(1, len(self.data)-1)-29, bottom-30)
+            self._label(theme.fa_number(row[0][5:]), left+width*i/max(1, len(self.data)-1)-29, bottom-50)
         self._label('تاریخ میلادی', left+width/2-45, self.y-4, 90)
         for column, color in [(1, theme.COLORS['primary'])]:
             points = []
             for i, row in enumerate(self.data):
-                points.extend([left+width*i/6, bottom+height*row[column]/maximum])
+                points.extend([left+width*i/max(1, len(self.data)-1), bottom+height*row[column]/maximum])
             with self.canvas.before:
-                Color(*theme.rgba(color, .08))
-                Line(points=points, width=6)
-                Color(*theme.rgba(color, .2))
-                Line(points=points, width=3)
                 Color(*theme.rgba(color))
-                Line(points=points, width=1.3)
+                Line(points=points, width=1.1)
                 for x, y in zip(points[::2], points[1::2]):
-                    Ellipse(pos=(x-3,y-3), size=(6,6))
+                    Ellipse(pos=(x-2,y-2), size=(4,4))

@@ -85,7 +85,7 @@ class InstantTransition(TransitionBase):
 
 class RenoApp(App):
     title = "PLAKINO"
-    icon = str(Path(__file__).resolve().parent / "assets/icons/reference/app.png")
+    icon = str(Path(__file__).resolve().parent / "assets/icons/lucide/app.png")
 
     def build(self):
         register_app_font()

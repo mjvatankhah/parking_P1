@@ -366,7 +366,8 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._table_holder.add_widget(scroll)
 
     def _build_table_header(self):
-        row = BoxLayout(orientation="horizontal", size_hint_y=None, height=30)
+        row = Card(orientation="horizontal", size_hint_y=None, height=36, padding=0,
+                   radius=4, hover_effect=False, bg_color=theme.rgba(COLORS["surface_alt"]))
         headers = [("شناسه", 0.22), ("نوع", 0.16), ("کارکرد", 0.2), ("وضعیت", 0.16), ("عملیات", 0.26)]
         for text, ratio in headers:
             cell = RTLLabel(text=text, font_size=FONT_SIZE["caption"], bold=True,

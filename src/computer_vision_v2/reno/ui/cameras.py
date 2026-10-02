@@ -4,14 +4,13 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.screenmanager import Screen
-from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 
 from computer_vision_v2.reno.ui import theme
 from computer_vision_v2.reno.ui.components.page_shell import PageShell
 from computer_vision_v2.reno.ui.theme import COLORS, SPACING
 from computer_vision_v2.reno.ui.components.common import (
-    Card, RTLLabel, EmptyState,
+    Card, RTLLabel, EmptyState, SecondaryButton,
 )
 from computer_vision_v2.reno.ui.components.raw_camera_card import RawCameraCard
 from computer_vision_v2.reno.services.camera_service import camera_service
@@ -33,9 +32,7 @@ class CamerasScreen(Screen):
         toolbar = BoxLayout(size_hint_y=None, height=38, spacing=8)
         for label, callback in [('انتخاب همه', self._select_all),
                                 ('لغو انتخاب', self._clear_selection)]:
-            button = Button(text=theme.rtl(label), font_name=theme.APP_FONT_NAME,
-                            background_normal='', background_color=theme.rgba(COLORS['surface_alt']),
-                            color=theme.rgba(COLORS['text_primary']), size_hint_x=None, width=115)
+            button = SecondaryButton(text=theme.rtl(label), font_size=13, size_hint_x=None, width=115)
             button.bind(on_release=lambda _button, action=callback: action())
             toolbar.add_widget(button)
         self._count = RTLLabel(text='', color=theme.rgba(COLORS['text_secondary']))
@@ -101,6 +98,8 @@ class CamerasScreen(Screen):
                                   background_color=theme.rgba(COLORS['primary_light'] if camera.id in self._selected else COLORS['surface_alt']),
                                   color=theme.rgba(COLORS['text_primary']),
                                   state='down' if camera.id in self._selected else 'normal')
+            choice.bind(state=lambda button, state: setattr(button, 'background_color',
+                        theme.rgba(COLORS['primary_light'] if state == 'down' else COLORS['surface_alt'])))
             choice.bind(on_release=lambda button, cid=camera.id:
                         self._toggle(cid, button.state == 'down'))
             self._choices.add_widget(choice)

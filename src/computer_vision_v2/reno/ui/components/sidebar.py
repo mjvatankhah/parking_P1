@@ -35,7 +35,7 @@ class _SidebarItem(HoverBehavior, ButtonBehavior, BoxLayout):
             self._active_line = Line(width=1)
         self._icon = Icon(name=icon_name, color=theme.rgba('#A4B4C0'),
                           size_hint=(None, None), size=(20, 20), pos_hint={'center_y': .5})
-        self._label = RTLLabel(text=label_text, font_size=12, halign='left', padding=[0, 0],
+        self._label = RTLLabel(text=label_text, font_size=13, halign='left', padding=[0, 0],
                                color=theme.rgba('#A4B4C0'))
         self.add_widget(self._icon)
         self.add_widget(self._label)
@@ -53,12 +53,12 @@ class _SidebarItem(HoverBehavior, ButtonBehavior, BoxLayout):
         self._bg_color.rgba = color
 
     def _style(self, *_):
-        target = theme.rgba('#004A6B', .4 if self.active else (.22 if self.hovered else 0))
+        target = theme.rgba('#29384C', 1 if self.active else (.55 if self.hovered else 0))
         Animation.cancel_all(self, '_bg_rgba')
         Animation(_bg_rgba=target, duration=theme.ANIM_FAST, t='out_quad').start(self)
         self._icon.color = theme.rgba(theme.COLORS['primary'] if self.active or self.hovered else '#A4B4C0')
         self._label.color = theme.rgba('#F2FCFF' if self.active or self.hovered else '#A4B4C0')
-        self._border_color.rgba = theme.rgba('#136382', .4 if self.active else 0)
+        self._border_color.rgba = theme.rgba('#40536A', .4 if self.active else 0)
         self._active_color.rgba = theme.rgba(theme.COLORS['primary'], 1 if self.active else 0)
 
 
@@ -76,8 +76,8 @@ class Sidebar(BoxLayout):
         self._items = {}
         with self.canvas.before:
             Color(1, 1, 1, .88)
-            self._surface = RoundedRectangle(texture=make_gradient_texture('#0C1A24', '#080E13'), radius=[0])
-            Color(*theme.rgba('#1A2C36'))
+            self._surface = RoundedRectangle(texture=make_gradient_texture('#181E26', '#141920'), radius=[0])
+            Color(*theme.rgba('#303B49'))
             self._edge = Line(width=.65)
         self.bind(pos=self._redraw, size=self._redraw, active=self._set_active)
         self.add_widget(Brand())
@@ -88,8 +88,8 @@ class Sidebar(BoxLayout):
             self._items[key] = item
             self.add_widget(item)
         self.add_widget(Widget())
-        self.add_widget(RTLLabel(text='مرکز کنترل تردد', font_size=12, size_hint_y=None, height=24))
-        self.add_widget(RTLLabel(text='VISION IN CONTROL', font_size=8,
+        self.add_widget(RTLLabel(text='مرکز کنترل تردد', font_size=13, size_hint_y=None, height=24))
+        self.add_widget(RTLLabel(text='PLAKINO', font_size=10,
                                 color=theme.rgba(theme.COLORS['text_secondary']), size_hint_y=None, height=18))
         self.add_widget(Widget(size_hint_y=None, height=12))
         logout = _SidebarItem('logout', 'خروج', key='logout')

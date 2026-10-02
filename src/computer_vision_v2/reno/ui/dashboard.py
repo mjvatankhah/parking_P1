@@ -58,15 +58,15 @@ class DashboardScreen(Screen):
         panels = BoxLayout(spacing=18)
         chart_panel = Card(orientation='vertical', padding=[17, 13, 17, 14], spacing=10, size_hint_x=.54)
         heading = BoxLayout(size_hint_y=None, height=28, spacing=8)
-        heading.add_widget(RTLLabel(text='تعداد ورود بر حسب روز', font_size=9,
+        heading.add_widget(RTLLabel(text='تعداد ورود بر حسب روز', font_size=11,
                                     color=theme.rgba(COLORS['text_secondary']), halign='left', padding=[0, 0]))
-        heading.add_widget(RTLLabel(text='ورودهای هفتگی', font_size=13, padding=[0, 0]))
+        heading.add_widget(RTLLabel(text='ورودهای هفتگی', font_size=14, padding=[0, 0]))
         heading.add_widget(Icon(name='reports', size_hint=(None, None), size=(16, 16),
                                 pos_hint={'center_y': .5}, color=theme.rgba(COLORS['primary'])))
         chart_panel.add_widget(heading)
         self._chart = TrafficChart()
         chart_panel.add_widget(self._chart)
-        self._chart_status = RTLLabel(text='در حال دریافت اطلاعات…', font_size=9,
+        self._chart_status = RTLLabel(text='در حال دریافت اطلاعات…', font_size=11,
                                       color=theme.rgba(COLORS['text_secondary']),
                                       size_hint_y=None, height=26, padding=[0, 0])
         chart_panel.add_widget(self._chart_status)
@@ -75,16 +75,18 @@ class DashboardScreen(Screen):
         self._record_panel = record_panel = Card(size_hint_x=.46, orientation='vertical',
             padding=[10, 13, 10, 14], spacing=8)
         heading = BoxLayout(size_hint_y=None, height=28, spacing=8, padding=[7, 0, 7, 0])
-        self._record_status = RTLLabel(text='در حال دریافت…', font_size=9,
+        self._record_status = RTLLabel(text='در حال دریافت…', font_size=11,
             color=theme.rgba(COLORS['text_secondary']), halign='left', padding=[0, 0], size_hint_x=None, width=110)
         heading.add_widget(self._record_status)
-        heading.add_widget(RTLLabel(text='آخرین شناسایی‌ها', font_size=13, padding=[0, 0]))
+        heading.add_widget(RTLLabel(text='آخرین شناسایی‌ها', font_size=14, padding=[0, 0]))
         heading.add_widget(Icon(name='log', size_hint=(None, None), size=(16, 16),
                                 pos_hint={'center_y': .5}, color=theme.rgba(COLORS['primary'])))
         record_panel.add_widget(heading)
         self._record_holder = BoxLayout(orientation='vertical')
+        self._record_holder.add_widget(EmptyState(icon_name='log', title='در حال دریافت رویدادها',
+                                                  subtitle='اطلاعات تردد در این بخش نمایش داده می‌شود'))
         record_panel.add_widget(self._record_holder)
-        record_panel.add_widget(RTLLabel(text='جزئیات هر تردد با کلیک روی ردیف', font_size=9,
+        record_panel.add_widget(RTLLabel(text='جزئیات هر تردد با کلیک روی ردیف', font_size=11,
             color=theme.rgba(COLORS['text_secondary']), size_hint_y=None, height=23))
         panels.add_widget(record_panel)
         content.add_widget(panels)
@@ -107,9 +109,9 @@ class DashboardScreen(Screen):
         toolbar.add_widget(self._search)
         content.add_widget(toolbar)
         footer = BoxLayout(size_hint_y=None, height=20)
-        footer.add_widget(RTLLabel(text='PLAKINO / VISION IN CONTROL', font_size=9, halign='left',
-                                   color=theme.rgba('#647F8F'), padding=[0, 0]))
-        self._data_status = RTLLabel(text='رویدادهای ثبت‌شدهٔ سامانه', font_size=9,
+        footer.add_widget(RTLLabel(text='PLAKINO', font_size=11, halign='left',
+                                   color=theme.rgba(COLORS['text_secondary']), padding=[0, 0]))
+        self._data_status = RTLLabel(text='رویدادهای ثبت‌شدهٔ سامانه', font_size=11,
                                      color=theme.rgba(COLORS['text_secondary']), padding=[0, 0])
         footer.add_widget(self._data_status)
         content.add_widget(footer)
@@ -193,6 +195,9 @@ class DashboardScreen(Screen):
             self._chart.set_data([])
             self._chart_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
             self._record_status.set_text('خطای دریافت')
+            self._record_holder.clear_widgets()
+            self._record_holder.add_widget(EmptyState(icon_name='log', title='دریافت رویدادها ناموفق بود',
+                                                      subtitle='تلاش مجدد به‌صورت خودکار انجام می‌شود'))
             self._data_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
             return
         self._today.set_value(stats.today_total)

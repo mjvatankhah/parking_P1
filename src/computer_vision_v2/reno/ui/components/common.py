@@ -69,8 +69,8 @@ def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 48):
 class Card(BoxLayout):
     """Reference glass surface; optional gradient is confined to the thin frame."""
 
-    bg_color = ListProperty(theme.rgba(COLORS['surface'], .78))
-    border_color = ListProperty(theme.rgba('#21323E', .9))
+    bg_color = ListProperty(theme.rgba(COLORS['surface']))
+    border_color = ListProperty(theme.rgba(COLORS['border']))
     radius = NumericProperty(10)
     _hover_amount = NumericProperty(0)
 
@@ -182,7 +182,7 @@ class _RoundedButtonBase(HoverBehavior, ButtonBehavior, Label):
             self._color = Color(*self.bg_color_normal)
             self._rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius])
             self._border_color_instr = Color(*self.border_color)
-            self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=1.2)
+            self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=.7)
             self._animated_color = list(self.bg_color_normal)
         self.bind(pos=self._reposition, size=self._reposition,
                   state=self._redraw, disabled=self._redraw, hovered=self._redraw)
@@ -216,10 +216,10 @@ class PrimaryButton(_RoundedButtonBase):
     """Solid brand-colored button, e.g. the Login / Save buttons."""
 
     def __init__(self, **kwargs):
-        kwargs.setdefault("bg_color_normal", theme.rgba(COLORS["primary"]))
-        kwargs.setdefault("bg_color_hover", theme.rgba("#35D9FF"))
+        kwargs.setdefault("bg_color_normal", theme.rgba(COLORS["action"]))
+        kwargs.setdefault("bg_color_hover", theme.rgba(COLORS["action_hover"]))
         kwargs.setdefault("bg_color_down", theme.rgba(COLORS["primary_dark"]))
-        kwargs.setdefault("border_color", theme.rgba(COLORS["primary"]))
+        kwargs.setdefault("border_color", theme.rgba(COLORS["action"]))
         kwargs.setdefault("color", theme.rgba(COLORS["text_on_primary"]))
         super().__init__(**kwargs)
 
@@ -266,6 +266,7 @@ class RoundedTextInput(TextInput):
         kwargs.setdefault("background_color", (0, 0, 0, 0))
         kwargs.setdefault("cursor_color", theme.rgba(COLORS["primary"]))
         kwargs.setdefault("foreground_color", theme.rgba(COLORS["text_primary"]))
+        kwargs.setdefault("disabled_foreground_color", theme.rgba(COLORS["disabled_text"]))
         kwargs.setdefault("hint_text_color", theme.rgba(COLORS["placeholder"]))
         super().__init__(**kwargs)
         # Insert the decoration BEFORE Kivy's cursor/foreground instructions.
@@ -275,7 +276,7 @@ class RoundedTextInput(TextInput):
         self._color = Color(*theme.rgba(COLORS["background"]))
         self._rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius])
         self._border_color_instr = Color(*theme.rgba(COLORS["border"]))
-        self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=1.2)
+        self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=.7)
         for instruction in (self._color, self._rect, self._border_color_instr, self._border):
             background.add(instruction)
         self.canvas.before.insert(0, background)
@@ -463,7 +464,7 @@ class EmptyState(BoxLayout):
         if subtitle:
             self.add_widget(RTLLabel(text=subtitle, font_size=FONT_SIZE["caption"],
                                       halign="center", color=theme.rgba(COLORS["placeholder"]),
-                                      size_hint_y=None, height=20))
+                                      size_hint_y=None, height=42))
         if action_text and on_action:
             action_button = SecondaryButton(text=rtl(action_text), size_hint=(None, None),
                                              size=(180, 40), pos_hint={"center_x": 0.5})

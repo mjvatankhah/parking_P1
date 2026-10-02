@@ -27,53 +27,54 @@ import os
 # ---------------------------------------------------------------------
 # 1. COLOR PALETTE
 # ---------------------------------------------------------------------
-# Shared midnight glass palette and semantic neon accents.
+# Restrained graphite surfaces and accessible semantic accents.
 COLORS = {
-    "primary": "#00CEFF",
-    "primary_dark": "#087895",
-    "primary_light": "#123B50",
+    "action": "#3F6695",
+    "action_hover": "#4B75A5",
+    "primary": "#91B4DF",
+    "primary_dark": "#345780",
+    "primary_light": "#26364B",
 
-    # A very subtle petroleum-blue wash keeps full pages calm while
-    # preserving the bright cards and readable Persian text.
-    "background": "#050B10",
-    "surface": "#101B24",
-    "surface_alt": "#12202B",
-    "sidebar": "#080E13",
-    "border": "#203440",
-    "border_strong": "#00CEFF",
+    # Neutral surfaces keep the dense monitoring UI readable.
+    "background": "#101419",
+    "surface": "#191F27",
+    "surface_alt": "#202832",
+    "sidebar": "#141920",
+    "border": "#303B49",
+    "border_strong": "#91B4DF",
 
-    "text_primary": "#ECF5FA",
-    "text_secondary": "#8C9EAB",
-    "text_on_primary": "#05121A",
-    "placeholder": "#78929F",
+    "text_primary": "#E8EDF3",
+    "text_secondary": "#A5B1C0",
+    "text_on_primary": "#FFFFFF",
+    "placeholder": "#98A7B9",
 
-    "online": "#58E2AE",
-    "offline": "#FF426D",
-    "warning": "#FFC66D",
-    "info": "#65C7FF",
+    "online": "#8DC8AF",
+    "offline": "#DF9A9F",
+    "warning": "#DABB89",
+    "info": "#91B4DF",
 
-    "accent_teal": "#17B9CF",
-    "accent_blue": "#3299D1",
-    "accent_purple": "#A879FF",
-    "accent_orange": "#D49B5E",
-    "accent_red": "#C96672",
+    "accent_teal": "#83B6BA",
+    "accent_blue": "#8AAED6",
+    "accent_purple": "#B0A5D1",
+    "accent_orange": "#C5A583",
+    "accent_red": "#D4969F",
 
-    "hover_overlay": "#00CEFF10",
-    "pressed_overlay": "#00CEFF20",
-    "disabled_bg": "#172630",
-    "disabled_text": "#708894",
-    "focus_ring": "#00CEFF",
+    "hover_overlay": "#91B4DF10",
+    "pressed_overlay": "#91B4DF20",
+    "disabled_bg": "#252D38",
+    "disabled_text": "#91A0B3",
+    "focus_ring": "#91B4DF",
 
     "shadow": "#00000044",
     "overlay": "#061620BB",
 
     # Decorative background washes.
-    "glow_teal": "#00CEFF14",
-    "glow_blue": "#3299D112",
+    "glow_teal": "#91B4DF14",
+    "glow_blue": "#8AAED612",
 }
 
-PAGE_BG_TOP = "#080E13"
-PAGE_BG_BOTTOM = "#050B10"
+PAGE_BG_TOP = "#141920"
+PAGE_BG_BOTTOM = "#101419"
 
 
 

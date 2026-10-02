@@ -3,7 +3,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.label import Label
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.popup import Popup
@@ -57,8 +56,8 @@ class LoginScreen(Screen):
             padding=[36, 32, 36, 28],
             spacing=10,
             radius=10,
-            border_gradient=(COLORS["primary"], COLORS["accent_purple"]),
-            bg_color=theme.rgba(COLORS["surface"], .86),
+            hover_effect=False,
+            bg_color=theme.rgba(COLORS["surface"]),
         )
 
         card.add_widget(self._build_brand())
@@ -104,9 +103,9 @@ class LoginScreen(Screen):
         box = BoxLayout(orientation="vertical", size_hint_y=None, height=122, spacing=5)
         icon = BrandMark(size=(44, 44), pos_hint={"center_x": 0.5})
         title = Label(
-            text=APP_NAME,
+            text=rtl("ورود به سامانه"),
             font_name=theme.APP_FONT_NAME,
-            font_size=FONT_SIZE["display"],
+            font_size=24,
             bold=True,
             color=theme.rgba(COLORS["text_primary"]),
             size_hint_y=None,
@@ -225,31 +224,26 @@ class _LinkLabel(HoverBehavior, Label):
 
 
 class _LoginHero(Card):
-    """Reference logo and type hierarchy over the shared moving ambient lights."""
+    """Quiet product introduction beside the existing authentication form."""
 
     def __init__(self, **kwargs):
         super().__init__(orientation='vertical', padding=[34, 42, 34, 36], spacing=14,
-                         gradient=('#102C3D', '#21132F'), bg_color=theme.rgba('#101B24', .66),
-                         border_gradient=('#008EB0', '#694599'), radius=10, **kwargs)
+                         gradient=('#222C39', '#191F27'), bg_color=theme.rgba(COLORS['surface']),
+                         hover_effect=False, radius=10, **kwargs)
         self.add_widget(Brand())
         self.add_widget(BoxLayout())
-        mark = AnchorLayout(size_hint_y=None, height=110)
-        mark.add_widget(BrandMark(size=(92, 92)))
-        self.add_widget(mark)
-        self.add_widget(RTLLabel(text='VISION IN CONTROL', font_size=12,
-                                color=theme.rgba(COLORS['primary']), halign='center',
-                                size_hint_y=None, height=28))
-        self.add_widget(RTLLabel(text='کنترل هوشمند تردد', font_size=24,
-                                halign='center', size_hint_y=None, height=44))
-        self.add_widget(RTLLabel(text='دید کامل به مسیرها، از اولین ورود تا آخرین خروج', font_size=12,
-                                color=theme.rgba(COLORS['text_secondary']), halign='center',
-                                size_hint_y=None, height=48))
-        self.add_widget(BoxLayout())
-        features = BoxLayout(size_hint_y=None, height=42, spacing=12)
-        for icon, label in [('car', 'شناسایی پلاک'), ('camera', 'پایش زنده'), ('shield', 'کنترل تردد')]:
-            item = BoxLayout(orientation='vertical', spacing=4)
+        self.add_widget(RTLLabel(text='پایش و مدیریت تردد', font_size=26,
+                                size_hint_y=None, height=48, padding=[0, 0]))
+        self.add_widget(RTLLabel(text='مشاهدهٔ دوربین‌ها و بررسی رویدادهای ورود و خروج', font_size=13,
+                                color=theme.rgba(COLORS['text_secondary']),
+                                size_hint_y=None, height=52, padding=[0, 0]))
+        self.add_widget(BoxLayout(size_hint_y=None, height=14))
+        for icon, label in [('car', 'شناسایی و ثبت پلاک'), ('camera', 'مانیتورینگ دوربین‌ها'),
+                            ('shield', 'بررسی وضعیت تردد')]:
+            item = BoxLayout(size_hint_y=None, height=36, spacing=14)
+            item.add_widget(RTLLabel(text=label, font_size=13, padding=[0, 0],
+                                    color=theme.rgba(COLORS['text_secondary'])))
             item.add_widget(Icon(name=icon, color=theme.rgba(COLORS['primary']),
-                                 size_hint=(None, None), size=(20, 20), pos_hint={'center_x': .5}))
-            item.add_widget(RTLLabel(text=label, font_size=9, halign='center', padding=[0, 0]))
-            features.add_widget(item)
-        self.add_widget(features)
+                                 size_hint=(None, None), size=(20, 20), pos_hint={'center_y': .5}))
+            self.add_widget(item)
+        self.add_widget(BoxLayout())

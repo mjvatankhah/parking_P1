@@ -1,5 +1,4 @@
-"""User-facing contracts with the HTML reference and requested desktop behavior."""
-import re
+"""Desktop navigation, event presentation and visual accessibility contracts."""
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -52,15 +51,15 @@ class ReferenceUIContractTests(unittest.TestCase):
         for p in cls.patches:
             p.stop()
 
-    def test_reference_icons_are_extracted_without_changing_paths(self):
-        reference = (APP_PATH / 'dashboard-prototype.html').read_text()
-        symbols = dict(re.findall(r'<symbol id="([^"]+)"[^>]*>(.*?)</symbol>', reference))
-        for name, body in symbols.items():
-            extracted = (APP_PATH / 'assets/icons/reference' / f'{name}.svg').read_text()
-            self.assertIn(body, extracted)
-            self.assertIn('stroke-width="1.6"', extracted)
-        for name in ('car', 'camera', 'shield', 'bell', 'dashboard', 'reports', 'settings', 'search', 'log'):
-            self.assertTrue(_ICON_FILES[name].startswith('reference/'))
+    def test_icons_share_lucide_sources_and_application_brand(self):
+        for filename in _ICON_FILES.values():
+            self.assertTrue(filename.startswith('lucide/'))
+            asset = APP_PATH / 'assets/icons' / filename
+            self.assertTrue(asset.is_file())
+            svg = asset.with_suffix('.svg').read_text()
+            self.assertIn('stroke-width="2"', svg)
+            self.assertIn('viewBox="0 0 24 24"', svg)
+        self.assertTrue((APP_PATH / 'assets/icons/lucide/LICENSE').is_file())
         self.assertEqual(self.app.icon, APP_ICON)
         for screen_name in ('login', 'dashboard', 'cameras', 'reports', 'camera_settings'):
             marks = [w for w in self.root.get_screen(screen_name).walk(restrict=True) if isinstance(w, BrandMark)]
@@ -101,15 +100,15 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.root.size = Window.size
         layout()
 
-    def test_gradient_frame_tracks_full_card_after_layout(self):
-        layout()
-        for card in (self.dashboard._today, self.dashboard._unique,
-                     self.root.get_screen('login')._hero):
-            vertices = card._frame.vertices
-            self.assertAlmostEqual(min(vertices[::4]), card.x, places=3)
-            self.assertAlmostEqual(max(vertices[::4]), card.x+card.width, places=3)
-            self.assertAlmostEqual(min(vertices[1::4]), card.y, places=3)
-            self.assertAlmostEqual(max(vertices[1::4]), card.y+card.height, places=3)
+    def test_primary_action_text_contrast(self):
+        def luminance(rgb):
+            values = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in rgb[:3]]
+            return sum(v*w for v, w in zip(values, (.2126, .7152, .0722)))
+        button = self.root.get_screen('login')._login_button
+        foreground = luminance(button.color)
+        for color in (button.bg_color_normal, button.bg_color_hover, button.bg_color_down):
+            background = luminance(color)
+            self.assertGreaterEqual((max(foreground, background)+.05)/(min(foreground, background)+.05), 4.5)
 
     def test_recent_rows_expose_object_direction_time_and_original_image(self):
         self.app._navigate('dashboard')
@@ -146,7 +145,7 @@ class ReferenceUIContractTests(unittest.TestCase):
         finally:
             dialog.dismiss()
 
-    def test_fast_login_hover_and_moving_purple_light(self):
+    def test_fast_login_hover(self):
         self.app._navigate('logout')
         layout()
         login = self.root.get_screen('login')
@@ -159,11 +158,6 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.assertLessEqual(theme.ANIM_FAST, .08)
         button._track_pointer(Window, (-100, -100))
         self.assertFalse(button.hovered)
-        background = login._root.children[-1]
-        previous = tuple(background._purple.pos)
-        background._tick(3)
-        self.assertNotEqual(previous, tuple(background._purple.pos))
-
     def test_four_destinations_and_logout_work(self):
         expected = ['dashboard', 'cameras', 'reports', 'camera_settings', 'logout']
         self.assertEqual(list(self.dashboard._shell.sidebar._items), expected)

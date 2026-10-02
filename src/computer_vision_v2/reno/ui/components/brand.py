@@ -25,7 +25,7 @@ class Brand(BoxLayout):
         words = BoxLayout(orientation='vertical', size_hint_y=None, height=38,
                           pos_hint={'center_y': .5}, spacing=3)
         for text, size, color in [('PLAKINO', 18, 'text_primary'),
-                                   ('VISION IN CONTROL', 7.5, 'text_secondary')]:
+                                   (theme.rtl('کنترل تردد'), 10, 'text_secondary')]:
             label = Label(text=text, font_size=size, font_name=theme.APP_FONT_NAME,
                           color=theme.rgba(theme.COLORS[color]), halign='left', valign='middle')
             label.bind(size=lambda w, *_: setattr(w, 'text_size', w.size))

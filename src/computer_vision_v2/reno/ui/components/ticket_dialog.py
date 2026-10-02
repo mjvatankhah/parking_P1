@@ -14,7 +14,7 @@ class TicketDialog(Popup):
                          size_hint=(None, None), size=(500, 480), auto_dismiss=False, **kwargs)
         self.receipt = None
         panel = Card(orientation='vertical', padding=24, spacing=10,
-                     bg_color=theme.rgba('#101B24'), border_gradient=('#00CEFF', '#9254FF'))
+                     bg_color=theme.rgba(theme.COLORS['surface']), hover_effect=False)
         panel.add_widget(RTLLabel(text='ثبت تیکت', font_size=20, size_hint_y=None, height=32))
         panel.add_widget(RTLLabel(text='ثبت نمایشی؛ تیکت برای پشتیبانی ارسال نمی‌شود.', font_size=11,
                                  color=theme.rgba(theme.COLORS['text_secondary']), size_hint_y=None, height=28))

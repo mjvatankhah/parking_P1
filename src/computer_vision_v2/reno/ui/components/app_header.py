@@ -20,7 +20,7 @@ class _WindowButton(HoverBehavior, ButtonBehavior, Label):
     _bg_rgba = ListProperty([0, 0, 0, 0])
 
     def __init__(self, symbol, action, danger=False, **kwargs):
-        kwargs.setdefault("text", symbol)
+        kwargs.setdefault("text", "")
         kwargs.setdefault("font_name", theme.APP_FONT_NAME)
         kwargs.setdefault("font_size", 18)
         kwargs.setdefault("halign", "center")
@@ -28,16 +28,20 @@ class _WindowButton(HoverBehavior, ButtonBehavior, Label):
         kwargs.setdefault("size_hint", (None, None))
         kwargs.setdefault("size", (36, 34))
         super().__init__(**kwargs)
+        self._symbol = Icon(name={"−": "minus", "□": "maximize", "×": "close"}[symbol],
+                            color=theme.rgba(COLORS["text_secondary"]),
+                            size_hint=(None, None), size=(14, 14))
+        self.add_widget(self._symbol)
         self._action = action
         self._danger = danger
         self.color = theme.rgba(COLORS["offline"] if danger else COLORS["text_primary"])
-        self._normal_bg = theme.rgba("#38242D" if danger else COLORS["surface_alt"])
+        self._normal_bg = theme.rgba(COLORS["surface_alt"])
         self._bg_rgba = self._normal_bg
         self.text_size = self.size
         with self.canvas.before:
             self._bg_color = Color(*self._normal_bg)
             self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[7])
-            self._border_color = Color(*theme.rgba(COLORS["offline"] if danger else COLORS["border_strong"], 0.55))
+            self._border_color = Color(*theme.rgba(COLORS["border"], 0.55))
             self._border = Line(rounded_rectangle=(*self.pos, *self.size, 7), width=1)
         self.bind(pos=self._redraw, size=self._redraw, hovered=self._animate, state=self._animate,
                   _bg_rgba=self._sync_bg)
@@ -48,6 +52,7 @@ class _WindowButton(HoverBehavior, ButtonBehavior, Label):
         self._bg.size = self.size
         self._border.rounded_rectangle = (*self.pos, *self.size, 7)
         self.text_size = self.size
+        self._symbol.center = self.center
 
     def _animate(self, *_):
         if self.state == "down":
@@ -102,24 +107,21 @@ class WindowControls(BoxLayout):
 class AppHeader(BoxLayout):
     """The HTML title hierarchy and a functional symbolic ticket action."""
 
-    def __init__(self, title, subtitle='دید کامل به مسیرها، از اولین ورود تا آخرین خروج', **kwargs):
+    def __init__(self, title, subtitle='خلاصهٔ ترددها و وضعیت دوربین‌ها', **kwargs):
         kwargs.setdefault('size_hint_y', None)
-        kwargs.setdefault('height', 82)
+        kwargs.setdefault('height', 64)
         kwargs.setdefault('spacing', 18)
         super().__init__(**kwargs)
-        self.ticket_button = SecondaryButton(text=rtl('ثبت تیکت'), font_size=11,
+        self.ticket_button = SecondaryButton(text=rtl('ثبت تیکت'), font_size=12,
             size_hint=(None, None), size=(114, 36), pos_hint={'center_y': .5},
-            bg_color_normal=theme.rgba('#0E293B', .65), border_color=theme.rgba('#285168'),
-            color=theme.rgba('#A8D9ED'), radius=5)
+            bg_color_normal=theme.rgba(COLORS['surface_alt']), border_color=theme.rgba(COLORS['border']),
+            color=theme.rgba(COLORS['text_primary']), radius=5)
         self.ticket_button.bind(on_release=self._open_ticket)
         self.add_widget(self.ticket_button)
         heading = BoxLayout(orientation='vertical', spacing=1)
-        heading.add_widget(RTLLabel(text='PARKING INTELLIGENCE / 01', font_size=10,
-                          color=theme.rgba(COLORS['primary']), size_hint_y=None, height=20,
-                          padding=[0, 0]))
         heading.add_widget(RTLLabel(text=title, font_size=23, size_hint_y=None, height=34,
                           padding=[0, 0]))
-        heading.add_widget(RTLLabel(text=subtitle, font_size=11,
+        heading.add_widget(RTLLabel(text=subtitle, font_size=12,
                           color=theme.rgba(COLORS['text_secondary']), size_hint_y=None, height=25,
                           padding=[0, 0]))
         self.add_widget(heading)
