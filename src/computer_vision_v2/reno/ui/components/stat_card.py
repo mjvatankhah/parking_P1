@@ -3,11 +3,14 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.properties import NumericProperty
 from kivy.animation import Animation
+from kivy.clock import Clock
+import math
 from computer_vision_v2.reno.ui import theme
 from computer_vision_v2.reno.ui.components.common import Card, RTLLabel
 from computer_vision_v2.reno.ui.components.icons import Icon
 
 GRADIENT_TEAL = ('#91B4DF', '#303B49')
+GRADIENT_CYAN = ('#82B7B3', '#303B49')
 GRADIENT_BLUE = ('#B0A5D1', '#303B49')
 GRADIENT_ORANGE = ('#DABB89', '#303B49')
 GRADIENT_CRIMSON = ('#DF9A9F', '#303B49')
@@ -15,6 +18,7 @@ GRADIENT_CRIMSON = ('#DF9A9F', '#303B49')
 
 class StatCard(Card):
     _display_value = NumericProperty(0)
+    _border_phase = NumericProperty(0)
 
     def __init__(self, title, value, subtitle='', icon_name='reports', gradient=GRADIENT_TEAL,
                  value_color=None, **kwargs):
@@ -24,11 +28,13 @@ class StatCard(Card):
         kwargs.setdefault('size_hint_y', None)
         kwargs.setdefault('height', 112)
         kwargs.setdefault('radius', 9)
-        kwargs['gradient'] = ('#222B37', '#191F27')
-        kwargs['hover_effect'] = False
-        kwargs['bg_color'] = theme.rgba(theme.COLORS['surface'])
+        kwargs['border_gradient'] = gradient
+        kwargs['hover_effect'] = True
+        kwargs['bg_color'] = theme.rgba(theme.COLORS['surface'], .92)
         kwargs['border_color'] = theme.rgba(theme.COLORS['border'])
         super().__init__(**kwargs)
+        self.bind(_border_phase=self._redraw)
+        self._border_animation = Clock.schedule_interval(self._animate_border, 1/20)
         self._total = None
         self._target_value = value
         self._title_label = RTLLabel(text=title, font_size=12, padding=[0, 0],
@@ -64,3 +70,17 @@ class StatCard(Card):
         if self._total is not None:
             text += f' [size=14][color=8c9eab]/ {theme.fa_number(self._total)}[/color][/size]'
         self._value_label.text = text
+
+    def _animate_border(self, dt):
+        if self.get_root_window():
+            self._border_phase = (self._border_phase + dt*math.tau/24) % math.tau
+
+    def _update_gradient_frame(self):
+        super()._update_gradient_frame()
+        vertices = list(self._frame.vertices)
+        for i in range(0,len(vertices),4):
+            angle = math.atan2((vertices[i+1]-self.y)/max(1,self.height)-.5,
+                               (vertices[i]-self.x)/max(1,self.width)-.5)
+            vertices[i+3] = .5+.5*math.sin(angle+self._border_phase)
+        self._frame.vertices = vertices
+        self._frame_color.a = .35+.12*self._hover_amount

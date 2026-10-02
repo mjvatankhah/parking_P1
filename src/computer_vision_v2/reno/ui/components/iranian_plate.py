@@ -44,3 +44,23 @@ class IranianPlate(Card):
             box.add_widget(RTLLabel(text=region, font_size=12, bold=True, halign='center',
                                      padding=[0, 0], color=theme.rgba('#122038')))
             self.add_widget(box)
+
+
+class PlainPlate(BoxLayout):
+    """Plain, physically ordered plate segments immune to surrounding RTL bidi."""
+    def __init__(self, text, **kwargs):
+        kwargs.setdefault('spacing', 2)
+        super().__init__(**kwargs)
+        segments = plate_segments(text)
+        self.segments = segments
+        if not segments:
+            self.add_widget(RTLLabel(text=text or '—', font_size=13, halign='center', padding=[0,0]))
+            return
+        left, letter, serial, region = segments
+        parts = [(left, 2), (letter, 1.3), (serial, 3)]
+        if region:
+            parts.extend([('|', .5), (region, 2)])
+        for part, width in parts:
+            self.add_widget(RTLLabel(text=theme.fa_number(part), font_size=15, bold=part!='|',
+                size_hint_x=width, halign='center', padding=[0,0],
+                color=theme.rgba(theme.COLORS['text_secondary'] if part=='|' else theme.COLORS['text_primary'])))

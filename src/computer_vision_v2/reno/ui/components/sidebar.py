@@ -35,10 +35,10 @@ class _SidebarItem(HoverBehavior, ButtonBehavior, BoxLayout):
             self._active_line = Line(width=1)
         self._icon = Icon(name=icon_name, color=theme.rgba('#A4B4C0'),
                           size_hint=(None, None), size=(20, 20), pos_hint={'center_y': .5})
-        self._label = RTLLabel(text=label_text, font_size=13, halign='left', padding=[0, 0],
+        self._label = RTLLabel(text=label_text, font_size=13, halign='right', padding=[0, 0],
                                color=theme.rgba('#A4B4C0'))
-        self.add_widget(self._icon)
         self.add_widget(self._label)
+        self.add_widget(self._icon)
         self.bind(pos=self._redraw, size=self._redraw, active=self._style,
                   hovered=self._style, state=self._style, _bg_rgba=self._sync_color)
         self._style()
@@ -47,7 +47,7 @@ class _SidebarItem(HoverBehavior, ButtonBehavior, BoxLayout):
     def _redraw(self, *_):
         self._bg.pos, self._bg.size = self.pos, self.size
         self._border.rounded_rectangle = (*self.pos, *self.size, 7)
-        self._active_line.points = [self.x+1, self.y+9, self.x+1, self.top-9]
+        self._active_line.points = [self.x+self.width-1, self.y+9, self.x+self.width-1, self.y+self.height-9]
 
     def _sync_color(self, _, color):
         self._bg_color.rgba = color
@@ -100,7 +100,7 @@ class Sidebar(BoxLayout):
 
     def _redraw(self, *_):
         self._surface.pos, self._surface.size = self.pos, self.size
-        self._edge.points = [self.x+self.width, self.y, self.x+self.width, self.y+self.height]
+        self._edge.points = [self.x, self.y, self.x, self.y+self.height]
 
     def _navigate(self, key):
         if self.on_navigate:

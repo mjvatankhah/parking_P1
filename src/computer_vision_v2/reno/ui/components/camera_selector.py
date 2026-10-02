@@ -35,7 +35,7 @@ def build_camera_selector(on_select=None):
         value_by_label.clear()
         value_by_label[all_label] = ALL_CAMERAS_VALUE
         for camera in camera_service.get_cameras():
-            value_by_label[camera.id] = camera.id
+            value_by_label[rtl(camera.id)] = camera.id
         spinner.values = list(value_by_label.keys())
         if spinner.text not in value_by_label:
             spinner.text = all_label

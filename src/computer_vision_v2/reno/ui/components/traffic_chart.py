@@ -1,58 +1,104 @@
-"""Weekly entries, grouped by day, in the reference palette and Persian font."""
-import math
+"""Non-interactive Matplotlib/Agg chart, rendered at twice the panel resolution."""
 from datetime import date
-from kivy.graphics import Color, Line, Ellipse
+from pathlib import Path
+
+from kivy.clock import Clock
+from kivy.graphics.texture import Texture
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib.figure import Figure
+from matplotlib.font_manager import FontProperties
+from matplotlib.ticker import FuncFormatter, MaxNLocator
+
 from computer_vision_v2.reno.ui import theme
-from computer_vision_v2.reno.ui.components.common import RTLLabel
+from computer_vision_v2.reno.ui.components.jalali_calendar import WEEKDAYS
 
 
 class TrafficChart(FloatLayout):
+    """Keep the existing data/filter interface; no pyplot window or mouse tools."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.data = []
-        self.bind(pos=self._draw, size=self._draw)
+        self.metric = 'entry'
+        font_path = Path(__file__).resolve().parents[2] / 'assets/fonts/Vazirmatn-Regular.ttf'
+        self._font = FontProperties(fname=str(font_path))
+        self._figure = Figure(dpi=192, facecolor='none')
+        self._agg = FigureCanvasAgg(self._figure)
+        self._image = Image(fit_mode='fill', pos_hint={'x': 0, 'y': 0})
+        self.add_widget(self._image)
+        self._render_key = None
+        # Coalesce resize events; moving the panel never requires a new render.
+        self._render_trigger = Clock.create_trigger(self._draw, .12)
+        self.bind(size=self._render_trigger)
+        self._render_trigger()
+
+    def set_metric(self, metric):
+        if metric not in ('entry', 'exit', 'both'):
+            raise ValueError(f'Unsupported chart metric: {metric}')
+        self.metric = metric
+        self._render_trigger()
 
     def set_data(self, data):
-        self.data = data
-        self._draw()
-
-    def _label(self, text, x, y, width=58, color=None):
-        self.add_widget(RTLLabel(text=text, font_size=10, halign='center',
-                                color=theme.rgba(color or theme.COLORS['text_secondary']),
-                                size_hint=(None, None), size=(width, 24), pos=(x, y)))
+        self.data = sorted(data, key=lambda row: (date.fromisoformat(row[0]).weekday()+2) % 7)
+        self._render_trigger()
 
     def _draw(self, *_):
-        self.canvas.before.clear()
-        self.clear_widgets()
-        if not self.data:
-            self._label('در انتظار داده', self.center_x-60, self.center_y, 120)
+        width, height = round(self.width), round(self.height)
+        if width < 120 or height < 100:
             return
-        left, bottom = self.x+42, self.y+72
-        width, height = max(1, self.width-68), max(1, self.height-125)
-        peak = max(4, *(row[1] for row in self.data))
-        step = max(1, math.ceil(peak/4))
-        maximum = step*4
-        self._label('تعداد ورود', left-25, bottom+height+8, 80)
-        with self.canvas.before:
-            for i in range(5):
-                y = bottom + height*i/4
-                Color(*theme.rgba(theme.COLORS['border'], .8))
-                Line(points=[left, y, left+width, y], width=1)
-        for i in range(5):
-            self._label(theme.fa_number(step*i), self.x, bottom+height*i/4-12, 35)
-        for i, row in enumerate(self.data):
-            day = date.fromisoformat(row[0])
-            weekday = ['دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه', 'یکشنبه'][day.weekday()]
-            self._label(weekday, left+width*i/max(1, len(self.data)-1)-29, bottom-30)
-            self._label(theme.fa_number(row[0][5:]), left+width*i/max(1, len(self.data)-1)-29, bottom-50)
-        self._label('تاریخ میلادی', left+width/2-45, self.y-4, 90)
-        for column, color in [(1, theme.COLORS['primary'])]:
-            points = []
-            for i, row in enumerate(self.data):
-                points.extend([left+width*i/max(1, len(self.data)-1), bottom+height*row[column]/maximum])
-            with self.canvas.before:
-                Color(*theme.rgba(color))
-                Line(points=points, width=1.1)
-                for x, y in zip(points[::2], points[1::2]):
-                    Ellipse(pos=(x-2,y-2), size=(4,4))
+        key = (width, height, self.metric, tuple(tuple(row) for row in self.data))
+        if key == self._render_key:
+            return
+        self._figure.clear()
+        # Logical pixels at 96 DPI, rasterized at 192 DPI for clean downsampling.
+        self._figure.set_size_inches(width / 96, height / 96, forward=False)
+        axes = self._figure.add_axes((38 / width, 32 / height,
+                                     max(.1, 1 - 58 / width), max(.1, 1 - 68 / height)))
+        axes.set_facecolor('none')
+        for spine in axes.spines.values():
+            spine.set_visible(False)
+        axes.set_axisbelow(True)
+        axes.grid(axis='y', color=theme.COLORS['border'], linewidth=.55, alpha=.75)
+        axes.tick_params(axis='both', length=0, pad=7, colors=theme.COLORS['text_secondary'])
+        axes.set_xlim(-.15, 6.15)
+        axes.set_xticks(range(7), [theme.rtl(day) for day in WEEKDAYS])
+        axes.yaxis.set_major_locator(MaxNLocator(nbins=4, integer=True, min_n_ticks=3))
+        axes.yaxis.set_major_formatter(FuncFormatter(lambda value, _: theme.fa_number(f'{value:,.0f}')))
+        columns = (1, 2) if self.metric == 'both' else (2,) if self.metric == 'exit' else (1,)
+        peak = max([0] + [row[column] for row in self.data for column in columns])
+        axes.set_ylim(0, max(4, peak * 1.15))
+        x_values = [(date.fromisoformat(row[0]).weekday()+2) % 7 for row in self.data]
+        for column in columns:
+            entry = column == 1
+            axes.plot(x_values, [row[column] for row in self.data],
+                      label=theme.rtl('ورود' if entry else 'خروج'),
+                      color=theme.COLORS['entry' if entry else 'exit'],
+                      linewidth=1.5, linestyle='-' if entry else (0, (4, 2.5)),
+                      marker='o', markersize=3.3, markeredgewidth=0,
+                      solid_capstyle='round', antialiased=True, clip_on=False)
+        font_size = 8.2 if width >= 340 else 7.2
+        for label in axes.get_xticklabels() + axes.get_yticklabels():
+            label.set_fontproperties(self._font)
+            label.set_fontsize(font_size)
+        legend_font = self._font.copy()
+        legend_font.set_size(8.5)
+        if self.data:
+            axes.legend(loc='lower left', bbox_to_anchor=(0, 1.03), ncol=len(columns),
+                        frameon=False, prop=legend_font, labelcolor='linecolor',
+                        handlelength=2, handletextpad=.6, columnspacing=1.6, borderaxespad=0)
+        else:
+            axes.text(.5, .5, theme.rtl('داده‌ای برای نمایش موجود نیست'),
+                      transform=axes.transAxes, ha='center', va='center',
+                      fontproperties=legend_font, color=theme.COLORS['text_secondary'])
+        self._agg.draw()
+        size = self._agg.get_width_height()
+        texture = self._image.texture
+        if texture is None or texture.size != size:
+            texture = Texture.create(size=size, colorfmt='rgba')
+            texture.flip_vertical()
+            texture.mag_filter = texture.min_filter = 'linear'
+        texture.blit_buffer(bytes(self._agg.buffer_rgba()), colorfmt='rgba', bufferfmt='ubyte')
+        self._image.texture = texture
+        self._render_key = key

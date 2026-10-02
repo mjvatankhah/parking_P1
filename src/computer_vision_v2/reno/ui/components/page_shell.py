@@ -16,12 +16,12 @@ class PageShell(FloatLayout):
         self.frame = Card(size_hint=(None, None), padding=0, radius=8, hover_effect=False,
                           bg_color=theme.rgba(theme.COLORS['background']), border_color=theme.rgba(theme.COLORS['border']))
         self.sidebar = Sidebar(active=active, on_navigate=on_navigate)
-        self.frame.add_widget(self.sidebar)
         self.main = BoxLayout(orientation='vertical', padding=[30, 26, 30, 20], spacing=20)
         self.header = AppHeader(title, **({'subtitle': subtitle} if subtitle is not None else {}))
         self.main.add_widget(self.header)
         self.main.add_widget(content)
         self.frame.add_widget(self.main)
+        self.frame.add_widget(self.sidebar)
         self.add_widget(self.frame)
         controls = WindowControls(pos_hint={'right': 1, 'top': 1})
         controls.height = 32

@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.popup import Popup
 from kivy.animation import Animation
+from kivy.graphics import Color, Mesh, Line
 
 from computer_vision_v2.reno.ui import theme
 from computer_vision_v2.reno.ui.theme import COLORS, FONT_SIZE, rtl
@@ -230,6 +231,15 @@ class _LoginHero(Card):
         super().__init__(orientation='vertical', padding=[34, 42, 34, 36], spacing=14,
                          gradient=('#222C39', '#191F27'), bg_color=theme.rgba(COLORS['surface']),
                          hover_effect=False, radius=10, **kwargs)
+        with self.canvas.before:
+            Color(*theme.rgba('#587398', .10))
+            self._plane = Mesh(vertices=[], indices=[0,1,2,0,2,3], mode='triangles')
+            Color(*theme.rgba('#90AACB', .13))
+            self._contour = Line(width=.65)
+            Color(*theme.rgba('#90AACB', .07))
+            self._contour_inner = Line(width=.65)
+        self.bind(pos=self._geometry, size=self._geometry)
+        self._geometry()
         self.add_widget(Brand())
         self.add_widget(BoxLayout())
         self.add_widget(RTLLabel(text='پایش و مدیریت تردد', font_size=26,
@@ -247,3 +257,10 @@ class _LoginHero(Card):
                                  size_hint=(None, None), size=(20, 20), pos_hint={'center_y': .5}))
             self.add_widget(item)
         self.add_widget(BoxLayout())
+
+    def _geometry(self, *_):
+        x,y,w,h=self.x,self.y,self.width,self.height
+        points=[(.02,.14),(.32,.02),(.60,.02),(.02,.38)]
+        self._plane.vertices=[v for px,py in points for v in (x+w*px,y+h*py,0,0)]
+        self._contour.points=[x+w*.45,y+h*.98,x+w*.98,y+h*.68,x+w*.98,y+h*.84,x+w*.74,y+h*.98]
+        self._contour_inner.points=[x+w*.59,y+h*.98,x+w*.98,y+h*.76]

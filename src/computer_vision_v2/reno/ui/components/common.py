@@ -623,21 +623,40 @@ class _AnimatedDropDown(DropDown):
 
 
 class _StyledSpinner(HoverBehavior, Spinner):
-    """Spinner with the same hover/press feedback as other controls."""
+    """Shared outlined dropdown with consistent focus/hover and Lucide affordance."""
+    _surface_rgba = ListProperty(theme.rgba(COLORS['surface']))
 
     def __init__(self, **kwargs):
+        kwargs['background_color'] = (0,0,0,0)
         super().__init__(**kwargs)
-        self.bind(hovered=self._animate_surface, state=self._animate_surface)
+        from computer_vision_v2.reno.ui.components.icons import Icon
+        with self.canvas.before:
+            self._surface_color = Color(*self._surface_rgba)
+            self._surface = RoundedRectangle(pos=self.pos,size=self.size,radius=[6])
+            self._outline_color = Color(*theme.rgba(COLORS['border']))
+            self._outline = Line(rounded_rectangle=(*self.pos,*self.size,6),width=.65)
+        self._chevron = Icon(name='chevron_down',color=theme.rgba(COLORS['text_secondary']),
+                             size_hint=(None,None),size=(12,12))
+        self.add_widget(self._chevron)
+        self.bind(hovered=self._animate_surface,state=self._animate_surface,
+                  pos=self._position_surface,size=self._position_surface,
+                  _surface_rgba=self._sync_surface)
+        self._position_surface()
 
-    def _animate_surface(self, *_args):
-        if self.state == "down":
-            target = theme.rgba(COLORS["primary_light"])
-        elif self.hovered:
-            target = theme.rgba(COLORS["primary_light"])
-        else:
-            target = theme.rgba(COLORS["background"])
-        Animation.cancel_all(self, "background_color")
-        Animation(background_color=target, duration=theme.ANIM_FAST, t="out_quad").start(self)
+    def _position_surface(self,*_):
+        self._surface.pos,self._surface.size=self.pos,self.size
+        self._outline.rounded_rectangle=(*self.pos,*self.size,6)
+        self._chevron.pos=(self.x+9,self.center_y-6)
+
+    def _sync_surface(self,_,color):
+        self._surface_color.rgba=color
+
+    def _animate_surface(self,*_):
+        active=self.state=='down' or self.hovered
+        target=theme.rgba(COLORS['primary_light'] if active else COLORS['surface'])
+        self._outline_color.rgba=theme.rgba(COLORS['primary'] if active else COLORS['border'])
+        Animation.cancel_all(self,'_surface_rgba')
+        Animation(_surface_rgba=target,duration=theme.ANIM_FAST,t='out_quad').start(self)
 
 
 def styled_spinner(values, initial, width=None):

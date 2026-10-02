@@ -53,6 +53,16 @@ COLORS = {
     "warning": "#DABB89",
     "info": "#91B4DF",
 
+    # Shared entry/exit accents for event chips and chart series.
+    "entry": "#57C595",
+    "entry_surface": "#214D3C",
+    "entry_border": "#39795D",
+    "entry_text": "#4A9672",
+    "exit": "#E47D87",
+    "exit_surface": "#592D36",
+    "exit_border": "#91505D",
+    "exit_text": "#B4627C",
+
     "accent_teal": "#83B6BA",
     "accent_blue": "#8AAED6",
     "accent_purple": "#B0A5D1",

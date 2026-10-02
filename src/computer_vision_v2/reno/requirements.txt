@@ -13,3 +13,6 @@ opencv-python>=4.10.0
 
 # Read the backend's committed plate events.
 psycopg[binary]>=3.3.5
+
+# Non-interactive, high-resolution dashboard chart rendering.
+matplotlib>=3.11.1,<4

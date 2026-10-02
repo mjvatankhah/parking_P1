@@ -89,7 +89,7 @@ class ReferenceUIContractTests(unittest.TestCase):
         for size in ((1000, 780), (1440, 1000)):
             self.root.size = size
             layout()
-            self.assertLess(screen._shell.sidebar.right, screen._today.x)
+            self.assertGreater(screen._shell.sidebar.x, screen._alerts.right)
             self.assertLess(screen._today.x, screen._unique.x)
             self.assertLess(screen._unique.x, screen._online.x)
             self.assertLess(screen._online.x, screen._alerts.x)
@@ -110,13 +110,13 @@ class ReferenceUIContractTests(unittest.TestCase):
             background = luminance(color)
             self.assertGreaterEqual((max(foreground, background)+.05)/(min(foreground, background)+.05), 4.5)
 
-    def test_recent_rows_expose_object_direction_time_and_original_image(self):
+    def test_recent_rows_expose_direction_and_original_event(self):
         self.app._navigate('dashboard')
         layout()
         rows = [w for w in self.dashboard._record_holder.walk(restrict=True) if isinstance(w, TrafficRecordRow)]
         self.assertEqual(len(rows), 2)
         human = next(w for w in rows if w.record.class_id == 0)
-        self.assertEqual(human._event_label.text, theme.rtl('انسان · خروج'))
+        self.assertEqual(human._event_label.text, theme.rtl('خروج'))
         self.assertIs(human.record, self.records[1])
         self.assertEqual(human.image_path, '')
         human.dispatch('on_release')
