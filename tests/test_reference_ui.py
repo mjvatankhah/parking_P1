@@ -100,6 +100,64 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.root.size = Window.size
         layout()
 
+    def test_dashboard_neon_frames_are_visible_and_move(self):
+        from tempfile import TemporaryDirectory
+        from PIL import Image, ImageChops
+        from computer_vision_v2.reno.ui.components.common import Card
+
+        self.app._navigate('dashboard')
+        layout()
+        cards = [w for w in self.dashboard.walk(restrict=True)
+                 if isinstance(w, Card) and w._animated_border]
+        self.assertEqual(set(cards), {self.dashboard._today, self.dashboard._unique,
+                                      self.dashboard._online, self.dashboard._alerts})
+        self.assertIsNone(self.dashboard._record_panel._frame)
+        self.assertIsNone(self.dashboard._chart.parent._frame)
+        with TemporaryDirectory() as directory:
+            for index, card in enumerate(cards):
+                # The accent is a local spotlight.  Most of the perimeter stays
+                # on the neutral hairline instead of becoming a full neon box.
+                alpha = list(card._spotlight_texture.pixels[3::4])
+                bright = sum(value >= 96 for value in alpha) / len(alpha)
+                self.assertLess(bright, .4)
+                self.assertGreater(max(alpha), 220)
+                self.assertLess(min(alpha), 12)
+                self.assertIsNotNone(card._halo)
+                self.assertEqual(card._neon_glow, [])
+                card._border_phase = 0
+                before = str(Path(directory) / f'{index}-before.png')
+                after = str(Path(directory) / f'{index}-after.png')
+                card.export_to_png(before)
+                card._animate_border(1)
+                card.export_to_png(after)
+                with Image.open(before) as first, Image.open(after) as second:
+                    # Only compare the top frame, excluding text and live data.
+                    band = (12, 0, first.width-12, 3)
+                    difference = ImageChops.difference(
+                        first.convert('RGB').crop(band), second.convert('RGB').crop(band))
+                    self.assertGreaterEqual(max(high for low, high in difference.getextrema()), 30)
+
+    def test_neon_hairline_keeps_its_width_on_wide_cards(self):
+        from computer_vision_v2.reno.ui.components.common import Card
+
+        card = Card(size_hint=(None, None), size=(360, 112),
+                    border_gradient=('#39F5D0', '#247DAD'),
+                    animated_border=True, hover_effect=False)
+        try:
+            vertices = card._frame.vertices
+            top_widths = [vertices[i+1] - vertices[i+5]
+                          for i in range(0, len(vertices), 8)
+                          if abs(vertices[i+1] - card.top) < .001]
+            self.assertTrue(top_widths)
+            self.assertGreaterEqual(min(top_widths), 1.0)
+            self.assertLessEqual(max(top_widths), 1.5)
+            self.assertIn(card._frame, card.canvas.after.children)
+            self.assertIn(card._halo, card.canvas.after.children)
+            self.assertAlmostEqual(vertices[-1] - vertices[3], 1.0)
+            self.assertEqual(vertices[-8:-6], vertices[:2])
+        finally:
+            card._border_animation.cancel()
+
     def test_primary_action_text_contrast(self):
         def luminance(rgb):
             values = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in rgb[:3]]

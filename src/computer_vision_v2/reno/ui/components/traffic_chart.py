@@ -63,7 +63,9 @@ class TrafficChart(FloatLayout):
         axes.grid(axis='y', color=theme.COLORS['border'], linewidth=.55, alpha=.75)
         axes.tick_params(axis='both', length=0, pad=7, colors=theme.COLORS['text_secondary'])
         axes.set_xlim(-.15, 6.15)
-        axes.set_xticks(range(7), [theme.rtl(day) for day in WEEKDAYS])
+        # Matplotlib 3.11+ shapes and orders Persian through HarfBuzz/Raqm.
+        # Kivy's pre-reversed theme.rtl() would reverse these labels twice.
+        axes.set_xticks(range(7), WEEKDAYS)
         axes.yaxis.set_major_locator(MaxNLocator(nbins=4, integer=True, min_n_ticks=3))
         axes.yaxis.set_major_formatter(FuncFormatter(lambda value, _: theme.fa_number(f'{value:,.0f}')))
         columns = (1, 2) if self.metric == 'both' else (2,) if self.metric == 'exit' else (1,)
@@ -73,7 +75,7 @@ class TrafficChart(FloatLayout):
         for column in columns:
             entry = column == 1
             axes.plot(x_values, [row[column] for row in self.data],
-                      label=theme.rtl('ورود' if entry else 'خروج'),
+                      label='ورود' if entry else 'خروج',
                       color=theme.COLORS['entry' if entry else 'exit'],
                       linewidth=1.5, linestyle='-' if entry else (0, (4, 2.5)),
                       marker='o', markersize=3.3, markeredgewidth=0,
@@ -89,7 +91,7 @@ class TrafficChart(FloatLayout):
                         frameon=False, prop=legend_font, labelcolor='linecolor',
                         handlelength=2, handletextpad=.6, columnspacing=1.6, borderaxespad=0)
         else:
-            axes.text(.5, .5, theme.rtl('داده‌ای برای نمایش موجود نیست'),
+            axes.text(.5, .5, 'داده‌ای برای نمایش موجود نیست',
                       transform=axes.transAxes, ha='center', va='center',
                       fontproperties=legend_font, color=theme.COLORS['text_secondary'])
         self._agg.draw()

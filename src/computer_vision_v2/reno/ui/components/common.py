@@ -42,7 +42,7 @@ from computer_vision_v2.reno.ui.theme import COLORS, RADIUS, FONT_SIZE, SPACING,
 
 
 @lru_cache(maxsize=32)
-def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 48):
+def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 256):
     """Build a small vertical-gradient texture between two hex colors.
 
     Used to give a handful of "hero" surfaces (see StatCard) real
@@ -63,6 +63,27 @@ def make_gradient_texture(top_hex: str, bottom_hex: str, steps: int = 48):
     texture = Texture.create(size=(1, steps), colorfmt="rgba")
     texture.blit_buffer(bytes(buf), colorfmt="rgba", bufferfmt="ubyte")
     texture.wrap = "clamp_to_edge"
+    texture.min_filter = texture.mag_filter = "linear"
+    return texture
+
+
+@lru_cache(maxsize=16)
+def make_spotlight_texture(first_hex: str, second_hex: str, steps: int = 256):
+    """Build a two-tone border highlight with transparent, feathered tails."""
+    first = theme.rgba(first_hex)
+    second = theme.rgba(second_hex)
+    buf = bytearray()
+    for i in range(steps):
+        t = i / (steps - 1)
+        color_mix = min(1, max(0, (t - .32) / .36))
+        intensity = math.exp(-.5 * ((t - .5) / .135) ** 2)
+        rgb = [first[channel] * (1-color_mix) + second[channel] * color_mix
+               for channel in range(3)]
+        buf += bytes([*(round(value*255) for value in rgb), round(intensity*255)])
+    texture = Texture.create(size=(1, steps), colorfmt="rgba")
+    texture.blit_buffer(bytes(buf), colorfmt="rgba", bufferfmt="ubyte")
+    texture.wrap = "repeat"
+    texture.min_filter = texture.mag_filter = "linear"
     return texture
 
 
@@ -73,12 +94,17 @@ class Card(BoxLayout):
     border_color = ListProperty(theme.rgba(COLORS['border']))
     radius = NumericProperty(10)
     _hover_amount = NumericProperty(0)
+    _border_phase = NumericProperty(0)
 
-    def __init__(self, gradient=None, border_gradient=None, hover_effect=True, **kwargs):
+    def __init__(self, gradient=None, border_gradient=None, hover_effect=True, animated_border=False, **kwargs):
         super().__init__(**kwargs)
         self._hover_enabled = hover_effect
         self._has_fill_gradient = bool(gradient)
         self._frame = None
+        self._halo = None
+        self._spotlight_texture = None
+        self._animated_border = animated_border and bool(border_gradient)
+        self._neon_glow = []
         with self.canvas.before:
             self._shadow_color = Color(0, 0, 0, .18)
             self._shadow = RoundedRectangle(pos=self.pos, size=self.size, radius=[self.radius])
@@ -87,17 +113,32 @@ class Card(BoxLayout):
                 texture=make_gradient_texture(*gradient) if gradient else None)
             self._border_color_instr = Color(*self.border_color)
             self._border = Line(rounded_rectangle=(*self.pos, *self.size, self.radius), width=.65)
-            if border_gradient:
-                self._frame_color = Color(1, 1, 1, .68)
-                self._frame = Mesh(vertices=[], indices=[], mode='triangles',
-                                   texture=make_gradient_texture(*border_gradient))
             self._shine_color = Color(1, 1, 1, .045)
             self._shine = Line(points=[], width=.6)
+        # Paint the accent after child canvases so content cannot cover it.
+        with self.canvas.after:
+            if border_gradient:
+                if self._animated_border:
+                    self._spotlight_texture = make_spotlight_texture(*border_gradient)
+                    self._halo_color = Color(1, 1, 1, .20)
+                    self._halo = Mesh(vertices=[], indices=[], mode='triangles',
+                                      texture=self._spotlight_texture)
+                self._frame_color = Color(1, 1, 1, .68)
+                self._frame = Mesh(vertices=[], indices=[], mode='triangles',
+                                   texture=(self._spotlight_texture or
+                                            make_gradient_texture(*border_gradient)))
         if hover_effect:
             Window.bind(mouse_pos=self._glass_hover)
         self.bind(pos=self._redraw, size=self._redraw, bg_color=self._redraw,
                   border_color=self._redraw, radius=self._redraw, _hover_amount=self._redraw)
+        self.bind(_border_phase=self._redraw)
+        self._border_animation = (Clock.schedule_interval(self._animate_border, 1/30)
+                                  if self._animated_border else None)
         self._redraw()
+
+    def _animate_border(self, dt):
+        if self.get_root_window():
+            self._border_phase = (self._border_phase + dt*math.tau/18) % math.tau
 
     def _glass_hover(self, _window, position):
         hovered = bool(self.get_root_window() and self.collide_point(*self.to_widget(*position)))
@@ -118,31 +159,72 @@ class Card(BoxLayout):
         self._shine.points = [self.x+18, self.y+self.height-1,
                               max(self.x+18, self.x+self.width-18), self.y+self.height-1]
         if self._frame is not None:
-            self._frame_color.a = .68 + .3*self._hover_amount
+            self._frame_color.a = (.96 + .04*self._hover_amount if self._animated_border
+                                   else .68 + .3*self._hover_amount)
             self._update_gradient_frame()
 
     def _update_gradient_frame(self):
-        # Two nested rounded paths create an actual ring, never a colored fill.
-        vertices = []
+        """Draw a neutral hairline plus one feathered highlight on the perimeter."""
         radius = min(self.radius, self.width/2, self.height/2)
-        thickness = 1.15 + .3*self._hover_amount
-        # Alias properties can still be stale inside a pos/size callback.
         right, top = self.x+self.width, self.y+self.height
+        corner_points = []
         for cx, cy, start in [(right-radius, top-radius, 0),
                               (self.x+radius, top-radius, 90),
                               (self.x+radius, self.y+radius, 180),
                               (right-radius, self.y+radius, 270)]:
-            for step in range(9):
-                angle = math.radians(start + step*90/8)
-                for r in (radius, max(0, radius-thickness)):
-                    x, y = cx+r*math.cos(angle), cy+r*math.sin(angle)
-                    vertices.extend((x, y, .5, (y-self.y)/max(1, self.height)))
-        n = len(vertices)//8
-        indices = []
-        for i in range(n):
-            a, b = 2*i, 2*((i+1)%n)
-            indices.extend((a, a+1, b, a+1, b+1, b))
-        self._frame.vertices, self._frame.indices = vertices, indices
+            for step in range(13):
+                angle = math.radians(start + step*90/12)
+                corner_points.append((cx+radius*math.cos(angle),
+                                      cy+radius*math.sin(angle)))
+
+        points = []
+        for index, point in enumerate(corner_points):
+            following = corner_points[(index+1) % len(corner_points)]
+            distance = math.dist(point, following)
+            samples = max(1, math.ceil(distance/10)) if self._animated_border else 1
+            for sample in range(samples):
+                t = sample/samples
+                points.append((point[0]+(following[0]-point[0])*t,
+                               point[1]+(following[1]-point[1])*t))
+
+        distances = [0]
+        for point, following in zip(points, points[1:]):
+            distances.append(distances[-1] + math.dist(point, following))
+        perimeter = distances[-1] + math.dist(points[-1], points[0])
+
+        def ring_geometry(thickness):
+            vertices = []
+            # Duplicate the closing point with UV + 1: interpolating back to
+            # UV zero would stretch a second highlight across the last segment.
+            for index in range(len(points)+1):
+                x, y = points[index % len(points)]
+                # The closest point in the rounded rectangle's inner box
+                # gives the outward normal on both straight edges and arcs.
+                cx = min(right-radius, max(self.x+radius, x))
+                cy = min(top-radius, max(self.y+radius, y))
+                dx, dy = x-cx, y-cy
+                if dx == 0 and dy == 0:
+                    # Square corners still need a normal on each straight edge.
+                    _, dx, dy = min((abs(x-self.x), -1, 0),
+                                    (abs(x-right), 1, 0),
+                                    (abs(y-self.y), 0, -1),
+                                    (abs(y-top), 0, 1))
+                length = max(.0001, math.hypot(dx, dy))
+                distance = distances[index] if index < len(points) else perimeter
+                texture_v = distance/perimeter + self._border_phase/math.tau
+                for inset in (0, thickness):
+                    vertices.extend((x-dx/length*inset, y-dy/length*inset,
+                                     .5, texture_v))
+            indices = []
+            for index in range(len(points)):
+                a, b = 2*index, 2*(index+1)
+                indices.extend((a, a+1, b, a+1, b+1, b))
+            return vertices, indices
+
+        thickness = (1.1 if self._animated_border else 1.15) + .2*self._hover_amount
+        self._frame.vertices, self._frame.indices = ring_geometry(thickness)
+        if self._halo is not None:
+            self._halo.vertices, self._halo.indices = ring_geometry(4.5)
 
 class HoverBehavior:
     """Adds a desktop hover state without changing touch behavior."""

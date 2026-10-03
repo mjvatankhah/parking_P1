@@ -80,9 +80,9 @@ class WeeklyUI(unittest.TestCase):
         chart._draw()
         axes=chart._figure.axes[0]
         labels=axes.get_xticklabels()
-        self.assertEqual([w.get_text() for w in labels],[theme.rtl(day) for day in WEEKDAYS])
+        self.assertEqual([w.get_text() for w in labels],list(WEEKDAYS))
         self.assertEqual([w.get_position()[0] for w in labels],list(range(7)))
-        self.assertEqual([line.get_label() for line in axes.lines],[theme.rtl('ورود'),theme.rtl('خروج')])
+        self.assertEqual([line.get_label() for line in axes.lines],['ورود','خروج'])
         self.assertEqual(list(axes.lines[0].get_ydata()),list(range(1,8)))
         self.assertEqual(list(axes.lines[1].get_ydata()),list(range(7,0,-1)))
         self.assertEqual(chart._image.texture.size,(860,460))
@@ -95,7 +95,7 @@ class WeeklyUI(unittest.TestCase):
         chart=TrafficChart(size=(300,180),size_hint=(None,None))
         chart._draw()
         self.assertEqual(chart._image.texture.size,(600,360))
-        self.assertTrue(any(text.get_text()==theme.rtl('داده‌ای برای نمایش موجود نیست')
+        self.assertTrue(any(text.get_text()=='داده‌ای برای نمایش موجود نیست'
                             for text in chart._figure.axes[0].texts))
         chart.size=(640,300)
         chart._draw()
