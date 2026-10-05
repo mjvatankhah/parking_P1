@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Metadata carried over by Windows/macOS file copies
+*:Zone.Identifier*
+Thumbs.db
+desktop.ini
+.DS_Store

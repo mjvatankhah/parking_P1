@@ -5,10 +5,10 @@ import cv2
 
 
 # مسیر و شماره فریم دلخواهت را اینجا تغییر بده.
-VIDEO_PATH = Path(__file__).resolve().parent / "video" / "c5.mp4"
+#VIDEO_PATH = Path(__file__).resolve().parent / "video" / "c5.mp4"
 
 # یک فریم از ویدیو می‌خوانیم.
-video = cv2.VideoCapture(str(VIDEO_PATH))
+video = cv2.VideoCapture('rtsp://User1:SADgk%401133@172.16.254.8:554/cam/realmonitor?channel=1&subtype=1')
 
 success, frame = video.read()
 video.release()
