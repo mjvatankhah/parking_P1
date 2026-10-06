@@ -79,6 +79,26 @@ class Pipeline:
                 time.sleep(0.005)
                 continue
             for frame in frames:
+                print(
+                    f"Frame received: camera={frame.camera_id}, frame={frame.frame_idx}",
+                    flush=True,
+                )
+                for detection in frame.detections:
+                    object_type = {0: "Person", 2: "Car"}.get(detection.class_id)
+                    if object_type is None:
+                        continue
+                    x1, y1, x2, y2 = map(float, detection.bbox)
+                    height, width = frame.image.shape[:2]
+                    bottom_x = (x1 + x2) / 2
+                    print(
+                        f"Object detected: camera={frame.camera_id}, frame={frame.frame_idx}, "
+                        f"type={object_type}, track={detection.track_id}, "
+                        f"bbox=({x1:.1f}, {y1:.1f}, {x2:.1f}, {y2:.1f}), "
+                        f"bottom_center=({bottom_x:.1f}, {y2:.1f}), "
+                        f"normalized_bottom_center=({bottom_x / width:.6f}, {y2 / height:.6f}), "
+                        f"predicted={detection.is_predicted}",
+                        flush=True,
+                    )
                 self.preview.publish(frame)
                 self._dispatch_frame(self.line_queue,frame)
                 self._dispatch_frame(self.crop_queue,frame)

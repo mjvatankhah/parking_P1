@@ -35,7 +35,6 @@ def annotate_frame(frame):
         y1, y2 = (max(0, min(height - 1, y)) for y in (y1, y2))
         color = (80, 210, 80) if detection.class_id == 0 else (255, 180, 40)
         label = "Person" if detection.class_id == 0 else "Car"
-        label += f" #{detection.track_id} {detection.confidence:.0%}"
         cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
         cv2.putText(image, label, (x1, max(18, y1 - 7)),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 2)

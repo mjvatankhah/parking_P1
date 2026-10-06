@@ -115,8 +115,9 @@ class CameraSettingsScreen(Screen):
         self._line_inputs = []
         for label, default_value in zip(
             ("خط: X1 (۰ تا ۱)", "خط: Y1 (۰ تا ۱)",
-             "خط: X2 (۰ تا ۱)", "خط: Y2 (۰ تا ۱)"),
-            _DEFAULT_LINE,
+             "خط: X2 (۰ تا ۱)", "خط: Y2 (۰ تا ۱)",
+             "L: X3 (اختیاری)", "L: Y3 (اختیاری)"),
+            (*_DEFAULT_LINE, "", ""),
         ):
             line_input = RoundedTextInput(
                 text=str(default_value), input_filter="float", size_hint_y=None,
@@ -420,7 +421,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._source_type_spinner.text = rtl(SOURCE_TYPE_LABELS[SOURCE_TYPE_RTSP])
         self._sync_source_control()
         self._role_spinner.text = rtl(ROLE_LABELS[ROLE_ENTRY])
-        for line_input, value in zip(self._line_inputs, _DEFAULT_LINE):
+        for line_input, value in zip(self._line_inputs, (*_DEFAULT_LINE, "", "")):
             line_input.text = str(value)
         for point_input, value in zip(self._inside_point_inputs, _DEFAULT_INSIDE_POINT):
             point_input.text = str(value)
@@ -437,6 +438,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._sync_source_control()
         self._role_spinner.text = rtl(camera.role_label())
         line_values = [value for point in camera.line for value in point]
+        line_values += [""] * (6 - len(line_values))
         for line_input, value in zip(self._line_inputs, line_values):
             line_input.text = str(value)
         inside_point = camera.inside_point or _DEFAULT_INSIDE_POINT
@@ -464,11 +466,14 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         source_type = _SOURCE_TYPE_BY_DISPLAY.get(self._source_type_spinner.text, SOURCE_TYPE_RTSP)
         role = _ROLE_BY_DISPLAY.get(self._role_spinner.text, ROLE_ENTRY)
         try:
-            x1, y1, x2, y2 = (float(field.text) for field in self._line_inputs)
+            x1, y1, x2, y2 = (float(field.text) for field in self._line_inputs[:4])
+            line_points = [[x1, y1], [x2, y2]]
+            if any(field.text.strip() for field in self._line_inputs[4:]):
+                line_points.append([float(field.text) for field in self._line_inputs[4:]])
         except ValueError:
             self._error_label.set_text("مختصات خط عبور باید کامل و عددی باشند")
             return
-        if (x1, y1) == (x2, y2):
+        if any(a == b for a, b in zip(line_points, line_points[1:])):
             self._error_label.set_text("دو نقطه خط عبور نمی‌توانند یکسان باشند")
             return
         existing = camera_service.get_camera(camera_id)
@@ -476,7 +481,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
             self._error_label.set_text("مختصات پیکسلی قدیمی را ابتدا به بازه صفر تا یک تبدیل کنید")
             return
         coordinate_space = "normalized"
-        if not all(0 <= v <= 1 for v in (x1, y1, x2, y2)):
+        if not all(0 <= v <= 1 for point in line_points for v in point):
             self._error_label.set_text("مختصات نرمال‌شده باید بین صفر و یک باشند")
             return
         inside_point = None
@@ -495,6 +500,12 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
                 self._error_label.set_text("نقطه داخل پارکینگ نباید روی خط مرجع باشد")
                 return
             inside_point = [inside_x, inside_y]
+            for a, b in zip(line_points, line_points[1:]):
+                cross = ((b[0] - a[0]) * (inside_y - a[1])
+                         - (b[1] - a[1]) * (inside_x - a[0]))
+                if abs(cross) <= 1e-9:
+                    self._error_label.set_text("نقطه داخل نباید روی امتداد ضلع خط مرجع باشد")
+                    return
         # A brand-new camera has no real connection yet, so it starts
         # OFFLINE - "online" would be a fake status nobody verified.
         status = existing.status if existing else STATUS_OFFLINE
@@ -505,7 +516,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
             source=source,
             role=role,
             status=status,
-            line=[[x1, y1], [x2, y2]],
+            line=line_points,
             inside_point=inside_point,
             coordinate_space=coordinate_space,
         )

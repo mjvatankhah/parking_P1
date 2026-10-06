@@ -24,6 +24,23 @@ class LineDetector:
         if coordinate_space not in ('pixels', 'normalized'):
             raise ValueError(f"Camera {camera_id}: coordinate_space must be pixels or normalized")
         self.coordinate_space = coordinate_space
+        self._segments = None
+        if line and len(line) > 2:
+            # Preserve vertex order: sorting would change the shape of the path.
+            self._segments = [
+                LineDetector(camera_id, (a, b), direction, forget_after,
+                             inside_point, coordinate_space)
+                for a, b in zip(line, line[1:])
+            ]
+            self.line = tuple(tuple(p) for p in line)
+            self.forget_after = forget_after
+            self._poly_seen = {}
+            self._poly_crossed = set()
+            for segment in self._segments:
+                segment._finite_segment = True
+            return
+        self._finite_segment = False
+        self._positions = {}
         # ترتیب ثابت: چپ به راست؛ برای خط عمودی، بالا به پایین.
         try:
             self.line = tuple(sorted(tuple(p) for p in line)) if line else None
@@ -73,10 +90,25 @@ class LineDetector:
         stale = [t_id for t_id , (_,last_ts) in self._state.items() if now - last_ts > self.forget_after]
         for t_id in stale:
             self._state.pop(t_id)
+            self._positions.pop(t_id, None)
             self._crossed.discard(t_id) # برای جلوگیری از خطا در صورت نبود کلید از این متد استفاده شد 
 
     def update(self,track_frame):
         now = time.monotonic()
+        if self._segments is not None:
+            for track_id, seen_at in list(self._poly_seen.items()):
+                if now - seen_at > self.forget_after:
+                    del self._poly_seen[track_id]
+                    self._poly_crossed.discard(track_id)
+            for detection in track_frame.detections:
+                self._poly_seen[detection.track_id] = now
+            events = []
+            for segment in self._segments:
+                for event in segment.update(track_frame):
+                    if event['track_id'] not in self._poly_crossed:
+                        self._poly_crossed.add(event['track_id'])
+                        events.append(event)
+            return events
         self._cleanup(now)
 
         events = []
@@ -91,6 +123,8 @@ class LineDetector:
 
             px, py = _bottom_center(my_track.bbox)
             side = _side(self.line, (px / width, py / height))
+            point = (px / width, py / height)
+            prev_point = self._positions.get(t_id)
             prev = self._state.get(t_id)
             if side == 0:
                 # روی خط، آخرین سمت معتبر را حفظ و زمان مشاهده را تازه کن.
@@ -99,6 +133,7 @@ class LineDetector:
                 continue
 
             self._state[t_id] = (side , now)
+            self._positions[t_id] = point
 
             if prev is None:
                 continue
@@ -109,6 +144,12 @@ class LineDetector:
 
             if t_id in self._crossed: # این ماشین از خط عبور کرده پس نیازی به شمارش مجدد نیست
                 continue
+
+            if self._finite_segment and prev_point is not None:
+                # The motion must intersect the actual edge, not its extension.
+                a, b = self.line
+                if _side((prev_point, point), a) * _side((prev_point, point), b) > 0:
+                    continue
 
             # دوربین تک‌نقش، هر عبور را با همان نقش ثبت می‌کند.
             if self.direction in ('entry', 'exit'):

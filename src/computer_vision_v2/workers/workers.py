@@ -69,8 +69,7 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
                 if (now - crossed_ts) <= wait_after_cross:
                     continue
 
-                pending.pop(key, None)
-                continue
+                # Preserve the crossing even when no usable crop was found.
 
             pending.pop(key, None)
             dispatched[key] = now

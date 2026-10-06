@@ -20,6 +20,7 @@ from computer_vision_v2.reno.ui.components.traffic_record import TrafficRecordRo
 from computer_vision_v2.reno.ui.components.week_picker import WeekPicker
 from computer_vision_v2.reno.ui.components.jalali_calendar import week_bounds
 from computer_vision_v2.reno.ui.components.camera_selector import build_camera_selector, ALL_CAMERAS_VALUE
+from computer_vision_v2.reno.ui.components.camera_card import CameraCard
 from computer_vision_v2.reno.models.camera import STATUS_ONLINE
 from computer_vision_v2.reno.services.camera_service import camera_service
 from computer_vision_v2.reno.services.dashboard_service import dashboard_service
@@ -37,6 +38,8 @@ class DashboardScreen(Screen):
         self._camera = ''
         self._day = week_bounds(date.today())[1]
         self._revision = 0
+        self._preview_enabled = False
+        self._preview_cards = []
         self._refresh_trigger = Clock.create_trigger(self._request_refresh, .3)
         self._build()
         camera_service.subscribe(self._on_cameras_changed)
@@ -56,6 +59,14 @@ class DashboardScreen(Screen):
         for card in (self._today, self._unique, self._online, self._alerts):
             stats.add_widget(card)
         content.add_widget(stats)
+
+        preview_controls = BoxLayout(size_hint_y=None, height=36)
+        self._preview_button = SecondaryButton(text=theme.rtl('نمایش تشخیص برای تست'))
+        self._preview_button.bind(on_release=self._toggle_preview)
+        preview_controls.add_widget(self._preview_button)
+        content.add_widget(preview_controls)
+        self._preview_holder = BoxLayout(size_hint_y=None, height=0, spacing=10)
+        content.add_widget(self._preview_holder)
 
         panels = BoxLayout(spacing=18)
         chart_panel = Card(orientation='vertical', padding=[17, 13, 17, 14], spacing=10, size_hint_x=.42)
@@ -150,18 +161,23 @@ class DashboardScreen(Screen):
 
     def on_pre_enter(self, *_):
         self._active = True
+        for card in self._preview_cards:
+            card.ensure_stream_started()
         self._request_refresh()
         if self._timer is None:
             self._timer = Clock.schedule_interval(self._request_refresh, 5)
 
     def on_leave(self, *_):
         self._active = False
+        for card in self._preview_cards:
+            card.stop_stream()
         if self._timer is not None:
             self._timer.cancel()
             self._timer = None
 
     def _on_cameras_changed(self, cameras):
         self._set_camera_counts(cameras)
+        self._rebuild_preview()
         self._filters_changed()
 
     def _on_status_changed(self, cameras):
@@ -170,7 +186,40 @@ class DashboardScreen(Screen):
 
     def _select_camera(self, value):
         self._camera = '' if value == ALL_CAMERAS_VALUE else value
+        self._rebuild_preview()
         self._filters_changed()
+
+    def _toggle_preview(self, *_):
+        self._preview_enabled = not self._preview_enabled
+        self._preview_button.text = theme.rtl(
+            'بستن نمایش تشخیص' if self._preview_enabled else 'نمایش تشخیص برای تست')
+        self._rebuild_preview()
+
+    def _rebuild_preview(self):
+        for card in self._preview_cards:
+            card.stop_stream()
+        self._preview_cards = []
+        self._preview_holder.clear_widgets()
+        self._preview_holder.height = 240 if self._preview_enabled else 0
+        if not self._preview_enabled:
+            return
+        cameras = [camera for camera in camera_service.get_cameras()
+                   if not self._camera or camera.id == self._camera]
+        if not cameras:
+            self._preview_holder.add_widget(RTLLabel(text='دوربینی تنظیم نشده است'))
+            return
+        scroll = ScrollView(do_scroll_y=False)
+        row = BoxLayout(size_hint_x=None, spacing=10)
+        row.bind(minimum_width=row.setter('width'))
+        for camera in cameras:
+            card = CameraCard(camera, size_hint_x=None, width=380)
+            self._preview_cards.append(card)
+            row.add_widget(card)
+        scroll.add_widget(row)
+        self._preview_holder.add_widget(scroll)
+        if self._active:
+            for card in self._preview_cards:
+                card.ensure_stream_started()
 
     def _select_day(self, value):
         self._day = value

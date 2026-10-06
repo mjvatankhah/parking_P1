@@ -1,6 +1,8 @@
+
 {
   "model_path": "yolov8n.pt",
   "detection_interval": 3,
+
   "cameras": [
     {
       "id": "cam2",
@@ -9,17 +11,23 @@
       "line": [
         [
           0.3,
-          0.4
+          0.5
         ],
         [
           0.8,
+          0.5
+        ],
+        [
+          0.9,
           0.3
+          
+
         ]
       ],
       "dir": "entry_exit",
       "inside_point": [
-        0.6,
-        0.5
+        0.8,
+        0.8
       ] ,
       "coordinate_space": "normalized"
     }
