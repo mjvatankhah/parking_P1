@@ -10,24 +10,24 @@
       "source": "rtsp://User1:SADgk%401133@172.16.254.8:554/cam/realmonitor?channel=1&subtype=1",
       "line": [
         [
-          0.3,
-          0.5
+          0.19,
+          0.92
         ],
         [
-          0.8,
-          0.5
+          0.90,
+          0.73
         ],
         [
-          0.9,
-          0.3
+          0.69,
+          0.29
           
 
         ]
       ],
       "dir": "entry_exit",
       "inside_point": [
-        0.8,
-        0.8
+        0.97,
+        0.80
       ] ,
       "coordinate_space": "normalized"
     }

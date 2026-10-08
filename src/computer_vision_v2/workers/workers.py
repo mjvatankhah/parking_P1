@@ -32,7 +32,7 @@ def line_worker(line_queue, cross_queue, line_manager, is_running):
             line_queue.task_done()
 
 
-def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_after_cross=5.0):
+def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_after_cross=10.0):
     """انتخاب بهترین کراپ‌ها و ارسال به OCR، مستقل از ترد اصلی."""
     pending = {}
     dispatched = {}
@@ -47,7 +47,12 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
                 return
             key = (event["camera_id"], event["track_id"])
             if key not in dispatched:
-                pending.setdefault(key, {"event":event, "crossed_ts":event.get('ts') or time.monotonic()})
+                if key not in pending:
+                    crossed_ts = event.get("ts")
+                    if crossed_ts is None:
+                        crossed_ts = time.monotonic()
+                    pending[key] = {"event": event, "crossed_ts": crossed_ts}
+                    selector.retain(*key)
             cross_queue.task_done()
 
     def flush_pending(final=False):
@@ -62,15 +67,11 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
             event = pending_data['event']
             crossed_ts = pending_data['crossed_ts']
 
+            if not final and now < crossed_ts + wait_after_cross:
+                continue
+
+            # Consume only after the full candidate window, even if a crop exists.
             best_crop = selector.get(camera_id, track_id)
-            if best_crop is None and not final:
-                if not is_running():
-                    continue  # در پایان، رویداد بدون کراپ هم ثبت می‌شود.
-                if (now - crossed_ts) <= wait_after_cross:
-                    continue
-
-                # Preserve the crossing even when no usable crop was found.
-
             pending.pop(key, None)
             dispatched[key] = now
             offer_event(
@@ -94,8 +95,14 @@ def crop_worker(crop_queue, cross_queue, ocr_queue, selector, is_running, wait_a
             flush_pending(final=True)
             crop_queue.task_done()
             break
+        # Pin pre-cross crops before cleanup, and close expired windows before
+        # accepting a new frame so images after the deadline cannot win.
+        drain_cross_events()
+        flush_pending()
         try:
-            selector.update(tracked_frame.camera_id,tracked_frame)
+            selector.update(tracked_frame.camera_id, tracked_frame,
+                            excluded_tracks={track_id for camera_id, track_id in dispatched
+                                             if camera_id == tracked_frame.camera_id})
             
 
         except Exception:  # noqa: BLE001

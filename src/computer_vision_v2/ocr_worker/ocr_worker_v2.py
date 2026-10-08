@@ -1,6 +1,23 @@
+import logging
+from pathlib import Path
+from uuid import uuid4
+
+import cv2
+
 from computer_vision_v2.workers.queueing import offer_event
 
 CAR_CLASS_ID = 2
+PERSON_CLASS_ID = 0
+PERSON_IMAGE_DIR = Path(__file__).resolve().parents[2] / "captured_persons"
+logger = logging.getLogger(__name__)
+
+
+def _save_person_crop(crop):
+    PERSON_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+    path = PERSON_IMAGE_DIR / f"person_{uuid4().hex}.jpg"
+    if not cv2.imwrite(str(path), crop):
+        raise OSError(f"Could not write person crop to {path}")
+    return str(path)
 
 def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
     while True:
@@ -18,6 +35,12 @@ def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
         plate_txt = None
         confidence = float(event.get('confidence', 0.0))
         image_path = None
+
+        if class_id == PERSON_CLASS_ID and best_crop is not None:
+            try:
+                image_path = _save_person_crop(best_crop['crop'])
+            except Exception:
+                logger.exception("Could not save person crop %s/%s", camera_id, track_id)
 
         if class_id == CAR_CLASS_ID and best_crop is not None:
             

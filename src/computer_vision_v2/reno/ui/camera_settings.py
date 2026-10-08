@@ -217,7 +217,7 @@ class CameraSettingsScreen(Screen):
         self._source_input.readonly = is_video
         self._source_input.hint_text = (
             rtl("برای انتخاب فایل ویدیو کلیک کنید")
-            if is_video else "مثال: rtsp://192.168.1.100:554/stream"
+            if is_video else rtl("مثال: rtsp://192.168.1.100:554/stream")
         )
         if hasattr(self, "_source_picker_button"):
             self._source_picker_button.disabled = not is_video

@@ -4,6 +4,7 @@ import logging
 import threading
 from datetime import date
 from functools import partial
+from dataclasses import astuple
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -40,6 +41,9 @@ class DashboardScreen(Screen):
         self._revision = 0
         self._preview_enabled = False
         self._preview_cards = []
+        self._record_scroll = None
+        self._record_rows = None
+        self._record_keys = []
         self._refresh_trigger = Clock.create_trigger(self._request_refresh, .3)
         self._build()
         camera_service.subscribe(self._on_cameras_changed)
@@ -258,9 +262,10 @@ class DashboardScreen(Screen):
             self._chart.set_data([])
             self._chart_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
             self._record_status.set_text('خطای دریافت')
-            self._record_holder.clear_widgets()
-            self._record_holder.add_widget(EmptyState(icon_name='log', title='دریافت رویدادها ناموفق بود',
-                                                      subtitle='تلاش مجدد به‌صورت خودکار انجام می‌شود'))
+            if self._record_scroll is None:
+                self._record_holder.clear_widgets()
+                self._record_holder.add_widget(EmptyState(icon_name='log', title='دریافت رویدادها ناموفق بود',
+                                                          subtitle='تلاش مجدد به‌صورت خودکار انجام می‌شود'))
             self._data_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
             return
         self._today.set_value(stats.today_total)
@@ -275,19 +280,65 @@ class DashboardScreen(Screen):
         self._chart_status.set_text('ترددی در این بازه ثبت نشده است' if not any(a or b for _, a, b in flow) else 'بازهٔ هفتگی · تعداد رویدادهای ثبت‌شده')
         self._record_status.set_text(f'{theme.fa_number(len(records))} تردد')
         self._data_status.set_text('حالت نمایشی · داده‌های آزمایشی' if MOCK_DATA_ENABLED else 'رویدادهای ثبت‌شدهٔ سامانه')
-        self._record_holder.clear_widgets()
+        self._set_records(records)
+
+    def _set_records(self, records):
+        keys = [astuple(record) for record in records]
+        if keys == self._record_keys and self._record_scroll is not None:
+            return
         if not records:
+            self._record_holder.clear_widgets()
+            self._record_scroll = self._record_rows = None
+            self._record_keys = []
             self._record_holder.add_widget(EmptyState(
                 icon_name='reports', title='هنوز ترددی ثبت نشده است',
                 subtitle='رویدادهای ثبت‌شده اینجا نمایش داده می‌شوند'))
             return
-        scroll = ScrollView(do_scroll_x=True, scroll_x=1, bar_width=4)
-        rows = GridLayout(cols=1, size_hint=(None,None), spacing=3)
-        scroll.bind(width=lambda _, width: setattr(rows, 'width', max(480,width)))
-        rows.width = max(480,scroll.width)
-        rows.add_widget(detection_header())
-        rows.bind(minimum_height=rows.setter('height'))
-        for record in records:
-            rows.add_widget(TrafficRecordRow(record))
-        scroll.add_widget(rows)
-        self._record_holder.add_widget(scroll)
+        if self._record_scroll is None:
+            self._record_holder.clear_widgets()
+            self._record_scroll = scroll = ScrollView(do_scroll_x=True, scroll_x=1, bar_width=4)
+            self._record_rows = rows = GridLayout(cols=1, size_hint=(None,None), spacing=3)
+            scroll.bind(width=lambda _, width: setattr(rows, 'width', max(480,width)))
+            rows.width = max(480,scroll.width)
+            rows.bind(minimum_height=rows.setter('height'))
+            scroll.add_widget(rows)
+            self._record_holder.add_widget(scroll)
+
+        scroll, rows = self._record_scroll, self._record_rows
+        at_top = scroll.scroll_y >= .999
+        offset = (1 - scroll.scroll_y) * max(0, rows.height - scroll.height)
+        old_widgets = list(reversed(rows.children))
+        old_data_rows = old_widgets[1:]
+        # Anchor to the first surviving row at/after the visible top. Each
+        # data row occupies 56 pixels plus 3 pixels of spacing after the header.
+        first_visible = max(0, int((offset - 29) // 59))
+        if not at_top:
+            for index in range(first_visible, len(self._record_keys)):
+                key = self._record_keys[index]
+                if key in keys:
+                    offset += (keys.index(key) - index) * 59
+                    break
+
+        available = {}
+        for key, row in zip(self._record_keys, old_data_rows):
+            available.setdefault(key, []).append(row)
+        new_rows = []
+        for key, record in zip(keys, records):
+            matches = available.get(key)
+            if matches:
+                row = matches.pop(0)
+                row.record = record
+            else:
+                row = TrafficRecordRow(record)
+            new_rows.append(row)
+        rows.clear_widgets()
+        rows.add_widget(old_widgets[0] if old_widgets else detection_header())
+        for row in new_rows:
+            rows.add_widget(row)
+        self._record_keys = keys
+        # Resolve height before restoring the scroll so a later layout does
+        # not apply an obsolete normalized position to the updated content.
+        rows.height = 26 + len(records) * 59
+        rows.do_layout()
+        extent = max(0, rows.height - scroll.height)
+        scroll.scroll_y = 1 if at_top or not extent else 1 - min(extent, max(0, offset)) / extent
