@@ -39,7 +39,7 @@ class PersonCropTests(unittest.TestCase):
             cursor.fetchone.return_value = (42,)
             self.assertEqual(_save_event(cursor, item), 42)
             self.assertEqual(cursor.execute.call_count, 1)
-            self.assertEqual(cursor.execute.call_args.args[1],
+            self.assertEqual(cursor.execute.call_args.args[1][:-1],
                              ('cam', None, 'entry', 0, .9, item['image_path']))
 
     def test_missing_crop_preserves_person_event(self):

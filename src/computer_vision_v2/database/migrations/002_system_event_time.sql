@@ -1,0 +1,6 @@
+BEGIN;
+
+ALTER TABLE event ALTER COLUMN captured_at DROP DEFAULT;
+ALTER TABLE vehicle_session ALTER COLUMN opened_at DROP DEFAULT;
+
+COMMIT;

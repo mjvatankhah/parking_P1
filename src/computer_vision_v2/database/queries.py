@@ -23,8 +23,8 @@ ON CONFLICT (plate_number) DO NOTHING
 """
 
 INSERT_EVENT = """
-INSERT INTO event (camera_id, plate_number, event_type, class_id, confidence, image_path)
-VALUES (%s, %s, %s, %s, %s, %s)
+INSERT INTO event (camera_id, plate_number, event_type, class_id, confidence, image_path, captured_at)
+VALUES (%s, %s, %s, %s, %s, %s, %s)
 RETURNING id
 """
 
@@ -36,12 +36,12 @@ LIMIT 1 FOR UPDATE
 """
 
 INSERT_SESSION = """
-INSERT INTO vehicle_session (plate_number, entry_event_id, status)
-VALUES (%s, %s, 'open')
+INSERT INTO vehicle_session (plate_number, entry_event_id, opened_at, status)
+VALUES (%s, %s, %s, 'open')
 """
 
 UPDATE_CLOSE_SESSION = """
 UPDATE vehicle_session
-SET exit_event_id = %s, status = 'closed', closed_at = NOW()
+SET exit_event_id = %s, closed_at = %s, status = 'closed'
 WHERE id = %s
 """

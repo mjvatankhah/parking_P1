@@ -18,12 +18,8 @@ Why a "subscribe" mechanism?
     change. This is the same idea as an Excel cell that recalculates
     automatically when a cell it depends on changes.
 
-How to connect your real backend later:
-    Replace the in-memory `self._cameras` list and the methods below
-    with calls into your existing CameraManager. Keep the method
-    names (get_cameras, add_camera, update_camera, delete_camera) and
-    keep calling self._notify() after every change, so the UI keeps
-    updating itself automatically.
+Configuration is shared with the pipeline in data/cameras.json.
+The app periodically calls reload() to pick up edits made outside the UI.
 """
 
 import json
@@ -73,6 +69,27 @@ class CameraService:
                 return camera
         return None
 
+    def reload(self) -> bool:
+        """Publish external config edits while keeping the last valid state."""
+        if MOCK_DATA_ENABLED:
+            return False
+        try:
+            cameras = self._load(strict=True)
+        except (OSError, ValueError, TypeError):
+            # Editors may briefly leave an incomplete file while saving.
+            return False
+        if [c.to_dict() for c in cameras] == [c.to_dict() for c in self._cameras]:
+            return False
+        previous = {camera.id: camera for camera in self._cameras}
+        self._cameras = [
+            previous[camera.id]
+            if camera.id in previous and previous[camera.id].to_dict() == camera.to_dict()
+            else camera
+            for camera in cameras
+        ]
+        self._notify()
+        return True
+
     # -- writing ------------------------------------------------------
     def add_camera(self, camera: Camera) -> None:
         self._cameras.append(camera)
@@ -92,27 +109,33 @@ class CameraService:
         self._save()
         self._notify()
 
-    def _load(self) -> List[Camera]:
-        if not os.path.isfile(self._store_path):
-            return []
+    def _load(self, *, strict=False) -> List[Camera]:
         try:
             with open(self._store_path, "r", encoding="utf-8") as handle:
                 data = json.load(handle)
             # Accept the old list once for a seamless migration, but always
             # save back using the pipeline's native config structure.
             if isinstance(data, dict):
-                self._model_path = data.get("model_path", self._model_path)
-                self._detection_interval = data.get("detection_interval", 3)
+                model_path = data.get("model_path", self._model_path)
+                detection_interval = data.get("detection_interval", 3)
                 camera_items = data.get("cameras", [])
             else:
+                model_path = self._model_path
+                detection_interval = self._detection_interval
                 camera_items = data
+            if not isinstance(camera_items, list) or not all(isinstance(item, dict) for item in camera_items):
+                raise ValueError("Camera configuration must contain a list of camera objects")
             cameras = [Camera.from_dict(item) for item in camera_items if isinstance(item, dict)]
             # Connection state is runtime information; never trust a stale
             # "online" value from the previous application session.
             for camera in cameras:
                 camera.status = STATUS_OFFLINE
+            self._model_path = model_path
+            self._detection_interval = detection_interval
             return cameras
         except (OSError, ValueError, TypeError):
+            if strict:
+                raise
             return []
 
     def _save(self) -> None:

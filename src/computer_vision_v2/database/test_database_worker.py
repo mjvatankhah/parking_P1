@@ -1,4 +1,5 @@
 import queue
+from datetime import datetime, timezone
 import unittest
 from unittest.mock import MagicMock, patch
 
@@ -28,7 +29,8 @@ class DatabaseWorkerTests(unittest.TestCase):
         self.assertNotIn("INSERT INTO vehicle ", queries[0])
         self.assertNotIn("vehicle_session", queries[0])
         params = cursor.execute.call_args.args[1]
-        self.assertEqual(params, ("cam2", None, "entry", 0, 0.87, None))
+        self.assertEqual(params[:-1], ("cam2", None, "entry", 0, 0.87, None))
+        self.assertIsNotNone(params[-1].tzinfo)
         connection.commit.assert_called_once()
 
     def test_event_with_plate_creates_vehicle_and_entry_session(self):
@@ -63,6 +65,30 @@ class DatabaseWorkerTests(unittest.TestCase):
         broken.rollback.assert_called_once()
         recovered.commit.assert_called_once()
         self.assertEqual(items.unfinished_tasks, 0)
+
+    def test_system_time_is_explicit_for_event_and_entry_session(self):
+        stamp = datetime(2026, 10, 10, 10, 30, tzinfo=timezone.utc)
+        with patch.object(module, 'datetime') as clock:
+            clock.now.return_value.astimezone.return_value = stamp
+            _, cursor = self.run_worker({
+                'camera_id': 'cam2', 'class_id': 2, 'direction': 'entry',
+                'plate_text': 'test-plate', 'confidence': .9, 'image_path': None,
+            }, [(12,), None])
+        cursor.execute.assert_any_call(module.queries.INSERT_EVENT,
+            ('cam2', 'test-plate', 'entry', 2, .9, None, stamp))
+        cursor.execute.assert_any_call(module.queries.INSERT_SESSION,
+                                      ('test-plate', 12, stamp))
+
+    def test_system_time_is_shared_with_session_close(self):
+        stamp = datetime(2026, 10, 10, 11, 30, tzinfo=timezone.utc)
+        with patch.object(module, 'datetime') as clock:
+            clock.now.return_value.astimezone.return_value = stamp
+            _, cursor = self.run_worker({
+                'camera_id': 'cam2', 'class_id': 2, 'direction': 'exit',
+                'plate_text': 'test-plate', 'confidence': .9, 'image_path': None,
+            }, [(13,), (7,)])
+        cursor.execute.assert_any_call(module.queries.UPDATE_CLOSE_SESSION,
+                                      (13, stamp, 7))
 
 
 if __name__ == "__main__":

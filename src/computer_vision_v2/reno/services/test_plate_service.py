@@ -1,6 +1,8 @@
 import sys
+import os
+import time
 import unittest
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -39,6 +41,21 @@ class PlateServiceTests(unittest.TestCase):
     def test_no_rows_is_empty(self):
         self.cursor.fetchall.return_value = []
         self.assertEqual(self.service.get_recent_records(), [])
+
+    @unittest.skipUnless(hasattr(time, 'tzset'), 'Requires system timezone control')
+    def test_database_timestamp_is_displayed_in_system_timezone(self):
+        self.cursor.fetchall.return_value = [
+            (None, datetime(2026, 10, 10, 23, 45, tzinfo=timezone.utc),
+             'cam2', 'entry', 0, None),
+        ]
+        try:
+            with patch.dict(os.environ, {'TZ': 'Asia/Tehran'}):
+                time.tzset()
+                record = self.service.get_recent_records()[0]
+                self.assertEqual(record.date, '2026-10-11')
+                self.assertEqual(record.time, '03:15:00')
+        finally:
+            time.tzset()
 
     def test_database_errors_are_not_reported_as_empty_results(self):
         self.cursor.fetchall.side_effect = RuntimeError('database unavailable')

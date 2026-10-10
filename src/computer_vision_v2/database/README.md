@@ -22,3 +22,7 @@ For a database created with the earlier `TIMESTAMP` columns, first inspect
 Then apply `migrations/001_timestamptz.sql` with `psql -X -v ON_ERROR_STOP=1 -f`.
 The migration preserves rows and interprets old wall-clock values in the
 database's configured time zone. It does not invent or change gate IDs.
+
+The writer sends timezone-aware system timestamps for events and vehicle
+sessions. Apply `migrations/002_system_event_time.sql` to remove the database
+clock defaults from an existing database; existing timestamps are preserved.

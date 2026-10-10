@@ -50,6 +50,7 @@ Config.set("graphics", "borderless", "1")
 Config.set("input", "mouse", "mouse,disable_multitouch")
 
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, TransitionBase
 
@@ -59,6 +60,7 @@ from computer_vision_v2.reno.ui.dashboard import DashboardScreen
 from computer_vision_v2.reno.ui.cameras import CamerasScreen
 from computer_vision_v2.reno.ui.camera_settings import CameraSettingsScreen
 from computer_vision_v2.reno.ui.placeholder_screen import PlaceholderScreen
+from computer_vision_v2.reno.services.camera_service import camera_service
 
 # Kivy's window clears to white by default before anything else draws.
 # On a dark UI that shows up as a white flash on resize or on any gap
@@ -86,6 +88,7 @@ class InstantTransition(TransitionBase):
 class RenoApp(App):
     title = "PLAKINO"
     icon = str(Path(__file__).resolve().parent / "assets/icons/lucide/app.png")
+    _camera_config_poll = None
 
     def build(self):
         register_app_font()
@@ -126,6 +129,7 @@ class RenoApp(App):
         self._show_screen("dashboard")
 
     def _show_screen(self, name):
+        camera_service.reload()
         self.screen_manager.current = name
 
     def _navigate(self, screen_name: str):
@@ -134,7 +138,17 @@ class RenoApp(App):
             return
         self._show_screen(screen_name)
 
+    def on_start(self):
+        self._refresh_camera_config()
+        self._camera_config_poll = Clock.schedule_interval(self._refresh_camera_config, 1)
+
+    def _refresh_camera_config(self, *_args):
+        camera_service.reload()
+
     def on_stop(self):
+        if self._camera_config_poll is not None:
+            self._camera_config_poll.cancel()
+            self._camera_config_poll = None
         self.screen_manager.get_screen("cameras").on_leave()
 
 

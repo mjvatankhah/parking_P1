@@ -8,6 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+.uv-model-cache/
 
 # Metadata carried over by Windows/macOS file copies
 *:Zone.Identifier*

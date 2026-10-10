@@ -1,6 +1,7 @@
 """Persist recognized crossings using the schema's vehicle and session tables."""
 
 import logging
+from datetime import datetime
 
 from computer_vision_v2.database.connection import get_connection
 from computer_vision_v2.database import queries
@@ -10,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 def _save_event(cursor, item):
+    captured_at = datetime.now().astimezone()
     plate_number = item["plate_text"] or None
     if plate_number is not None:
         cursor.execute(queries.INSERT_VEHICLE, (plate_number, "car"))
@@ -18,7 +20,7 @@ def _save_event(cursor, item):
         queries.INSERT_EVENT,
         (
             item["camera_id"], plate_number, item["direction"], item["class_id"],
-            item["confidence"], item["image_path"],
+            item["confidence"], item["image_path"], captured_at,
         ),
     )
     event_id = cursor.fetchone()[0]
@@ -29,12 +31,12 @@ def _save_event(cursor, item):
     cursor.execute(queries.SELECT_OPEN_SESSION, (plate_number,))
     open_session = cursor.fetchone()
     if item["direction"] == "entry" and open_session is None:
-        cursor.execute(queries.INSERT_SESSION, (plate_number, event_id))
+        cursor.execute(queries.INSERT_SESSION, (plate_number, event_id, captured_at))
     elif item["direction"] == "exit":
         if open_session is None:
             logger.warning("No open session for plate %s", plate_number)
         else:
-            cursor.execute(queries.UPDATE_CLOSE_SESSION, (event_id, open_session[0]))
+            cursor.execute(queries.UPDATE_CLOSE_SESSION, (event_id, captured_at, open_session[0]))
     return event_id
 
 

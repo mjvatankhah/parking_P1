@@ -1,0 +1,482 @@
+WARNING:root:Failed to create openvino_telemetry file. Please allow write access to the following directory: /home/MJR
+WARNING:root:Could not create directory for storing client ID. No data will be sent.
+Frame received: camera=cam2, frame=1
+Frame received: camera=cam2, frame=3
+Frame received: camera=cam2, frame=4
+Frame received: camera=cam2, frame=5
+Frame received: camera=cam2, frame=6
+Frame received: camera=cam2, frame=7
+Frame received: camera=cam2, frame=8
+Frame received: camera=cam2, frame=9
+Frame received: camera=cam2, frame=10
+Frame received: camera=cam2, frame=11
+Frame received: camera=cam2, frame=12
+Frame received: camera=cam2, frame=13
+Frame received: camera=cam2, frame=15
+Frame received: camera=cam2, frame=16
+Frame received: camera=cam2, frame=17
+Frame received: camera=cam2, frame=19
+Frame received: camera=cam2, frame=21
+Frame received: camera=cam2, frame=22
+Frame received: camera=cam2, frame=25
+Frame received: camera=cam2, frame=26
+Frame received: camera=cam2, frame=28
+Frame received: camera=cam2, frame=30
+Frame received: camera=cam2, frame=31
+Frame received: camera=cam2, frame=34
+Frame received: camera=cam2, frame=36
+Frame received: camera=cam2, frame=37
+Frame received: camera=cam2, frame=38
+Frame received: camera=cam2, frame=40
+Frame received: camera=cam2, frame=41
+Frame received: camera=cam2, frame=42
+Frame received: camera=cam2, frame=43
+Frame received: camera=cam2, frame=45
+Frame received: camera=cam2, frame=46
+Frame received: camera=cam2, frame=47
+Frame received: camera=cam2, frame=48
+Frame received: camera=cam2, frame=49
+Frame received: camera=cam2, frame=51
+Frame received: camera=cam2, frame=52
+Frame received: camera=cam2, frame=53
+Frame received: camera=cam2, frame=54
+Frame received: camera=cam2, frame=55
+Frame received: camera=cam2, frame=57
+Frame received: camera=cam2, frame=58
+Frame received: camera=cam2, frame=61
+Frame received: camera=cam2, frame=63
+Frame received: camera=cam2, frame=64
+Frame received: camera=cam2, frame=65
+Frame received: camera=cam2, frame=67
+Frame received: camera=cam2, frame=68
+Frame received: camera=cam2, frame=70
+Frame received: camera=cam2, frame=71
+Frame received: camera=cam2, frame=72
+Frame received: camera=cam2, frame=73
+Frame received: camera=cam2, frame=74
+Frame received: camera=cam2, frame=75
+Frame received: camera=cam2, frame=76
+Frame received: camera=cam2, frame=78
+Frame received: camera=cam2, frame=79
+Frame received: camera=cam2, frame=82
+Frame received: camera=cam2, frame=83
+Frame received: camera=cam2, frame=85
+Frame received: camera=cam2, frame=86
+Frame received: camera=cam2, frame=88
+Frame received: camera=cam2, frame=89
+Frame received: camera=cam2, frame=90
+Frame received: camera=cam2, frame=91
+Frame received: camera=cam2, frame=93
+Frame received: camera=cam2, frame=94
+Frame received: camera=cam2, frame=97
+Frame received: camera=cam2, frame=99
+Frame received: camera=cam2, frame=100
+Frame received: camera=cam2, frame=101
+Frame received: camera=cam2, frame=103
+Frame received: camera=cam2, frame=105
+Frame received: camera=cam2, frame=106
+Frame received: camera=cam2, frame=108
+Frame received: camera=cam2, frame=109
+Frame received: camera=cam2, frame=110
+Frame received: camera=cam2, frame=112
+Frame received: camera=cam2, frame=114
+Frame received: camera=cam2, frame=115
+Frame received: camera=cam2, frame=117
+Frame received: camera=cam2, frame=118
+Frame received: camera=cam2, frame=119
+Frame received: camera=cam2, frame=120
+Frame received: camera=cam2, frame=121
+Frame received: camera=cam2, frame=123
+Frame received: camera=cam2, frame=124
+Frame received: camera=cam2, frame=126
+Frame received: camera=cam2, frame=127
+Frame received: camera=cam2, frame=130
+Frame received: camera=cam2, frame=132
+Frame received: camera=cam2, frame=133
+Frame received: camera=cam2, frame=136
+Frame received: camera=cam2, frame=138
+Frame received: camera=cam2, frame=139
+Frame received: camera=cam2, frame=142
+Frame received: camera=cam2, frame=143
+Frame received: camera=cam2, frame=145
+Frame received: camera=cam2, frame=148
+Frame received: camera=cam2, frame=150
+Frame received: camera=cam2, frame=151
+Frame received: camera=cam2, frame=152
+Frame received: camera=cam2, frame=153
+Frame received: camera=cam2, frame=154
+Frame received: camera=cam2, frame=156
+Frame received: camera=cam2, frame=157
+Frame received: camera=cam2, frame=159
+Frame received: camera=cam2, frame=160
+Frame received: camera=cam2, frame=163
+Frame received: camera=cam2, frame=165
+Frame received: camera=cam2, frame=166
+Frame received: camera=cam2, frame=168
+Frame received: camera=cam2, frame=169
+Frame received: camera=cam2, frame=170
+Object detected: camera=cam2, frame=170, type=Person, track=1, bbox=(563.9, 108.3, 618.6, 298.4), bottom_center=(591.2, 298.4), normalized_bottom_center=(0.947463, 0.700469), predicted=False
+Frame received: camera=cam2, frame=171
+Object detected: camera=cam2, frame=171, type=Person, track=1, bbox=(562.4, 108.8, 617.0, 298.3), bottom_center=(589.7, 298.3), normalized_bottom_center=(0.945045, 0.700125), predicted=True
+Frame received: camera=cam2, frame=172
+Object detected: camera=cam2, frame=172, type=Person, track=1, bbox=(561.2, 108.7, 616.1, 299.5), bottom_center=(588.6, 299.5), normalized_bottom_center=(0.943347, 0.703065), predicted=True
+Frame received: camera=cam2, frame=173
+Object detected: camera=cam2, frame=173, type=Person, track=1, bbox=(561.6, 107.8, 617.9, 303.3), bottom_center=(589.8, 303.3), normalized_bottom_center=(0.945130, 0.711932), predicted=False
+Frame received: camera=cam2, frame=174
+Object detected: camera=cam2, frame=174, type=Person, track=1, bbox=(560.9, 108.4, 617.2, 303.7), bottom_center=(589.1, 303.7), normalized_bottom_center=(0.943991, 0.712799), predicted=True
+Frame received: camera=cam2, frame=175
+Object detected: camera=cam2, frame=175, type=Person, track=1, bbox=(559.9, 109.9, 616.0, 304.6), bottom_center=(587.9, 304.6), normalized_bottom_center=(0.942174, 0.714991), predicted=True
+Frame received: camera=cam2, frame=176
+Object detected: camera=cam2, frame=176, type=Person, track=1, bbox=(558.9, 107.8, 616.5, 307.6), bottom_center=(587.7, 307.6), normalized_bottom_center=(0.941832, 0.722159), predicted=False
+Frame received: camera=cam2, frame=177
+Object detected: camera=cam2, frame=177, type=Person, track=1, bbox=(558.9, 107.8, 616.5, 307.6), bottom_center=(587.7, 307.6), normalized_bottom_center=(0.941832, 0.722156), predicted=True
+Frame received: camera=cam2, frame=178
+Object detected: camera=cam2, frame=178, type=Person, track=1, bbox=(558.9, 107.8, 616.5, 307.6), bottom_center=(587.7, 307.6), normalized_bottom_center=(0.941832, 0.722160), predicted=True
+Frame received: camera=cam2, frame=179
+Object detected: camera=cam2, frame=179, type=Person, track=1, bbox=(557.9, 109.0, 615.1, 307.1), bottom_center=(586.5, 307.1), normalized_bottom_center=(0.939935, 0.720921), predicted=False
+Frame received: camera=cam2, frame=180
+Object detected: camera=cam2, frame=180, type=Person, track=1, bbox=(557.2, 110.1, 614.1, 307.4), bottom_center=(585.6, 307.4), normalized_bottom_center=(0.938505, 0.721563), predicted=True
+Frame received: camera=cam2, frame=181
+Object detected: camera=cam2, frame=181, type=Person, track=1, bbox=(556.9, 110.5, 613.7, 307.3), bottom_center=(585.3, 307.3), normalized_bottom_center=(0.937921, 0.721468), predicted=True
+Frame received: camera=cam2, frame=182
+Object detected: camera=cam2, frame=182, type=Person, track=1, bbox=(558.2, 109.8, 615.7, 309.0), bottom_center=(586.9, 309.0), normalized_bottom_center=(0.940613, 0.725460), predicted=False
+Frame received: camera=cam2, frame=183
+Object detected: camera=cam2, frame=183, type=Person, track=1, bbox=(558.0, 110.0, 615.4, 309.2), bottom_center=(586.7, 309.2), normalized_bottom_center=(0.940229, 0.725899), predicted=True
+Frame received: camera=cam2, frame=184
+Object detected: camera=cam2, frame=184, type=Person, track=1, bbox=(557.6, 110.0, 615.2, 309.6), bottom_center=(586.4, 309.6), normalized_bottom_center=(0.939773, 0.726667), predicted=True
+Frame received: camera=cam2, frame=185
+Object detected: camera=cam2, frame=185, type=Person, track=1, bbox=(556.1, 110.9, 614.1, 311.0), bottom_center=(585.1, 311.0), normalized_bottom_center=(0.937668, 0.730141), predicted=False
+Frame received: camera=cam2, frame=186
+Object detected: camera=cam2, frame=186, type=Person, track=1, bbox=(555.8, 110.8, 614.1, 311.6), bottom_center=(585.0, 311.6), normalized_bottom_center=(0.937446, 0.731399), predicted=True
+Frame received: camera=cam2, frame=187
+Object detected: camera=cam2, frame=187, type=Person, track=1, bbox=(555.0, 110.4, 613.6, 312.2), bottom_center=(584.3, 312.2), normalized_bottom_center=(0.936302, 0.732963), predicted=True
+Frame received: camera=cam2, frame=188
+Object detected: camera=cam2, frame=188, type=Person, track=1, bbox=(554.9, 112.6, 613.3, 312.6), bottom_center=(584.1, 312.6), normalized_bottom_center=(0.936040, 0.733815), predicted=False
+Frame received: camera=cam2, frame=189
+Object detected: camera=cam2, frame=189, type=Person, track=1, bbox=(554.9, 112.6, 613.3, 312.6), bottom_center=(584.1, 312.6), normalized_bottom_center=(0.936039, 0.733815), predicted=True
+Frame received: camera=cam2, frame=190
+Object detected: camera=cam2, frame=190, type=Person, track=1, bbox=(554.5, 112.5, 613.0, 313.0), bottom_center=(583.8, 313.0), normalized_bottom_center=(0.935528, 0.734757), predicted=True
+Frame received: camera=cam2, frame=192
+Frame received: camera=cam2, frame=193
+Frame received: camera=cam2, frame=194
+Frame received: camera=cam2, frame=196
+Frame received: camera=cam2, frame=199
+Frame received: camera=cam2, frame=201
+Frame received: camera=cam2, frame=202
+Frame received: camera=cam2, frame=203
+Frame received: camera=cam2, frame=204
+Frame received: camera=cam2, frame=205
+Frame received: camera=cam2, frame=208
+Frame received: camera=cam2, frame=209
+Frame received: camera=cam2, frame=210
+Frame received: camera=cam2, frame=211
+Frame received: camera=cam2, frame=212
+Frame received: camera=cam2, frame=214
+Frame received: camera=cam2, frame=217
+Frame received: camera=cam2, frame=218
+Frame received: camera=cam2, frame=220
+Frame received: camera=cam2, frame=221
+Frame received: camera=cam2, frame=223
+Frame received: camera=cam2, frame=225
+Frame received: camera=cam2, frame=226
+Frame received: camera=cam2, frame=227
+Frame received: camera=cam2, frame=229
+Frame received: camera=cam2, frame=230
+Frame received: camera=cam2, frame=231
+Frame received: camera=cam2, frame=232
+Frame received: camera=cam2, frame=234
+Frame received: camera=cam2, frame=235
+Frame received: camera=cam2, frame=236
+Frame received: camera=cam2, frame=238
+Frame received: camera=cam2, frame=241
+Frame received: camera=cam2, frame=242
+Frame received: camera=cam2, frame=244
+Frame received: camera=cam2, frame=246
+Frame received: camera=cam2, frame=247
+Frame received: camera=cam2, frame=250
+Frame received: camera=cam2, frame=252
+Frame received: camera=cam2, frame=253
+Frame received: camera=cam2, frame=255
+Frame received: camera=cam2, frame=256
+Frame received: camera=cam2, frame=257
+Frame received: camera=cam2, frame=258
+Frame received: camera=cam2, frame=259
+Frame received: camera=cam2, frame=261
+Frame received: camera=cam2, frame=262
+Frame received: camera=cam2, frame=265
+Frame received: camera=cam2, frame=267
+Frame received: camera=cam2, frame=268
+Frame received: camera=cam2, frame=271
+Frame received: camera=cam2, frame=274
+Frame received: camera=cam2, frame=277
+Frame received: camera=cam2, frame=278
+Frame received: camera=cam2, frame=280
+Frame received: camera=cam2, frame=282
+Frame received: camera=cam2, frame=283
+Frame received: camera=cam2, frame=284
+Object detected: camera=cam2, frame=284, type=Car, track=2, bbox=(279.8, 0.0, 354.7, 73.0), bottom_center=(317.3, 73.0), normalized_bottom_center=(0.508455, 0.171359), predicted=False
+Frame received: camera=cam2, frame=285
+Object detected: camera=cam2, frame=285, type=Car, track=2, bbox=(279.4, 0.7, 354.9, 74.3), bottom_center=(317.1, 74.3), normalized_bottom_center=(0.508232, 0.174448), predicted=True
+Frame received: camera=cam2, frame=286
+Object detected: camera=cam2, frame=286, type=Car, track=2, bbox=(278.7, 2.3, 355.2, 76.8), bottom_center=(317.0, 76.8), normalized_bottom_center=(0.507969, 0.180353), predicted=True
+Frame received: camera=cam2, frame=287
+Object detected: camera=cam2, frame=287, type=Car, track=2, bbox=(277.5, 0.6, 356.7, 77.9), bottom_center=(317.1, 77.9), normalized_bottom_center=(0.508172, 0.182756), predicted=False
+Frame received: camera=cam2, frame=288
+Object detected: camera=cam2, frame=288, type=Car, track=2, bbox=(277.1, 1.3, 356.8, 79.1), bottom_center=(317.0, 79.1), normalized_bottom_center=(0.507978, 0.185713), predicted=True
+Frame received: camera=cam2, frame=289
+Object detected: camera=cam2, frame=289, type=Car, track=2, bbox=(276.8, 2.1, 357.1, 80.4), bottom_center=(316.9, 80.4), normalized_bottom_center=(0.507888, 0.188721), predicted=True
+Frame received: camera=cam2, frame=290
+Object detected: camera=cam2, frame=290, type=Car, track=2, bbox=(274.5, 2.2, 358.5, 84.4), bottom_center=(316.5, 84.4), normalized_bottom_center=(0.507207, 0.198118), predicted=False
+Frame received: camera=cam2, frame=291
+Object detected: camera=cam2, frame=291, type=Car, track=2, bbox=(274.1, 2.9, 358.8, 85.8), bottom_center=(316.5, 85.8), normalized_bottom_center=(0.507184, 0.201331), predicted=True
+Frame received: camera=cam2, frame=292
+Object detected: camera=cam2, frame=292, type=Car, track=2, bbox=(273.8, 3.8, 359.0, 87.2), bottom_center=(316.4, 87.2), normalized_bottom_center=(0.507110, 0.204639), predicted=True
+Frame received: camera=cam2, frame=293
+Frame received: camera=cam2, frame=294
+Frame received: camera=cam2, frame=295
+Frame received: camera=cam2, frame=296
+Frame received: camera=cam2, frame=297
+Frame received: camera=cam2, frame=298
+Frame received: camera=cam2, frame=301
+Frame received: camera=cam2, frame=304
+Frame received: camera=cam2, frame=306
+Frame received: camera=cam2, frame=307
+Frame received: camera=cam2, frame=308
+Frame received: camera=cam2, frame=310
+Frame received: camera=cam2, frame=311
+Frame received: camera=cam2, frame=313
+Frame received: camera=cam2, frame=316
+Frame received: camera=cam2, frame=318
+Frame received: camera=cam2, frame=319
+Frame received: camera=cam2, frame=322
+Frame received: camera=cam2, frame=324
+Frame received: camera=cam2, frame=325
+Frame received: camera=cam2, frame=326
+Frame received: camera=cam2, frame=327
+Frame received: camera=cam2, frame=328
+Frame received: camera=cam2, frame=331
+Frame received: camera=cam2, frame=333
+Frame received: camera=cam2, frame=334
+Frame received: camera=cam2, frame=335
+Frame received: camera=cam2, frame=337
+Frame received: camera=cam2, frame=338
+Frame received: camera=cam2, frame=340
+Frame received: camera=cam2, frame=342
+Frame received: camera=cam2, frame=343
+Frame received: camera=cam2, frame=344
+Frame received: camera=cam2, frame=346
+Frame received: camera=cam2, frame=348
+Frame received: camera=cam2, frame=349
+Frame received: camera=cam2, frame=350
+Object detected: camera=cam2, frame=350, type=Car, track=3, bbox=(303.7, 58.8, 446.4, 183.7), bottom_center=(375.0, 183.7), normalized_bottom_center=(0.601011, 0.431305), predicted=False
+Frame received: camera=cam2, frame=351
+Object detected: camera=cam2, frame=351, type=Car, track=3, bbox=(305.6, 59.3, 449.4, 185.1), bottom_center=(377.5, 185.1), normalized_bottom_center=(0.604961, 0.434610), predicted=True
+Frame received: camera=cam2, frame=352
+Object detected: camera=cam2, frame=352, type=Car, track=3, bbox=(307.6, 59.7, 452.4, 186.5), bottom_center=(380.0, 186.5), normalized_bottom_center=(0.608937, 0.437748), predicted=True
+Frame received: camera=cam2, frame=353
+Object detected: camera=cam2, frame=353, type=Car, track=3, bbox=(309.7, 61.4, 455.3, 188.6), bottom_center=(382.5, 188.6), normalized_bottom_center=(0.613009, 0.442713), predicted=False
+Frame received: camera=cam2, frame=354
+Object detected: camera=cam2, frame=354, type=Car, track=3, bbox=(311.9, 61.8, 458.6, 190.0), bottom_center=(385.3, 190.0), normalized_bottom_center=(0.617410, 0.445945), predicted=True
+Frame received: camera=cam2, frame=355
+Object detected: camera=cam2, frame=355, type=Car, track=3, bbox=(314.2, 62.2, 462.1, 191.4), bottom_center=(388.1, 191.4), normalized_bottom_center=(0.622028, 0.449403), predicted=True
+Frame received: camera=cam2, frame=356
+Object detected: camera=cam2, frame=356, type=Car, track=3, bbox=(316.5, 63.9, 464.6, 192.8), bottom_center=(390.5, 192.8), normalized_bottom_center=(0.625846, 0.452681), predicted=False
+Frame received: camera=cam2, frame=357
+Object detected: camera=cam2, frame=357, type=Car, track=3, bbox=(318.8, 64.2, 468.0, 194.1), bottom_center=(393.4, 194.1), normalized_bottom_center=(0.630376, 0.455693), predicted=True
+Frame received: camera=cam2, frame=358
+Object detected: camera=cam2, frame=358, type=Car, track=3, bbox=(324.4, 65.6, 473.7, 195.5), bottom_center=(399.1, 195.5), normalized_bottom_center=(0.639564, 0.459023), predicted=True
+Frame received: camera=cam2, frame=359
+Object detected: camera=cam2, frame=359, type=Car, track=3, bbox=(324.8, 65.5, 475.4, 195.8), bottom_center=(400.1, 195.8), normalized_bottom_center=(0.641196, 0.459723), predicted=False
+Frame received: camera=cam2, frame=360
+Object detected: camera=cam2, frame=360, type=Car, track=3, bbox=(327.1, 66.0, 478.4, 196.9), bottom_center=(402.8, 196.9), normalized_bottom_center=(0.645478, 0.462171), predicted=True
+Frame received: camera=cam2, frame=361
+Object detected: camera=cam2, frame=361, type=Car, track=3, bbox=(329.5, 66.4, 481.7, 198.1), bottom_center=(405.6, 198.1), normalized_bottom_center=(0.650002, 0.464966), predicted=True
+Frame received: camera=cam2, frame=362
+Object detected: camera=cam2, frame=362, type=Car, track=3, bbox=(329.7, 66.6, 485.5, 200.2), bottom_center=(407.6, 200.2), normalized_bottom_center=(0.653203, 0.469941), predicted=False
+Frame received: camera=cam2, frame=363
+Object detected: camera=cam2, frame=363, type=Car, track=3, bbox=(334.2, 67.4, 492.0, 202.8), bottom_center=(413.1, 202.8), normalized_bottom_center=(0.661993, 0.476071), predicted=True
+Frame received: camera=cam2, frame=364
+Object detected: camera=cam2, frame=364, type=Car, track=3, bbox=(336.6, 68.0, 495.0, 203.9), bottom_center=(415.8, 203.9), normalized_bottom_center=(0.666350, 0.478606), predicted=True
+Frame received: camera=cam2, frame=365
+Object detected: camera=cam2, frame=365, type=Car, track=3, bbox=(338.3, 67.4, 500.3, 205.3), bottom_center=(419.3, 205.3), normalized_bottom_center=(0.671916, 0.481838), predicted=False
+Frame received: camera=cam2, frame=366
+Object detected: camera=cam2, frame=366, type=Car, track=3, bbox=(338.3, 67.4, 500.3, 205.3), bottom_center=(419.3, 205.3), normalized_bottom_center=(0.671916, 0.481838), predicted=True
+Frame received: camera=cam2, frame=367
+Object detected: camera=cam2, frame=367, type=Car, track=3, bbox=(343.2, 68.4, 507.1, 207.9), bottom_center=(425.1, 207.9), normalized_bottom_center=(0.681325, 0.487953), predicted=True
+Frame received: camera=cam2, frame=368
+Object detected: camera=cam2, frame=368, type=Car, track=3, bbox=(345.4, 68.2, 512.4, 208.8), bottom_center=(428.9, 208.8), normalized_bottom_center=(0.687355, 0.490034), predicted=False
+Frame received: camera=cam2, frame=369
+Object detected: camera=cam2, frame=369, type=Car, track=3, bbox=(348.2, 68.7, 516.0, 210.0), bottom_center=(432.1, 210.0), normalized_bottom_center=(0.692444, 0.493054), predicted=True
+Frame received: camera=cam2, frame=370
+Object detected: camera=cam2, frame=370, type=Car, track=3, bbox=(353.4, 69.9, 522.8, 212.6), bottom_center=(438.1, 212.6), normalized_bottom_center=(0.702053, 0.499050), predicted=True
+Frame received: camera=cam2, frame=371
+Object detected: camera=cam2, frame=371, type=Car, track=3, bbox=(353.8, 69.3, 526.3, 213.3), bottom_center=(440.1, 213.3), normalized_bottom_center=(0.705222, 0.500591), predicted=False
+Frame received: camera=cam2, frame=372
+Object detected: camera=cam2, frame=372, type=Car, track=3, bbox=(356.7, 69.8, 530.3, 214.7), bottom_center=(443.5, 214.7), normalized_bottom_center=(0.710733, 0.503908), predicted=True
+Frame received: camera=cam2, frame=373
+Object detected: camera=cam2, frame=373, type=Car, track=3, bbox=(359.6, 70.3, 534.3, 216.0), bottom_center=(446.9, 216.0), normalized_bottom_center=(0.716250, 0.507034), predicted=True
+Frame received: camera=cam2, frame=374
+Object detected: camera=cam2, frame=374, type=Car, track=3, bbox=(359.2, 68.9, 539.3, 217.7), bottom_center=(449.2, 217.7), normalized_bottom_center=(0.719910, 0.511090), predicted=False
+Frame received: camera=cam2, frame=375
+Object detected: camera=cam2, frame=375, type=Car, track=3, bbox=(362.0, 69.4, 543.2, 219.0), bottom_center=(452.6, 219.0), normalized_bottom_center=(0.725335, 0.514102), predicted=True
+Frame received: camera=cam2, frame=376
+Object detected: camera=cam2, frame=376, type=Car, track=3, bbox=(367.9, 70.2, 551.5, 221.9), bottom_center=(459.7, 221.9), normalized_bottom_center=(0.736714, 0.520830), predicted=True
+Frame received: camera=cam2, frame=377
+Object detected: camera=cam2, frame=377, type=Car, track=3, bbox=(367.0, 68.8, 554.3, 222.3), bottom_center=(460.7, 222.3), normalized_bottom_center=(0.738247, 0.521828), predicted=False
+Frame received: camera=cam2, frame=378
+Object detected: camera=cam2, frame=378, type=Car, track=3, bbox=(369.9, 69.1, 558.7, 223.9), bottom_center=(464.3, 223.9), normalized_bottom_center=(0.744118, 0.525539), predicted=True
+Frame received: camera=cam2, frame=379
+Object detected: camera=cam2, frame=379, type=Car, track=3, bbox=(372.9, 69.5, 562.9, 225.4), bottom_center=(467.9, 225.4), normalized_bottom_center=(0.749858, 0.528999), predicted=True
+Frame received: camera=cam2, frame=380
+Object detected: camera=cam2, frame=380, type=Car, track=3, bbox=(373.9, 69.3, 569.0, 228.3), bottom_center=(471.5, 228.3), normalized_bottom_center=(0.755570, 0.536005), predicted=False
+Frame received: camera=cam2, frame=381
+Object detected: camera=cam2, frame=381, type=Car, track=3, bbox=(373.9, 69.3, 569.1, 228.3), bottom_center=(471.5, 228.3), normalized_bottom_center=(0.755572, 0.536014), predicted=True
+Frame received: camera=cam2, frame=382
+Object detected: camera=cam2, frame=382, type=Car, track=3, bbox=(373.9, 69.3, 569.1, 228.3), bottom_center=(471.5, 228.3), normalized_bottom_center=(0.755573, 0.536016), predicted=True
+Frame received: camera=cam2, frame=383
+Object detected: camera=cam2, frame=383, type=Car, track=3, bbox=(378.5, 69.2, 577.9, 230.8), bottom_center=(478.2, 230.8), normalized_bottom_center=(0.766374, 0.541804), predicted=False
+Frame received: camera=cam2, frame=384
+Object detected: camera=cam2, frame=384, type=Car, track=3, bbox=(381.6, 69.6, 581.9, 232.1), bottom_center=(481.7, 232.1), normalized_bottom_center=(0.772035, 0.544743), predicted=True
+Frame received: camera=cam2, frame=385
+Object detected: camera=cam2, frame=385, type=Car, track=3, bbox=(384.6, 70.0, 586.1, 233.4), bottom_center=(485.4, 233.4), normalized_bottom_center=(0.777811, 0.547881), predicted=True
+Frame received: camera=cam2, frame=386
+Object detected: camera=cam2, frame=386, type=Car, track=3, bbox=(382.2, 70.0, 588.7, 237.3), bottom_center=(485.4, 237.3), normalized_bottom_center=(0.777947, 0.557014), predicted=False
+Frame received: camera=cam2, frame=387
+Object detected: camera=cam2, frame=387, type=Car, track=3, bbox=(385.3, 70.4, 592.7, 238.5), bottom_center=(489.0, 238.5), normalized_bottom_center=(0.783655, 0.559749), predicted=True
+Frame received: camera=cam2, frame=388
+Object detected: camera=cam2, frame=388, type=Car, track=3, bbox=(388.3, 70.9, 596.7, 239.7), bottom_center=(492.5, 239.7), normalized_bottom_center=(0.789249, 0.562564), predicted=True
+Frame received: camera=cam2, frame=389
+Object detected: camera=cam2, frame=389, type=Car, track=3, bbox=(389.6, 71.8, 597.8, 240.1), bottom_center=(493.7, 240.1), normalized_bottom_center=(0.791160, 0.563513), predicted=False
+Frame received: camera=cam2, frame=390
+Object detected: camera=cam2, frame=390, type=Car, track=3, bbox=(392.7, 72.4, 602.0, 241.6), bottom_center=(497.3, 241.6), normalized_bottom_center=(0.797007, 0.567025), predicted=True
+Frame received: camera=cam2, frame=391
+Object detected: camera=cam2, frame=391, type=Car, track=3, bbox=(392.7, 72.4, 602.0, 241.6), bottom_center=(497.3, 241.6), normalized_bottom_center=(0.797008, 0.567024), predicted=True
+Frame received: camera=cam2, frame=392
+Object detected: camera=cam2, frame=392, type=Car, track=3, bbox=(393.6, 73.0, 602.4, 241.2), bottom_center=(498.0, 241.2), normalized_bottom_center=(0.798098, 0.566142), predicted=False
+Frame received: camera=cam2, frame=393
+Object detected: camera=cam2, frame=393, type=Car, track=3, bbox=(403.3, 74.5, 615.1, 245.1), bottom_center=(509.2, 245.1), normalized_bottom_center=(0.816014, 0.575358), predicted=True
+Frame received: camera=cam2, frame=394
+Object detected: camera=cam2, frame=394, type=Car, track=3, bbox=(409.8, 75.4, 623.7, 247.6), bottom_center=(516.8, 247.6), normalized_bottom_center=(0.828127, 0.581315), predicted=True
+Frame received: camera=cam2, frame=395
+Object detected: camera=cam2, frame=395, type=Car, track=3, bbox=(406.9, 74.3, 616.4, 243.1), bottom_center=(511.6, 243.1), normalized_bottom_center=(0.819895, 0.570760), predicted=False
+Frame received: camera=cam2, frame=396
+Object detected: camera=cam2, frame=396, type=Car, track=3, bbox=(410.2, 74.9, 620.1, 244.1), bottom_center=(515.2, 244.1), normalized_bottom_center=(0.825589, 0.572982), predicted=True
+INFO:computer_vision_v2.workers.workers:Crossing camera=cam2 track=3 direction=entry
+Frame received: camera=cam2, frame=397
+Object detected: camera=cam2, frame=397, type=Car, track=3, bbox=(413.6, 75.5, 624.0, 245.3), bottom_center=(518.8, 245.3), normalized_bottom_center=(0.831402, 0.575748), predicted=True
+Frame received: camera=cam2, frame=398
+Object detected: camera=cam2, frame=398, type=Car, track=3, bbox=(418.4, 76.4, 624.0, 243.4), bottom_center=(521.2, 243.4), normalized_bottom_center=(0.835246, 0.571460), predicted=False
+Frame received: camera=cam2, frame=399
+Object detected: camera=cam2, frame=399, type=Car, track=3, bbox=(421.9, 77.1, 624.0, 244.4), bottom_center=(523.0, 244.4), normalized_bottom_center=(0.838064, 0.573694), predicted=True
+Frame received: camera=cam2, frame=400
+Object detected: camera=cam2, frame=400, type=Car, track=3, bbox=(425.5, 78.1, 624.0, 245.2), bottom_center=(524.7, 245.2), normalized_bottom_center=(0.840931, 0.575595), predicted=True
+Frame received: camera=cam2, frame=401
+Object detected: camera=cam2, frame=401, type=Car, track=3, bbox=(426.1, 78.3, 624.0, 245.1), bottom_center=(525.1, 245.1), normalized_bottom_center=(0.841428, 0.575293), predicted=False
+Frame received: camera=cam2, frame=402
+Object detected: camera=cam2, frame=402, type=Car, track=3, bbox=(429.5, 78.9, 624.0, 246.2), bottom_center=(526.8, 246.2), normalized_bottom_center=(0.844155, 0.577914), predicted=True
+Frame received: camera=cam2, frame=403
+Object detected: camera=cam2, frame=403, type=Car, track=3, bbox=(436.5, 80.3, 624.0, 248.5), bottom_center=(530.3, 248.5), normalized_bottom_center=(0.849765, 0.583316), predicted=True
+Frame received: camera=cam2, frame=404
+Object detected: camera=cam2, frame=404, type=Car, track=3, bbox=(434.2, 81.4, 624.0, 248.4), bottom_center=(529.1, 248.4), normalized_bottom_center=(0.847951, 0.583178), predicted=False
+Frame received: camera=cam2, frame=405
+Object detected: camera=cam2, frame=405, type=Car, track=3, bbox=(437.7, 82.2, 624.0, 249.4), bottom_center=(530.9, 249.4), normalized_bottom_center=(0.850754, 0.585460), predicted=True
+Frame received: camera=cam2, frame=406
+Object detected: camera=cam2, frame=406, type=Car, track=3, bbox=(441.3, 83.1, 624.0, 250.2), bottom_center=(532.7, 250.2), normalized_bottom_center=(0.853629, 0.587241), predicted=True
+Frame received: camera=cam2, frame=407
+Object detected: camera=cam2, frame=407, type=Car, track=3, bbox=(443.0, 83.6, 624.0, 247.5), bottom_center=(533.5, 247.5), normalized_bottom_center=(0.854974, 0.580990), predicted=False
+Frame received: camera=cam2, frame=408
+Object detected: camera=cam2, frame=408, type=Car, track=3, bbox=(450.3, 85.6, 624.0, 249.1), bottom_center=(537.1, 249.1), normalized_bottom_center=(0.860810, 0.584814), predicted=True
+Frame received: camera=cam2, frame=409
+Object detected: camera=cam2, frame=409, type=Car, track=3, bbox=(454.0, 86.6, 624.0, 249.8), bottom_center=(539.0, 249.8), normalized_bottom_center=(0.863799, 0.586478), predicted=True
+Frame received: camera=cam2, frame=410
+Object detected: camera=cam2, frame=410, type=Car, track=3, bbox=(458.3, 86.4, 624.0, 237.8), bottom_center=(541.1, 237.8), normalized_bottom_center=(0.867196, 0.558176), predicted=False
+Frame received: camera=cam2, frame=411
+Object detected: camera=cam2, frame=411, type=Car, track=3, bbox=(461.9, 87.4, 624.0, 238.7), bottom_center=(542.9, 238.7), normalized_bottom_center=(0.870102, 0.560373), predicted=True
+Frame received: camera=cam2, frame=412
+Object detected: camera=cam2, frame=412, type=Car, track=3, bbox=(465.5, 88.4, 624.0, 239.6), bottom_center=(544.7, 239.6), normalized_bottom_center=(0.872963, 0.562472), predicted=True
+Frame received: camera=cam2, frame=413
+Object detected: camera=cam2, frame=413, type=Car, track=3, bbox=(471.5, 88.3, 624.0, 230.8), bottom_center=(547.7, 230.8), normalized_bottom_center=(0.877789, 0.541739), predicted=False
+Frame received: camera=cam2, frame=414
+Object detected: camera=cam2, frame=414, type=Car, track=3, bbox=(475.1, 89.2, 624.0, 231.4), bottom_center=(549.5, 231.4), normalized_bottom_center=(0.880686, 0.543283), predicted=True
+Frame received: camera=cam2, frame=415
+Object detected: camera=cam2, frame=415, type=Car, track=3, bbox=(482.2, 91.1, 624.0, 232.9), bottom_center=(553.1, 232.9), normalized_bottom_center=(0.886374, 0.546821), predicted=True
+Frame received: camera=cam2, frame=416
+Object detected: camera=cam2, frame=416, type=Car, track=3, bbox=(483.3, 92.1, 624.0, 228.3), bottom_center=(553.7, 228.3), normalized_bottom_center=(0.887295, 0.535870), predicted=False
+Frame received: camera=cam2, frame=417
+Object detected: camera=cam2, frame=417, type=Car, track=3, bbox=(486.9, 93.0, 624.0, 228.9), bottom_center=(555.4, 228.9), normalized_bottom_center=(0.890143, 0.537394), predicted=True
+Frame received: camera=cam2, frame=418
+Object detected: camera=cam2, frame=418, type=Car, track=3, bbox=(493.9, 95.1, 624.0, 230.6), bottom_center=(559.0, 230.6), normalized_bottom_center=(0.895771, 0.541269), predicted=True
+Frame received: camera=cam2, frame=419
+Object detected: camera=cam2, frame=419, type=Car, track=3, bbox=(491.7, 94.2, 624.0, 227.8), bottom_center=(557.8, 227.8), normalized_bottom_center=(0.893954, 0.534857), predicted=False
+Frame received: camera=cam2, frame=420
+Object detected: camera=cam2, frame=420, type=Car, track=3, bbox=(498.6, 96.2, 624.0, 229.7), bottom_center=(561.3, 229.7), normalized_bottom_center=(0.899494, 0.539103), predicted=True
+Frame received: camera=cam2, frame=421
+Object detected: camera=cam2, frame=421, type=Car, track=3, bbox=(502.1, 97.3, 624.0, 230.4), bottom_center=(563.1, 230.4), normalized_bottom_center=(0.902325, 0.540914), predicted=True
+Frame received: camera=cam2, frame=422
+Object detected: camera=cam2, frame=422, type=Car, track=3, bbox=(501.2, 97.4, 624.0, 229.7), bottom_center=(562.6, 229.7), normalized_bottom_center=(0.901567, 0.539203), predicted=False
+Frame received: camera=cam2, frame=423
+Object detected: camera=cam2, frame=423, type=Car, track=3, bbox=(504.8, 98.7, 624.0, 230.4), bottom_center=(564.4, 230.4), normalized_bottom_center=(0.904451, 0.540947), predicted=True
+Frame received: camera=cam2, frame=424
+Object detected: camera=cam2, frame=424, type=Car, track=3, bbox=(508.3, 99.7, 624.0, 231.2), bottom_center=(566.1, 231.2), normalized_bottom_center=(0.907260, 0.542638), predicted=True
+Frame received: camera=cam2, frame=425
+Object detected: camera=cam2, frame=425, type=Car, track=3, bbox=(511.3, 100.2, 624.0, 231.2), bottom_center=(567.7, 231.2), normalized_bottom_center=(0.909728, 0.542809), predicted=False
+Frame received: camera=cam2, frame=426
+Object detected: camera=cam2, frame=426, type=Car, track=3, bbox=(514.8, 101.1, 624.0, 231.8), bottom_center=(569.4, 231.8), normalized_bottom_center=(0.912485, 0.544218), predicted=True
+Frame received: camera=cam2, frame=427
+Object detected: camera=cam2, frame=427, type=Car, track=3, bbox=(518.3, 102.2, 624.0, 232.5), bottom_center=(571.1, 232.5), normalized_bottom_center=(0.915297, 0.545757), predicted=True
+Frame received: camera=cam2, frame=428
+Object detected: camera=cam2, frame=428, type=Car, track=3, bbox=(519.7, 102.9, 624.0, 233.3), bottom_center=(571.8, 233.3), normalized_bottom_center=(0.916389, 0.547662), predicted=False
+Frame received: camera=cam2, frame=429
+Object detected: camera=cam2, frame=429, type=Car, track=3, bbox=(523.2, 103.9, 624.0, 233.8), bottom_center=(573.6, 233.8), normalized_bottom_center=(0.919242, 0.548765), predicted=True
+Frame received: camera=cam2, frame=430
+Object detected: camera=cam2, frame=430, type=Car, track=3, bbox=(526.7, 104.8, 624.0, 234.2), bottom_center=(575.3, 234.2), normalized_bottom_center=(0.922005, 0.549879), predicted=True
+Frame received: camera=cam2, frame=431
+Object detected: camera=cam2, frame=431, type=Car, track=3, bbox=(528.3, 105.5, 624.0, 238.5), bottom_center=(576.2, 238.5), normalized_bottom_center=(0.923326, 0.559921), predicted=False
+Frame received: camera=cam2, frame=432
+Object detected: camera=cam2, frame=432, type=Car, track=3, bbox=(531.6, 106.3, 624.0, 239.3), bottom_center=(577.8, 239.3), normalized_bottom_center=(0.925938, 0.561708), predicted=True
+Frame received: camera=cam2, frame=433
+Object detected: camera=cam2, frame=433, type=Car, track=3, bbox=(534.9, 107.5, 624.0, 239.8), bottom_center=(579.5, 239.8), normalized_bottom_center=(0.928632, 0.562822), predicted=True
+Frame received: camera=cam2, frame=434
+Object detected: camera=cam2, frame=434, type=Car, track=3, bbox=(529.6, 108.0, 624.0, 259.1), bottom_center=(576.8, 259.1), normalized_bottom_center=(0.924329, 0.608182), predicted=False
+Frame received: camera=cam2, frame=435
+Object detected: camera=cam2, frame=435, type=Car, track=3, bbox=(532.3, 108.5, 624.0, 259.6), bottom_center=(578.2, 259.6), normalized_bottom_center=(0.926548, 0.609450), predicted=True
+Frame received: camera=cam2, frame=436
+Object detected: camera=cam2, frame=436, type=Car, track=3, bbox=(539.0, 110.7, 624.0, 260.2), bottom_center=(581.5, 260.2), normalized_bottom_center=(0.931899, 0.610901), predicted=True
+Frame received: camera=cam2, frame=437
+Object detected: camera=cam2, frame=437, type=Car, track=3, bbox=(540.3, 110.2, 624.0, 259.3), bottom_center=(582.2, 259.3), normalized_bottom_center=(0.932937, 0.608626), predicted=False
+Frame received: camera=cam2, frame=438
+Object detected: camera=cam2, frame=438, type=Car, track=3, bbox=(543.6, 111.3, 624.0, 259.6), bottom_center=(583.8, 259.6), normalized_bottom_center=(0.935608, 0.609410), predicted=True
+Frame received: camera=cam2, frame=439
+Object detected: camera=cam2, frame=439, type=Car, track=3, bbox=(549.7, 112.7, 624.0, 261.0), bottom_center=(586.8, 261.0), normalized_bottom_center=(0.940438, 0.612668), predicted=True
+Frame received: camera=cam2, frame=442
+Frame received: camera=cam2, frame=444
+Frame received: camera=cam2, frame=445
+Frame received: camera=cam2, frame=446
+Frame received: camera=cam2, frame=448
+Frame received: camera=cam2, frame=449
+Frame received: camera=cam2, frame=450
+Frame received: camera=cam2, frame=451
+Frame received: camera=cam2, frame=453
+Frame received: camera=cam2, frame=454
+Frame received: camera=cam2, frame=456
+Frame received: camera=cam2, frame=457
+Frame received: camera=cam2, frame=458
+Frame received: camera=cam2, frame=460
+Frame received: camera=cam2, frame=462
+Frame received: camera=cam2, frame=463
+Frame received: camera=cam2, frame=464
+Frame received: camera=cam2, frame=465
+Frame received: camera=cam2, frame=466
+Frame received: camera=cam2, frame=467
+Frame received: camera=cam2, frame=469
+Frame received: camera=cam2, frame=471
+Frame received: camera=cam2, frame=472
+Frame received: camera=cam2, frame=473
+Frame received: camera=cam2, frame=474
+Frame received: camera=cam2, frame=475
+Frame received: camera=cam2, frame=476
+Frame received: camera=cam2, frame=478
+Frame received: camera=cam2, frame=480
+Frame received: camera=cam2, frame=481
+Frame received: camera=cam2, frame=482
+Frame received: camera=cam2, frame=484

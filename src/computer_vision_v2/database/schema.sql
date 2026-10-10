@@ -37,7 +37,7 @@ CREATE TABLE event (
     event_type TEXT NOT NULL,
     confidence NUMERIC(4, 3) NOT NULL,
     image_path TEXT,
-    captured_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    captured_at TIMESTAMPTZ NOT NULL,
     class_id INTEGER NOT NULL DEFAULT 2,
 
     FOREIGN KEY (camera_id) REFERENCES camera(id),
@@ -56,7 +56,7 @@ CREATE TABLE vehicle_session (
     exit_event_id BIGINT,
 
     status TEXT NOT NULL DEFAULT 'open',
-    opened_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    opened_at TIMESTAMPTZ NOT NULL,
     closed_at TIMESTAMPTZ,
 
     FOREIGN KEY (plate_number) REFERENCES vehicle(plate_number),

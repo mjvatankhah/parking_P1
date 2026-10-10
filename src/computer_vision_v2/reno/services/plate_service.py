@@ -62,6 +62,7 @@ class PlateService:
                 rows = cursor.fetchall()
         records = []
         for plate, captured_at, camera_id, direction, class_id, image_path in rows:
+            captured_at = captured_at.astimezone()
             if image_path:
                 path = Path(image_path)
                 image_path = str(path if path.is_absolute() else _PROJECT_ROOT / path)

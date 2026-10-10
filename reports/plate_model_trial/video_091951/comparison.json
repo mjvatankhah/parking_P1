@@ -1,0 +1,50 @@
+{
+  "video": "/home/MJR/parking_P1/src/computer_vision_v2/video/MyRecord_20261010091951.mp4",
+  "decoded_frames": 484,
+  "expected_frames": 484,
+  "metadata_frames": 485,
+  "models": {
+    "baseline": {
+      "path": "/home/MJR/parking_P1/src/computer_vision_v2/ocr_worker/models/plate_yolo.platrix-backup.onnx",
+      "sha256": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6"
+    },
+    "candidate": {
+      "path": "/home/MJR/parking_P1/src/computer_vision_v2/ocr_worker/models/plate_yolo_yolov8m.onnx",
+      "sha256": "2840415ec21286d94d2b715a29a1658716ddc30cbf31b5cff43d662013f22e18"
+    }
+  },
+  "comparisons": [
+    {
+      "input": "/home/MJR/parking_P1/reports/plate_model_trial/video_091951/vehicle_1.png",
+      "shape": [
+        126,
+        144,
+        3
+      ],
+      "baseline": {
+        "plate_text": null,
+        "confidence": 0.0,
+        "image_path": null,
+        "elapsed_seconds": 0.9154020890000538
+      },
+      "candidate": {
+        "plate_text": null,
+        "confidence": 0.0,
+        "image_path": null,
+        "elapsed_seconds": 7.320161105999887
+      }
+    }
+  ],
+  "crossing_events_before_recognition": [
+    {
+      "camera_id": "cam2",
+      "track_id": 3,
+      "class_id": 2,
+      "direction": "entry",
+      "plate_text": null,
+      "confidence": 0.9076424837112427,
+      "image_path": null
+    }
+  ],
+  "database_writes": false
+}
