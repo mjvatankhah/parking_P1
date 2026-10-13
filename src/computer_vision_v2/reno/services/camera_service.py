@@ -99,6 +99,8 @@ class CameraService:
     def update_camera(self, camera: Camera) -> None:
         for index, existing in enumerate(self._cameras):
             if existing.id == camera.id:
+                if camera.lines is None:
+                    camera.lines = existing.lines
                 self._cameras[index] = camera
                 break
         self._save()

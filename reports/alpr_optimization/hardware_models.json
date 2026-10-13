@@ -1,0 +1,162 @@
+{
+  "cpu": "Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz",
+  "cores_available": 4,
+  "avx2": false,
+  "avx": true,
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "memory_snapshot": "MemTotal:        3947796 kB\nMemFree:          176460 kB\nMemAvailable:    1005324 kB\nBuffers:           11084 kB\nCached:           949788 kB\nSwapCached:        49948 kB\nActive:          1377384 kB\nInactive:        1991152 kB\nActive(anon):     618440 kB\nInactive(anon):  1830672 kB\nActive(file):     758944 kB\nInactive(file):   160480 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:       1048576 kB\nSwapFree:              0 kB\nDirty:               284 kB\nWriteback:             0 kB\nAnonPages:       2356108 kB\nMapped:           252272 kB\nShmem:             41404 kB\nKReclaimable:      67328 kB\nSlab:             114816 kB\nSReclaimable:      67328 kB\nSUnreclaim:        47488 kB\nKernelStack:        6848 kB\nPageTables:        53640 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     3022472 kB\nCommitted_AS:    7815504 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       32108 kB\nVmallocChunk:          0 kB\nPercpu:             1600 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:    126976 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:     14336 kB\nFilePmdMapped:      4096 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:       35840 kB\nDirectMap2M:    12480512 kB\n",
+  "dri_available": false,
+  "versions": {
+    "onnxruntime": "1.29.0",
+    "openvino": "2026.4.0",
+    "ultralytics": "8.4.135",
+    "torch": "2.13.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "models": [
+    {
+      "path": "src/computer_vision_v2/ocr_worker/models/plate_yolo.onnx",
+      "sha256": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6",
+      "bytes": 12608775,
+      "initializer_elements": 3005875,
+      "metadata": {
+        "description": "Ultralytics best model trained on /tmp/plate_yolo2/data.yaml",
+        "author": "Ultralytics",
+        "date": "2026-07-24T22:40:27.029548",
+        "version": "8.4.104",
+        "license": "AGPL-3.0 License (https://ultralytics.com/license)",
+        "docs": "https://docs.ultralytics.com",
+        "stride": "32",
+        "task": "detect",
+        "head": "Detect",
+        "batch": "1",
+        "imgsz": "[320, 320]",
+        "names": "{0: 'plate'}",
+        "args": "{'data': None, 'batch': 1, 'fraction': 1.0, 'quantize': None, 'dynamic': True, 'simplify': True, 'opset': None, 'nms': False}",
+        "channels": "3",
+        "end2end": "False"
+      },
+      "io": [
+        {
+          "images": [
+            "batch",
+            3,
+            "height",
+            "width"
+          ]
+        },
+        {
+          "output0": [
+            "batch",
+            5,
+            "anchors"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/computer_vision_v2/ocr_worker/models/plate_yolo_fallback.onnx",
+      "sha256": "a6974fcb0a79755c270d50f1ebefd4d96d765c879a29051a19aac00dfda8b5af",
+      "bytes": 12265080,
+      "initializer_elements": 3047873,
+      "metadata": {
+        "description": "Ultralytics best model trained on /root/det_ds2/data.yaml",
+        "author": "Ultralytics",
+        "date": "2026-07-25T14:31:20.583533",
+        "version": "8.4.104",
+        "license": "AGPL-3.0 License (https://ultralytics.com/license)",
+        "docs": "https://docs.ultralytics.com",
+        "stride": "32",
+        "task": "detect",
+        "head": "Detect",
+        "batch": "1",
+        "imgsz": "[640, 640]",
+        "names": "{0: 'licence'}",
+        "args": "{'data': None, 'batch': 1, 'fraction': 1.0, 'quantize': None, 'dynamic': False, 'simplify': True, 'opset': 13, 'nms': False}",
+        "channels": "3",
+        "end2end": "False"
+      },
+      "io": [
+        {
+          "images": [
+            1,
+            3,
+            640,
+            640
+          ]
+        },
+        {
+          "output0": [
+            1,
+            5,
+            8400
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/computer_vision_v2/ocr_worker/models/plate_yolo_yolov8m.onnx",
+      "sha256": "2840415ec21286d94d2b715a29a1658716ddc30cbf31b5cff43d662013f22e18",
+      "bytes": 103590133,
+      "initializer_elements": 25840339,
+      "metadata": {
+        "description": "Ultralytics YOLOv8m_Iran_license_plate_detection model trained on /home/shalchianmh/Documents/CV/Iran_veichle_plate/plate_detection_dataset/data.yaml",
+        "author": "Ultralytics",
+        "date": "2026-10-10T12:37:24.923335+03:30",
+        "version": "8.4.135",
+        "license": "AGPL-3.0 License (https://ultralytics.com/license)",
+        "docs": "https://docs.ultralytics.com",
+        "stride": "32",
+        "task": "detect",
+        "head": "Detect",
+        "batch": "1",
+        "imgsz": "[640, 640]",
+        "names": "{0: 'L'}",
+        "args": "{'data': None, 'batch': 1, 'fraction': 1.0, 'quantize': None, 'dynamic': False, 'simplify': False, 'opset': 17, 'nms': False}",
+        "channels": "3",
+        "end2end": "False"
+      },
+      "io": [
+        {
+          "images": [
+            1,
+            3,
+            640,
+            640
+          ]
+        },
+        {
+          "output0": [
+            1,
+            5,
+            8400
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/computer_vision_v2/ocr_worker/models/ocr_crnn.onnx",
+      "sha256": "45f8c45f29eb1ee91f6274cb8d9c328da1a2050ea7d8596bae61f4a6b9f9fb1e",
+      "bytes": 10452525,
+      "initializer_elements": 2611233,
+      "metadata": {},
+      "io": [
+        {
+          "input": [
+            "batch",
+            1,
+            32,
+            128
+          ]
+        },
+        {
+          "logits": [
+            "batch",
+            31,
+            33
+          ]
+        }
+      ]
+    }
+  ]
+}

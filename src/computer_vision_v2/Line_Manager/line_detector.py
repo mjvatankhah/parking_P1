@@ -19,17 +19,41 @@ def _side(line,point):
 
 class LineDetector:
     def __init__(self,camera_id ,line= None ,direction= None , forget_after= 60.0,
-                 inside_point=None, coordinate_space='pixels'):
+                 inside_point=None, coordinate_space='pixels', lines=None,
+                 reference_side='inside'):
         self.camera_id = camera_id
         if coordinate_space not in ('pixels', 'normalized'):
             raise ValueError(f"Camera {camera_id}: coordinate_space must be pixels or normalized")
         self.coordinate_space = coordinate_space
+        if reference_side not in ('inside', 'outside'):
+            raise ValueError('reference_side must be inside or outside')
         self._segments = None
+        if lines is not None:
+            if len(lines) != 2:
+                raise ValueError('Exactly two independent lines are required')
+            self._segments = []
+            for definition in lines:
+                vertices = definition['line']
+                if len(vertices) != 2:
+                    raise ValueError('Independent lines must have two endpoints')
+                segment = LineDetector(camera_id, vertices,
+                                       definition.get('dir', direction), forget_after,
+                                       definition.get('inside_point', inside_point),
+                                       coordinate_space,
+                                       reference_side=definition.get('reference_side', reference_side))
+                if segment.line is None or segment.line[0] == segment.line[1]:
+                    raise ValueError('Independent lines must have distinct endpoints')
+                segment._finite_segment = True
+                self._segments.append(segment)
+            self.forget_after = forget_after
+            self._poly_seen = {}
+            self._poly_crossed = set()
+            return
         if line and len(line) > 2:
             # Preserve vertex order: sorting would change the shape of the path.
             self._segments = [
                 LineDetector(camera_id, (a, b), direction, forget_after,
-                             inside_point, coordinate_space)
+                             inside_point, coordinate_space, reference_side=reference_side)
                 for a, b in zip(line, line[1:])
             ]
             self.line = tuple(tuple(p) for p in line)
@@ -82,6 +106,8 @@ class LineDetector:
             self._inside_side = _side(self.line, self.inside_point)
             if self._inside_side == 0:
                 raise ValueError(f"Camera {camera_id}: inside_point must not be on the line")
+            if reference_side == 'outside':
+                self._inside_side *= -1
         self.forget_after = forget_after
         self._state = {}
         self._crossed = set()
@@ -183,10 +209,12 @@ class LineDetectorManager:
         for camera in config.get("cameras",[]):
             self.detectors[camera["id"]] = LineDetector(
                 camera_id = camera["id"],
-                line = camera["line"],
+                line = camera.get("line"),
+                lines = camera.get("lines"),
                 direction = camera["dir"],
                 inside_point = camera.get("inside_point"),
                 coordinate_space = camera.get("coordinate_space", "pixels"),
+                reference_side = camera.get('reference_side', 'inside'),
 
             )
 

@@ -10,7 +10,9 @@ from computer_vision_v2.tracking.tracker import CameraTracker
 
 
 logger = logging.getLogger(__name__)
-MAX_READ_FAILURES = 30
+# A failed read can already consume the full five-second timeout.
+# Reopen the stalled decoder immediately rather than retrying the same session.
+MAX_READ_FAILURES = 1
 MAX_RETRY_DELAY = 30
 
 

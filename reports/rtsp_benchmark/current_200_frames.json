@@ -1,0 +1,1423 @@
+{
+  "model": "yolo26n_openvino_model",
+  "detection_interval": 3,
+  "warmup_frames": 10,
+  "requested_frames": 200,
+  "scope": "live RTSP capture and vehicle/person tracking; no plate OCR",
+  "frames": [
+    {
+      "index": 54,
+      "processing_seconds": 0.004945200000292971,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 55,
+      "processing_seconds": 0.06610319900028117,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 56,
+      "processing_seconds": 0.0038568999989365693,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 57,
+      "processing_seconds": 0.0038003999998181826,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 58,
+      "processing_seconds": 0.09260069800075144,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 61,
+      "processing_seconds": 0.0754058989987243,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 63,
+      "processing_seconds": 0.06757579899931443,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 65,
+      "processing_seconds": 0.06627889899937145,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 67,
+      "processing_seconds": 0.0669209999996383,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 69,
+      "processing_seconds": 0.06896349899943743,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 71,
+      "processing_seconds": 0.06490329899861536,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 73,
+      "processing_seconds": 0.0711693990015192,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 75,
+      "processing_seconds": 0.06291599900032452,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 77,
+      "processing_seconds": 0.06533179899997776,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 79,
+      "processing_seconds": 0.06434589899981802,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 81,
+      "processing_seconds": 0.06630979900000966,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 83,
+      "processing_seconds": 0.06551939899873105,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 85,
+      "processing_seconds": 0.06916609899963078,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 87,
+      "processing_seconds": 0.06756669899914414,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 89,
+      "processing_seconds": 0.1244456979984534,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 93,
+      "processing_seconds": 0.06647549900117156,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 95,
+      "processing_seconds": 0.06518279899864865,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 97,
+      "processing_seconds": 0.0624755990011181,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 98,
+      "processing_seconds": 0.004292600000553648,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 99,
+      "processing_seconds": 0.0035207000000809785,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 100,
+      "processing_seconds": 0.0951074989989138,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 102,
+      "processing_seconds": 0.18002029699891864,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 108,
+      "processing_seconds": 0.10857199800011585,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 111,
+      "processing_seconds": 0.06695429899991723,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 113,
+      "processing_seconds": 0.08473279899953923,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 115,
+      "processing_seconds": 0.06657919899953413,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 118,
+      "processing_seconds": 0.10694069899909664,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 121,
+      "processing_seconds": 0.09443669800020871,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 124,
+      "processing_seconds": 0.0763775989998976,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 126,
+      "processing_seconds": 0.07230239900127344,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 128,
+      "processing_seconds": 0.06982519899975159,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 130,
+      "processing_seconds": 0.08440649899966957,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 133,
+      "processing_seconds": 0.11319999800070946,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 136,
+      "processing_seconds": 0.07901469900025404,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 138,
+      "processing_seconds": 0.08828669899958186,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 141,
+      "processing_seconds": 0.07345259900102974,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 143,
+      "processing_seconds": 0.07025099900056375,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 145,
+      "processing_seconds": 0.06702969899924938,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 147,
+      "processing_seconds": 0.08252609900046082,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 150,
+      "processing_seconds": 0.08090939900102967,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 152,
+      "processing_seconds": 0.07465339900045365,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 155,
+      "processing_seconds": 0.06540149899956305,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 156,
+      "processing_seconds": 0.004327099999500206,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 157,
+      "processing_seconds": 0.0035181990006094566,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 158,
+      "processing_seconds": 0.06394349899892404,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 159,
+      "processing_seconds": 0.005333999999493244,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 160,
+      "processing_seconds": 0.0036753999993379693,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 161,
+      "processing_seconds": 0.1469334979992709,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 165,
+      "processing_seconds": 0.1954618970012234,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 171,
+      "processing_seconds": 0.08271159899959457,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 173,
+      "processing_seconds": 0.0926126979993569,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 176,
+      "processing_seconds": 0.08600189900062105,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 179,
+      "processing_seconds": 0.08160959900123999,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 181,
+      "processing_seconds": 0.07277899899963813,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 183,
+      "processing_seconds": 0.07944539900017844,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 186,
+      "processing_seconds": 0.06544069900155591,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 187,
+      "processing_seconds": 0.005208100001254934,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 188,
+      "processing_seconds": 0.00349379999897792,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 189,
+      "processing_seconds": 0.08994559900020249,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 191,
+      "processing_seconds": 0.1220364979999431,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 195,
+      "processing_seconds": 0.06774029900043388,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 197,
+      "processing_seconds": 0.06664399900000717,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 199,
+      "processing_seconds": 0.06460639900069509,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 201,
+      "processing_seconds": 0.06531119900137128,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 203,
+      "processing_seconds": 0.06495279999944614,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 205,
+      "processing_seconds": 0.06493469899942284,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 207,
+      "processing_seconds": 0.06970909899973776,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 209,
+      "processing_seconds": 0.07743619799839507,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 211,
+      "processing_seconds": 0.06361649999962538,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 213,
+      "processing_seconds": 0.06695399900127086,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 215,
+      "processing_seconds": 0.0689970990006259,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 217,
+      "processing_seconds": 0.10644009799943888,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 220,
+      "processing_seconds": 0.06608909900023718,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 222,
+      "processing_seconds": 0.06353829900035635,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 224,
+      "processing_seconds": 0.08193599899823312,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 226,
+      "processing_seconds": 0.06598249900162045,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 229,
+      "processing_seconds": 0.09126349899997876,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 231,
+      "processing_seconds": 0.06570869900133403,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 233,
+      "processing_seconds": 0.06828189900079451,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 235,
+      "processing_seconds": 0.06908409900097467,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 237,
+      "processing_seconds": 0.0976594980002119,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 240,
+      "processing_seconds": 0.09306659899993974,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 243,
+      "processing_seconds": 0.08937759999935224,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 246,
+      "processing_seconds": 0.1413384319985198,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 250,
+      "processing_seconds": 0.1701729600008548,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 255,
+      "processing_seconds": 0.08101887600059854,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 258,
+      "processing_seconds": 0.07857327399869973,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 260,
+      "processing_seconds": 0.08372887800032913,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 263,
+      "processing_seconds": 0.07647847199950775,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 265,
+      "processing_seconds": 0.08002467500045896,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 267,
+      "processing_seconds": 0.09351608800170652,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 270,
+      "processing_seconds": 0.08477958000003127,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 273,
+      "processing_seconds": 0.08095017600135179,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 275,
+      "processing_seconds": 0.07824117299969657,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 277,
+      "processing_seconds": 0.0764015719996678,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 280,
+      "processing_seconds": 0.0724311679987295,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 282,
+      "processing_seconds": 0.14658503700047731,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 286,
+      "processing_seconds": 0.13073162200089428,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 290,
+      "processing_seconds": 0.16840815800060227,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 295,
+      "processing_seconds": 0.12537251799949445,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 299,
+      "processing_seconds": 0.09927479299949482,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 302,
+      "processing_seconds": 0.08918108400030178,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 305,
+      "processing_seconds": 0.07370856899979117,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 307,
+      "processing_seconds": 0.0743872700004431,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 309,
+      "processing_seconds": 0.07442046999858576,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 311,
+      "processing_seconds": 0.08695988100043905,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 314,
+      "processing_seconds": 0.08004637500016543,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 316,
+      "processing_seconds": 0.07280176899985236,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 318,
+      "processing_seconds": 0.08686178099924291,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 321,
+      "processing_seconds": 0.07958777500061842,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 323,
+      "processing_seconds": 0.0656618620014342,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 325,
+      "processing_seconds": 0.06486376099928748,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 327,
+      "processing_seconds": 0.07723687199904816,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 330,
+      "processing_seconds": 0.06747666299997945,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 331,
+      "processing_seconds": 0.003786803999901167,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 332,
+      "processing_seconds": 0.003402103000553325,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 333,
+      "processing_seconds": 0.06617116199959128,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 334,
+      "processing_seconds": 0.003927302999727544,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 335,
+      "processing_seconds": 0.003616003999923123,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 336,
+      "processing_seconds": 0.06484366100085026,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 337,
+      "processing_seconds": 0.005477605000123731,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 338,
+      "processing_seconds": 0.0034758029996737605,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 339,
+      "processing_seconds": 0.08246867799971369,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 341,
+      "processing_seconds": 0.09800719200029562,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 344,
+      "processing_seconds": 0.08069297499969252,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 346,
+      "processing_seconds": 0.0821900770006323,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 349,
+      "processing_seconds": 0.06565966199923423,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 351,
+      "processing_seconds": 0.07272066800032917,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 353,
+      "processing_seconds": 0.09161258600033761,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 356,
+      "processing_seconds": 0.08991278500070621,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 358,
+      "processing_seconds": 0.08850878300108889,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 361,
+      "processing_seconds": 0.08397747900016839,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 363,
+      "processing_seconds": 0.07855247300176416,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 366,
+      "processing_seconds": 0.07416867000029015,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 368,
+      "processing_seconds": 0.09093098499943153,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 371,
+      "processing_seconds": 0.07914937500027008,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 373,
+      "processing_seconds": 0.08138667599996552,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 376,
+      "processing_seconds": 0.07373906899920257,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 378,
+      "processing_seconds": 0.07109156699880259,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 380,
+      "processing_seconds": 0.07154706700021052,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 382,
+      "processing_seconds": 0.06404305999967619,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 384,
+      "processing_seconds": 0.06272985900068306,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 386,
+      "processing_seconds": 0.06601526200029184,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 388,
+      "processing_seconds": 0.0817509769985918,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 390,
+      "processing_seconds": 0.06703566299984232,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 392,
+      "processing_seconds": 0.0776957729995047,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 395,
+      "processing_seconds": 0.2846078669990675,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 403,
+      "processing_seconds": 0.07004866600073001,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 405,
+      "processing_seconds": 0.10259799599953112,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 409,
+      "processing_seconds": 0.06763866299843357,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 410,
+      "processing_seconds": 0.0056328059999941615,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 411,
+      "processing_seconds": 0.004649604999940493,
+      "yolo": 0,
+      "flow": 1,
+      "fallback": 0
+    },
+    {
+      "index": 412,
+      "processing_seconds": 0.07534807000047294,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 414,
+      "processing_seconds": 0.07029736600088654,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 416,
+      "processing_seconds": 0.0820126770013303,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 418,
+      "processing_seconds": 0.09322570400036057,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 421,
+      "processing_seconds": 0.08423400400170067,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 424,
+      "processing_seconds": 0.10079310400033137,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 427,
+      "processing_seconds": 0.07066670299900579,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 429,
+      "processing_seconds": 0.07479830299962487,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 431,
+      "processing_seconds": 0.06753200300045137,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 433,
+      "processing_seconds": 0.0823866030004865,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 435,
+      "processing_seconds": 0.06835720299932291,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 437,
+      "processing_seconds": 0.11130890499953239,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 441,
+      "processing_seconds": 0.07145680199937487,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 443,
+      "processing_seconds": 0.11153360499884002,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 446,
+      "processing_seconds": 0.07830130299953453,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 449,
+      "processing_seconds": 0.08232400400083861,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 451,
+      "processing_seconds": 0.07918280300145852,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 454,
+      "processing_seconds": 0.06406930299999658,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 456,
+      "processing_seconds": 0.08926380299999437,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 458,
+      "processing_seconds": 0.10411020500032464,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 461,
+      "processing_seconds": 0.07349470299959648,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 464,
+      "processing_seconds": 0.08989610299977357,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 466,
+      "processing_seconds": 0.06884710300073493,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 468,
+      "processing_seconds": 0.09732990399970731,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 471,
+      "processing_seconds": 0.07044570299876796,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 473,
+      "processing_seconds": 0.07786970300003304,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 476,
+      "processing_seconds": 0.07705450300090888,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 478,
+      "processing_seconds": 0.08618010399914056,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 481,
+      "processing_seconds": 0.06884420300048077,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 483,
+      "processing_seconds": 0.09010560399838141,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 485,
+      "processing_seconds": 0.07575572799942165,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 488,
+      "processing_seconds": 0.09894427600011113,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 491,
+      "processing_seconds": 0.0692915930012532,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 493,
+      "processing_seconds": 0.08615084000120987,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 495,
+      "processing_seconds": 0.0844769350005663,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 498,
+      "processing_seconds": 0.07334220399934566,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 500,
+      "processing_seconds": 0.11552962099995057,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 503,
+      "processing_seconds": 0.08079112500126939,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 506,
+      "processing_seconds": 0.06777638899984595,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 508,
+      "processing_seconds": 0.08364193300076295,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 510,
+      "processing_seconds": 0.06852309100031562,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 513,
+      "processing_seconds": 0.07312370300132898,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    },
+    {
+      "index": 515,
+      "processing_seconds": 0.0702043950004736,
+      "yolo": 1,
+      "flow": 0,
+      "fallback": 0
+    }
+  ],
+  "input_wh": [
+    704,
+    480
+  ],
+  "processed_frames": 200,
+  "seconds": 15.44172682899989,
+  "complete": true,
+  "processing_fps": 12.951919316717595,
+  "captured_frames": 463,
+  "yolo": 181,
+  "flow": 19,
+  "fallback": 0,
+  "mean_processing_ms": 75.9018432150242,
+  "median_processing_ms": 74.40386999951443
+}

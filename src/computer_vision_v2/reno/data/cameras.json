@@ -1,35 +1,69 @@
-
 {
-  "model_path": "yolov8n.pt",
+  "model_path": "yolo26n_openvino_model",
   "detection_interval": 3,
-
   "cameras": [
     {
       "id": "cam2",
       "type": "rtsp",
-      "source": "rtsp://User1:SADgk%401133@172.16.254.8:554/cam/realmonitor?channel=1&subtype=1",
+      "source": "src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
       "line": [
         [
           0.19,
           0.92
         ],
         [
-          0.90,
+          0.9,
           0.73
         ],
         [
           0.69,
           0.29
-          
-
         ]
       ],
       "dir": "entry_exit",
       "inside_point": [
         0.97,
-        0.80
-      ] ,
-      "coordinate_space": "normalized"
+        0.8
+      ],
+      "coordinate_space": "normalized",
+      "lines": [
+        {
+          "line": [
+            [
+              0.102083,
+              0.387963
+            ],
+            [
+              0.381771,
+              0.287037
+            ]
+          ],
+          "inside_point": [
+            0.841146,
+            0.442593
+          ],
+          "reference_side": "inside",
+          "dir": "entry_exit"
+        },
+        {
+          "line": [
+            [
+              0.489063,
+              0.262963
+            ],
+            [
+              0.947917,
+              0.984259
+            ]
+          ],
+          "inside_point": [
+            0.841146,
+            0.442593
+          ],
+          "reference_side": "inside",
+          "dir": "entry_exit"
+        }
+      ]
     }
   ]
 }

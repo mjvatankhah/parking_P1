@@ -39,9 +39,13 @@ Config.set("graphics", "width", "1200")
 Config.set("graphics", "height", "780")
 Config.set("graphics", "minimum_width", "1000")
 Config.set("graphics", "minimum_height", "650")
-# Draw the desktop chrome ourselves.  AppHeader provides the minimize,
-# maximize and close buttons on every screen.
-Config.set("graphics", "borderless", "1")
+# Let the desktop window manager handle dragging, resizing and window controls.
+# A borderless window has no draggable title bar and can lose desktop controls
+# under WSLg. Override saved Kivy settings before the window is created.
+Config.set("graphics", "borderless", "0")
+Config.set("graphics", "custom_titlebar", "0")
+Config.set("graphics", "fullscreen", "0")
+Config.set("graphics", "resizable", "1")
 
 # Kivy's mouse input provider simulates a second touch point on
 # right-click (and right-click-drag) by default, drawn as a red dot -

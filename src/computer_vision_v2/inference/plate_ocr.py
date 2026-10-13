@@ -13,9 +13,16 @@ DEFAULT_DETECTOR = MODEL_DIR / "plate_yolo.onnx"
 DEFAULT_FALLBACK = MODEL_DIR / "plate_yolo_fallback.onnx"
 DEFAULT_OCR = MODEL_DIR / "ocr_crnn.onnx"
 DEFAULT_LABELS = MODEL_DIR / "ocr_crnn.labels.json"
-# منطق پشت این کد بررسی شود
-def _session(path):
-    return ort.InferenceSession(str(path), providers=["CPUExecutionProvider"])
+def _session(path, intra_op_num_threads=0):
+    options = ort.SessionOptions()
+    if intra_op_num_threads is not None:
+        # OCR and detection share the CPU with capture and vehicle tracking.
+        # Sleeping workers avoid competing with those stages between reads.
+        options.intra_op_num_threads = intra_op_num_threads
+        options.add_session_config_entry("session.intra_op.allow_spinning", "0")
+        options.add_session_config_entry("session.inter_op.allow_spinning", "0")
+    return ort.InferenceSession(str(path), sess_options=options,
+                                providers=["CPUExecutionProvider"])
 
 def _letterbox(image, size=640):
     h , w = image.shape[:2]
@@ -52,17 +59,25 @@ class PlateReader:
                 ocr_path=DEFAULT_OCR,
                 labels_path =DEFAULT_LABELS,
                 fallback_detector_path=DEFAULT_FALLBACK,
-                conf_thr=0.35
+                conf_thr=0.35,
+                *, intra_op_num_threads=0,
     ):
+        # 0 keeps automatic thread count; None also restores default spinning.
+        if intra_op_num_threads is not None and (
+            isinstance(intra_op_num_threads, bool)
+            or not isinstance(intra_op_num_threads, int)
+            or intra_op_num_threads < 0
+        ):
+            raise ValueError("intra_op_num_threads must be a non-negative integer or None")
         self.conf_thr = conf_thr
 
         # اماده کردن مدل ها
         try:
-            self.detector = _session(detector_path)
+            self.detector = _session(detector_path, intra_op_num_threads)
         except Exception:
-            self.detector = _session(fallback_detector_path)
+            self.detector = _session(fallback_detector_path, intra_op_num_threads)
 
-        self.ocr = _session(ocr_path)
+        self.ocr = _session(ocr_path, intra_op_num_threads)
         
 
         self.det_input = self.detector.get_inputs()[0].name

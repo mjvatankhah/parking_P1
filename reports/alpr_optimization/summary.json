@@ -1,0 +1,169 @@
+{
+  "sources": [
+    "runtime.json",
+    "runtime_completion.json"
+  ],
+  "note": "First run interrupted after round2/default; remaining three configurations completed in separate process. Timing variation substantial.",
+  "aggregates": [
+    {
+      "model": "detector",
+      "size": 640,
+      "threads": "default",
+      "n": 18,
+      "median_ms": 885.117098999217,
+      "p95_ms": 1852.3385041509746,
+      "cpu_ms_per_input": 1546.7525777777778,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 640,
+      "threads": "1",
+      "n": 18,
+      "median_ms": 501.75249650055775,
+      "p95_ms": 1041.536173949589,
+      "cpu_ms_per_input": 417.91675555555594,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 640,
+      "threads": "2",
+      "n": 18,
+      "median_ms": 520.8781100000124,
+      "p95_ms": 1160.970865099807,
+      "cpu_ms_per_input": 548.8163722222221,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 640,
+      "threads": "4",
+      "n": 18,
+      "median_ms": 473.6760880005022,
+      "p95_ms": 804.8870647494365,
+      "cpu_ms_per_input": 557.1746611111109,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 416,
+      "threads": "default",
+      "n": 18,
+      "median_ms": 301.8205684993518,
+      "p95_ms": 427.03542385106624,
+      "cpu_ms_per_input": 563.1171166666672,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 416,
+      "threads": "1",
+      "n": 18,
+      "median_ms": 197.77943000099185,
+      "p95_ms": 298.3260695997158,
+      "cpu_ms_per_input": 170.10503888888908,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 416,
+      "threads": "2",
+      "n": 18,
+      "median_ms": 218.67213749919756,
+      "p95_ms": 313.646530400183,
+      "cpu_ms_per_input": 201.20664444444446,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 416,
+      "threads": "4",
+      "n": 18,
+      "median_ms": 257.9418559998885,
+      "p95_ms": 429.6238390990765,
+      "cpu_ms_per_input": 243.18949444444428,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 320,
+      "threads": "default",
+      "n": 18,
+      "median_ms": 243.3876329996565,
+      "p95_ms": 582.5126664494745,
+      "cpu_ms_per_input": 466.17086111111064,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 320,
+      "threads": "1",
+      "n": 18,
+      "median_ms": 123.38570000065374,
+      "p95_ms": 217.26136295083046,
+      "cpu_ms_per_input": 99.99475000000001,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 320,
+      "threads": "2",
+      "n": 18,
+      "median_ms": 118.52164800075116,
+      "p95_ms": 218.7386582003455,
+      "cpu_ms_per_input": 123.71933333333345,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "detector",
+      "size": 320,
+      "threads": "4",
+      "n": 18,
+      "median_ms": 128.33809849962563,
+      "p95_ms": 234.8078909000833,
+      "cpu_ms_per_input": 133.3445388888891,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "ocr",
+      "size": 128,
+      "threads": "default",
+      "n": 96,
+      "median_ms": 49.2122189989459,
+      "p95_ms": 108.093242749419,
+      "cpu_ms_per_input": 96.64731666666664,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "ocr",
+      "size": 128,
+      "threads": "1",
+      "n": 96,
+      "median_ms": 37.01126450050651,
+      "p95_ms": 101.54784075029966,
+      "cpu_ms_per_input": 31.543759375000075,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "ocr",
+      "size": 128,
+      "threads": "2",
+      "n": 96,
+      "median_ms": 38.29456499988737,
+      "p95_ms": 81.85680824999508,
+      "cpu_ms_per_input": 43.572585416666584,
+      "max_abs_difference": 0.0
+    },
+    {
+      "model": "ocr",
+      "size": 128,
+      "threads": "4",
+      "n": 96,
+      "median_ms": 34.544514999652165,
+      "p95_ms": 101.10794249931132,
+      "cpu_ms_per_input": 44.417327083333305,
+      "max_abs_difference": 0.0
+    }
+  ]
+}

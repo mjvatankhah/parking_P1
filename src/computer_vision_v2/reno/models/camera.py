@@ -68,6 +68,8 @@ class Camera:
     line: list = field(default_factory=lambda: [[0.2, 0.6], [0.8, 0.6]])
     inside_point: list | None = None
     coordinate_space: str = "normalized"
+    lines: list | None = None
+    reference_side: str = 'inside'
 
     def source_type_label(self) -> str:
         return SOURCE_TYPE_LABELS.get(self.source_type, self.source_type)
@@ -80,7 +82,7 @@ class Camera:
 
     def to_dict(self) -> dict:
         """Return the camera object in the pipeline's native JSON schema."""
-        return {
+        result = {
             "id": self.id,
             "type": self.source_type,
             "source": self.source,
@@ -88,7 +90,11 @@ class Camera:
             "dir": self.role,
             "inside_point": self.inside_point,
             "coordinate_space": self.coordinate_space,
+            "reference_side": self.reference_side,
         }
+        if self.lines is not None:
+            result['lines'] = self.lines
+        return result
 
     @staticmethod
     def from_dict(data: dict) -> "Camera":
@@ -101,4 +107,6 @@ class Camera:
             line=data.get("line", [[775, 132], [399, 561]]),
             inside_point=data.get("inside_point"),
             coordinate_space=data.get("coordinate_space", "pixels"),
+            lines=data.get('lines'),
+            reference_side=data.get('reference_side', 'inside'),
         )

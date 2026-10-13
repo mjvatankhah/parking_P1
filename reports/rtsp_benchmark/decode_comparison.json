@@ -1,0 +1,53 @@
+{
+  "source": {
+    "codec_name": "hevc",
+    "width": 1920,
+    "height": 1080,
+    "r_frame_rate": "30/1"
+  },
+  "opencv_backend": "FFMPEG",
+  "runs": [
+    {
+      "method": "opencv",
+      "frames": 120,
+      "seconds": 3.4973915050004507,
+      "fps": 34.31128594794952,
+      "ms_per_frame": 29.14492920833709
+    },
+    {
+      "method": "ffmpeg",
+      "frames": 120,
+      "seconds": 14.875350413999513,
+      "fps": 8.06703685360349,
+      "ms_per_frame": 123.96125344999594
+    },
+    {
+      "method": "ffmpeg",
+      "frames": 120,
+      "seconds": 3.71731889000057,
+      "fps": 32.281330590925336,
+      "ms_per_frame": 30.977657416671416
+    },
+    {
+      "method": "opencv",
+      "frames": 120,
+      "seconds": 2.052393729999494,
+      "fps": 58.46831348487387,
+      "ms_per_frame": 17.10328108332912
+    },
+    {
+      "method": "opencv",
+      "frames": 120,
+      "seconds": 2.09685896100018,
+      "fps": 57.228455624293034,
+      "ms_per_frame": 17.4738246750015
+    },
+    {
+      "method": "ffmpeg",
+      "frames": 120,
+      "seconds": 3.1595608110001194,
+      "fps": 37.97996214607292,
+      "ms_per_frame": 26.329673425000994
+    }
+  ]
+}

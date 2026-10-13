@@ -1,4 +1,9 @@
 from abc import ABC, abstractmethod
+import os
+
+# Use reliable interleaved RTSP transport by default. Preserve explicit
+# deployment overrides; set this before importing OpenCV or opening captures.
+os.environ.setdefault("OPENCV_FFMPEG_CAPTURE_OPTIONS", "rtsp_transport;tcp")
 import cv2 as cv
 
 class BaseSource(ABC):

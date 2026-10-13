@@ -25,6 +25,39 @@ class FakeTracker:
 
 
 class StreamRuntimeTests(unittest.TestCase):
+    def test_stalled_rtsp_releases_connection_after_first_failed_read(self):
+        with patch("computer_vision_v2.streaming.Streming_Cameras.CameraTracker"):
+            stream = StreamManager("cam", "rtsp://camera", "rtsp", "unused")
+
+        class StalledSource:
+            reads = 0
+            released = False
+
+            def connect(self):
+                pass
+
+            def get_frame(self):
+                self.reads += 1
+                return False, None
+
+            def disconnect(self):
+                self.released = True
+
+        source = StalledSource()
+        stream._create_source = lambda: source
+
+        def stop_at_reconnect(delay):
+            if delay >= 1:
+                stream._stop.set()
+                return True
+            return False
+
+        with patch.object(stream._stop, "wait", side_effect=stop_at_reconnect), \
+             self.assertLogs("computer_vision_v2.streaming.Streming_Cameras", level="WARNING"):
+            stream._capture_loop()
+        self.assertTrue(source.released)
+        self.assertEqual(source.reads, 1)
+
     def wait_until(self, condition, timeout=3):
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
