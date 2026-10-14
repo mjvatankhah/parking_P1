@@ -143,6 +143,15 @@ class PlateReader:
         context = vehicle_crop[max(0,y1-pad):min(h,y2+pad), max(0,x1-pad):min(w,x2+pad)].copy()
         return plate_crop, float(scores[best]), context
 
+    @staticmethod
+    def _prepared_sharpness(image):
+        """Score edges in the prepared text band, excluding its crop boundary."""
+        gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+        edges = cv.Laplacian(gray, cv.CV_32F)
+        if min(edges.shape) > 4:
+            edges = edges[2:-2, 2:-2]
+        return float(edges.var())
+
     def recognize_candidates(self, candidates):
         readings, images = [], []
         prepared = []
@@ -151,7 +160,7 @@ class PlateReader:
                 candidate.context if candidate.context is not None else candidate.crop)
             if result is not None:
                 prepared.append((candidate, result))
-        prepared.sort(key=lambda pair: pair[0].confidence * pair[1].quality, reverse=True)
+        prepared.sort(key=lambda pair: self._prepared_sharpness(pair[1].image), reverse=True)
         for candidate, result in prepared:
             image = result.image
             text, confidence = self._ctc_decode(self.ocr.run(None, {self.ocr_input:self._prep_ocr(image)})[0])
