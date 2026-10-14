@@ -16,6 +16,8 @@ dependencies = [
     "psycopg>=3.3.5",
     "psycopg2-binary>=2.9.12",
     "python-bidi>=0.6.11",
+    "torch>=2.14.1",
+    "torchvision>=0.29.1",
     "ultralytics>=8.4.135",
 ]
 
@@ -28,3 +30,12 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-name = ["computer_vision_v2", "reno"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

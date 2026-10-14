@@ -1,0 +1,387 @@
+[
+  {
+    "car": 1,
+    "frame": 364,
+    "ts": 12.127091634589801,
+    "sampling_quality": 0.8686937688533755,
+    "plate_confidence": 0.7814492583274841,
+    "geometry_quality": 0.21178392188821926,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "5م87235",
+        "confidence": 0.8590987324714661,
+        "valid": false,
+        "frame_idx": 364
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 340,
+    "ts": 11.327503175166298,
+    "sampling_quality": 0.8664121466245507,
+    "plate_confidence": 0.8015244007110596,
+    "geometry_quality": 0.2091271679331481,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9744589328765869,
+    "readings": [
+      {
+        "text": "58م87335",
+        "confidence": 0.9744589328765869,
+        "valid": true,
+        "frame_idx": 340
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 349,
+    "ts": 11.627348847450111,
+    "sampling_quality": 0.861049148525241,
+    "plate_confidence": 0.8049189448356628,
+    "geometry_quality": 0.20077526797478498,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9484452307224274,
+    "readings": [
+      {
+        "text": "58م87245",
+        "confidence": 0.9484452307224274,
+        "valid": true,
+        "frame_idx": 349
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 328,
+    "ts": 10.927708945454546,
+    "sampling_quality": 0.8546201972961425,
+    "plate_confidence": 0.7657442092895508,
+    "geometry_quality": 0.17820371815807284,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "5م87235",
+        "confidence": 0.850195016179766,
+        "valid": false,
+        "frame_idx": 328
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 373,
+    "ts": 12.426937306873615,
+    "sampling_quality": 0.8105324346241343,
+    "plate_confidence": 0.6368647217750549,
+    "geometry_quality": 0.18717939009228057,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9442181587219238,
+    "readings": [
+      {
+        "text": "58م87335",
+        "confidence": 0.9442181587219238,
+        "valid": true,
+        "frame_idx": 373
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 301,
+    "ts": 10.028171928603104,
+    "sampling_quality": 0.8084554771126491,
+    "plate_confidence": 0.751555323600769,
+    "geometry_quality": 0.2019689851947598,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9639194682240486,
+    "readings": [
+      {
+        "text": "58م87245",
+        "confidence": 0.9639194682240486,
+        "valid": true,
+        "frame_idx": 301
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 310,
+    "ts": 10.328017600886918,
+    "sampling_quality": 0.7988766864346709,
+    "plate_confidence": 0.7130935788154602,
+    "geometry_quality": 0.16637944294288398,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.8884816765785217,
+    "readings": [
+      {
+        "text": "58م87245",
+        "confidence": 0.8884816765785217,
+        "valid": true,
+        "frame_idx": 310
+      }
+    ]
+  },
+  {
+    "car": 1,
+    "frame": 352,
+    "ts": 11.72729740487805,
+    "sampling_quality": 0.857277928385736,
+    "plate_confidence": 0.813351035118103,
+    "geometry_quality": null,
+    "plate_text": null,
+    "recognition_status": "unread",
+    "confidence": 0.0,
+    "readings": []
+  },
+  {
+    "car": 2,
+    "frame": 880,
+    "ts": 29.31824351219512,
+    "sampling_quality": 0.7628376474241158,
+    "plate_confidence": 0.7484626173973083,
+    "geometry_quality": 0.14291892922210353,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9328472167253494,
+    "readings": [
+      {
+        "text": "13ه33345",
+        "confidence": 0.9328472167253494,
+        "valid": true,
+        "frame_idx": 880
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 838,
+    "ts": 27.918963708203993,
+    "sampling_quality": 0.7273324444791194,
+    "plate_confidence": 0.640348494052887,
+    "geometry_quality": 0.15415390157018777,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "94ه44445",
+        "confidence": 0.755694255232811,
+        "valid": true,
+        "frame_idx": 838
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 871,
+    "ts": 29.01839783991131,
+    "sampling_quality": 0.7025854045525193,
+    "plate_confidence": 0.6005333065986633,
+    "geometry_quality": 0.1288020152655209,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.979317806661129,
+    "readings": [
+      {
+        "text": "13ه33345",
+        "confidence": 0.979317806661129,
+        "valid": true,
+        "frame_idx": 871
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 853,
+    "ts": 28.41870649534368,
+    "sampling_quality": 0.7011715943294187,
+    "plate_confidence": 0.5850716233253479,
+    "geometry_quality": 0.17141774857560332,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9022163525223732,
+    "readings": [
+      {
+        "text": "13ه33345",
+        "confidence": 0.9022163525223732,
+        "valid": true,
+        "frame_idx": 853
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 889,
+    "ts": 29.618089184478936,
+    "sampling_quality": 0.6583351818784591,
+    "plate_confidence": 0.5473260879516602,
+    "geometry_quality": 0.1860483102299573,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.8970655202865601,
+    "readings": [
+      {
+        "text": "13ه33345",
+        "confidence": 0.8970655202865601,
+        "valid": true,
+        "frame_idx": 889
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 904,
+    "ts": 30.117831971618624,
+    "sampling_quality": 0.6395870897473601,
+    "plate_confidence": 0.5631033182144165,
+    "geometry_quality": 0.07049970612637113,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9913908392190933,
+    "readings": [
+      {
+        "text": "13ه33345",
+        "confidence": 0.9913908392190933,
+        "valid": true,
+        "frame_idx": 904
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 913,
+    "ts": 30.41767764390244,
+    "sampling_quality": 0.6323348186782913,
+    "plate_confidence": 0.6891815066337585,
+    "geometry_quality": 0.15265232268745946,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9270763993263245,
+    "readings": [
+      {
+        "text": "13ه33345",
+        "confidence": 0.9270763993263245,
+        "valid": true,
+        "frame_idx": 913
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 925,
+    "ts": 30.817471873614192,
+    "sampling_quality": 0.5764008965622036,
+    "plate_confidence": 0.6995526552200317,
+    "geometry_quality": 0.1754958489728156,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.8706437349319458,
+    "readings": [
+      {
+        "text": "12ه33335",
+        "confidence": 0.8706437349319458,
+        "valid": true,
+        "frame_idx": 925
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 937,
+    "ts": 31.217266103325944,
+    "sampling_quality": 0.5354131150059923,
+    "plate_confidence": 0.6628004908561707,
+    "geometry_quality": 0.1923677272803343,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "12ه333345",
+        "confidence": 0.7590119110213386,
+        "valid": false,
+        "frame_idx": 937
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 997,
+    "ts": 33.2162372518847,
+    "sampling_quality": 0.5204199005238749,
+    "plate_confidence": 0.7536302208900452,
+    "geometry_quality": 0.18205849326649823,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9441457837820053,
+    "readings": [
+      {
+        "text": "12ه33335",
+        "confidence": 0.9441457837820053,
+        "valid": true,
+        "frame_idx": 997
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 1006,
+    "ts": 33.516082924168515,
+    "sampling_quality": 0.4820583617150904,
+    "plate_confidence": 0.7646284103393555,
+    "geometry_quality": 0.1521049921135968,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.984759546816349,
+    "readings": [
+      {
+        "text": "12ه33335",
+        "confidence": 0.984759546816349,
+        "valid": true,
+        "frame_idx": 1006
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 946,
+    "ts": 31.517111775609756,
+    "sampling_quality": 0.47198165484809407,
+    "plate_confidence": 0.5999994277954102,
+    "geometry_quality": 0.10891354882352258,
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.942672960460186,
+    "readings": [
+      {
+        "text": "12ه33335",
+        "confidence": 0.942672960460186,
+        "valid": true,
+        "frame_idx": 946
+      }
+    ]
+  },
+  {
+    "car": 2,
+    "frame": 916,
+    "ts": 30.517626201330376,
+    "sampling_quality": 0.5782812251973992,
+    "plate_confidence": 0.4851629137992859,
+    "geometry_quality": null,
+    "plate_text": null,
+    "recognition_status": "unread",
+    "confidence": 0.0,
+    "readings": []
+  }
+]

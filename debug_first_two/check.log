@@ -1,0 +1,8 @@
+[0;93m2026-10-14 00:35:24.191775296 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+1 uncertain [{"text": "58م87335", "confidence": 0.9744589328765869, "valid": true, "frame_idx": 340}, {"text": "5م87235", "confidence": 0.8590987324714661, "valid": false, "frame_idx": 364}, {"text": "58م87245", "confidence": 0.9639194682240486, "valid": true, "frame_idx": 301}]
+2 uncertain [{"text": "12ه33335", "confidence": 0.9441457837820053, "valid": true, "frame_idx": 997}, {"text": "12ه333345", "confidence": 0.7590119110213386, "valid": false, "frame_idx": 937}, {"text": "13ه33345", "confidence": 0.9328472167253494, "valid": true, "frame_idx": 880}]
+Traceback (most recent call last):
+  File "/home/mjr/plakino/debug_first_two/check.py", line 12, in <module>
+    assert not failed, f"Expected corroborated plates; uncertain cars: {failed}"
+           ^^^^^^^^^^
+AssertionError: Expected corroborated plates; uncertain cars: [1, 2]

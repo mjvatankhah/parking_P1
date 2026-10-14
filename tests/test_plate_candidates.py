@@ -64,20 +64,20 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual([c.frame_idx for c in state.candidates],[3])
         self.assertEqual(state.fallback.frame_idx,0)
 
-    def test_vote_states_and_no_duplicate_frame_votes(self):
+    def test_vote_states_include_nearby_frames_and_limit_to_five(self):
         reader=PlateReader.__new__(PlateReader)
         reader.labels=['م'];reader.ocr=Mock();reader.ocr_input='input'
         reader.ocr.run.return_value=[None]
         reader._prep_ocr=Mock(return_value=None)
-        candidates=[Candidate(self.crop,t,i,.9,1.) for i,t in enumerate([0,.1,.6,1.2])]
-        for outputs,status in [([('58م87245',.95)]*3,'read'),
-                               ([('58م87245',.95),('58م87246',.95),('',0)],'uncertain'),
-                               ([('',0)]*3,'unread')]:
+        candidates=[Candidate(self.crop,t,i,.9,1.) for i,t in enumerate([0,.1,.2,.3,.4,.5])]
+        for outputs,status in [([('58م87245',.95)]*5,'read'),
+                               ([('58م87245',.95),('58م87246',.95),('',0),('',0),('',0)],'uncertain'),
+                               ([('',0)]*5,'unread')]:
             reader._ctc_decode=Mock(side_effect=outputs)
             with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',return_value=PreparedPlate(self.crop,1.)):
                 result=reader.recognize_candidates(candidates)
             self.assertEqual(result['recognition_status'],status)
-            self.assertEqual([r['frame_idx'] for r in result['readings']],[0,2,3])
+            self.assertEqual([r['frame_idx'] for r in result['readings']],[0,1,2,3,4])
             if status!='read':self.assertIsNone(result['plate_text'])
 
     def test_failed_geometry_does_not_run_ocr_and_keeps_review_image(self):

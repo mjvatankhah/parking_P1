@@ -1,0 +1,2 @@
+[0;93m2026-10-14 00:33:00.815397606 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+{"plate_text": "58م87245", "recognition_status": "read", "confidence": 0.956182349473238, "readings": [{"text": "58م87245", "confidence": 0.9484452307224274, "valid": true, "frame_idx": 349}, {"text": "58م87245", "confidence": 0.9639194682240486, "valid": true, "frame_idx": 301}]}

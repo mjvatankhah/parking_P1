@@ -1,0 +1,111 @@
+[
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 1,
+      "bbox": [
+        363.19787731885475,
+        202.2820385417823,
+        618.7502064336975,
+        358.4426817305294
+      ],
+      "class_id": 2,
+      "confidence": 0.18080100417137146,
+      "frame_idx": 371,
+      "ts": 12.36030493525499,
+      "side": -1,
+      "direction": "exit"
+    },
+    "completed_frame": 425,
+    "candidate_frames": [
+      364,
+      340,
+      349,
+      328,
+      373,
+      301,
+      310,
+      352
+    ],
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9744589328765869,
+    "readings": [
+      {
+        "text": "58م87335",
+        "confidence": 0.9744589328765869,
+        "valid": true,
+        "frame_idx": 340
+      },
+      {
+        "text": "5م87235",
+        "confidence": 0.8590987324714661,
+        "valid": false,
+        "frame_idx": 364
+      },
+      {
+        "text": "58م87245",
+        "confidence": 0.9639194682240486,
+        "valid": true,
+        "frame_idx": 301
+      }
+    ]
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 8,
+      "bbox": [
+        280.5207182528886,
+        210.58747079493776,
+        576.9526411632551,
+        371.70279005666424
+      ],
+      "class_id": 2,
+      "confidence": 0.7781593799591064,
+      "frame_idx": 915,
+      "ts": 30.484310015521064,
+      "side": 1,
+      "direction": "entry"
+    },
+    "completed_frame": 1143,
+    "candidate_frames": [
+      880,
+      838,
+      871,
+      853,
+      889,
+      904,
+      913,
+      925,
+      937,
+      997,
+      1006,
+      946,
+      916
+    ],
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9441457837820053,
+    "readings": [
+      {
+        "text": "12ه33335",
+        "confidence": 0.9441457837820053,
+        "valid": true,
+        "frame_idx": 997
+      },
+      {
+        "text": "12ه333345",
+        "confidence": 0.7590119110213386,
+        "valid": false,
+        "frame_idx": 937
+      },
+      {
+        "text": "13ه33345",
+        "confidence": 0.9328472167253494,
+        "valid": true,
+        "frame_idx": 880
+      }
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 1,
+      "bbox": [
+        247.72386105886804,
+        217.32788569093722,
+        635.6555375768221,
+        371.2244205426932
+      ],
+      "class_id": 2,
+      "confidence": 0.6291583180427551,
+      "frame_idx": 2108,
+      "ts": 70.23051968603104,
+      "side": 1,
+      "direction": "entry"
+    },
+    "completed_frame": 2194,
+    "candidate_frames": [
+      2139,
+      2133
+    ],
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "81ط795453",
+        "confidence": 0.9057330042123795,
+        "valid": false,
+        "frame_idx": 2139
+      }
+    ]
+  }
+]

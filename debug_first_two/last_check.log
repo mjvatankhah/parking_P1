@@ -1,0 +1,7 @@
+[0;93m2026-10-14 00:39:40.751625493 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+{"plate_text": null, "recognition_status": "uncertain", "confidence": 0.0, "readings": [{"text": "81ط795453", "confidence": 0.9057330042123795, "valid": false, "frame_idx": 2139}]}
+Traceback (most recent call last):
+  File "/home/mjr/plakino/debug_first_two/check_last.py", line 7, in <module>
+    assert r['recognition_status']=='read', 'Last car lacks a corroborated valid plate'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Last car lacks a corroborated valid plate

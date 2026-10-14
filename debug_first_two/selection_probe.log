@@ -1,0 +1,81 @@
+[0;93m2026-10-14 00:31:57.236506215 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+[
+  {
+    "case": "baseline",
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9744589328765869,
+    "readings": [
+      {
+        "text": "58م87335",
+        "confidence": 0.9744589328765869,
+        "valid": true,
+        "frame_idx": 340
+      },
+      {
+        "text": "5م87235",
+        "confidence": 0.8590987324714661,
+        "valid": false,
+        "frame_idx": 364
+      },
+      {
+        "text": "58م87245",
+        "confidence": 0.9639194682240486,
+        "valid": true,
+        "frame_idx": 301
+      }
+    ]
+  },
+  {
+    "case": "omit_top_frame_340",
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9639194682240486,
+    "readings": [
+      {
+        "text": "5م87235",
+        "confidence": 0.8590987324714661,
+        "valid": false,
+        "frame_idx": 364
+      },
+      {
+        "text": "58م87245",
+        "confidence": 0.9639194682240486,
+        "valid": true,
+        "frame_idx": 301
+      },
+      {
+        "text": "5م87235",
+        "confidence": 0.850195016179766,
+        "valid": false,
+        "frame_idx": 328
+      }
+    ]
+  },
+  {
+    "case": "omit_frames_340_373",
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9639194682240486,
+    "readings": [
+      {
+        "text": "5م87235",
+        "confidence": 0.8590987324714661,
+        "valid": false,
+        "frame_idx": 364
+      },
+      {
+        "text": "58م87245",
+        "confidence": 0.9639194682240486,
+        "valid": true,
+        "frame_idx": 301
+      },
+      {
+        "text": "5م87235",
+        "confidence": 0.850195016179766,
+        "valid": false,
+        "frame_idx": 328
+      }
+    ]
+  }
+]

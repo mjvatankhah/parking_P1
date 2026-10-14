@@ -144,7 +144,7 @@ class PlateReader:
         return plate_crop, float(scores[best]), context
 
     def recognize_candidates(self, candidates):
-        readings, times, images = [], [], []
+        readings, images = [], []
         prepared = []
         for candidate in candidates:
             result = candidate.prepared if candidate.prepared is not None else prepare_plate(
@@ -153,8 +153,6 @@ class PlateReader:
                 prepared.append((candidate, result))
         prepared.sort(key=lambda pair: pair[0].confidence * pair[1].quality, reverse=True)
         for candidate, result in prepared:
-            if any(abs(candidate.ts-ts) < .5 for ts in times):
-                continue
             image = result.image
             text, confidence = self._ctc_decode(self.ocr.run(None, {self.ocr_input:self._prep_ocr(image)})[0])
             letter = text[2:-5]
@@ -162,7 +160,6 @@ class PlateReader:
                      and letter in self.labels and not letter.isdigit())
             readings.append({'text':text, 'confidence':confidence, 'valid':valid,
                              'frame_idx':candidate.frame_idx})
-            times.append(candidate.ts)
             images.append(image)
             if len(readings) == 3:
                 break
