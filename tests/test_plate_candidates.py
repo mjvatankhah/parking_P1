@@ -34,7 +34,7 @@ class CandidateTests(unittest.TestCase):
         for a in state.candidates:
             for b in state.candidates:
                 if a is not b:
-                    self.assertGreaterEqual(abs(a.ts-b.ts),.25)
+                    self.assertGreaterEqual(abs(a.ts-b.ts),.09)
         self.assertEqual(self.pool.observe(self.frame(9.9), [self.crossing(ts=9.9)]), [])
         self.pool.observe(self.frame(10.))
         result = self.pool.observe(self.frame(10.8,track=None))

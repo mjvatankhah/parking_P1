@@ -1,0 +1,379 @@
+[0;93m2026-10-14 13:08:11.137706492 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+{
+  "0.25": [
+    {
+      "event": {
+        "camera_id": "cached",
+        "track_id": 1,
+        "class_id": 2,
+        "direction": "exit",
+        "frame_idx": 1,
+        "ts": 0.033316185809312636
+      },
+      "unfinished": true,
+      "actual": {
+        "plate_text": null,
+        "recognition_status": "uncertain",
+        "confidence": 0.9672903716564178,
+        "readings": [
+          {
+            "text": "58م87245",
+            "confidence": 0.9672903716564178,
+            "valid": true,
+            "frame_idx": 348
+          },
+          {
+            "text": "5م87345",
+            "confidence": 0.897134508405413,
+            "valid": false,
+            "frame_idx": 357
+          },
+          {
+            "text": "58م87335",
+            "confidence": 0.9448160529136658,
+            "valid": true,
+            "frame_idx": 339
+          }
+        ]
+      },
+      "ranked_readings": [
+        {
+          "text": "58م87245",
+          "confidence": 0.9672903716564178,
+          "valid": true,
+          "frame_idx": 348,
+          "shape": [
+            44,
+            78
+          ],
+          "quality": 0.8749870883348659,
+          "geometry_quality": 0.21749431167878294
+        },
+        {
+          "text": "5م87345",
+          "confidence": 0.897134508405413,
+          "valid": false,
+          "frame_idx": 357,
+          "shape": [
+            39,
+            75
+          ],
+          "quality": 0.8794503089709159,
+          "geometry_quality": 0.21400181826163242
+        },
+        {
+          "text": "58م87335",
+          "confidence": 0.9448160529136658,
+          "valid": true,
+          "frame_idx": 339,
+          "shape": [
+            47,
+            80
+          ],
+          "quality": 0.8778225292471494,
+          "geometry_quality": 0.21139757556944308
+        },
+        {
+          "text": "58م87345",
+          "confidence": 0.9735320582985878,
+          "valid": true,
+          "frame_idx": 372,
+          "shape": [
+            36,
+            71
+          ],
+          "quality": 0.8505058137230656,
+          "geometry_quality": 0.20432434219943077
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9594739079475403,
+          "valid": true,
+          "frame_idx": 306,
+          "shape": [
+            52,
+            82
+          ],
+          "quality": 0.819619442905502,
+          "geometry_quality": 0.1935563068024266
+        },
+        {
+          "text": "5م87245",
+          "confidence": 0.9709467376981463,
+          "valid": false,
+          "frame_idx": 387,
+          "shape": [
+            33,
+            64
+          ],
+          "quality": 0.8416411416097119,
+          "geometry_quality": 0.19779230014369575
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9793738052248955,
+          "valid": true,
+          "frame_idx": 297,
+          "shape": [
+            54,
+            82
+          ],
+          "quality": 0.7978740851869883,
+          "geometry_quality": 0.18213167423258783
+        },
+        {
+          "text": "25م382335",
+          "confidence": 0.5891956090927124,
+          "valid": false,
+          "frame_idx": 255,
+          "shape": [
+            56,
+            70
+          ],
+          "quality": 0.5037693692800589,
+          "geometry_quality": 0.19147452568086154
+        },
+        {
+          "text": "5م383335",
+          "confidence": 0.6296274065971375,
+          "valid": false,
+          "frame_idx": 246,
+          "shape": [
+            57,
+            71
+          ],
+          "quality": 0.5329092695858789,
+          "geometry_quality": 0.1612791040715755
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9774777963757515,
+          "valid": true,
+          "frame_idx": 396,
+          "shape": [
+            32,
+            64
+          ],
+          "quality": 0.7815195362200029,
+          "geometry_quality": 0.1711638114491162
+        }
+      ],
+      "votes_by_limit": {
+        "3": {
+          "58م87245": 1,
+          "58م87335": 1
+        },
+        "5": {
+          "58م87245": 2,
+          "58م87335": 1,
+          "58م87345": 1
+        },
+        "12": {
+          "58م87245": 4,
+          "58م87335": 1,
+          "58م87345": 1
+        }
+      }
+    }
+  ],
+  "0.09": [
+    {
+      "event": {
+        "camera_id": "cached",
+        "track_id": 1,
+        "class_id": 2,
+        "direction": "exit",
+        "frame_idx": 1,
+        "ts": 0.033316185809312636
+      },
+      "unfinished": true,
+      "actual": {
+        "plate_text": "58م87245",
+        "recognition_status": "read",
+        "confidence": 0.9499595984816551,
+        "readings": [
+          {
+            "text": "58م87245",
+            "confidence": 0.9672903716564178,
+            "valid": true,
+            "frame_idx": 348
+          },
+          {
+            "text": "5م87345",
+            "confidence": 0.897134508405413,
+            "valid": false,
+            "frame_idx": 357
+          },
+          {
+            "text": "58م87245",
+            "confidence": 0.9326288253068924,
+            "valid": true,
+            "frame_idx": 345
+          }
+        ]
+      },
+      "ranked_readings": [
+        {
+          "text": "58م87245",
+          "confidence": 0.9672903716564178,
+          "valid": true,
+          "frame_idx": 348,
+          "shape": [
+            44,
+            78
+          ],
+          "quality": 0.8749870883348659,
+          "geometry_quality": 0.21749431167878294
+        },
+        {
+          "text": "5م87345",
+          "confidence": 0.897134508405413,
+          "valid": false,
+          "frame_idx": 357,
+          "shape": [
+            39,
+            75
+          ],
+          "quality": 0.8794503089709159,
+          "geometry_quality": 0.21400181826163242
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9326288253068924,
+          "valid": true,
+          "frame_idx": 345,
+          "shape": [
+            44,
+            79
+          ],
+          "quality": 0.857635000769919,
+          "geometry_quality": 0.2206039261224947
+        },
+        {
+          "text": "58م87335",
+          "confidence": 0.9448160529136658,
+          "valid": true,
+          "frame_idx": 339,
+          "shape": [
+            47,
+            80
+          ],
+          "quality": 0.8778225292471494,
+          "geometry_quality": 0.21139757556944308
+        },
+        {
+          "text": "58م87345",
+          "confidence": 0.9330756217241287,
+          "valid": true,
+          "frame_idx": 336,
+          "shape": [
+            45,
+            81
+          ],
+          "quality": 0.871106613074801,
+          "geometry_quality": 0.2091271679331481
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9799613356590271,
+          "valid": true,
+          "frame_idx": 342,
+          "shape": [
+            47,
+            81
+          ],
+          "quality": 0.8606240280131076,
+          "geometry_quality": 0.20356841495715908
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9160169064998627,
+          "valid": true,
+          "frame_idx": 333,
+          "shape": [
+            48,
+            80
+          ],
+          "quality": 0.8534955792361869,
+          "geometry_quality": 0.20566666155073374
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9025759920477867,
+          "valid": true,
+          "frame_idx": 321,
+          "shape": [
+            48,
+            81
+          ],
+          "quality": 0.853037225059521,
+          "geometry_quality": 0.20089821172402644
+        },
+        {
+          "text": "58م87335",
+          "confidence": 0.9260825365781784,
+          "valid": true,
+          "frame_idx": 324,
+          "shape": [
+            50,
+            81
+          ],
+          "quality": 0.8561107460657755,
+          "geometry_quality": 0.19909309372845738
+        },
+        {
+          "text": "58م87345",
+          "confidence": 0.9735320582985878,
+          "valid": true,
+          "frame_idx": 372,
+          "shape": [
+            36,
+            71
+          ],
+          "quality": 0.8505058137230656,
+          "geometry_quality": 0.20432434219943077
+        },
+        {
+          "text": "58م87235",
+          "confidence": 0.9597503766417503,
+          "valid": true,
+          "frame_idx": 369,
+          "shape": [
+            37,
+            72
+          ],
+          "quality": 0.842826125231591,
+          "geometry_quality": 0.19990820439203155
+        },
+        {
+          "text": "5م87235",
+          "confidence": 0.8445199728012085,
+          "valid": false,
+          "frame_idx": 330,
+          "shape": [
+            50,
+            84
+          ],
+          "quality": 0.8659421862165132,
+          "geometry_quality": 0.17747314837061146
+        }
+      ],
+      "votes_by_limit": {
+        "3": {
+          "58م87245": 2
+        },
+        "5": {
+          "58م87245": 2,
+          "58م87335": 1,
+          "58م87345": 1
+        },
+        "12": {
+          "58م87245": 5,
+          "58م87335": 2,
+          "58م87345": 2,
+          "58م87235": 1
+        }
+      }
+    }
+  ]
+}

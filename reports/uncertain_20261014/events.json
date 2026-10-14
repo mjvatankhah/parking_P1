@@ -1,0 +1,115 @@
+[
+  {
+    "event_id": 83,
+    "plate_number": "58م87345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 347,
+        "confidence": 0.9703876972198486
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 323,
+        "confidence": 0.9366688281297684
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 371,
+        "confidence": 0.9764215424656868
+      }
+    ]
+  },
+  {
+    "event_id": 87,
+    "plate_number": "58م87345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 347,
+        "confidence": 0.9703876972198486
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 323,
+        "confidence": 0.9366688281297684
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 371,
+        "confidence": 0.9764215424656868
+      }
+    ]
+  },
+  {
+    "event_id": 93,
+    "plate_number": "58م87245",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 349,
+        "confidence": 0.933778241276741
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 307,
+        "confidence": 0.9293905720114708
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 331,
+        "confidence": 0.9604991301894188
+      }
+    ]
+  },
+  {
+    "event_id": 96,
+    "plate_number": null,
+    "status": "uncertain",
+    "readings": [
+      {
+        "text": "58م87335",
+        "valid": true,
+        "frame_idx": 340,
+        "confidence": 0.9744589328765869
+      },
+      {
+        "text": "5م87235",
+        "valid": false,
+        "frame_idx": 364,
+        "confidence": 0.8590987324714661
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 349,
+        "confidence": 0.9484452307224274
+      }
+    ]
+  },
+  {
+    "event_id": 98,
+    "plate_number": null,
+    "status": "uncertain",
+    "readings": [
+      {
+        "text": "81ط79545",
+        "valid": true,
+        "frame_idx": 2095,
+        "confidence": 0.9666785299777985
+      }
+    ]
+  }
+]

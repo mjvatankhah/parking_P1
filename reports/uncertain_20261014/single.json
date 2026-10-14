@@ -1,0 +1,13 @@
+{
+  "plate_text": null,
+  "recognition_status": "uncertain",
+  "confidence": 0.980460949242115,
+  "readings": [
+    {
+      "text": "81ط79545",
+      "confidence": 0.980460949242115,
+      "valid": true,
+      "frame_idx": 2095
+    }
+  ]
+}

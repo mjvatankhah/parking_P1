@@ -1,0 +1,8 @@
+[0;93m2026-10-14 13:02:49.855922020 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+Loading src/models/vehicle/yolo26n_openvino_model for OpenVINO inference...
+WARNING:root:Failed to create openvino_telemetry file. Please allow write access to the following directory: /home/MJR
+WARNING:root:Could not create directory for storing client ID. No data will be sent.
+Using OpenVINO LATENCY mode for batch=1 inference on CPU...
+processed 2040
+processed 2070
+processed 2100

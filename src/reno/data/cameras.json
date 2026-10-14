@@ -1,12 +1,12 @@
 {
-  "model_path": "models/vehicle/yolo26s.pt",
+  "model_path": "src/models/vehicle/yolo26n_openvino_model",
   "detection_interval": 3,
   "plate_sampling": {},
   "cameras": [
     {
       "id": "cam2",
       "type": "video",
-      "source": "src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
+      "source": "src/computer_vision_v2/video/vlc-record-2026-10-12-21h10m22s-rtsp___172.16.254.8_554_cam_realmonitor-.avi",
       "line": [
         [
           0.10364583333333334,

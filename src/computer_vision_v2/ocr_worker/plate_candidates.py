@@ -39,7 +39,7 @@ class CompletedPassage:
 
 
 class PlateCandidates:
-    def __init__(self, reader, interval=0.1, capacity=12, near=0.25, stale=5.0,
+    def __init__(self, reader, interval=0.1, capacity=12, near=0.09, stale=5.0,
                  exit_delay=0.75, reid_gap=0.5, reid_iou=0.35):
         if (not all(math.isfinite(v) for v in (interval, near, stale, exit_delay, reid_gap, reid_iou))
                 or interval <= 0 or near < 0 or stale <= 0 or exit_delay <= 0

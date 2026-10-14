@@ -161,7 +161,7 @@ class PlateReader:
             readings.append({'text':text, 'confidence':confidence, 'valid':valid,
                              'frame_idx':candidate.frame_idx})
             images.append(image)
-            if len(readings) == 3:
+            if len(readings) == 5:
                 break
         votes = Counter(r['text'] for r in readings if r['valid'] and r['confidence'] >= .8)
         winner, count = votes.most_common(1)[0] if votes else (None,0)

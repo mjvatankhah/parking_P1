@@ -34,7 +34,7 @@ class CameraTracker:
     def _detect(self, image):
         results = self.model.track(
             image, persist=True, classes=VEHICLE_CLASSES, verbose=False,
-            tracker="bytetrack.yaml", imgsz=(256, 416),
+            tracker="bytetrack.yaml", imgsz=(384,640),
         )
         self.yolo_calls += 1
         if not results or results[0].boxes is None or results[0].boxes.id is None:
