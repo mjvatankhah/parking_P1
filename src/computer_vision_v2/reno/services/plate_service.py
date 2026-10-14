@@ -53,7 +53,7 @@ class PlateService:
                 cursor.execute("SET TRANSACTION READ ONLY")
                 cursor.execute("SET LOCAL statement_timeout = '5s'")
                 cursor.execute(
-                    f"""SELECT plate_number, captured_at, camera_id, event_type, class_id, image_path
+                    f"""SELECT plate_number, captured_at, camera_id, event_type, class_id, image_path, recognition_status
                        FROM event {where}
                        ORDER BY captured_at DESC, id DESC
                        LIMIT %s""",
@@ -61,13 +61,13 @@ class PlateService:
                 )
                 rows = cursor.fetchall()
         records = []
-        for plate, captured_at, camera_id, direction, class_id, image_path in rows:
+        for plate, captured_at, camera_id, direction, class_id, image_path, status in rows:
             captured_at = captured_at.astimezone()
             if image_path:
                 path = Path(image_path)
                 image_path = str(path if path.is_absolute() else _PROJECT_ROOT / path)
             records.append(PlateRecord(
-                plate=plate or "خوانده نشد", date=captured_at.strftime('%Y-%m-%d'),
+                plate=plate or ('نامطمئن' if status == 'uncertain' else 'خوانده نشد'), date=captured_at.strftime('%Y-%m-%d'),
                 time=captured_at.strftime('%H:%M:%S'), camera=camera_id,
                 class_id=class_id, direction=direction, image_path=image_path or '',
             ))

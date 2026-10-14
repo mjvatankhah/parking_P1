@@ -1,0 +1,5 @@
+{
+  "plate_yolo.onnx": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6",
+  "ocr_crnn.onnx": "45f8c45f29eb1ee91f6274cb8d9c328da1a2050ea7d8596bae61f4a6b9f9fb1e",
+  "ocr_crnn.labels.json": "8a3082edb92cbac729d27f84c4c11909e34174c277cb8aa2c3a8a646d5651c45"
+}

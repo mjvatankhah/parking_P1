@@ -39,6 +39,8 @@ CREATE TABLE event (
     image_path TEXT,
     captured_at TIMESTAMPTZ NOT NULL,
     class_id INTEGER NOT NULL DEFAULT 2,
+    recognition_status TEXT NOT NULL DEFAULT 'unread' CHECK (recognition_status IN ('read', 'uncertain', 'unread')),
+    recognition_details JSONB NOT NULL DEFAULT '[]'::jsonb,
 
     FOREIGN KEY (camera_id) REFERENCES camera(id),
     FOREIGN KEY (plate_number) REFERENCES vehicle(plate_number),

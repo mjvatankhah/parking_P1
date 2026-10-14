@@ -1,5 +1,4 @@
 import math
-import time
 
 def _bottom_center(bbox):
     x1 ,y1 ,x2 ,y2 = bbox
@@ -39,7 +38,7 @@ class LineDetector:
             for segment in self._segments:
                 segment._finite_segment = True
             return
-        self._finite_segment = False
+        self._finite_segment = True
         self._positions = {}
         # ترتیب ثابت: چپ به راست؛ برای خط عمودی، بالا به پایین.
         try:
@@ -94,7 +93,7 @@ class LineDetector:
             self._crossed.discard(t_id) # برای جلوگیری از خطا در صورت نبود کلید از این متد استفاده شد 
 
     def update(self,track_frame):
-        now = time.monotonic()
+        now = track_frame.ts
         if self._segments is not None:
             for track_id, seen_at in list(self._poly_seen.items()):
                 if now - seen_at > self.forget_after:

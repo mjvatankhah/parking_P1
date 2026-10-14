@@ -1,0 +1,50 @@
+[
+  {
+    "frame": 159,
+    "text": "19ز62",
+    "confidence": 0.3738250702619552,
+    "matched_log": true,
+    "det_conf": 0.44281744956970215,
+    "plate_size": [
+      97,
+      98
+    ],
+    "ocr_conf": 0.3442569077014923
+  },
+  {
+    "frame": 210,
+    "text": "59ت9",
+    "confidence": 0.3093098010867834,
+    "matched_log": true,
+    "det_conf": 0.44983479380607605,
+    "plate_size": [
+      78,
+      121
+    ],
+    "ocr_conf": 0.24908480420708656
+  },
+  {
+    "frame": 270,
+    "text": "56ب650949",
+    "confidence": 0.5796068476306068,
+    "matched_log": true,
+    "det_conf": 0.6784448027610779,
+    "plate_size": [
+      73,
+      57
+    ],
+    "ocr_conf": 0.537247724003262
+  },
+  {
+    "frame": 330,
+    "text": "6ب52965",
+    "confidence": 0.5687038958072661,
+    "matched_log": true,
+    "det_conf": 0.7858861684799194,
+    "plate_size": [
+      84,
+      50
+    ],
+    "ocr_conf": 0.4756257789475577
+  }
+]

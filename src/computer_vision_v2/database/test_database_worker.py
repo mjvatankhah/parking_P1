@@ -29,8 +29,9 @@ class DatabaseWorkerTests(unittest.TestCase):
         self.assertNotIn("INSERT INTO vehicle ", queries[0])
         self.assertNotIn("vehicle_session", queries[0])
         params = cursor.execute.call_args.args[1]
-        self.assertEqual(params[:-1], ("cam2", None, "entry", 0, 0.87, None))
-        self.assertIsNotNone(params[-1].tzinfo)
+        self.assertEqual(params[:6], ("cam2", None, "entry", 0, 0.87, None))
+        self.assertIsNotNone(params[6].tzinfo)
+        self.assertEqual(params[7:], ('unread', '[]'))
         connection.commit.assert_called_once()
 
     def test_event_with_plate_creates_vehicle_and_entry_session(self):
@@ -44,6 +45,16 @@ class DatabaseWorkerTests(unittest.TestCase):
         self.assertIn("INSERT INTO event", queries)
         self.assertIn("INSERT INTO vehicle_session", queries)
         connection.commit.assert_called_once()
+
+    def test_uncertain_text_never_opens_vehicle_session(self):
+        connection, cursor = self.run_worker({
+            'camera_id':'cam2', 'class_id':2, 'direction':'entry',
+            'plate_text':'58م87245', 'confidence':.9, 'image_path':None,
+            'recognition_status':'uncertain', 'readings':[],
+        }, [(12,)])
+        self.assertEqual(cursor.execute.call_count,1)
+        self.assertIsNone(cursor.execute.call_args.args[1][1])
+        self.assertEqual(cursor.execute.call_args.args[1][7],'uncertain')
 
     def test_connection_failure_reopens_for_next_event(self):
         item = {
@@ -75,7 +86,7 @@ class DatabaseWorkerTests(unittest.TestCase):
                 'plate_text': 'test-plate', 'confidence': .9, 'image_path': None,
             }, [(12,), None])
         cursor.execute.assert_any_call(module.queries.INSERT_EVENT,
-            ('cam2', 'test-plate', 'entry', 2, .9, None, stamp))
+            ('cam2', 'test-plate', 'entry', 2, .9, None, stamp, 'read', '[]'))
         cursor.execute.assert_any_call(module.queries.INSERT_SESSION,
                                       ('test-plate', 12, stamp))
 

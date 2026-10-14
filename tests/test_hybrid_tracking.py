@@ -11,8 +11,9 @@ import numpy as np
 from computer_vision_v2.tracking.frame_info import Detection
 from computer_vision_v2.tracking.tracker import CameraTracker
 from computer_vision_v2.Line_Manager.line_detector import LineDetector
-from computer_vision_v2.best_crop_selector import BestCropSelector
-from computer_vision_v2.workers.workers import line_worker, crop_worker
+from computer_vision_v2.plate_candidates import PlateCandidates
+from computer_vision_v2.inference.plate_geometry import PreparedPlate
+from computer_vision_v2.workers.workers import observation_worker
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.tracking.optical_flow import OpticalFlow
 
@@ -49,19 +50,25 @@ class HybridTrackingTests(unittest.TestCase):
     def test_crossing_on_flow_frame_reaches_crop_and_is_not_duplicated(self):
         tracker = self.make_tracker()
         line = LineDetector('cam', line=((0, 105), (240, 105)), direction='entry')
-        selector = BestCropSelector()
+        reader = Mock()
+        reader.detect_plate.return_value = (scene()[40:60,50:120], .9, scene()[30:80,40:130])
+        selector = PlateCandidates(reader)
         events = []
         boxes = [Detection(7, (50, 40 + dy, 120, 100 + dy), 2, .9) for dy in (0, 24)]
-        with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]):
+        with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]), \
+             patch('computer_vision_v2.plate_candidates.prepare_plate',
+                   return_value=PreparedPlate(scene()[40:60,50:120],1.)):
             for i in range(4):
                 frame = tracker.process(i + 1, i / 25, scene(dy=i * 8))
-                selector.update('cam', frame)
-                events.extend(line.update(frame))
+                crossings = line.update(frame)
+                selector.observe(frame, crossings)
+                events.extend(crossings)
         self.assertEqual(len(events), 1)
         self.assertEqual(events[0]['frame_idx'], 2)
         self.assertEqual(events[0]['track_id'], 7)
         self.assertEqual(events[0]['direction'], 'entry')
-        self.assertIsNotNone(selector.get('cam', 7))
+        self.assertEqual(selector.observe(frame), [])
+        self.assertTrue(selector.tracks[('cam',7)].candidates)
 
     def test_crossing_on_detector_frame_still_works(self):
         tracker = self.make_tracker()
@@ -80,18 +87,19 @@ class HybridTrackingTests(unittest.TestCase):
                 boxes = [Detection(7, (50, 40 + dy, 120, 100 + dy), 2, .9) for dy in (0, 24)]
                 with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]):
                     frames = [tracker.process(i + 1, i / 25, scene(dy=i * 8)) for i in range(4)]
-                line_q, crop_q, cross_q, ocr_q, db_q = [queue.Queue() for _ in range(5)]
+                frame_q, ocr_q, db_q = [queue.Queue() for _ in range(3)]
                 for frame in frames:
-                    line_q.put(frame)
-                    crop_q.put(frame)
-                line_q.put(None)
-                crop_q.put(None)
+                    frame_q.put(frame)
+                last = frames[-1]
+                frame_q.put(type(last)(last.camera_id, last.frame_idx+30, last.ts+1,
+                                       last.image, []))
+                frame_q.put(None)
                 detector = LineDetector('cam', line=((0, line_y), (240, line_y)), direction='entry')
-                with patch('builtins.print'):
-                    line_worker(line_q, cross_q, detector, lambda: True)
-                    crop_worker(crop_q, cross_q, ocr_q, BestCropSelector(), lambda: True)
                 reader = Mock()
-                reader.read.return_value = ('TEST-PLATE', .95, 'test-crop.jpg')
+                reader.detect_plate.return_value = None
+                observation_worker(frame_q, ocr_q, detector, PlateCandidates(reader), lambda: True)
+                reader.recognize_candidates.return_value = dict(plate_text='TEST-PLATE',confidence=.95,
+                    recognition_status='read',readings=[],image=None)
                 ocr_q.put(None)
                 ocr_worker(ocr_q, db_q, reader, lambda: True)
                 self.assertEqual(db_q.qsize(), 1)
@@ -99,7 +107,7 @@ class HybridTrackingTests(unittest.TestCase):
                 self.assertEqual(record['track_id'], 7)
                 self.assertEqual(record['direction'], 'entry')
                 self.assertEqual(record['plate_text'], 'TEST-PLATE')
-                reader.read.assert_called_once()
+                reader.recognize_candidates.assert_called_once()
 
     def test_untrackable_image_falls_back_to_detector(self):
         tracker = self.make_tracker()

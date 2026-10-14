@@ -1,0 +1,5 @@
+{
+  "video": "src/computer_vision_v2/video/vlc-record-2026-10-12-01h34m47s-rtsp___172.16.254.8_554_cam_realmonitor-.avi",
+  "log": "reports/plate_debug/20261012-211328/results.jsonl",
+  "decoded_frames": 753
+}

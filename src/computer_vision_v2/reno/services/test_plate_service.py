@@ -21,8 +21,8 @@ class PlateServiceTests(unittest.TestCase):
 
     def test_event_rows_map_to_dashboard_records(self):
         self.cursor.fetchall.return_value = [
-            ('12ب345', datetime(2026, 9, 14, 13, 4, 5), 'cam2', 'exit', 2, 'captured_plates/test.jpg'),
-            (None, datetime(2026, 9, 14, 12, 1, 2), 'cam1', 'entry', 0, None),
+            ('12ب345', datetime(2026, 9, 14, 13, 4, 5), 'cam2', 'exit', 2, 'captured_plates/test.jpg', 'read'),
+            (None, datetime(2026, 9, 14, 12, 1, 2), 'cam1', 'entry', 0, None, 'unread'),
         ]
         records = self.service.get_recent_records(50)
         self.assertEqual(len(records), 2)
@@ -42,11 +42,16 @@ class PlateServiceTests(unittest.TestCase):
         self.cursor.fetchall.return_value = []
         self.assertEqual(self.service.get_recent_records(), [])
 
+    def test_uncertain_event_has_distinct_label(self):
+        self.cursor.fetchall.return_value = [
+            (None,datetime(2026,10,13,12),'cam2','exit',2,None,'uncertain')]
+        self.assertEqual(self.service.get_recent_records()[0].plate,'نامطمئن')
+
     @unittest.skipUnless(hasattr(time, 'tzset'), 'Requires system timezone control')
     def test_database_timestamp_is_displayed_in_system_timezone(self):
         self.cursor.fetchall.return_value = [
             (None, datetime(2026, 10, 10, 23, 45, tzinfo=timezone.utc),
-             'cam2', 'entry', 0, None),
+             'cam2', 'entry', 0, None, 'unread'),
         ]
         try:
             with patch.dict(os.environ, {'TZ': 'Asia/Tehran'}):

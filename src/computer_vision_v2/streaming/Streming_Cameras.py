@@ -21,11 +21,11 @@ class CapturedFrame(NamedTuple):
 
 
 class StreamManager:
-    def __init__(self, camera_id, source, source_type, model_path, detection_interval=3):
+    def __init__(self, camera_id, source, source_type, model_path, detection_interval=3, roi=None):
         self.camera_id = camera_id
         self.source = source
         self.source_type = source_type
-        self.tracker = CameraTracker(camera_id, model_path, detection_interval)
+        self.tracker = CameraTracker(camera_id, model_path, detection_interval, roi=roi)
 
         self._stop = threading.Event()
         self._condition = threading.Condition()
@@ -75,7 +75,8 @@ class StreamManager:
                 if not ok:
                     return
                 self._capture_index += 1
-                tracked = self.tracker.process(self._capture_index, time.monotonic(), image)
+                fps = getattr(source, 'fps', 25.)
+                tracked = self.tracker.process(self._capture_index, self._capture_index/fps, image)
                 with self._condition:
                     self._latest_tracked = tracked
         except Exception:

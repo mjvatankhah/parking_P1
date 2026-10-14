@@ -23,8 +23,8 @@ ON CONFLICT (plate_number) DO NOTHING
 """
 
 INSERT_EVENT = """
-INSERT INTO event (camera_id, plate_number, event_type, class_id, confidence, image_path, captured_at)
-VALUES (%s, %s, %s, %s, %s, %s, %s)
+INSERT INTO event (camera_id, plate_number, event_type, class_id, confidence, image_path, captured_at, recognition_status, recognition_details)
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s::jsonb)
 RETURNING id
 """
 

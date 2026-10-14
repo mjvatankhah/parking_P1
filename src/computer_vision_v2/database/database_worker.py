@@ -1,6 +1,7 @@
 """Persist recognized crossings using the schema's vehicle and session tables."""
 
 import logging
+import json
 from datetime import datetime
 
 from computer_vision_v2.database.connection import get_connection
@@ -12,7 +13,8 @@ logger = logging.getLogger(__name__)
 
 def _save_event(cursor, item):
     captured_at = datetime.now().astimezone()
-    plate_number = item["plate_text"] or None
+    status = item.get('recognition_status', 'read' if item['plate_text'] else 'unread')
+    plate_number = (item["plate_text"] or None) if status == 'read' else None
     if plate_number is not None:
         cursor.execute(queries.INSERT_VEHICLE, (plate_number, "car"))
 
@@ -21,6 +23,7 @@ def _save_event(cursor, item):
         (
             item["camera_id"], plate_number, item["direction"], item["class_id"],
             item["confidence"], item["image_path"], captured_at,
+            status, json.dumps(item.get('readings', []), ensure_ascii=False),
         ),
     )
     event_id = cursor.fetchone()[0]

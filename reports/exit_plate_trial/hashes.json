@@ -1,0 +1,7 @@
+{
+  "src/computer_vision_v2/inference/plate_ocr.py": "9aa5c90c6be9c384d6b3da5189fbcddd8b0a409b967d08a3b5afa911a6a5723c",
+  "src/computer_vision_v2/debug_plate.py": "e98679abdbe7398205877cb5ce0feb7621576f5cfccbff0c579dab316e848f38",
+  "src/computer_vision_v2/tracking/tracker.py": "f275efb81a303eee5be33cdf6aae0ed6afaf19c60aa4f2d9d6895d92b5d7ad3c",
+  "src/computer_vision_v2/ocr_worker/models/plate_yolo.onnx": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6",
+  "src/computer_vision_v2/ocr_worker/models/ocr_crnn.onnx": "45f8c45f29eb1ee91f6274cb8d9c328da1a2050ea7d8596bae61f4a6b9f9fb1e"
+}

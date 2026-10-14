@@ -1,0 +1,20 @@
+[0;93m2026-10-12 20:39:24.465432393 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+best_all {'track': 1, 'bbox': [68, 12, 143, 94], 'predicted': False, 'vehicle_confidence': 0.4260087311267853, 'crop_eligible': True, 'text': None, 'confidence': 0.0, 'plate_path': None, 'detector_confidence': None, 'ocr_confidence': None, 'status': 'no_plate', 'frame': 1828, 'score': 9393.263995619123, 'sharpness': 9344.513122506445}
+best_range {'track': 1, 'bbox': [42, 61, 159, 207], 'predicted': False, 'vehicle_confidence': 0.8660694360733032, 'crop_eligible': True, 'text': None, 'confidence': 0.0, 'plate_path': None, 'detector_confidence': None, 'ocr_confidence': None, 'status': 'no_plate', 'frame': 2001, 'score': 6920.776142185329, 'sharpness': 6817.087198577999}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (82, 75, 3)
+{"frame": 1828, "crop_size": [75, 82], "raw_shape": [1, 5, 8400], "max_detector_score": 0.011383593082427979, "top_box": [22, 49, 48, 69], "text": null, "combined_confidence": 0.0, "plate_path": null}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (148, 119, 3)
+{"frame": 2000, "crop_size": [119, 148], "raw_shape": [1, 5, 8400], "max_detector_score": 0.0403464138507843, "top_box": [39, 118, 77, 140], "text": null, "combined_confidence": 0.0, "plate_path": null}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (146, 117, 3)
+{"frame": 2001, "crop_size": [117, 146], "raw_shape": [1, 5, 8400], "max_detector_score": 0.034000009298324585, "top_box": [37, 118, 76, 138], "text": null, "combined_confidence": 0.0, "plate_path": null}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (158, 135, 3)
+{"frame": 2020, "crop_size": [135, 158], "raw_shape": [1, 5, 8400], "max_detector_score": 0.05146273970603943, "top_box": [43, 126, 86, 150], "text": null, "combined_confidence": 0.0, "plate_path": null}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (204, 166, 3)
+{"frame": 2040, "crop_size": [166, 204], "raw_shape": [1, 5, 8400], "max_detector_score": 0.11302399635314941, "top_box": [112, 130, 148, 156], "text": null, "combined_confidence": 0.0, "plate_path": null}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (228, 183, 3)
+{"frame": 2050, "crop_size": [183, 228], "raw_shape": [1, 5, 8400], "max_detector_score": 0.35125240683555603, "top_box": [126, 147, 171, 180], "text": "36ز6666", "combined_confidence": 0.45349021852016447, "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791824979059.jpg", "plate_size": [45, 33]}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (248, 197, 3)
+{"frame": 2055, "crop_size": [197, 248], "raw_shape": [1, 5, 8400], "max_detector_score": 0.04169493913650513, "top_box": [136, 162, 183, 195], "text": null, "combined_confidence": 0.0, "plate_path": null}
+[PlateReader DEBUG] type= <class 'numpy.ndarray'> shape= (276, 208, 3)
+{"frame": 2060, "crop_size": [208, 276], "raw_shape": [1, 5, 8400], "max_detector_score": 0.03624966740608215, "top_box": [198, 21, 208, 25], "text": null, "combined_confidence": 0.0, "plate_path": null}
+DONE

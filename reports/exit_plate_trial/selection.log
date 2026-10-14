@@ -1,0 +1,96 @@
+[0;93m2026-10-13 05:44:33.707303279 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+{
+  "roi": [
+    0.1,
+    0.1,
+    0.75,
+    0.65
+  ],
+  "frame_spacing": 3,
+  "candidate_separation_frames": 15,
+  "candidate_count": 37,
+  "stage_counts": {
+    "outside_roi_or_sampling": 33,
+    "sampled_frames": 113,
+    "rejected_aspect": 19,
+    "no_geometry": 18
+  },
+  "selected": [
+    {
+      "frame": 348,
+      "candidate": 0,
+      "quality": 0.18393517829165032,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -16.961705886532908,
+        "rect": [
+          13,
+          22,
+          83,
+          23
+        ],
+        "geometry_quality": 0.21749431167878294,
+        "aspect": 3.608695652173913
+      },
+      "detector_score": 0.8457010984420776,
+      "text": "58م87245",
+      "ocr_confidence": 0.9672903716564178,
+      "valid_format": true
+    },
+    {
+      "frame": 333,
+      "candidate": 0,
+      "quality": 0.15839310182517483,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -17.899489837357475,
+        "rect": [
+          12,
+          24,
+          85,
+          21
+        ],
+        "geometry_quality": 0.20566666155073374,
+        "aspect": 4.0476190476190474
+      },
+      "detector_score": 0.7701447606086731,
+      "text": "58م87245",
+      "ocr_confidence": 0.9160169064998627,
+      "valid_format": true
+    },
+    {
+      "frame": 318,
+      "candidate": 0,
+      "quality": 0.15537174626375572,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -18.758650347842234,
+        "rect": [
+          13,
+          25,
+          86,
+          22
+        ],
+        "geometry_quality": 0.2020371355820267,
+        "aspect": 3.909090909090909
+      },
+      "detector_score": 0.7690256834030151,
+      "text": "58م87245",
+      "ocr_confidence": 0.9546210542321205,
+      "valid_format": true
+    }
+  ],
+  "votes": {
+    "58م87245": 0.4713306263314263
+  },
+  "occurrences": {
+    "58م87245": 3
+  },
+  "final_text": "58م87245",
+  "decision": "agreed",
+  "expected_for_evaluation_only": "58م87245",
+  "correct": true,
+  "ocr_calls": 3,
+  "last_observed_frame": 441,
+  "scope": "one known exiting track; no multi-car ID-switch validation"
+}

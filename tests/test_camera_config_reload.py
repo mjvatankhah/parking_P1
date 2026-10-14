@@ -65,3 +65,14 @@ class CameraConfigReloadTests(unittest.TestCase):
         self.assertTrue(self.service.reload())
         self.assertEqual(self.service.get_cameras(), [])
         self.listener.assert_called_once_with([])
+
+    def test_save_preserves_sampling_and_roi(self):
+        config=json.loads(self.path.read_text())
+        config['plate_sampling']={'capacity':8,'interval':.2}
+        config['cameras'][0]['roi']=[[.1,.1],[.9,.1],[.9,.9],[.1,.9]]
+        self.path.write_text(json.dumps(config))
+        self.service.reload()
+        self.service._save()
+        saved=json.loads(self.path.read_text())
+        self.assertEqual(saved['plate_sampling'],config['plate_sampling'])
+        self.assertEqual(saved['cameras'][0]['roi'],config['cameras'][0]['roi'])

@@ -15,3 +15,22 @@ wheels/
 Thumbs.db
 desktop.ini
 .DS_Store
+# Images
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.webp
+
+# Videos
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.webm
+*.ts
+
+# Archives
+*.zip
+*.rar
+*.7z

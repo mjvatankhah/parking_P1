@@ -159,6 +159,9 @@ class CameraSettingsScreen(Screen):
         cancel_button.bind(on_release=lambda *_: self._start_add_mode())
 
         buttons_row.add_widget(add_button)
+        geometry_button = SecondaryButton(text=rtl('محدوده و خط'), size_hint_x=None, width=130)
+        geometry_button.bind(on_release=lambda *_: self._select_geometry())
+        buttons_row.add_widget(geometry_button)
         buttons_row.add_widget(BoxLayout())
         buttons_row.add_widget(cancel_button)
         buttons_row.add_widget(save_button)
@@ -412,6 +415,14 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         return row
 
     # -- actions --------------------------------------------------------
+    def _select_geometry(self):
+        camera_id = self._id_input.text.strip()
+        if camera_service.get_camera(camera_id) is None:
+            self._error_label.set_text('ابتدا دوربین را ذخیره کنید، سپس آن را برای رسم محدوده ویرایش کنید.')
+            return
+        subprocess.Popen([sys.executable, '-m', 'computer_vision_v2.select_line_points',
+                          '--camera', camera_id, '--shape', 'l'])
+
     def _start_add_mode(self):
         self._editing_camera_id = None
         self._form_title.set_text("افزودن دوربین جدید")
@@ -519,6 +530,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
             line=line_points,
             inside_point=inside_point,
             coordinate_space=coordinate_space,
+            roi=existing.roi if existing else None,
         )
 
         if is_new:
@@ -538,6 +550,10 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
 
     def _on_cameras_changed(self, _cameras):
         self._refresh_table()
+        if self._editing_camera_id:
+            camera = camera_service.get_camera(self._editing_camera_id)
+            if camera is not None:
+                self._start_edit_mode(camera)
 
     def _on_camera_status_changed(self, _cameras):
         self._refresh_table()

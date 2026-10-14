@@ -1,0 +1,35 @@
+{
+  "clock": "video time, reconstructed; not historical wall time",
+  "best_at_2060": {
+    "frame": 1828,
+    "score": 9393.263995619123,
+    "shape": [
+      82,
+      75,
+      3
+    ]
+  },
+  "crossings": [],
+  "selection_changes": [
+    {
+      "observed_frame": 1821,
+      "best_frame": 1821,
+      "score": 8855.564125248167
+    },
+    {
+      "observed_frame": 1825,
+      "best_frame": 1825,
+      "score": 8944.336513655202
+    },
+    {
+      "observed_frame": 1826,
+      "best_frame": 1826,
+      "score": 9133.328692233477
+    },
+    {
+      "observed_frame": 1828,
+      "best_frame": 1828,
+      "score": 9393.263995619123
+    }
+  ]
+}

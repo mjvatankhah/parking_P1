@@ -1,0 +1,4353 @@
+[
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9014819860458374,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 1
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9009115099906921,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 2
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9009233117103577,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 3
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9011401534080505,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 4
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9020419120788574,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 5
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9029940366744995,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 6
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9033300280570984,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 7
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9027393460273743,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 8
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9020950198173523,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 9
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9013595581054688,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 10
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.901136040687561,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 11
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9018024802207947,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 12
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9012231826782227,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 13
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9004576802253723,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 14
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9011730551719666,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 15
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.900155246257782,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 16
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9008968472480774,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 17
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9012864232063293,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 18
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9017514586448669,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 19
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.901576042175293,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 20
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9012279510498047,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 21
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.8996546864509583,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 22
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9001381397247314,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 23
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9001061916351318,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 24
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.8998127579689026,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 25
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9002332091331482,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 26
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9003672003746033,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 27
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9010741114616394,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 28
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9019753336906433,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 29
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9028346538543701,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 30
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9024639129638672,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 31
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9034525752067566,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 32
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.903846263885498,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 33
+  },
+  {
+    "track": 2,
+    "bbox": [
+      340,
+      3,
+      493,
+      160
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.35824260115623474,
+    "crop_eligible": true,
+    "text": "090پ06650",
+    "confidence": 0.4132269069552421,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827077225.jpg",
+    "detector_confidence": 0.3757232427597046,
+    "ocr_confidence": 0.42929990589618683,
+    "status": "read",
+    "frame": 33
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9035933017730713,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 34
+  },
+  {
+    "track": 2,
+    "bbox": [
+      340,
+      3,
+      493,
+      160
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.29131343960762024,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 34
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.903957188129425,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 35
+  },
+  {
+    "track": 2,
+    "bbox": [
+      340,
+      3,
+      494,
+      160
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.2295656055212021,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 35
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.903675377368927,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 36
+  },
+  {
+    "track": 2,
+    "bbox": [
+      340,
+      3,
+      494,
+      160
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.19755472242832184,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 36
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9042896628379822,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 37
+  },
+  {
+    "track": 2,
+    "bbox": [
+      340,
+      3,
+      494,
+      161
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.16794157028198242,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 37
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9032783508300781,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 38
+  },
+  {
+    "track": 2,
+    "bbox": [
+      339,
+      3,
+      495,
+      163
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.13670764863491058,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 38
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.903710126876831,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 39
+  },
+  {
+    "track": 2,
+    "bbox": [
+      338,
+      3,
+      495,
+      164
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.10944405198097229,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 39
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9037536382675171,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 40
+  },
+  {
+    "track": 2,
+    "bbox": [
+      337,
+      3,
+      495,
+      165
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.1161852702498436,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 40
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9043905138969421,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 41
+  },
+  {
+    "track": 2,
+    "bbox": [
+      337,
+      3,
+      495,
+      165
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.12145612388849258,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 41
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9038386940956116,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 42
+  },
+  {
+    "track": 2,
+    "bbox": [
+      337,
+      3,
+      495,
+      166
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.14398318529129028,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 42
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9037811160087585,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 43
+  },
+  {
+    "track": 2,
+    "bbox": [
+      337,
+      3,
+      495,
+      166
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.11154989898204803,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 43
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9033578634262085,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 44
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.903952419757843,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 45
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9039773344993591,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 46
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9034536480903625,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 47
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9024931788444519,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 48
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9032401442527771,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 49
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9027508497238159,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 50
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9048185348510742,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 51
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9037153720855713,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 52
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.902471125125885,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 53
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.90236896276474,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 54
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9026750326156616,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 55
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9019118547439575,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 56
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9020020365715027,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 57
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9019827246665955,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 58
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9019631147384644,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 59
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9025601744651794,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 60
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9057976007461548,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 61
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.904503583908081,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 62
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9029489755630493,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 63
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9032655358314514,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 64
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9039357900619507,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 65
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9031987190246582,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 66
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9028806090354919,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 67
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9034098982810974,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 68
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9031580686569214,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 69
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9031134247779846,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 70
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9025459885597229,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 71
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9036275744438171,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 72
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9036011099815369,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 73
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.902845561504364,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 74
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9023845195770264,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 75
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9011638164520264,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 76
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9018700122833252,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 77
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9019477367401123,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 78
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9017230868339539,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 79
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9027061462402344,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 80
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9017691016197205,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 81
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9012729525566101,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 82
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9016321897506714,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 83
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9006912708282471,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 84
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9005581140518188,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 85
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9006507396697998,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 86
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9023098945617676,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 87
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9011887311935425,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 88
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9010607600212097,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 89
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9014574885368347,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 90
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9022788405418396,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 91
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.901891827583313,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 92
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.901540994644165,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 93
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9020434617996216,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 94
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9024237394332886,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 95
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9017137885093689,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 96
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9021024107933044,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 97
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.902667760848999,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 98
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9031018614768982,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 99
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9035980105400085,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 100
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9031808972358704,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 101
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9026597738265991,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 102
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9018685817718506,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 103
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9012563228607178,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 104
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9022995829582214,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 105
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9015291333198547,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 106
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9018834233283997,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 107
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9001611471176147,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 108
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9000383019447327,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 109
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9006446599960327,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 110
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9021204710006714,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 111
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.902106523513794,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 112
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9030717015266418,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 113
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9015836119651794,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 114
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9014528393745422,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 115
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9013259410858154,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 116
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9019530415534973,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 117
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.904044508934021,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 118
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9036169052124023,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 119
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9025276303291321,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 120
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9053134322166443,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 121
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9051942229270935,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 122
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.905249834060669,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 123
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9064627289772034,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 124
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.90485680103302,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 125
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      43,
+      497,
+      229
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.39156442880630493,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 125
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      557,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9042268991470337,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 126
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      44,
+      496,
+      229
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.25380709767341614,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 126
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9042652249336243,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 127
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      43,
+      499,
+      231
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.20220938324928284,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 127
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1918,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9048798084259033,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 128
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      44,
+      499,
+      232
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.13708852231502533,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 128
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9041452407836914,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 129
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9039259552955627,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 130
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9043334722518921,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 131
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.905311107635498,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 132
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9054668545722961,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 133
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9052417278289795,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 134
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9066269993782043,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 135
+  },
+  {
+    "track": 3,
+    "bbox": [
+      321,
+      48,
+      501,
+      239
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.27667713165283203,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 135
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9060766696929932,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 136
+  },
+  {
+    "track": 3,
+    "bbox": [
+      314,
+      29,
+      508,
+      239
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.14291857182979584,
+    "crop_eligible": true,
+    "text": "56م52290",
+    "confidence": 0.5113970544189215,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827478177.jpg",
+    "detector_confidence": 0.48491889238357544,
+    "ocr_confidence": 0.5227448381483555,
+    "status": "read",
+    "frame": 136
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9065356850624084,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 137
+  },
+  {
+    "track": 3,
+    "bbox": [
+      320,
+      43,
+      503,
+      240
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.2840650975704193,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 137
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      555,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9062255024909973,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 138
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      49,
+      500,
+      241
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.16522185504436493,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 138
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9070307016372681,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 139
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      51,
+      499,
+      243
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.47051697969436646,
+    "crop_eligible": true,
+    "text": "5پ8109",
+    "confidence": 0.5300002470612526,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827511270.jpg",
+    "detector_confidence": 0.43354135751724243,
+    "ocr_confidence": 0.5713397711515427,
+    "status": "read",
+    "frame": 139
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9068098664283752,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 140
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      53,
+      499,
+      244
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.22476424276828766,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 140
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9068407416343689,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 141
+  },
+  {
+    "track": 3,
+    "bbox": [
+      322,
+      55,
+      498,
+      245
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.1181526854634285,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 141
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9074147939682007,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 142
+  },
+  {
+    "track": 3,
+    "bbox": [
+      320,
+      54,
+      499,
+      247
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.11708507686853409,
+    "crop_eligible": true,
+    "text": "56م52205",
+    "confidence": 0.6072972411289811,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827549358.jpg",
+    "detector_confidence": 0.5789795517921448,
+    "ocr_confidence": 0.619433393701911,
+    "status": "read",
+    "frame": 142
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9065710306167603,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 143
+  },
+  {
+    "track": 3,
+    "bbox": [
+      320,
+      54,
+      500,
+      249
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.132625550031662,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 143
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1716,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.906520664691925,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 144
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9064778685569763,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 145
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9056231379508972,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 146
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9062567353248596,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 147
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9060105681419373,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 148
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9056715369224548,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 149
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9072351455688477,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 150
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9079599380493164,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 151
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9083382487297058,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 152
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9082163572311401,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 153
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9084705114364624,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 154
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      556,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9077081680297852,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 155
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9074854850769043,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 156
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9080163240432739,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 157
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9078992605209351,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 158
+  },
+  {
+    "track": 3,
+    "bbox": [
+      320,
+      63,
+      499,
+      256
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.3318915069103241,
+    "crop_eligible": true,
+    "text": "5م8200",
+    "confidence": 0.46782014518976206,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827672180.jpg",
+    "detector_confidence": 0.5898738503456116,
+    "ocr_confidence": 0.4155114144086838,
+    "status": "read",
+    "frame": 158
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.908557116985321,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 159
+  },
+  {
+    "track": 3,
+    "bbox": [
+      320,
+      64,
+      499,
+      257
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.3560023009777069,
+    "crop_eligible": true,
+    "text": "5م820",
+    "confidence": 0.4828404307365417,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827679383.jpg",
+    "detector_confidence": 0.5836243629455566,
+    "ocr_confidence": 0.4396473169326782,
+    "status": "read",
+    "frame": 159
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9066081643104553,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 160
+  },
+  {
+    "track": 3,
+    "bbox": [
+      319,
+      65,
+      498,
+      257
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.30620908737182617,
+    "crop_eligible": true,
+    "text": "64م82996",
+    "confidence": 0.4469167934730649,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827686094.jpg",
+    "detector_confidence": 0.5156354904174805,
+    "ocr_confidence": 0.41746592335402966,
+    "status": "read",
+    "frame": 160
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9068860411643982,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 161
+  },
+  {
+    "track": 3,
+    "bbox": [
+      319,
+      66,
+      499,
+      258
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.23718608915805817,
+    "crop_eligible": true,
+    "text": "6م82996",
+    "confidence": 0.40815172642469405,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827692647.jpg",
+    "detector_confidence": 0.36571383476257324,
+    "ocr_confidence": 0.4263393942798887,
+    "status": "read",
+    "frame": 161
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9063149094581604,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 162
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9071221947669983,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 163
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.907177209854126,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 164
+  },
+  {
+    "track": 3,
+    "bbox": [
+      320,
+      66,
+      502,
+      261
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.6369216442108154,
+    "crop_eligible": true,
+    "text": "5م38799",
+    "confidence": 0.5404777228832245,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827711328.jpg",
+    "detector_confidence": 0.4526463747024536,
+    "ocr_confidence": 0.578119729246412,
+    "status": "read",
+    "frame": 164
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      555,
+      1918,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9076934456825256,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 165
+  },
+  {
+    "track": 3,
+    "bbox": [
+      319,
+      66,
+      503,
+      264
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5337885022163391,
+    "crop_eligible": true,
+    "text": "55م87495",
+    "confidence": 0.5977009017020464,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827717157.jpg",
+    "detector_confidence": 0.4963684678077698,
+    "ocr_confidence": 0.6411290876567364,
+    "status": "read",
+    "frame": 165
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9071213006973267,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 166
+  },
+  {
+    "track": 3,
+    "bbox": [
+      319,
+      67,
+      505,
+      266
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5797891616821289,
+    "crop_eligible": true,
+    "text": "5م87496",
+    "confidence": 0.6441717952489853,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827722243.jpg",
+    "detector_confidence": 0.4703785479068756,
+    "ocr_confidence": 0.7186546155384609,
+    "status": "read",
+    "frame": 166
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9076599478721619,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 167
+  },
+  {
+    "track": 3,
+    "bbox": [
+      319,
+      67,
+      507,
+      269
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.43466606736183167,
+    "crop_eligible": true,
+    "text": "5م87996",
+    "confidence": 0.5372878789901733,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827728553.jpg",
+    "detector_confidence": 0.5809469819068909,
+    "ocr_confidence": 0.5185768348830087,
+    "status": "read",
+    "frame": 167
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9074887037277222,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 168
+  },
+  {
+    "track": 3,
+    "bbox": [
+      319,
+      67,
+      507,
+      269
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5866418480873108,
+    "crop_eligible": true,
+    "text": "56م57495",
+    "confidence": 0.5359524320811033,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827732252.jpg",
+    "detector_confidence": 0.4134185314178467,
+    "ocr_confidence": 0.5884669609367847,
+    "status": "read",
+    "frame": 168
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9061164855957031,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 169
+  },
+  {
+    "track": 3,
+    "bbox": [
+      318,
+      68,
+      507,
+      270
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.2866547405719757,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 169
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9064932465553284,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 170
+  },
+  {
+    "track": 3,
+    "bbox": [
+      317,
+      68,
+      506,
+      269
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.22860421240329742,
+    "crop_eligible": true,
+    "text": "5م87395",
+    "confidence": 0.5971237167716026,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827741248.jpg",
+    "detector_confidence": 0.5456627011299133,
+    "ocr_confidence": 0.6191784377608981,
+    "status": "read",
+    "frame": 170
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9065877795219421,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 171
+  },
+  {
+    "track": 3,
+    "bbox": [
+      318,
+      68,
+      505,
+      269
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.28952932357788086,
+    "crop_eligible": true,
+    "text": "5م87095",
+    "confidence": 0.5857573002576827,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827745106.jpg",
+    "detector_confidence": 0.5377315282821655,
+    "ocr_confidence": 0.6063397739614759,
+    "status": "read",
+    "frame": 171
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9073508381843567,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 172
+  },
+  {
+    "track": 3,
+    "bbox": [
+      317,
+      68,
+      507,
+      270
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5169721841812134,
+    "crop_eligible": true,
+    "text": "58م82995",
+    "confidence": 0.5447637043893337,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827748617.jpg",
+    "detector_confidence": 0.49025800824165344,
+    "ocr_confidence": 0.5681232884526253,
+    "status": "read",
+    "frame": 172
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9070218801498413,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 173
+  },
+  {
+    "track": 3,
+    "bbox": [
+      317,
+      69,
+      507,
+      271
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.6777982711791992,
+    "crop_eligible": true,
+    "text": "58م82995",
+    "confidence": 0.45539316590875384,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827753922.jpg",
+    "detector_confidence": 0.49749746918678284,
+    "ocr_confidence": 0.4373484645038843,
+    "status": "read",
+    "frame": 173
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9065794944763184,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 174
+  },
+  {
+    "track": 3,
+    "bbox": [
+      316,
+      70,
+      507,
+      271
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.6615613102912903,
+    "crop_eligible": true,
+    "text": "5م427996",
+    "confidence": 0.4422769900411367,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827759095.jpg",
+    "detector_confidence": 0.44527536630630493,
+    "ocr_confidence": 0.44099197164177895,
+    "status": "read",
+    "frame": 174
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9057506918907166,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 175
+  },
+  {
+    "track": 3,
+    "bbox": [
+      316,
+      70,
+      508,
+      272
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.4885868430137634,
+    "crop_eligible": true,
+    "text": "5ع82096",
+    "confidence": 0.46520492732524876,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827763043.jpg",
+    "detector_confidence": 0.4829629957675934,
+    "ocr_confidence": 0.45759432656424387,
+    "status": "read",
+    "frame": 175
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9056771397590637,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 176
+  },
+  {
+    "track": 3,
+    "bbox": [
+      317,
+      70,
+      506,
+      270
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5501649975776672,
+    "crop_eligible": true,
+    "text": "6م87096",
+    "confidence": 0.582491222023964,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827767211.jpg",
+    "detector_confidence": 0.5153688788414001,
+    "ocr_confidence": 0.611257940530777,
+    "status": "read",
+    "frame": 176
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.905647873878479,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 177
+  },
+  {
+    "track": 3,
+    "bbox": [
+      316,
+      71,
+      507,
+      271
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5515162944793701,
+    "crop_eligible": true,
+    "text": "56م87096",
+    "confidence": 0.5822464101016521,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827771456.jpg",
+    "detector_confidence": 0.5003916025161743,
+    "ocr_confidence": 0.6173270419239998,
+    "status": "read",
+    "frame": 177
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9074773192405701,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 178
+  },
+  {
+    "track": 3,
+    "bbox": [
+      316,
+      71,
+      508,
+      273
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.569011926651001,
+    "crop_eligible": true,
+    "text": "56م87096",
+    "confidence": 0.5474352058023214,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827777762.jpg",
+    "detector_confidence": 0.47585543990135193,
+    "ocr_confidence": 0.5781122483313084,
+    "status": "read",
+    "frame": 178
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      554,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9078707098960876,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 179
+  },
+  {
+    "track": 3,
+    "bbox": [
+      315,
+      71,
+      510,
+      276
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.546562910079956,
+    "crop_eligible": true,
+    "text": "6م8795",
+    "confidence": 0.60814787397782,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827786500.jpg",
+    "detector_confidence": 0.5516458749771118,
+    "ocr_confidence": 0.632363016406695,
+    "status": "read",
+    "frame": 179
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1065
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9080978035926819,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 180
+  },
+  {
+    "track": 3,
+    "bbox": [
+      314,
+      71,
+      509,
+      276
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.5007060170173645,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 180
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9049161672592163,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 181
+  },
+  {
+    "track": 3,
+    "bbox": [
+      313,
+      70,
+      508,
+      275
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.4774557948112488,
+    "crop_eligible": true,
+    "text": "56م87095",
+    "confidence": 0.5190372642129659,
+    "plate_path": "/home/MJR/parking_P1/src/captured_plates/plate_1791827806979.jpg",
+    "detector_confidence": 0.41971683502197266,
+    "ocr_confidence": 0.5616031624376774,
+    "status": "read",
+    "frame": 181
+  },
+  {
+    "track": 1,
+    "bbox": [
+      1715,
+      553,
+      1919,
+      1066
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.9043615460395813,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 182
+  },
+  {
+    "track": 3,
+    "bbox": [
+      311,
+      71,
+      508,
+      277
+    ],
+    "predicted": false,
+    "vehicle_confidence": 0.47422468662261963,
+    "crop_eligible": true,
+    "text": null,
+    "confidence": 0.0,
+    "plate_path": null,
+    "detector_confidence": null,
+    "ocr_confidence": null,
+    "status": "no_plate",
+    "frame": 182
+  }
+]

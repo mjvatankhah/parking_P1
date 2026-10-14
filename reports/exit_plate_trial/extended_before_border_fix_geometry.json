@@ -1,0 +1,1957 @@
+[
+  {
+    "frame": 159,
+    "baseline": {
+      "bbox": [
+        628,
+        277,
+        725,
+        375
+      ],
+      "score": 0.44281744956970215,
+      "text": "19ز62",
+      "ocr_conf": 0.3442569077014923
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 162,
+    "baseline": {
+      "bbox": [
+        615,
+        278,
+        711,
+        381
+      ],
+      "score": 0.42659372091293335,
+      "text": "29پ2",
+      "ocr_conf": 0.34143946692347527
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 171,
+    "baseline": {
+      "bbox": [
+        566,
+        272,
+        660,
+        376
+      ],
+      "score": 0.4554327726364136,
+      "text": "59ز423",
+      "ocr_conf": 0.3014391362667084
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 177,
+    "baseline": {
+      "bbox": [
+        541,
+        268,
+        633,
+        380
+      ],
+      "score": 0.41176870465278625,
+      "text": "59پ5",
+      "ocr_conf": 0.3495536111295223
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 180,
+    "baseline": {
+      "bbox": [
+        534,
+        272,
+        626,
+        378
+      ],
+      "score": 0.47747063636779785,
+      "text": "19ز529",
+      "ocr_conf": 0.33029529949029285
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 183,
+    "baseline": {
+      "bbox": [
+        524,
+        272,
+        617,
+        373
+      ],
+      "score": 0.4133487939834595,
+      "text": "59ز655",
+      "ocr_conf": 0.3389907355109851
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 189,
+    "baseline": {
+      "bbox": [
+        493,
+        260,
+        583,
+        373
+      ],
+      "score": 0.3572334051132202,
+      "text": "59ب55",
+      "ocr_conf": 0.37231330275535585
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 192,
+    "baseline": {
+      "bbox": [
+        477,
+        265,
+        566,
+        369
+      ],
+      "score": 0.38538676500320435,
+      "text": "19ز225",
+      "ocr_conf": 0.32966111103693646
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 195,
+    "baseline": {
+      "bbox": [
+        463,
+        254,
+        552,
+        364
+      ],
+      "score": 0.5406716465950012,
+      "text": "59ز630",
+      "ocr_conf": 0.31797482818365097
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 198,
+    "baseline": {
+      "bbox": [
+        455,
+        261,
+        542,
+        362
+      ],
+      "score": 0.5530528426170349,
+      "text": "56ز35",
+      "ocr_conf": 0.3389948934316635
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 201,
+    "baseline": {
+      "bbox": [
+        448,
+        245,
+        530,
+        366
+      ],
+      "score": 0.4713774621486664,
+      "text": "59پ6559",
+      "ocr_conf": 0.4517877059323447
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 204,
+    "baseline": {
+      "bbox": [
+        437,
+        257,
+        521,
+        364
+      ],
+      "score": 0.4757826328277588,
+      "text": "59و699",
+      "ocr_conf": 0.2957402343551318
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 207,
+    "baseline": {
+      "bbox": [
+        425,
+        253,
+        509,
+        361
+      ],
+      "score": 0.5538402795791626,
+      "text": "59پ625",
+      "ocr_conf": 0.3565400217970212
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 210,
+    "baseline": {
+      "bbox": [
+        411,
+        235,
+        489,
+        356
+      ],
+      "score": 0.44983479380607605,
+      "text": "59ت9",
+      "ocr_conf": 0.24908480420708656
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 213,
+    "baseline": {
+      "bbox": [
+        396,
+        259,
+        477,
+        351
+      ],
+      "score": 0.41921788454055786,
+      "text": "56پ5525",
+      "ocr_conf": 0.479329845735005
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 225,
+    "baseline": {
+      "bbox": [
+        362,
+        251,
+        436,
+        345
+      ],
+      "score": 0.3728722035884857,
+      "text": "59ز9955",
+      "ocr_conf": 0.4450870007276535
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 228,
+    "baseline": {
+      "bbox": [
+        571,
+        198,
+        630,
+        251
+      ],
+      "score": 0.43517905473709106,
+      "text": "36ت33340",
+      "ocr_conf": 0.30417111702263355
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 231,
+    "baseline": {
+      "bbox": [
+        563,
+        199,
+        667,
+        257
+      ],
+      "score": 0.37222427129745483,
+      "text": "26پ203",
+      "ocr_conf": 0.38009779155254364
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -26.25865955480728
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 234,
+    "baseline": {
+      "bbox": [
+        553,
+        199,
+        614,
+        253
+      ],
+      "score": 0.4456130564212799,
+      "text": "46ت6426",
+      "ocr_conf": 0.3277881784098489
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 237,
+    "baseline": {
+      "bbox": [
+        538,
+        197,
+        603,
+        255
+      ],
+      "score": 0.4090935289859772,
+      "text": "46ت646",
+      "ocr_conf": 0.37876754502455395
+    },
+    "status": "reject_aspect"
+  },
+  {
+    "frame": 240,
+    "baseline": {
+      "bbox": [
+        528,
+        195,
+        595,
+        251
+      ],
+      "score": 0.5204685926437378,
+      "text": "46ت64262",
+      "ocr_conf": 0.2954002507030964
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -23.994896086231545,
+      "rect": [
+        9,
+        27,
+        78,
+        31
+      ],
+      "geometry_quality": 0.17446242595107403,
+      "aspect": 2.5161290322580645
+    },
+    "status": "ocr",
+    "text": "25م3322",
+    "ocr_confidence": 0.5203482338360378,
+    "size": [
+      82,
+      35
+    ]
+  },
+  {
+    "frame": 243,
+    "baseline": {
+      "bbox": [
+        514,
+        190,
+        586,
+        247
+      ],
+      "score": 0.5865564942359924,
+      "text": "46ت66620",
+      "ocr_conf": 0.3630432039499283
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -22.761967284435496
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 246,
+    "baseline": {
+      "bbox": [
+        499,
+        185,
+        570,
+        242
+      ],
+      "score": 0.6343733072280884,
+      "text": "49ت6460",
+      "ocr_conf": 0.31741270210061756
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -22.84804287161634,
+      "rect": [
+        9,
+        30,
+        79,
+        30
+      ],
+      "geometry_quality": 0.1612791040715755,
+      "aspect": 2.6333333333333333
+    },
+    "status": "ocr",
+    "text": "5م383335",
+    "ocr_confidence": 0.6296274065971375,
+    "size": [
+      83,
+      34
+    ]
+  },
+  {
+    "frame": 249,
+    "baseline": {
+      "bbox": [
+        486,
+        182,
+        560,
+        240
+      ],
+      "score": 0.4962387681007385,
+      "text": "49ت65430",
+      "ocr_conf": 0.37284998036921024
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -21.974507991471963
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 252,
+    "baseline": {
+      "bbox": [
+        475,
+        177,
+        544,
+        235
+      ],
+      "score": 0.5727065801620483,
+      "text": "49ت6630",
+      "ocr_conf": 0.38981244606631144
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -22.01128319791936,
+      "rect": [
+        7,
+        31,
+        80,
+        30
+      ],
+      "geometry_quality": 0.1650851153702173,
+      "aspect": 2.6666666666666665
+    },
+    "status": "ocr",
+    "text": "5م383335",
+    "ocr_confidence": 0.6703871116042137,
+    "size": [
+      84,
+      34
+    ]
+  },
+  {
+    "frame": 255,
+    "baseline": {
+      "bbox": [
+        461,
+        180,
+        531,
+        236
+      ],
+      "score": 0.5791524052619934,
+      "text": "26ت4560",
+      "ocr_conf": 0.40177459163325174
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -20.885801460693038,
+      "rect": [
+        8,
+        25,
+        81,
+        31
+      ],
+      "geometry_quality": 0.19147452568086154,
+      "aspect": 2.6129032258064515
+    },
+    "status": "ocr",
+    "text": "25م382335",
+    "ocr_confidence": 0.5891956090927124,
+    "size": [
+      85,
+      35
+    ]
+  },
+  {
+    "frame": 258,
+    "baseline": {
+      "bbox": [
+        453,
+        176,
+        528,
+        231
+      ],
+      "score": 0.501359224319458,
+      "text": "46ت53300",
+      "ocr_conf": 0.4581178203225136
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -20.984897835882194
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 261,
+    "baseline": {
+      "bbox": [
+        445,
+        178,
+        520,
+        228
+      ],
+      "score": 0.591850996017456,
+      "text": "56ب652440",
+      "ocr_conf": 0.6020221412181854
+    },
+    "geometry": {
+      "reason": "no_horizontal_edges"
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 264,
+    "baseline": {
+      "bbox": [
+        435,
+        177,
+        507,
+        228
+      ],
+      "score": 0.6318463683128357,
+      "text": "56ب65244",
+      "ocr_conf": 0.6278135739266872
+    },
+    "geometry": {
+      "reason": "no_horizontal_edges"
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 267,
+    "baseline": {
+      "bbox": [
+        429,
+        179,
+        504,
+        236
+      ],
+      "score": 0.6477932929992676,
+      "text": "56ص652040",
+      "ocr_conf": 0.5105103717909919
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -21.015816297373775
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 270,
+    "baseline": {
+      "bbox": [
+        424,
+        180,
+        497,
+        237
+      ],
+      "score": 0.6784448027610779,
+      "text": "56ب650949",
+      "ocr_conf": 0.537247724003262
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -22.16634582208246
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 273,
+    "baseline": {
+      "bbox": [
+        411,
+        179,
+        489,
+        237
+      ],
+      "score": 0.6813416481018066,
+      "text": "56ب65094",
+      "ocr_conf": 0.5369937904179096
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -21.309310597172612,
+      "rect": [
+        11,
+        29,
+        83,
+        24
+      ],
+      "geometry_quality": 0.18303310484085236,
+      "aspect": 3.4583333333333335
+    },
+    "status": "ocr",
+    "text": "58م87345",
+    "ocr_confidence": 0.9447882547974586,
+    "size": [
+      87,
+      28
+    ]
+  },
+  {
+    "frame": 276,
+    "baseline": {
+      "bbox": [
+        400,
+        179,
+        481,
+        235
+      ],
+      "score": 0.6850122809410095,
+      "text": "56ب5440",
+      "ocr_conf": 0.5339498817920685
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -22.249023657212366,
+      "rect": [
+        13,
+        29,
+        84,
+        24
+      ],
+      "geometry_quality": 0.18205785024528878,
+      "aspect": 3.5
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9795076474547386,
+    "size": [
+      88,
+      28
+    ]
+  },
+  {
+    "frame": 279,
+    "baseline": {
+      "bbox": [
+        396,
+        178,
+        473,
+        236
+      ],
+      "score": 0.6722227334976196,
+      "text": "56ب52940",
+      "ocr_conf": 0.5321554467082024
+    },
+    "geometry": {
+      "reason": "no_horizontal_edges"
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 282,
+    "baseline": {
+      "bbox": [
+        383,
+        175,
+        464,
+        232
+      ],
+      "score": 0.6701503396034241,
+      "text": "460ب65260",
+      "ocr_conf": 0.5935002134905921
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -21.92556049359148,
+      "rect": [
+        14,
+        30,
+        85,
+        29
+      ],
+      "geometry_quality": 0.17102426692184222,
+      "aspect": 2.9310344827586206
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9890162870287895,
+    "size": [
+      89,
+      33
+    ]
+  },
+  {
+    "frame": 285,
+    "baseline": {
+      "bbox": [
+        373,
+        172,
+        455,
+        228
+      ],
+      "score": 0.7069392204284668,
+      "text": "46ب65730",
+      "ocr_conf": 0.610830795019865
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -20.836675364943535,
+      "rect": [
+        14,
+        29,
+        85,
+        24
+      ],
+      "geometry_quality": 0.1846596990147983,
+      "aspect": 3.5416666666666665
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9754538461565971,
+    "size": [
+      89,
+      28
+    ]
+  },
+  {
+    "frame": 288,
+    "baseline": {
+      "bbox": [
+        366,
+        167,
+        446,
+        222
+      ],
+      "score": 0.6876590847969055,
+      "text": "56ب452330",
+      "ocr_conf": 0.48715832498338485
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -21.98524558121003,
+      "rect": [
+        10,
+        32,
+        85,
+        23
+      ],
+      "geometry_quality": 0.1765979748729095,
+      "aspect": 3.6956521739130435
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9879663363099098,
+    "size": [
+      89,
+      27
+    ]
+  },
+  {
+    "frame": 291,
+    "baseline": {
+      "bbox": [
+        362,
+        166,
+        441,
+        222
+      ],
+      "score": 0.7153070569038391,
+      "text": "60ت652030",
+      "ocr_conf": 0.46881184147463906
+    },
+    "geometry": {
+      "reason": "no_horizontal_edges"
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 294,
+    "baseline": {
+      "bbox": [
+        358,
+        167,
+        438,
+        223
+      ],
+      "score": 0.7082369923591614,
+      "text": "56ب50930",
+      "ocr_conf": 0.5577908121049404
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -20.831209601206005,
+      "rect": [
+        12,
+        30,
+        83,
+        25
+      ],
+      "geometry_quality": 0.17285300720411417,
+      "aspect": 3.32
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9810153990983963,
+    "size": [
+      87,
+      29
+    ]
+  },
+  {
+    "frame": 297,
+    "baseline": {
+      "bbox": [
+        349,
+        166,
+        431,
+        220
+      ],
+      "score": 0.7377611398696899,
+      "text": "56ب5230",
+      "ocr_conf": 0.5750218374388558
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -20.820892853310824,
+      "rect": [
+        13,
+        30,
+        85,
+        23
+      ],
+      "geometry_quality": 0.18213167423258783,
+      "aspect": 3.6956521739130435
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9793738052248955,
+    "size": [
+      89,
+      27
+    ]
+  },
+  {
+    "frame": 300,
+    "baseline": {
+      "bbox": [
+        335,
+        166,
+        424,
+        222
+      ],
+      "score": 0.7330124378204346,
+      "text": "46ب65720",
+      "ocr_conf": 0.6424144059419632
+    },
+    "geometry": {
+      "reason": "no_horizontal_edges"
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 303,
+    "baseline": {
+      "bbox": [
+        336,
+        166,
+        417,
+        221
+      ],
+      "score": 0.7192080020904541,
+      "text": "6ب657960",
+      "ocr_conf": 0.5272035375237465
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -19.890582129960418,
+      "rect": [
+        13,
+        29,
+        85,
+        23
+      ],
+      "geometry_quality": 0.1887183584764808,
+      "aspect": 3.6956521739130435
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9747982323169708,
+    "size": [
+      89,
+      27
+    ]
+  },
+  {
+    "frame": 306,
+    "baseline": {
+      "bbox": [
+        330,
+        170,
+        412,
+        222
+      ],
+      "score": 0.7256402969360352,
+      "text": "6م57960",
+      "ocr_conf": 0.5334047249385289
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -19.798876354524932,
+      "rect": [
+        11,
+        25,
+        86,
+        22
+      ],
+      "geometry_quality": 0.1935563068024266,
+      "aspect": 3.909090909090909
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9594739079475403,
+    "size": [
+      90,
+      26
+    ]
+  },
+  {
+    "frame": 309,
+    "baseline": {
+      "bbox": [
+        320,
+        169,
+        402,
+        222
+      ],
+      "score": 0.7314043045043945,
+      "text": "6م652960",
+      "ocr_conf": 0.4893499072641134
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -19.002215232779946,
+      "rect": [
+        14,
+        26,
+        85,
+        23
+      ],
+      "geometry_quality": 0.19166745271579516,
+      "aspect": 3.6956521739130435
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9354623407125473,
+    "size": [
+      89,
+      27
+    ]
+  },
+  {
+    "frame": 312,
+    "baseline": {
+      "bbox": [
+        316,
+        167,
+        400,
+        219
+      ],
+      "score": 0.7185714244842529,
+      "text": "6م657000",
+      "ocr_conf": 0.5053352266550064
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -18.859354242283487,
+      "rect": [
+        13,
+        26,
+        84,
+        32
+      ],
+      "geometry_quality": 0.17194656407937894,
+      "aspect": 2.625
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.8853356391191483,
+    "size": [
+      88,
+      36
+    ]
+  },
+  {
+    "frame": 315,
+    "baseline": {
+      "bbox": [
+        311,
+        165,
+        399,
+        217
+      ],
+      "score": 0.7268896698951721,
+      "text": "6م560",
+      "ocr_conf": 0.5349077701568603
+    },
+    "geometry": {
+      "reason": "no_horizontal_edges"
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 318,
+    "baseline": {
+      "bbox": [
+        305,
+        165,
+        388,
+        215
+      ],
+      "score": 0.7690256834030151,
+      "text": "6ب657460",
+      "ocr_conf": 0.5415911860764027
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -18.758650347842234,
+      "rect": [
+        13,
+        25,
+        86,
+        22
+      ],
+      "geometry_quality": 0.2020371355820267,
+      "aspect": 3.909090909090909
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9546210542321205,
+    "size": [
+      90,
+      26
+    ]
+  },
+  {
+    "frame": 321,
+    "baseline": {
+      "bbox": [
+        299,
+        166,
+        380,
+        214
+      ],
+      "score": 0.766032338142395,
+      "text": "6ص57966",
+      "ocr_conf": 0.4920709346021925
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -18.924644416051233,
+      "rect": [
+        11,
+        23,
+        85,
+        22
+      ],
+      "geometry_quality": 0.20089821172402644,
+      "aspect": 3.8636363636363638
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9025759920477867,
+    "size": [
+      89,
+      26
+    ]
+  },
+  {
+    "frame": 324,
+    "baseline": {
+      "bbox": [
+        288,
+        161,
+        369,
+        211
+      ],
+      "score": 0.759131669998169,
+      "text": "56ب652966",
+      "ocr_conf": 0.5643161767058902
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -18.895145990900705,
+      "rect": [
+        12,
+        26,
+        84,
+        23
+      ],
+      "geometry_quality": 0.19909309372845738,
+      "aspect": 3.652173913043478
+    },
+    "status": "ocr",
+    "text": "58م87335",
+    "ocr_confidence": 0.9260825365781784,
+    "size": [
+      88,
+      27
+    ]
+  },
+  {
+    "frame": 327,
+    "baseline": {
+      "bbox": [
+        280,
+        162,
+        364,
+        214
+      ],
+      "score": 0.7226317524909973,
+      "text": "56س65260",
+      "ocr_conf": 0.5551520362496376
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.9044475062482,
+      "rect": [
+        13,
+        25,
+        86,
+        31
+      ],
+      "geometry_quality": 0.18748867313107634,
+      "aspect": 2.774193548387097
+    },
+    "status": "ocr",
+    "text": "5م87235",
+    "ocr_confidence": 0.8815440876143319,
+    "size": [
+      90,
+      35
+    ]
+  },
+  {
+    "frame": 330,
+    "baseline": {
+      "bbox": [
+        275,
+        163,
+        359,
+        213
+      ],
+      "score": 0.7858861684799194,
+      "text": "6ب52965",
+      "ocr_conf": 0.4756257789475577
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.810496387922033,
+      "rect": [
+        11,
+        25,
+        85,
+        30
+      ],
+      "geometry_quality": 0.18524939415954428,
+      "aspect": 2.8333333333333335
+    },
+    "status": "ocr",
+    "text": "5م87235",
+    "ocr_confidence": 0.8445199728012085,
+    "size": [
+      89,
+      34
+    ]
+  },
+  {
+    "frame": 333,
+    "baseline": {
+      "bbox": [
+        268,
+        164,
+        348,
+        212
+      ],
+      "score": 0.7701447606086731,
+      "text": "6م529340",
+      "ocr_conf": 0.40178029984235764
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.899489837357475,
+      "rect": [
+        12,
+        24,
+        85,
+        21
+      ],
+      "geometry_quality": 0.20566666155073374,
+      "aspect": 4.0476190476190474
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9160169064998627,
+    "size": [
+      89,
+      25
+    ]
+  },
+  {
+    "frame": 336,
+    "baseline": {
+      "bbox": [
+        257,
+        164,
+        338,
+        209
+      ],
+      "score": 0.8015226125717163,
+      "text": "6م5746",
+      "ocr_conf": 0.5088891585667928
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.85622325731425,
+      "rect": [
+        13,
+        22,
+        85,
+        21
+      ],
+      "geometry_quality": 0.2091271679331481,
+      "aspect": 4.0476190476190474
+    },
+    "status": "ocr",
+    "text": "58م87345",
+    "ocr_confidence": 0.9330756217241287,
+    "size": [
+      89,
+      25
+    ]
+  },
+  {
+    "frame": 339,
+    "baseline": {
+      "bbox": [
+        251,
+        162,
+        331,
+        209
+      ],
+      "score": 0.8260651230812073,
+      "text": "6س57966",
+      "ocr_conf": 0.4457738271781376
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.030156772887047,
+      "rect": [
+        12,
+        23,
+        85,
+        23
+      ],
+      "geometry_quality": 0.21139757556944308,
+      "aspect": 3.6956521739130435
+    },
+    "status": "ocr",
+    "text": "58م87335",
+    "ocr_confidence": 0.9448160529136658,
+    "size": [
+      89,
+      27
+    ]
+  },
+  {
+    "frame": 342,
+    "baseline": {
+      "bbox": [
+        242,
+        161,
+        323,
+        208
+      ],
+      "score": 0.7977479696273804,
+      "text": "6س57940",
+      "ocr_conf": 0.44374276059014456
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.007946955407327,
+      "rect": [
+        12,
+        23,
+        85,
+        21
+      ],
+      "geometry_quality": 0.20356841495715908,
+      "aspect": 4.0476190476190474
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9799613356590271,
+    "size": [
+      89,
+      25
+    ]
+  },
+  {
+    "frame": 345,
+    "baseline": {
+      "bbox": [
+        229,
+        163,
+        308,
+        207
+      ],
+      "score": 0.8018369674682617,
+      "text": "6م57045",
+      "ocr_conf": 0.4896961918898991
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -17.14278193667208,
+      "rect": [
+        12,
+        22,
+        84,
+        23
+      ],
+      "geometry_quality": 0.2206039261224947,
+      "aspect": 3.652173913043478
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9326288253068924,
+    "size": [
+      88,
+      27
+    ]
+  },
+  {
+    "frame": 348,
+    "baseline": {
+      "bbox": [
+        222,
+        164,
+        300,
+        208
+      ],
+      "score": 0.8457010984420776,
+      "text": "6س57045",
+      "ocr_conf": 0.5150714835950306
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -16.961705886532908,
+      "rect": [
+        13,
+        22,
+        83,
+        23
+      ],
+      "geometry_quality": 0.21749431167878294,
+      "aspect": 3.608695652173913
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9672903716564178,
+    "size": [
+      87,
+      27
+    ]
+  },
+  {
+    "frame": 351,
+    "baseline": {
+      "bbox": [
+        208,
+        160,
+        285,
+        205
+      ],
+      "score": 0.7981367111206055,
+      "text": "6س57065",
+      "ocr_conf": 0.5465936958789825
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -15.945395900922854
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 354,
+    "baseline": {
+      "bbox": [
+        198,
+        160,
+        274,
+        201
+      ],
+      "score": 0.7712446451187134,
+      "text": "56ص57440",
+      "ocr_conf": 0.5845774747431278
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -16.03598203811398
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 357,
+    "baseline": {
+      "bbox": [
+        187,
+        159,
+        262,
+        198
+      ],
+      "score": 0.8374229669570923,
+      "text": "6م5704",
+      "ocr_conf": 0.5424163093169531
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -16.118808747657365,
+      "rect": [
+        13,
+        21,
+        80,
+        25
+      ],
+      "geometry_quality": 0.21400181826163242,
+      "aspect": 3.2
+    },
+    "status": "ocr",
+    "text": "5م87345",
+    "ocr_confidence": 0.897134508405413,
+    "size": [
+      84,
+      29
+    ]
+  },
+  {
+    "frame": 363,
+    "baseline": {
+      "bbox": [
+        159,
+        149,
+        232,
+        189
+      ],
+      "score": 0.7730007171630859,
+      "text": "56م5765",
+      "ocr_conf": 0.5366944862263543
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -15.901389934527437
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 369,
+    "baseline": {
+      "bbox": [
+        138,
+        144,
+        210,
+        181
+      ],
+      "score": 0.7074439525604248,
+      "text": "56م57945",
+      "ocr_conf": 0.4606399144977331
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -14.955839930074022,
+      "rect": [
+        12,
+        20,
+        75,
+        17
+      ],
+      "geometry_quality": 0.19990820439203155,
+      "aspect": 4.411764705882353
+    },
+    "status": "ocr",
+    "text": "58م87235",
+    "ocr_confidence": 0.9597503766417503,
+    "size": [
+      79,
+      21
+    ]
+  },
+  {
+    "frame": 372,
+    "baseline": {
+      "bbox": [
+        128,
+        139,
+        199,
+        175
+      ],
+      "score": 0.7205325365066528,
+      "text": "56ع5735",
+      "ocr_conf": 0.6136161003793988
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          6.666666507720947
+        ],
+        [
+          94.66666412353516,
+          0.0
+        ],
+        [
+          94.66666412353516,
+          31.66666603088379
+        ],
+        [
+          0.0,
+          56.66666793823242
+        ]
+      ],
+      "geometry_quality": 0.28888543603652966,
+      "aspect": 2.360978126525879,
+      "candidates": 2
+    },
+    "status": "ocr",
+    "text": "06ت82845",
+    "ocr_confidence": 0.5186775214970112,
+    "size": [
+      96,
+      41
+    ]
+  },
+  {
+    "frame": 375,
+    "baseline": {
+      "bbox": [
+        124,
+        139,
+        193,
+        173
+      ],
+      "score": 0.6949079632759094,
+      "text": "5ص57406",
+      "ocr_conf": 0.4158807396888733
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          4.333333492279053
+        ],
+        [
+          92.66666412353516,
+          0.0
+        ],
+        [
+          92.66666412353516,
+          29.66666603088379
+        ],
+        [
+          0.0,
+          53.66666793823242
+        ]
+      ],
+      "geometry_quality": 0.2818214687351633,
+      "aspect": 2.3859755992889404,
+      "candidates": 1
+    },
+    "status": "ocr",
+    "text": "96ت57425",
+    "ocr_confidence": 0.5676818322390318,
+    "size": [
+      94,
+      40
+    ]
+  },
+  {
+    "frame": 378,
+    "baseline": {
+      "bbox": [
+        112,
+        135,
+        183,
+        169
+      ],
+      "score": 0.6591775417327881,
+      "text": "56م57030",
+      "ocr_conf": 0.5873437337577343
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          6.0
+        ],
+        [
+          93.0,
+          0.0
+        ],
+        [
+          94.66666412353516,
+          30.0
+        ],
+        [
+          0.0,
+          54.0
+        ]
+      ],
+      "geometry_quality": 0.2893356090351397,
+      "aspect": 2.4454071521759033,
+      "candidates": 2
+    },
+    "status": "ocr",
+    "text": "96پ52435",
+    "ocr_confidence": 0.5880445651710033,
+    "size": [
+      95,
+      39
+    ]
+  },
+  {
+    "frame": 381,
+    "baseline": {
+      "bbox": [
+        98,
+        131,
+        167,
+        164
+      ],
+      "score": 0.6368942856788635,
+      "text": "56م8740",
+      "ocr_conf": 0.6268376878329686
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          5.333333492279053
+        ],
+        [
+          91.66666412353516,
+          0.0
+        ],
+        [
+          92.66666412353516,
+          29.66666603088379
+        ],
+        [
+          0.0,
+          52.66666793823242
+        ]
+      ],
+      "geometry_quality": 0.28766531939943574,
+      "aspect": 2.4319355487823486,
+      "candidates": 2
+    },
+    "status": "ocr",
+    "text": "4ت52240",
+    "ocr_confidence": 0.6868083987917218,
+    "size": [
+      94,
+      39
+    ]
+  },
+  {
+    "frame": 384,
+    "baseline": {
+      "bbox": [
+        95,
+        128,
+        160,
+        163
+      ],
+      "score": 0.6887293457984924,
+      "text": "56م52030",
+      "ocr_conf": 0.4680163338780403
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          6.333333492279053
+        ],
+        [
+          88.66666412353516,
+          0.0
+        ],
+        [
+          88.66666412353516,
+          31.0
+        ],
+        [
+          0.0,
+          53.33333206176758
+        ]
+      ],
+      "geometry_quality": 0.2683663765870251,
+      "aspect": 2.3119056224823,
+      "candidates": 1
+    },
+    "status": "ocr",
+    "text": "02ت02240",
+    "ocr_confidence": 0.5413710456341505,
+    "size": [
+      90,
+      39
+    ]
+  },
+  {
+    "frame": 387,
+    "baseline": {
+      "bbox": [
+        91,
+        128,
+        155,
+        161
+      ],
+      "score": 0.6969413757324219,
+      "text": "56ص87000",
+      "ocr_conf": 0.5225953944027424
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          5.0
+        ],
+        [
+          87.66666412353516,
+          0.0
+        ],
+        [
+          87.66666412353516,
+          30.0
+        ],
+        [
+          0.0,
+          51.33333206176758
+        ]
+      ],
+      "geometry_quality": 0.27122266312251836,
+      "aspect": 2.3323252201080322,
+      "candidates": 1
+    },
+    "status": "ocr",
+    "text": "03ت5240",
+    "ocr_confidence": 0.5876351552350181,
+    "size": [
+      89,
+      38
+    ]
+  },
+  {
+    "frame": 390,
+    "baseline": {
+      "bbox": [
+        86,
+        127,
+        150,
+        160
+      ],
+      "score": 0.5092442035675049,
+      "text": "96م82440",
+      "ocr_conf": 0.5206856206059456
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          3.6666667461395264
+        ],
+        [
+          87.0,
+          0.0
+        ],
+        [
+          87.66666412353516,
+          28.33333396911621
+        ],
+        [
+          1.0,
+          49.33333206176758
+        ]
+      ],
+      "geometry_quality": 0.2552978494943411,
+      "aspect": 2.3811769485473633,
+      "candidates": 1
+    },
+    "status": "ocr",
+    "text": "04ت52340",
+    "ocr_confidence": 0.6211965624243021,
+    "size": [
+      88,
+      37
+    ]
+  },
+  {
+    "frame": 393,
+    "baseline": {
+      "bbox": [
+        87,
+        122,
+        149,
+        152
+      ],
+      "score": 0.5476760864257812,
+      "text": "6م57940",
+      "ocr_conf": 0.6284202443701881
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -13.948096184373593
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 396,
+    "baseline": {
+      "bbox": [
+        84,
+        123,
+        148,
+        155
+      ],
+      "score": 0.564566969871521,
+      "text": "6م87906",
+      "ocr_conf": 0.5366437605449131
+    },
+    "geometry": {
+      "method": "edge_deskew_text_band",
+      "angle": -13.221280231721943,
+      "rect": [
+        11,
+        17,
+        65,
+        16
+      ],
+      "geometry_quality": 0.1711638114491162,
+      "aspect": 4.0625
+    },
+    "status": "ocr",
+    "text": "58م87245",
+    "ocr_confidence": 0.9774777963757515,
+    "size": [
+      69,
+      20
+    ]
+  },
+  {
+    "frame": 399,
+    "baseline": {
+      "bbox": [
+        80,
+        120,
+        143,
+        151
+      ],
+      "score": 0.5599563121795654,
+      "text": "6م87900",
+      "ocr_conf": 0.5873036810329982
+    },
+    "geometry": {
+      "reason": "no_text_band",
+      "angle": -12.783453941424366
+    },
+    "status": "no_geometry"
+  },
+  {
+    "frame": 402,
+    "baseline": {
+      "bbox": [
+        75,
+        117,
+        141,
+        148
+      ],
+      "score": 0.3533034324645996,
+      "text": "6م8750",
+      "ocr_conf": 0.6285593012968699
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          89.66666412353516,
+          0.0
+        ],
+        [
+          89.66666412353516,
+          26.0
+        ],
+        [
+          0.0,
+          47.33333206176758
+        ]
+      ],
+      "geometry_quality": 0.2622345217415818,
+      "aspect": 2.4795844554901123,
+      "candidates": 2
+    },
+    "status": "ocr",
+    "text": "96ع2290",
+    "ocr_confidence": 0.5504607366664069,
+    "size": [
+      91,
+      37
+    ]
+  },
+  {
+    "frame": 405,
+    "baseline": {
+      "bbox": [
+        74,
+        115,
+        138,
+        146
+      ],
+      "score": 0.45313069224357605,
+      "text": "56م8740",
+      "ocr_conf": 0.6235991546085903
+    },
+    "geometry": {
+      "quad": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          87.66666412353516,
+          0.0
+        ],
+        [
+          87.66666412353516,
+          26.0
+        ],
+        [
+          0.0,
+          47.33333206176758
+        ]
+      ],
+      "geometry_quality": 0.25652404427071956,
+      "aspect": 2.4257960319519043,
+      "candidates": 2
+    },
+    "status": "ocr",
+    "text": "46ژ2240",
+    "ocr_confidence": 0.509856932929584,
+    "size": [
+      89,
+      37
+    ]
+  }
+]

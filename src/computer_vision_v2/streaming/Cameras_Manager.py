@@ -23,6 +23,7 @@ class CameraManager:
                 stream_manager = StreamManager(
                     camera['id'], camera["source"], camera['type'], model_path,
                     detection_interval=self.config.get('detection_interval', 3),
+                    roi=camera.get('roi'),
                 )
                 stream_manager.start()
             except Exception as exc:

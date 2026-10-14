@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+from pathlib import Path
 import cv2 as cv
+import math
 
 class BaseSource(ABC):
 
@@ -19,13 +21,20 @@ class BaseSource(ABC):
 class VideoSource(BaseSource):
 
     def __init__(self, path):
-        self.path = path
+        # Camera file paths are relative to the project, just like monitoring.
+        path = Path(path).expanduser()
+        if not path.is_absolute():
+            path = Path(__file__).resolve().parents[3] / path
+        self.path = str(path)
         self.capture = None
+        self.fps = 25.
 
     def connect(self):
         self.capture = cv.VideoCapture(self.path)
         if not self.capture.isOpened():
             raise RuntimeError(f"Could not open video: {self.path}")
+        fps = self.capture.get(cv.CAP_PROP_FPS)
+        self.fps = fps if math.isfinite(fps) and fps > 0 else 25.
 
     def get_frame(self):
 

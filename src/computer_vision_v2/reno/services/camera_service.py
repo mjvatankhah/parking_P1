@@ -41,6 +41,7 @@ class CameraService:
         self._store_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "cameras.json")
         self._model_path = "yolov8n.pt"
         self._detection_interval = 3
+        self._plate_sampling = {}
         self._cameras: List[Camera] = self._load()
         if MOCK_DATA_ENABLED:
             self._cameras = [
@@ -119,10 +120,12 @@ class CameraService:
                 model_path = data.get("model_path", self._model_path)
                 detection_interval = data.get("detection_interval", 3)
                 camera_items = data.get("cameras", [])
+                plate_sampling = data.get('plate_sampling', {})
             else:
                 model_path = self._model_path
                 detection_interval = self._detection_interval
                 camera_items = data
+                plate_sampling = {}
             if not isinstance(camera_items, list) or not all(isinstance(item, dict) for item in camera_items):
                 raise ValueError("Camera configuration must contain a list of camera objects")
             cameras = [Camera.from_dict(item) for item in camera_items if isinstance(item, dict)]
@@ -132,6 +135,7 @@ class CameraService:
                 camera.status = STATUS_OFFLINE
             self._model_path = model_path
             self._detection_interval = detection_interval
+            self._plate_sampling = plate_sampling
             return cameras
         except (OSError, ValueError, TypeError):
             if strict:
@@ -146,6 +150,7 @@ class CameraService:
                 {
                     "model_path": self._model_path,
                     "detection_interval": self._detection_interval,
+                    "plate_sampling": self._plate_sampling,
                     "cameras": [camera.to_dict() for camera in self._cameras],
                 },
                 handle,

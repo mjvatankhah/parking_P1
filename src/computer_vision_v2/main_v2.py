@@ -12,10 +12,10 @@ os.environ["TORCH_CPP_LOG_LEVEL"] = "ERROR"
 
 from computer_vision_v2.streaming.Cameras_Manager import CameraManager
 from computer_vision_v2.preview import PreviewPublisher
-from computer_vision_v2.best_crop_selector import BestCropSelector
+from computer_vision_v2.plate_candidates import PlateCandidates
 from computer_vision_v2.Line_Manager.line_detector import LineDetectorManager
 from computer_vision_v2.inference.plate_ocr import PlateReader
-from computer_vision_v2.workers.workers import line_worker , crop_worker
+from computer_vision_v2.workers.workers import observation_worker
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.database.database_worker import database_worker
 
@@ -30,13 +30,11 @@ class Pipeline:
         self.preview = PreviewPublisher(self.config["cameras"])
         self.camera_manager = CameraManager(self.config) 
         self.lines = LineDetectorManager(self.config) 
-        self.selector = BestCropSelector() 
         self.plate_reader = PlateReader() 
+        self.candidates = PlateCandidates(self.plate_reader, **config.get('plate_sampling', {}))
 
-        self.line_queue = queue.Queue(maxsize=25) # drop - oldest
-        self.crop_queue = queue.Queue(maxsize=25) # drop - oldest
-        self.cross_queue = queue.Queue(maxsize=300) 
-        self.ocr_queue = queue.Queue(maxsize=300) 
+        self.frame_queue = queue.Queue(maxsize=4)
+        self.ocr_queue = queue.Queue(maxsize=16)
         self.db_queue = queue.Queue(maxsize=200)
 
         self.running = False
@@ -60,8 +58,7 @@ class Pipeline:
         alive = lambda: self.running 
 
         self._worker_stages = [
-            (self.line_queue, self._start_workers(line_worker, (self.line_queue, self.cross_queue, self.lines, alive))),
-            (self.crop_queue, self._start_workers(crop_worker, (self.crop_queue, self.cross_queue, self.ocr_queue, self.selector, alive))),
+            (self.frame_queue, self._start_workers(observation_worker, (self.frame_queue, self.ocr_queue, self.lines, self.candidates, alive))),
             (self.ocr_queue, self._start_workers(ocr_worker, (self.ocr_queue, self.db_queue, self.plate_reader, alive))),
             (self.db_queue, self._start_workers(database_worker, (self.db_queue, alive))),
         ]
@@ -79,29 +76,8 @@ class Pipeline:
                 time.sleep(0.005)
                 continue
             for frame in frames:
-                print(
-                    f"Frame received: camera={frame.camera_id}, frame={frame.frame_idx}",
-                    flush=True,
-                )
-                for detection in frame.detections:
-                    object_type = {0: "Person", 2: "Car"}.get(detection.class_id)
-                    if object_type is None:
-                        continue
-                    x1, y1, x2, y2 = map(float, detection.bbox)
-                    height, width = frame.image.shape[:2]
-                    bottom_x = (x1 + x2) / 2
-                    print(
-                        f"Object detected: camera={frame.camera_id}, frame={frame.frame_idx}, "
-                        f"type={object_type}, track={detection.track_id}, "
-                        f"bbox=({x1:.1f}, {y1:.1f}, {x2:.1f}, {y2:.1f}), "
-                        f"bottom_center=({bottom_x:.1f}, {y2:.1f}), "
-                        f"normalized_bottom_center=({bottom_x / width:.6f}, {y2 / height:.6f}), "
-                        f"predicted={detection.is_predicted}",
-                        flush=True,
-                    )
                 self.preview.publish(frame)
-                self._dispatch_frame(self.line_queue,frame)
-                self._dispatch_frame(self.crop_queue,frame)
+                self._dispatch_frame(self.frame_queue,frame)
 
     @staticmethod
     def _dispatch_frame(my_queue,frame):

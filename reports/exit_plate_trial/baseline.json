@@ -1,0 +1,2788 @@
+[
+  {
+    "frame": 1,
+    "track": 1,
+    "vehicle_bbox": [
+      1650,
+      292,
+      1918,
+      554
+    ],
+    "max_score": 0.006620824337005615,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 3,
+    "track": 1,
+    "vehicle_bbox": [
+      1646,
+      291,
+      1918,
+      557
+    ],
+    "max_score": 0.006335943937301636,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 6,
+    "track": 1,
+    "vehicle_bbox": [
+      1633,
+      283,
+      1916,
+      559
+    ],
+    "max_score": 0.006601005792617798,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 9,
+    "track": 1,
+    "vehicle_bbox": [
+      1622,
+      277,
+      1911,
+      558
+    ],
+    "max_score": 0.008210241794586182,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 12,
+    "track": 1,
+    "vehicle_bbox": [
+      1613,
+      275,
+      1908,
+      557
+    ],
+    "max_score": 0.010620981454849243,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 15,
+    "track": 1,
+    "vehicle_bbox": [
+      1603,
+      273,
+      1905,
+      555
+    ],
+    "max_score": 0.01912662386894226,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 18,
+    "track": 1,
+    "vehicle_bbox": [
+      1589,
+      272,
+      1905,
+      560
+    ],
+    "max_score": 0.017116963863372803,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 21,
+    "track": 1,
+    "vehicle_bbox": [
+      1577,
+      271,
+      1902,
+      560
+    ],
+    "max_score": 0.07032272219657898,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 24,
+    "track": 1,
+    "vehicle_bbox": [
+      1561,
+      270,
+      1904,
+      566
+    ],
+    "max_score": 0.06268236041069031,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 27,
+    "track": 1,
+    "vehicle_bbox": [
+      1548,
+      267,
+      1904,
+      568
+    ],
+    "max_score": 0.018290996551513672,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 30,
+    "track": 1,
+    "vehicle_bbox": [
+      1535,
+      265,
+      1903,
+      569
+    ],
+    "max_score": 0.050654470920562744,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 33,
+    "track": 1,
+    "vehicle_bbox": [
+      1523,
+      261,
+      1904,
+      569
+    ],
+    "max_score": 0.01781192421913147,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 36,
+    "track": 1,
+    "vehicle_bbox": [
+      1510,
+      259,
+      1902,
+      568
+    ],
+    "max_score": 0.01831185817718506,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 39,
+    "track": 1,
+    "vehicle_bbox": [
+      1494,
+      256,
+      1903,
+      571
+    ],
+    "max_score": 0.018768280744552612,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 42,
+    "track": 1,
+    "vehicle_bbox": [
+      1479,
+      252,
+      1905,
+      574
+    ],
+    "max_score": 0.05127105116844177,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 45,
+    "track": 1,
+    "vehicle_bbox": [
+      1465,
+      250,
+      1903,
+      575
+    ],
+    "max_score": 0.04305657744407654,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 48,
+    "track": 1,
+    "vehicle_bbox": [
+      1446,
+      247,
+      1904,
+      580
+    ],
+    "max_score": 0.05053552985191345,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 51,
+    "track": 1,
+    "vehicle_bbox": [
+      1431,
+      247,
+      1900,
+      581
+    ],
+    "max_score": 0.02970975637435913,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 54,
+    "track": 1,
+    "vehicle_bbox": [
+      1409,
+      244,
+      1901,
+      588
+    ],
+    "max_score": 0.00855603814125061,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 57,
+    "track": 1,
+    "vehicle_bbox": [
+      1393,
+      243,
+      1898,
+      588
+    ],
+    "max_score": 0.010625362396240234,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 60,
+    "track": 1,
+    "vehicle_bbox": [
+      1374,
+      242,
+      1897,
+      591
+    ],
+    "max_score": 0.006086021661758423,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 63,
+    "track": 1,
+    "vehicle_bbox": [
+      1352,
+      240,
+      1897,
+      595
+    ],
+    "max_score": 0.007173985242843628,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 66,
+    "track": 1,
+    "vehicle_bbox": [
+      1333,
+      239,
+      1894,
+      596
+    ],
+    "max_score": 0.0071197450160980225,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 69,
+    "track": 1,
+    "vehicle_bbox": [
+      1308,
+      238,
+      1895,
+      602
+    ],
+    "max_score": 0.009192317724227905,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 72,
+    "track": 1,
+    "vehicle_bbox": [
+      1280,
+      236,
+      1893,
+      608
+    ],
+    "max_score": 0.012954175472259521,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 75,
+    "track": 1,
+    "vehicle_bbox": [
+      1261,
+      236,
+      1888,
+      607
+    ],
+    "max_score": 0.024276316165924072,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 78,
+    "track": 1,
+    "vehicle_bbox": [
+      1238,
+      235,
+      1885,
+      607
+    ],
+    "max_score": 0.02742794156074524,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 81,
+    "track": 1,
+    "vehicle_bbox": [
+      1212,
+      233,
+      1884,
+      607
+    ],
+    "max_score": 0.038289427757263184,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 84,
+    "track": 1,
+    "vehicle_bbox": [
+      1183,
+      230,
+      1885,
+      610
+    ],
+    "max_score": 0.04958340525627136,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 87,
+    "track": 1,
+    "vehicle_bbox": [
+      1152,
+      228,
+      1887,
+      614
+    ],
+    "max_score": 0.017542272806167603,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 90,
+    "track": 1,
+    "vehicle_bbox": [
+      1122,
+      226,
+      1878,
+      613
+    ],
+    "max_score": 0.023822635412216187,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 93,
+    "track": 1,
+    "vehicle_bbox": [
+      1080,
+      223,
+      1858,
+      614
+    ],
+    "max_score": 0.013406604528427124,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 96,
+    "track": 1,
+    "vehicle_bbox": [
+      1044,
+      223,
+      1841,
+      616
+    ],
+    "max_score": 0.011185795068740845,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 99,
+    "track": 1,
+    "vehicle_bbox": [
+      1014,
+      220,
+      1835,
+      618
+    ],
+    "max_score": 0.09705817699432373,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 102,
+    "track": 1,
+    "vehicle_bbox": [
+      971,
+      216,
+      1806,
+      617
+    ],
+    "max_score": 0.04302695393562317,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 105,
+    "track": 1,
+    "vehicle_bbox": [
+      938,
+      215,
+      1780,
+      615
+    ],
+    "max_score": 0.1642550230026245,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 108,
+    "track": 1,
+    "vehicle_bbox": [
+      912,
+      212,
+      1761,
+      611
+    ],
+    "max_score": 0.09647542238235474,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 111,
+    "track": 1,
+    "vehicle_bbox": [
+      877,
+      210,
+      1738,
+      611
+    ],
+    "max_score": 0.03642457723617554,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 114,
+    "track": 1,
+    "vehicle_bbox": [
+      850,
+      207,
+      1713,
+      605
+    ],
+    "max_score": 0.03908151388168335,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 117,
+    "track": 1,
+    "vehicle_bbox": [
+      814,
+      206,
+      1688,
+      604
+    ],
+    "max_score": 0.12010923027992249,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 120,
+    "track": 1,
+    "vehicle_bbox": [
+      784,
+      203,
+      1669,
+      605
+    ],
+    "max_score": 0.0840577781200409,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 123,
+    "track": 1,
+    "vehicle_bbox": [
+      756,
+      202,
+      1643,
+      601
+    ],
+    "max_score": 0.08946648240089417,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 126,
+    "track": 1,
+    "vehicle_bbox": [
+      728,
+      200,
+      1620,
+      599
+    ],
+    "max_score": 0.034320712089538574,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 129,
+    "track": 1,
+    "vehicle_bbox": [
+      697,
+      198,
+      1600,
+      600
+    ],
+    "max_score": 0.07994431257247925,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 132,
+    "track": 1,
+    "vehicle_bbox": [
+      677,
+      198,
+      1576,
+      598
+    ],
+    "max_score": 0.0874471366405487,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 135,
+    "track": 1,
+    "vehicle_bbox": [
+      654,
+      195,
+      1555,
+      597
+    ],
+    "max_score": 0.04039907455444336,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 138,
+    "track": 1,
+    "vehicle_bbox": [
+      632,
+      194,
+      1533,
+      596
+    ],
+    "max_score": 0.05552712082862854,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 141,
+    "track": 1,
+    "vehicle_bbox": [
+      611,
+      193,
+      1508,
+      594
+    ],
+    "max_score": 0.039392560720443726,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 144,
+    "track": 1,
+    "vehicle_bbox": [
+      588,
+      192,
+      1487,
+      596
+    ],
+    "max_score": 0.015340447425842285,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 147,
+    "track": 1,
+    "vehicle_bbox": [
+      572,
+      191,
+      1462,
+      593
+    ],
+    "max_score": 0.017532438039779663,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 150,
+    "track": 1,
+    "vehicle_bbox": [
+      557,
+      191,
+      1440,
+      591
+    ],
+    "max_score": 0.08402499556541443,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 153,
+    "track": 1,
+    "vehicle_bbox": [
+      539,
+      191,
+      1419,
+      591
+    ],
+    "max_score": 0.0753360390663147,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 156,
+    "track": 1,
+    "vehicle_bbox": [
+      525,
+      190,
+      1397,
+      588
+    ],
+    "max_score": 0.120443195104599,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 159,
+    "track": 1,
+    "vehicle_bbox": [
+      508,
+      188,
+      1382,
+      590
+    ],
+    "max_score": 0.44281744956970215,
+    "detections": [
+      {
+        "bbox": [
+          628,
+          277,
+          725,
+          375
+        ],
+        "score": 0.44281744956970215,
+        "text": "19ز62",
+        "ocr_conf": 0.3442569077014923
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 162,
+    "track": 1,
+    "vehicle_bbox": [
+      494,
+      187,
+      1362,
+      589
+    ],
+    "max_score": 0.42659372091293335,
+    "detections": [
+      {
+        "bbox": [
+          615,
+          278,
+          711,
+          381
+        ],
+        "score": 0.42659372091293335,
+        "text": "29پ2",
+        "ocr_conf": 0.34143946692347527
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 165,
+    "track": 1,
+    "vehicle_bbox": [
+      484,
+      186,
+      1344,
+      588
+    ],
+    "max_score": 0.3402193784713745,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 168,
+    "track": 1,
+    "vehicle_bbox": [
+      479,
+      186,
+      1323,
+      582
+    ],
+    "max_score": 0.34338098764419556,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 171,
+    "track": 1,
+    "vehicle_bbox": [
+      472,
+      185,
+      1306,
+      578
+    ],
+    "max_score": 0.4554327726364136,
+    "detections": [
+      {
+        "bbox": [
+          566,
+          272,
+          660,
+          376
+        ],
+        "score": 0.4554327726364136,
+        "text": "59ز423",
+        "ocr_conf": 0.3014391362667084
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 174,
+    "track": 1,
+    "vehicle_bbox": [
+      461,
+      184,
+      1288,
+      575
+    ],
+    "max_score": 0.2649640142917633,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 177,
+    "track": 1,
+    "vehicle_bbox": [
+      453,
+      182,
+      1278,
+      575
+    ],
+    "max_score": 0.41176870465278625,
+    "detections": [
+      {
+        "bbox": [
+          541,
+          268,
+          633,
+          380
+        ],
+        "score": 0.41176870465278625,
+        "text": "59پ5",
+        "ocr_conf": 0.3495536111295223
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 180,
+    "track": 1,
+    "vehicle_bbox": [
+      442,
+      182,
+      1263,
+      576
+    ],
+    "max_score": 0.47747063636779785,
+    "detections": [
+      {
+        "bbox": [
+          534,
+          272,
+          626,
+          378
+        ],
+        "score": 0.47747063636779785,
+        "text": "19ز529",
+        "ocr_conf": 0.33029529949029285
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 183,
+    "track": 1,
+    "vehicle_bbox": [
+      434,
+      181,
+      1248,
+      576
+    ],
+    "max_score": 0.4133487939834595,
+    "detections": [
+      {
+        "bbox": [
+          524,
+          272,
+          617,
+          373
+        ],
+        "score": 0.4133487939834595,
+        "text": "59ز655",
+        "ocr_conf": 0.3389907355109851
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 186,
+    "track": 1,
+    "vehicle_bbox": [
+      428,
+      181,
+      1231,
+      573
+    ],
+    "max_score": 0.2994519770145416,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 189,
+    "track": 1,
+    "vehicle_bbox": [
+      425,
+      180,
+      1214,
+      568
+    ],
+    "max_score": 0.3572334051132202,
+    "detections": [
+      {
+        "bbox": [
+          493,
+          260,
+          583,
+          373
+        ],
+        "score": 0.3572334051132202,
+        "text": "59ب55",
+        "ocr_conf": 0.37231330275535585
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 192,
+    "track": 1,
+    "vehicle_bbox": [
+      424,
+      181,
+      1196,
+      561
+    ],
+    "max_score": 0.38538676500320435,
+    "detections": [
+      {
+        "bbox": [
+          477,
+          265,
+          566,
+          369
+        ],
+        "score": 0.38538676500320435,
+        "text": "19ز225",
+        "ocr_conf": 0.32966111103693646
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 195,
+    "track": 1,
+    "vehicle_bbox": [
+      417,
+      181,
+      1185,
+      560
+    ],
+    "max_score": 0.5406716465950012,
+    "detections": [
+      {
+        "bbox": [
+          463,
+          254,
+          552,
+          364
+        ],
+        "score": 0.5406716465950012,
+        "text": "59ز630",
+        "ocr_conf": 0.31797482818365097
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 198,
+    "track": 1,
+    "vehicle_bbox": [
+      412,
+      180,
+      1173,
+      558
+    ],
+    "max_score": 0.5530528426170349,
+    "detections": [
+      {
+        "bbox": [
+          455,
+          261,
+          542,
+          362
+        ],
+        "score": 0.5530528426170349,
+        "text": "56ز35",
+        "ocr_conf": 0.3389948934316635
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 201,
+    "track": 1,
+    "vehicle_bbox": [
+      402,
+      178,
+      1165,
+      560
+    ],
+    "max_score": 0.4713774621486664,
+    "detections": [
+      {
+        "bbox": [
+          448,
+          245,
+          530,
+          366
+        ],
+        "score": 0.4713774621486664,
+        "text": "59پ6559",
+        "ocr_conf": 0.4517877059323447
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 204,
+    "track": 1,
+    "vehicle_bbox": [
+      397,
+      176,
+      1153,
+      559
+    ],
+    "max_score": 0.4757826328277588,
+    "detections": [
+      {
+        "bbox": [
+          437,
+          257,
+          521,
+          364
+        ],
+        "score": 0.4757826328277588,
+        "text": "59و699",
+        "ocr_conf": 0.2957402343551318
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 207,
+    "track": 1,
+    "vehicle_bbox": [
+      394,
+      176,
+      1139,
+      556
+    ],
+    "max_score": 0.5538402795791626,
+    "detections": [
+      {
+        "bbox": [
+          425,
+          253,
+          509,
+          361
+        ],
+        "score": 0.5538402795791626,
+        "text": "59پ625",
+        "ocr_conf": 0.3565400217970212
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 210,
+    "track": 1,
+    "vehicle_bbox": [
+      395,
+      177,
+      1122,
+      549
+    ],
+    "max_score": 0.44983479380607605,
+    "detections": [
+      {
+        "bbox": [
+          411,
+          235,
+          489,
+          356
+        ],
+        "score": 0.44983479380607605,
+        "text": "59ت9",
+        "ocr_conf": 0.24908480420708656
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 213,
+    "track": 1,
+    "vehicle_bbox": [
+      391,
+      176,
+      1106,
+      543
+    ],
+    "max_score": 0.41921788454055786,
+    "detections": [
+      {
+        "bbox": [
+          396,
+          259,
+          477,
+          351
+        ],
+        "score": 0.41921788454055786,
+        "text": "56پ5525",
+        "ocr_conf": 0.479329845735005
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 216,
+    "track": 1,
+    "vehicle_bbox": [
+      387,
+      176,
+      1095,
+      541
+    ],
+    "max_score": 0.31953907012939453,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 219,
+    "track": 1,
+    "vehicle_bbox": [
+      384,
+      176,
+      1085,
+      540
+    ],
+    "max_score": 0.33913999795913696,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 222,
+    "track": 1,
+    "vehicle_bbox": [
+      382,
+      176,
+      1075,
+      537
+    ],
+    "max_score": 0.3119575083255768,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 225,
+    "track": 1,
+    "vehicle_bbox": [
+      378,
+      176,
+      1062,
+      535
+    ],
+    "max_score": 0.3728722035884857,
+    "detections": [
+      {
+        "bbox": [
+          362,
+          251,
+          436,
+          345
+        ],
+        "score": 0.3728722035884857,
+        "text": "59ز9955",
+        "ocr_conf": 0.4450870007276535
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 228,
+    "track": 1,
+    "vehicle_bbox": [
+      375,
+      175,
+      1052,
+      533
+    ],
+    "max_score": 0.43517905473709106,
+    "detections": [
+      {
+        "bbox": [
+          571,
+          198,
+          630,
+          251
+        ],
+        "score": 0.43517905473709106,
+        "text": "36ت33340",
+        "ocr_conf": 0.30417111702263355
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 231,
+    "track": 1,
+    "vehicle_bbox": [
+      369,
+      172,
+      1044,
+      532
+    ],
+    "max_score": 0.37222427129745483,
+    "detections": [
+      {
+        "bbox": [
+          563,
+          199,
+          667,
+          257
+        ],
+        "score": 0.37222427129745483,
+        "text": "26پ203",
+        "ocr_conf": 0.38009779155254364
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 234,
+    "track": 1,
+    "vehicle_bbox": [
+      366,
+      173,
+      1030,
+      530
+    ],
+    "max_score": 0.4456130564212799,
+    "detections": [
+      {
+        "bbox": [
+          553,
+          199,
+          614,
+          253
+        ],
+        "score": 0.4456130564212799,
+        "text": "46ت6426",
+        "ocr_conf": 0.3277881784098489
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 237,
+    "track": 1,
+    "vehicle_bbox": [
+      365,
+      172,
+      1017,
+      526
+    ],
+    "max_score": 0.4090935289859772,
+    "detections": [
+      {
+        "bbox": [
+          538,
+          197,
+          603,
+          255
+        ],
+        "score": 0.4090935289859772,
+        "text": "46ت646",
+        "ocr_conf": 0.37876754502455395
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 240,
+    "track": 1,
+    "vehicle_bbox": [
+      362,
+      173,
+      1006,
+      526
+    ],
+    "max_score": 0.5204685926437378,
+    "detections": [
+      {
+        "bbox": [
+          528,
+          195,
+          595,
+          251
+        ],
+        "score": 0.5204685926437378,
+        "text": "46ت64262",
+        "ocr_conf": 0.2954002507030964
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 243,
+    "track": 1,
+    "vehicle_bbox": [
+      360,
+      174,
+      993,
+      523
+    ],
+    "max_score": 0.5865564942359924,
+    "detections": [
+      {
+        "bbox": [
+          514,
+          190,
+          586,
+          247
+        ],
+        "score": 0.5865564942359924,
+        "text": "46ت66620",
+        "ocr_conf": 0.3630432039499283
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 246,
+    "track": 1,
+    "vehicle_bbox": [
+      362,
+      177,
+      978,
+      519
+    ],
+    "max_score": 0.6343733072280884,
+    "detections": [
+      {
+        "bbox": [
+          499,
+          185,
+          570,
+          242
+        ],
+        "score": 0.6343733072280884,
+        "text": "49ت6460",
+        "ocr_conf": 0.31741270210061756
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 249,
+    "track": 1,
+    "vehicle_bbox": [
+      359,
+      178,
+      968,
+      519
+    ],
+    "max_score": 0.4962387681007385,
+    "detections": [
+      {
+        "bbox": [
+          486,
+          182,
+          560,
+          240
+        ],
+        "score": 0.4962387681007385,
+        "text": "49ت65430",
+        "ocr_conf": 0.37284998036921024
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 252,
+    "track": 1,
+    "vehicle_bbox": [
+      360,
+      181,
+      952,
+      514
+    ],
+    "max_score": 0.5727065801620483,
+    "detections": [
+      {
+        "bbox": [
+          475,
+          177,
+          544,
+          235
+        ],
+        "score": 0.5727065801620483,
+        "text": "49ت6630",
+        "ocr_conf": 0.38981244606631144
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 255,
+    "track": 1,
+    "vehicle_bbox": [
+      361,
+      181,
+      938,
+      505
+    ],
+    "max_score": 0.5791524052619934,
+    "detections": [
+      {
+        "bbox": [
+          461,
+          180,
+          531,
+          236
+        ],
+        "score": 0.5791524052619934,
+        "text": "26ت4560",
+        "ocr_conf": 0.40177459163325174
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 258,
+    "track": 1,
+    "vehicle_bbox": [
+      354,
+      180,
+      930,
+      505
+    ],
+    "max_score": 0.501359224319458,
+    "detections": [
+      {
+        "bbox": [
+          453,
+          176,
+          528,
+          231
+        ],
+        "score": 0.501359224319458,
+        "text": "46ت53300",
+        "ocr_conf": 0.4581178203225136
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 261,
+    "track": 1,
+    "vehicle_bbox": [
+      351,
+      179,
+      924,
+      505
+    ],
+    "max_score": 0.591850996017456,
+    "detections": [
+      {
+        "bbox": [
+          445,
+          178,
+          520,
+          228
+        ],
+        "score": 0.591850996017456,
+        "text": "56ب652440",
+        "ocr_conf": 0.6020221412181854
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 264,
+    "track": 1,
+    "vehicle_bbox": [
+      351,
+      180,
+      912,
+      502
+    ],
+    "max_score": 0.6318463683128357,
+    "detections": [
+      {
+        "bbox": [
+          435,
+          177,
+          507,
+          228
+        ],
+        "score": 0.6318463683128357,
+        "text": "56ب65244",
+        "ocr_conf": 0.6278135739266872
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 267,
+    "track": 1,
+    "vehicle_bbox": [
+      346,
+      177,
+      905,
+      499
+    ],
+    "max_score": 0.6477932929992676,
+    "detections": [
+      {
+        "bbox": [
+          429,
+          179,
+          504,
+          236
+        ],
+        "score": 0.6477932929992676,
+        "text": "56ص652040",
+        "ocr_conf": 0.5105103717909919
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 270,
+    "track": 1,
+    "vehicle_bbox": [
+      342,
+      174,
+      897,
+      498
+    ],
+    "max_score": 0.6784448027610779,
+    "detections": [
+      {
+        "bbox": [
+          424,
+          180,
+          497,
+          237
+        ],
+        "score": 0.6784448027610779,
+        "text": "56ب650949",
+        "ocr_conf": 0.537247724003262
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 273,
+    "track": 1,
+    "vehicle_bbox": [
+      344,
+      174,
+      889,
+      495
+    ],
+    "max_score": 0.6813416481018066,
+    "detections": [
+      {
+        "bbox": [
+          411,
+          179,
+          489,
+          237
+        ],
+        "score": 0.6813416481018066,
+        "text": "56ب65094",
+        "ocr_conf": 0.5369937904179096
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 276,
+    "track": 1,
+    "vehicle_bbox": [
+      344,
+      173,
+      881,
+      492
+    ],
+    "max_score": 0.6850122809410095,
+    "detections": [
+      {
+        "bbox": [
+          400,
+          179,
+          481,
+          235
+        ],
+        "score": 0.6850122809410095,
+        "text": "56ب5440",
+        "ocr_conf": 0.5339498817920685
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 279,
+    "track": 1,
+    "vehicle_bbox": [
+      341,
+      172,
+      873,
+      491
+    ],
+    "max_score": 0.6722227334976196,
+    "detections": [
+      {
+        "bbox": [
+          396,
+          178,
+          473,
+          236
+        ],
+        "score": 0.6722227334976196,
+        "text": "56ب52940",
+        "ocr_conf": 0.5321554467082024
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 282,
+    "track": 1,
+    "vehicle_bbox": [
+      343,
+      175,
+      864,
+      489
+    ],
+    "max_score": 0.6701503396034241,
+    "detections": [
+      {
+        "bbox": [
+          383,
+          175,
+          464,
+          232
+        ],
+        "score": 0.6701503396034241,
+        "text": "460ب65260",
+        "ocr_conf": 0.5935002134905921
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 285,
+    "track": 1,
+    "vehicle_bbox": [
+      345,
+      178,
+      855,
+      486
+    ],
+    "max_score": 0.7069392204284668,
+    "detections": [
+      {
+        "bbox": [
+          373,
+          172,
+          455,
+          228
+        ],
+        "score": 0.7069392204284668,
+        "text": "46ب65730",
+        "ocr_conf": 0.610830795019865
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 288,
+    "track": 1,
+    "vehicle_bbox": [
+      347,
+      179,
+      847,
+      483
+    ],
+    "max_score": 0.6876590847969055,
+    "detections": [
+      {
+        "bbox": [
+          366,
+          167,
+          446,
+          222
+        ],
+        "score": 0.6876590847969055,
+        "text": "56ب452330",
+        "ocr_conf": 0.48715832498338485
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 291,
+    "track": 1,
+    "vehicle_bbox": [
+      344,
+      180,
+      838,
+      480
+    ],
+    "max_score": 0.7153070569038391,
+    "detections": [
+      {
+        "bbox": [
+          362,
+          166,
+          441,
+          222
+        ],
+        "score": 0.7153070569038391,
+        "text": "60ت652030",
+        "ocr_conf": 0.46881184147463906
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 294,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      179,
+      834,
+      480
+    ],
+    "max_score": 0.7082369923591614,
+    "detections": [
+      {
+        "bbox": [
+          358,
+          167,
+          438,
+          223
+        ],
+        "score": 0.7082369923591614,
+        "text": "56ب50930",
+        "ocr_conf": 0.5577908121049404
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 297,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      180,
+      828,
+      478
+    ],
+    "max_score": 0.7377611398696899,
+    "detections": [
+      {
+        "bbox": [
+          349,
+          166,
+          431,
+          220
+        ],
+        "score": 0.7377611398696899,
+        "text": "56ب5230",
+        "ocr_conf": 0.5750218374388558
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 300,
+    "track": 1,
+    "vehicle_bbox": [
+      343,
+      180,
+      819,
+      472
+    ],
+    "max_score": 0.7330124378204346,
+    "detections": [
+      {
+        "bbox": [
+          335,
+          166,
+          424,
+          222
+        ],
+        "score": 0.7330124378204346,
+        "text": "46ب65720",
+        "ocr_conf": 0.6424144059419632
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 303,
+    "track": 1,
+    "vehicle_bbox": [
+      341,
+      180,
+      817,
+      471
+    ],
+    "max_score": 0.7192080020904541,
+    "detections": [
+      {
+        "bbox": [
+          336,
+          166,
+          417,
+          221
+        ],
+        "score": 0.7192080020904541,
+        "text": "6ب657960",
+        "ocr_conf": 0.5272035375237465
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 306,
+    "track": 1,
+    "vehicle_bbox": [
+      342,
+      179,
+      813,
+      469
+    ],
+    "max_score": 0.7256402969360352,
+    "detections": [
+      {
+        "bbox": [
+          330,
+          170,
+          412,
+          222
+        ],
+        "score": 0.7256402969360352,
+        "text": "6م57960",
+        "ocr_conf": 0.5334047249385289
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 309,
+    "track": 1,
+    "vehicle_bbox": [
+      343,
+      179,
+      813,
+      468
+    ],
+    "max_score": 0.7314043045043945,
+    "detections": [
+      {
+        "bbox": [
+          320,
+          169,
+          402,
+          222
+        ],
+        "score": 0.7314043045043945,
+        "text": "6م652960",
+        "ocr_conf": 0.4893499072641134
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 312,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      180,
+      803,
+      465
+    ],
+    "max_score": 0.7185714244842529,
+    "detections": [
+      {
+        "bbox": [
+          316,
+          167,
+          400,
+          219
+        ],
+        "score": 0.7185714244842529,
+        "text": "6م657000",
+        "ocr_conf": 0.5053352266550064
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 315,
+    "track": 1,
+    "vehicle_bbox": [
+      339,
+      181,
+      795,
+      464
+    ],
+    "max_score": 0.7268896698951721,
+    "detections": [
+      {
+        "bbox": [
+          311,
+          165,
+          399,
+          217
+        ],
+        "score": 0.7268896698951721,
+        "text": "6م560",
+        "ocr_conf": 0.5349077701568603
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 318,
+    "track": 1,
+    "vehicle_bbox": [
+      338,
+      181,
+      787,
+      462
+    ],
+    "max_score": 0.7690256834030151,
+    "detections": [
+      {
+        "bbox": [
+          305,
+          165,
+          388,
+          215
+        ],
+        "score": 0.7690256834030151,
+        "text": "6ب657460",
+        "ocr_conf": 0.5415911860764027
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 321,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      181,
+      782,
+      459
+    ],
+    "max_score": 0.766032338142395,
+    "detections": [
+      {
+        "bbox": [
+          299,
+          166,
+          380,
+          214
+        ],
+        "score": 0.766032338142395,
+        "text": "6ص57966",
+        "ocr_conf": 0.4920709346021925
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 324,
+    "track": 1,
+    "vehicle_bbox": [
+      342,
+      182,
+      772,
+      452
+    ],
+    "max_score": 0.759131669998169,
+    "detections": [
+      {
+        "bbox": [
+          288,
+          161,
+          369,
+          211
+        ],
+        "score": 0.759131669998169,
+        "text": "56ب652966",
+        "ocr_conf": 0.5643161767058902
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 327,
+    "track": 1,
+    "vehicle_bbox": [
+      341,
+      182,
+      765,
+      451
+    ],
+    "max_score": 0.7226317524909973,
+    "detections": [
+      {
+        "bbox": [
+          280,
+          162,
+          364,
+          214
+        ],
+        "score": 0.7226317524909973,
+        "text": "56س65260",
+        "ocr_conf": 0.5551520362496376
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 330,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      180,
+      759,
+      447
+    ],
+    "max_score": 0.7858861684799194,
+    "detections": [
+      {
+        "bbox": [
+          275,
+          163,
+          359,
+          213
+        ],
+        "score": 0.7858861684799194,
+        "text": "6ب52965",
+        "ocr_conf": 0.4756257789475577
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 333,
+    "track": 1,
+    "vehicle_bbox": [
+      339,
+      180,
+      752,
+      444
+    ],
+    "max_score": 0.7701447606086731,
+    "detections": [
+      {
+        "bbox": [
+          268,
+          164,
+          348,
+          212
+        ],
+        "score": 0.7701447606086731,
+        "text": "6م529340",
+        "ocr_conf": 0.40178029984235764
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 336,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      180,
+      745,
+      441
+    ],
+    "max_score": 0.8015226125717163,
+    "detections": [
+      {
+        "bbox": [
+          257,
+          164,
+          338,
+          209
+        ],
+        "score": 0.8015226125717163,
+        "text": "6م5746",
+        "ocr_conf": 0.5088891585667928
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 339,
+    "track": 1,
+    "vehicle_bbox": [
+      337,
+      179,
+      734,
+      437
+    ],
+    "max_score": 0.8260651230812073,
+    "detections": [
+      {
+        "bbox": [
+          251,
+          162,
+          331,
+          209
+        ],
+        "score": 0.8260651230812073,
+        "text": "6س57966",
+        "ocr_conf": 0.4457738271781376
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 342,
+    "track": 1,
+    "vehicle_bbox": [
+      336,
+      178,
+      725,
+      433
+    ],
+    "max_score": 0.7977479696273804,
+    "detections": [
+      {
+        "bbox": [
+          242,
+          161,
+          323,
+          208
+        ],
+        "score": 0.7977479696273804,
+        "text": "6س57940",
+        "ocr_conf": 0.44374276059014456
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 345,
+    "track": 1,
+    "vehicle_bbox": [
+      338,
+      176,
+      714,
+      426
+    ],
+    "max_score": 0.8018369674682617,
+    "detections": [
+      {
+        "bbox": [
+          229,
+          163,
+          308,
+          207
+        ],
+        "score": 0.8018369674682617,
+        "text": "6م57045",
+        "ocr_conf": 0.4896961918898991
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 348,
+    "track": 1,
+    "vehicle_bbox": [
+      335,
+      173,
+      706,
+      422
+    ],
+    "max_score": 0.8457010984420776,
+    "detections": [
+      {
+        "bbox": [
+          222,
+          164,
+          300,
+          208
+        ],
+        "score": 0.8457010984420776,
+        "text": "6س57045",
+        "ocr_conf": 0.5150714835950306
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 351,
+    "track": 1,
+    "vehicle_bbox": [
+      339,
+      173,
+      692,
+      414
+    ],
+    "max_score": 0.7981367111206055,
+    "detections": [
+      {
+        "bbox": [
+          208,
+          160,
+          285,
+          205
+        ],
+        "score": 0.7981367111206055,
+        "text": "6س57065",
+        "ocr_conf": 0.5465936958789825
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 354,
+    "track": 1,
+    "vehicle_bbox": [
+      340,
+      171,
+      681,
+      408
+    ],
+    "max_score": 0.7712446451187134,
+    "detections": [
+      {
+        "bbox": [
+          198,
+          160,
+          274,
+          201
+        ],
+        "score": 0.7712446451187134,
+        "text": "56ص57440",
+        "ocr_conf": 0.5845774747431278
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 357,
+    "track": 1,
+    "vehicle_bbox": [
+      339,
+      168,
+      673,
+      402
+    ],
+    "max_score": 0.8374229669570923,
+    "detections": [
+      {
+        "bbox": [
+          187,
+          159,
+          262,
+          198
+        ],
+        "score": 0.8374229669570923,
+        "text": "6م5704",
+        "ocr_conf": 0.5424163093169531
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 363,
+    "track": 1,
+    "vehicle_bbox": [
+      350,
+      159,
+      663,
+      391
+    ],
+    "max_score": 0.7730007171630859,
+    "detections": [
+      {
+        "bbox": [
+          159,
+          149,
+          232,
+          189
+        ],
+        "score": 0.7730007171630859,
+        "text": "56م5765",
+        "ocr_conf": 0.5366944862263543
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 369,
+    "track": 1,
+    "vehicle_bbox": [
+      356,
+      147,
+      635,
+      360
+    ],
+    "max_score": 0.7074439525604248,
+    "detections": [
+      {
+        "bbox": [
+          138,
+          144,
+          210,
+          181
+        ],
+        "score": 0.7074439525604248,
+        "text": "56م57945",
+        "ocr_conf": 0.4606399144977331
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 372,
+    "track": 1,
+    "vehicle_bbox": [
+      361,
+      143,
+      629,
+      350
+    ],
+    "max_score": 0.7205325365066528,
+    "detections": [
+      {
+        "bbox": [
+          128,
+          139,
+          199,
+          175
+        ],
+        "score": 0.7205325365066528,
+        "text": "56ع5735",
+        "ocr_conf": 0.6136161003793988
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 375,
+    "track": 1,
+    "vehicle_bbox": [
+      360,
+      138,
+      617,
+      339
+    ],
+    "max_score": 0.6949079632759094,
+    "detections": [
+      {
+        "bbox": [
+          124,
+          139,
+          193,
+          173
+        ],
+        "score": 0.6949079632759094,
+        "text": "5ص57406",
+        "ocr_conf": 0.4158807396888733
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 378,
+    "track": 1,
+    "vehicle_bbox": [
+      366,
+      133,
+      620,
+      335
+    ],
+    "max_score": 0.6591775417327881,
+    "detections": [
+      {
+        "bbox": [
+          112,
+          135,
+          183,
+          169
+        ],
+        "score": 0.6591775417327881,
+        "text": "56م57030",
+        "ocr_conf": 0.5873437337577343
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 381,
+    "track": 1,
+    "vehicle_bbox": [
+      376,
+      130,
+      616,
+      328
+    ],
+    "max_score": 0.6368942856788635,
+    "detections": [
+      {
+        "bbox": [
+          98,
+          131,
+          167,
+          164
+        ],
+        "score": 0.6368942856788635,
+        "text": "56م8740",
+        "ocr_conf": 0.6268376878329686
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 384,
+    "track": 1,
+    "vehicle_bbox": [
+      376,
+      124,
+      603,
+      316
+    ],
+    "max_score": 0.6887293457984924,
+    "detections": [
+      {
+        "bbox": [
+          95,
+          128,
+          160,
+          163
+        ],
+        "score": 0.6887293457984924,
+        "text": "56م52030",
+        "ocr_conf": 0.4680163338780403
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 387,
+    "track": 1,
+    "vehicle_bbox": [
+      375,
+      118,
+      595,
+      305
+    ],
+    "max_score": 0.6969413757324219,
+    "detections": [
+      {
+        "bbox": [
+          91,
+          128,
+          155,
+          161
+        ],
+        "score": 0.6969413757324219,
+        "text": "56ص87000",
+        "ocr_conf": 0.5225953944027424
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 390,
+    "track": 1,
+    "vehicle_bbox": [
+      376,
+      113,
+      592,
+      299
+    ],
+    "max_score": 0.5092442035675049,
+    "detections": [
+      {
+        "bbox": [
+          86,
+          127,
+          150,
+          160
+        ],
+        "score": 0.5092442035675049,
+        "text": "96م82440",
+        "ocr_conf": 0.5206856206059456
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 393,
+    "track": 1,
+    "vehicle_bbox": [
+      375,
+      108,
+      584,
+      289
+    ],
+    "max_score": 0.5476760864257812,
+    "detections": [
+      {
+        "bbox": [
+          87,
+          122,
+          149,
+          152
+        ],
+        "score": 0.5476760864257812,
+        "text": "6م57940",
+        "ocr_conf": 0.6284202443701881
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 396,
+    "track": 1,
+    "vehicle_bbox": [
+      372,
+      101,
+      583,
+      284
+    ],
+    "max_score": 0.564566969871521,
+    "detections": [
+      {
+        "bbox": [
+          84,
+          123,
+          148,
+          155
+        ],
+        "score": 0.564566969871521,
+        "text": "6م87906",
+        "ocr_conf": 0.5366437605449131
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 399,
+    "track": 1,
+    "vehicle_bbox": [
+      374,
+      97,
+      578,
+      276
+    ],
+    "max_score": 0.5599563121795654,
+    "detections": [
+      {
+        "bbox": [
+          80,
+          120,
+          143,
+          151
+        ],
+        "score": 0.5599563121795654,
+        "text": "6م87900",
+        "ocr_conf": 0.5873036810329982
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 402,
+    "track": 1,
+    "vehicle_bbox": [
+      376,
+      93,
+      571,
+      265
+    ],
+    "max_score": 0.3533034324645996,
+    "detections": [
+      {
+        "bbox": [
+          75,
+          117,
+          141,
+          148
+        ],
+        "score": 0.3533034324645996,
+        "text": "6م8750",
+        "ocr_conf": 0.6285593012968699
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 405,
+    "track": 1,
+    "vehicle_bbox": [
+      375,
+      89,
+      567,
+      257
+    ],
+    "max_score": 0.45313069224357605,
+    "detections": [
+      {
+        "bbox": [
+          74,
+          115,
+          138,
+          146
+        ],
+        "score": 0.45313069224357605,
+        "text": "56م8740",
+        "ocr_conf": 0.6235991546085903
+      }
+    ],
+    "matched_log": true
+  },
+  {
+    "frame": 408,
+    "track": 1,
+    "vehicle_bbox": [
+      374,
+      85,
+      566,
+      253
+    ],
+    "max_score": 0.27605628967285156,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 411,
+    "track": 1,
+    "vehicle_bbox": [
+      376,
+      80,
+      563,
+      245
+    ],
+    "max_score": 0.15376386046409607,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 414,
+    "track": 1,
+    "vehicle_bbox": [
+      375,
+      77,
+      555,
+      235
+    ],
+    "max_score": 0.19014325737953186,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 417,
+    "track": 1,
+    "vehicle_bbox": [
+      374,
+      73,
+      554,
+      230
+    ],
+    "max_score": 0.21350565552711487,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 420,
+    "track": 1,
+    "vehicle_bbox": [
+      372,
+      68,
+      552,
+      224
+    ],
+    "max_score": 0.10751309990882874,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 423,
+    "track": 1,
+    "vehicle_bbox": [
+      370,
+      64,
+      551,
+      221
+    ],
+    "max_score": 0.10665148496627808,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 426,
+    "track": 1,
+    "vehicle_bbox": [
+      367,
+      60,
+      549,
+      219
+    ],
+    "max_score": 0.21550920605659485,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 429,
+    "track": 1,
+    "vehicle_bbox": [
+      368,
+      56,
+      543,
+      211
+    ],
+    "max_score": 0.06269147992134094,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 432,
+    "track": 1,
+    "vehicle_bbox": [
+      368,
+      52,
+      540,
+      205
+    ],
+    "max_score": 0.08407816290855408,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 435,
+    "track": 1,
+    "vehicle_bbox": [
+      365,
+      46,
+      537,
+      200
+    ],
+    "max_score": 0.07024765014648438,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 438,
+    "track": 1,
+    "vehicle_bbox": [
+      363,
+      41,
+      533,
+      193
+    ],
+    "max_score": 0.06079474091529846,
+    "detections": [],
+    "matched_log": true
+  },
+  {
+    "frame": 441,
+    "track": 1,
+    "vehicle_bbox": [
+      363,
+      38,
+      530,
+      188
+    ],
+    "max_score": 0.01667308807373047,
+    "detections": [],
+    "matched_log": true
+  }
+]

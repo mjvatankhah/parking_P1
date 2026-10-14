@@ -1,0 +1,731 @@
+{
+  "reproduced": {
+    "vehicle_size": [
+      153,
+      157
+    ],
+    "max_plate_score": 0.3757232427597046,
+    "top_box": [
+      47,
+      106,
+      100,
+      139
+    ],
+    "text": "090پ06650",
+    "combined_confidence": 0.4132269069552421,
+    "ocr_confidence": 0.42929990589618683,
+    "plate_size": [
+      53,
+      33
+    ],
+    "artifact": "logged_33"
+  },
+  "samples": [
+    {
+      "frame": 1,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            556,
+            1919,
+            1066
+          ],
+          "vehicle_confidence": 0.9014819860458374,
+          "vehicle_size": [
+            204,
+            510
+          ],
+          "max_plate_score": 0.13148710131645203,
+          "top_box": [
+            72,
+            365,
+            155,
+            465
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_1_1"
+        }
+      ]
+    },
+    {
+      "frame": 33,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            557,
+            1918,
+            1065
+          ],
+          "vehicle_confidence": 0.903846263885498,
+          "vehicle_size": [
+            203,
+            508
+          ],
+          "max_plate_score": 0.169573575258255,
+          "top_box": [
+            73,
+            363,
+            157,
+            463
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_33_1"
+        }
+      ]
+    },
+    {
+      "frame": 60,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            556,
+            1918,
+            1065
+          ],
+          "vehicle_confidence": 0.9025601744651794,
+          "vehicle_size": [
+            203,
+            509
+          ],
+          "max_plate_score": 0.13744699954986572,
+          "top_box": [
+            73,
+            364,
+            157,
+            465
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_60_1"
+        }
+      ]
+    },
+    {
+      "frame": 100,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1716,
+            556,
+            1919,
+            1065
+          ],
+          "vehicle_confidence": 0.9035980105400085,
+          "vehicle_size": [
+            203,
+            509
+          ],
+          "max_plate_score": 0.10522931814193726,
+          "top_box": [
+            71,
+            364,
+            155,
+            464
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_100_1"
+        }
+      ]
+    },
+    {
+      "frame": 150,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            556,
+            1919,
+            1066
+          ],
+          "vehicle_confidence": 0.9072351455688477,
+          "vehicle_size": [
+            204,
+            510
+          ],
+          "max_plate_score": 0.13135021924972534,
+          "top_box": [
+            72,
+            365,
+            156,
+            465
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_150_1"
+        }
+      ]
+    },
+    {
+      "frame": 210,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            553,
+            1919,
+            1066
+          ],
+          "vehicle_confidence": 0.9059271216392517,
+          "vehicle_size": [
+            204,
+            513
+          ],
+          "max_plate_score": 0.17231065034866333,
+          "top_box": [
+            74,
+            388,
+            156,
+            473
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_210_1"
+        }
+      ]
+    },
+    {
+      "frame": 270,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            552,
+            1919,
+            1065
+          ],
+          "vehicle_confidence": 0.9018384218215942,
+          "vehicle_size": [
+            204,
+            513
+          ],
+          "max_plate_score": 0.1467685103416443,
+          "top_box": [
+            74,
+            389,
+            155,
+            473
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_270_1"
+        }
+      ]
+    },
+    {
+      "frame": 330,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1714,
+            550,
+            1919,
+            1065
+          ],
+          "vehicle_confidence": 0.9072234630584717,
+          "vehicle_size": [
+            205,
+            515
+          ],
+          "max_plate_score": 0.13732334971427917,
+          "top_box": [
+            76,
+            391,
+            157,
+            474
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_330_1"
+        },
+        {
+          "sample_track": 4,
+          "bbox": [
+            289,
+            123,
+            527,
+            392
+          ],
+          "vehicle_confidence": 0.48364534974098206,
+          "vehicle_size": [
+            238,
+            269
+          ],
+          "max_plate_score": 0.614157497882843,
+          "top_box": [
+            79,
+            223,
+            151,
+            253
+          ],
+          "text": "5م57295",
+          "combined_confidence": 0.7306395798921586,
+          "ocr_confidence": 0.7805604721818652,
+          "plate_size": [
+            72,
+            30
+          ],
+          "artifact": "sample_330_4",
+          "downscaled_comparison": {
+            "vehicle_size": [
+              84,
+              105
+            ],
+            "max_plate_score": 0.06648394465446472,
+            "top_box": [
+              25,
+              77,
+              52,
+              101
+            ],
+            "text": null,
+            "combined_confidence": 0.0,
+            "ocr_confidence": null,
+            "plate_size": null,
+            "artifact": "sample_330_4_small"
+          }
+        }
+      ]
+    },
+    {
+      "frame": 390,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1714,
+            550,
+            1919,
+            1064
+          ],
+          "vehicle_confidence": 0.9086933135986328,
+          "vehicle_size": [
+            205,
+            514
+          ],
+          "max_plate_score": 0.13045331835746765,
+          "top_box": [
+            73,
+            368,
+            157,
+            469
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_390_1"
+        },
+        {
+          "sample_track": 4,
+          "bbox": [
+            282,
+            148,
+            531,
+            430
+          ],
+          "vehicle_confidence": 0.8323084712028503,
+          "vehicle_size": [
+            249,
+            282
+          ],
+          "max_plate_score": 0.6910496950149536,
+          "top_box": [
+            83,
+            241,
+            159,
+            274
+          ],
+          "text": "68م87245",
+          "combined_confidence": 0.7687945980578661,
+          "ocr_confidence": 0.8021138422191143,
+          "plate_size": [
+            76,
+            33
+          ],
+          "artifact": "sample_390_4"
+        }
+      ]
+    },
+    {
+      "frame": 450,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1714,
+            549,
+            1919,
+            1064
+          ],
+          "vehicle_confidence": 0.9136903882026672,
+          "vehicle_size": [
+            205,
+            515
+          ],
+          "max_plate_score": 0.24133822321891785,
+          "top_box": [
+            75,
+            390,
+            156,
+            475
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_450_1"
+        },
+        {
+          "sample_track": 4,
+          "bbox": [
+            270,
+            171,
+            536,
+            471
+          ],
+          "vehicle_confidence": 0.9084650278091431,
+          "vehicle_size": [
+            266,
+            300
+          ],
+          "max_plate_score": 0.5729026794433594,
+          "top_box": [
+            87,
+            243,
+            169,
+            282
+          ],
+          "text": "68م57245",
+          "combined_confidence": 0.6783011224120855,
+          "ocr_confidence": 0.7234718836843967,
+          "plate_size": [
+            82,
+            39
+          ],
+          "artifact": "sample_450_4",
+          "downscaled_comparison": {
+            "vehicle_size": [
+              94,
+              117
+            ],
+            "max_plate_score": 0.044755786657333374,
+            "top_box": [
+              30,
+              86,
+              61,
+              113
+            ],
+            "text": null,
+            "combined_confidence": 0.0,
+            "ocr_confidence": null,
+            "plate_size": null,
+            "artifact": "sample_450_4_small"
+          }
+        }
+      ]
+    },
+    {
+      "frame": 510,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1713,
+            546,
+            1920,
+            1065
+          ],
+          "vehicle_confidence": 0.9056389927864075,
+          "vehicle_size": [
+            207,
+            519
+          ],
+          "max_plate_score": 0.11943072080612183,
+          "top_box": [
+            75,
+            372,
+            159,
+            473
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_510_1"
+        },
+        {
+          "sample_track": 4,
+          "bbox": [
+            229,
+            225,
+            557,
+            596
+          ],
+          "vehicle_confidence": 0.884539008140564,
+          "vehicle_size": [
+            328,
+            371
+          ],
+          "max_plate_score": 0.5775724053382874,
+          "top_box": [
+            96,
+            321,
+            209,
+            376
+          ],
+          "text": "98م87245",
+          "combined_confidence": 0.6569156244397163,
+          "ocr_confidence": 0.6909198611974716,
+          "plate_size": [
+            113,
+            50
+          ],
+          "artifact": "sample_510_4",
+          "downscaled_comparison": {
+            "vehicle_size": [
+              116,
+              144
+            ],
+            "max_plate_score": 0.1669563353061676,
+            "top_box": [
+              31,
+              116,
+              76,
+              144
+            ],
+            "text": null,
+            "combined_confidence": 0.0,
+            "ocr_confidence": null,
+            "plate_size": null,
+            "artifact": "sample_510_4_small"
+          }
+        }
+      ]
+    },
+    {
+      "frame": 570,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1714,
+            546,
+            1920,
+            1065
+          ],
+          "vehicle_confidence": 0.9122243523597717,
+          "vehicle_size": [
+            206,
+            519
+          ],
+          "max_plate_score": 0.1650771200656891,
+          "top_box": [
+            77,
+            404,
+            156,
+            493
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_570_1"
+        },
+        {
+          "sample_track": 4,
+          "bbox": [
+            140,
+            268,
+            645,
+            841
+          ],
+          "vehicle_confidence": 0.8224842548370361,
+          "vehicle_size": [
+            505,
+            573
+          ],
+          "max_plate_score": 0.015045225620269775,
+          "top_box": [
+            460,
+            258,
+            483,
+            267
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_570_4",
+          "downscaled_comparison": {
+            "vehicle_size": [
+              179,
+              223
+            ],
+            "max_plate_score": 0.006843090057373047,
+            "top_box": [
+              25,
+              144,
+              127,
+              200
+            ],
+            "text": null,
+            "combined_confidence": 0.0,
+            "ocr_confidence": null,
+            "plate_size": null,
+            "artifact": "sample_570_4_small"
+          }
+        }
+      ]
+    },
+    {
+      "frame": 630,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1713,
+            545,
+            1920,
+            1066
+          ],
+          "vehicle_confidence": 0.9025595784187317,
+          "vehicle_size": [
+            207,
+            521
+          ],
+          "max_plate_score": 0.15373727679252625,
+          "top_box": [
+            79,
+            407,
+            157,
+            491
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_630_1"
+        },
+        {
+          "sample_track": 4,
+          "bbox": [
+            145,
+            390,
+            705,
+            1005
+          ],
+          "vehicle_confidence": 0.8247116208076477,
+          "vehicle_size": [
+            560,
+            615
+          ],
+          "max_plate_score": 0.018765628337860107,
+          "top_box": [
+            432,
+            145,
+            445,
+            153
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_630_4"
+        }
+      ]
+    },
+    {
+      "frame": 690,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1714,
+            549,
+            1919,
+            1066
+          ],
+          "vehicle_confidence": 0.9110729098320007,
+          "vehicle_size": [
+            205,
+            517
+          ],
+          "max_plate_score": 0.17164480686187744,
+          "top_box": [
+            76,
+            392,
+            157,
+            477
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_690_1"
+        }
+      ]
+    },
+    {
+      "frame": 750,
+      "cars": [
+        {
+          "sample_track": 1,
+          "bbox": [
+            1715,
+            551,
+            1919,
+            1066
+          ],
+          "vehicle_confidence": 0.9112503528594971,
+          "vehicle_size": [
+            204,
+            515
+          ],
+          "max_plate_score": 0.19309276342391968,
+          "top_box": [
+            75,
+            394,
+            155,
+            475
+          ],
+          "text": null,
+          "combined_confidence": 0.0,
+          "ocr_confidence": null,
+          "plate_size": null,
+          "artifact": "sample_750_1"
+        }
+      ]
+    }
+  ],
+  "sampling": "Selected decoded frames; new tracker, IDs are not historical IDs. Model settings unchanged except CPU thread limits."
+}

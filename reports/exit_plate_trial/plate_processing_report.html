@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>گزارش پردازش کراپ پلاک</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10151c;
+      --panel: #18212b;
+      --panel-2: #202c38;
+      --text: #edf3f8;
+      --muted: #aebdca;
+      --accent: #58d6b4;
+      --warn: #ffc861;
+      --border: #334454;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Tahoma, Arial, sans-serif;
+      line-height: 1.9;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 38px 20px 70px; }
+    h1, h2, h3 { line-height: 1.45; }
+    h1 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 42px); }
+    h2 { margin: 0 0 18px; font-size: 24px; }
+    h3 { margin: 0 0 8px; font-size: 18px; color: var(--accent); }
+    p { margin: 8px 0; }
+    code {
+      direction: ltr;
+      display: inline-block;
+      font-family: Consolas, monospace;
+      color: #d7fff4;
+      background: #0d1218;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 6px;
+    }
+    .lead { color: var(--muted); max-width: 850px; font-size: 17px; }
+    .section {
+      margin-top: 28px;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .flow div {
+      min-height: 92px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 12px;
+      background: var(--panel-2);
+      border-radius: 10px;
+      border-bottom: 3px solid var(--accent);
+    }
+    .steps { display: grid; gap: 14px; counter-reset: step; }
+    .step {
+      position: relative;
+      padding: 17px 64px 17px 18px;
+      background: var(--panel-2);
+      border-radius: 10px;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      right: 16px;
+      top: 17px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #07130f;
+      background: var(--accent);
+      font-weight: bold;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { padding: 16px; background: var(--panel-2); border-radius: 10px; }
+    .image-card img, .wide-image {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+      background: #080b0f;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      image-rendering: auto;
+    }
+    .image-card img { height: 170px; }
+    .caption { margin-top: 10px; color: var(--muted); font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--border); }
+    th { color: var(--accent); background: var(--panel-2); }
+    .note {
+      padding: 14px 16px;
+      border-right: 4px solid var(--warn);
+      background: #2b271d;
+      border-radius: 8px;
+      color: #ffe8b7;
+    }
+    .result { color: var(--accent); font-size: 21px; font-weight: bold; direction: ltr; text-align: right; }
+    ul { margin: 8px 0; padding-right: 22px; }
+    @media (max-width: 760px) {
+      .flow { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>گزارش پردازش کراپ پلاک</h1>
+  <p class="lead">
+    این گزارش نشان می‌دهد روی کراپ‌های پلاک خودروی خروجی چه پردازشی انجام شد و چرا ورودی جدیدِ همان مدل OCR نتیجهٔ بهتری داد. هیچ مدل جدیدی استفاده نشده و شمارهٔ صحیح برای انتخاب زاویه یا کادر به الگوریتم داده نشده است.
+  </p>
+
+  <section class="section">
+    <h2>مسیر کلی پردازش</h2>
+    <div class="flow">
+      <div>کادر خام مدل تشخیص پلاک</div>
+      <div>افزودن حاشیه برای حفظ لبه‌ها</div>
+      <div>تخمین خودکار زاویه</div>
+      <div>صاف‌کردن و استخراج نوار نوشته</div>
+      <div>OCR و توافق چند نمونه</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>مراحل دقیق روی تصویر</h2>
+    <div class="steps">
+      <article class="step">
+        <h3>گسترش کادر تشخیص‌داده‌شده</h3>
+        <p>از چهار طرف کادر مدل، ۱۲ پیکسل حاشیه اضافه شد. هدف این است که لبه‌های پلاک و نوشته‌ای که نزدیک مرز کادر قرار گرفته، هنگام چرخش قطع نشود.</p>
+      </article>
+      <article class="step">
+        <h3>ساخت نسخهٔ تحلیلی</h3>
+        <p>تصویر خاکستری شد و فقط برای محاسبات با درون‌یابی Bicubic سه برابر بزرگ شد. این بزرگ‌نمایی جزئیات واقعی تازه‌ای نمی‌سازد؛ صرفاً استخراج خطوط را پایدارتر می‌کند.</p>
+      </article>
+      <article class="step">
+        <h3>استخراج لبه و خطوط</h3>
+        <p>لبه‌ها با Canny و آستانه‌های <code>35 / 100</code> استخراج شدند. سپس HoughLinesP خطوطی با طول حداقل ۴۰٪ عرض کادر را پیدا کرد. فقط خطوط دارای زاویهٔ بین منفی ۴۵ تا مثبت ۴۵ درجه وارد محاسبه شدند.</p>
+      </article>
+      <article class="step">
+        <h3>محاسبه و اصلاح زاویه</h3>
+        <p>زاویه با میانهٔ وزن‌دار خطوط محاسبه شد؛ خط بلندتر وزن بیشتری داشت. زاویه هاردکد نبود. در سه نمونهٔ نهایی زاویه‌های محاسبه‌شده تقریباً ۱۷ تا ۱۹ درجه بودند. کراپ رنگی اصلی با warpAffine و Bicubic چرخانده شد.</p>
+      </article>
+      <article class="step">
+        <h3>پیداکردن نوار نوشته</h3>
+        <p>Black-hat نوشته‌های تیره روی زمینهٔ روشن را برجسته کرد. Otsu ماسک دودویی ساخت و Closing افقی بخش‌های حروف و اعداد را به یک ناحیهٔ پیوسته نزدیک کرد. سپس محتمل‌ترین نوار نوشته انتخاب شد.</p>
+      </article>
+      <article class="step">
+        <h3>برش نهایی و ورود به OCR</h3>
+        <p>نوار نوشته با ۲ پیکسل حاشیه از تصویر رنگیِ صاف‌شده برش خورد. بعد همان آماده‌سازی مدل اصلی انجام شد: خاکستری، اندازهٔ <code>128 × 32</code> و نرمال‌سازی به بازهٔ صفر تا یک.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>نکتهٔ مهم دربارهٔ فیلترها</h2>
+    <p class="note">
+      خروجی Canny، Black-hat، Otsu و Closing مستقیماً وارد OCR نشد. این فیلترها فقط برای یافتن زاویه و محل نوار نوشته استفاده شدند. چیزی که وارد OCR شد، برش واقعی از تصویر رنگیِ چرخانده‌شده بود.
+    </p>
+    <p>در این آزمایش شارپ‌سازی، CLAHE، افزایش مصنوعی کنتراست، سوپررزولوشن و بازسازی مولد روی تصویر ورودی OCR اعمال نشد.</p>
+  </section>
+
+  <section class="section">
+    <h2>نمونه‌های واقعی قبل و بعد</h2>
+    <img class="wide-image" src="before_after.jpg" alt="مقایسهٔ سه کراپ خام و اصلاح‌شده">
+    <p class="caption">سمت خام: پلاک کج همراه با حاشیهٔ اضافی. سمت اصلاح‌شده: نوار نوشته پس از تخمین خودکار زاویه و برش دقیق‌تر.</p>
+
+    <div class="grid" style="margin-top:16px">
+      <article class="card image-card">
+        <h3>فریم ۳۱۸ — کراپ خام</h3>
+        <img src="plate_318_0.png" alt="کراپ خام پلاک در فریم 318">
+        <p class="caption">خروجی خام OCR: <code>6ب657460</code></p>
+      </article>
+      <article class="card image-card">
+        <h3>فریم ۳۱۸ — ورودی اصلاح‌شده</h3>
+        <img src="selected_318.png" alt="کراپ اصلاح‌شده پلاک در فریم 318">
+        <p class="caption">خروجی OCR: <code>58م87245</code></p>
+      </article>
+      <article class="card image-card">
+        <h3>فریم ۳۳۳ — کراپ خام</h3>
+        <img src="plate_333_0.png" alt="کراپ خام پلاک در فریم 333">
+        <p class="caption">خروجی خام OCR: <code>6م529340</code></p>
+      </article>
+      <article class="card image-card">
+        <h3>فریم ۳۳۳ — ورودی اصلاح‌شده</h3>
+        <img src="selected_333.png" alt="کراپ اصلاح‌شده پلاک در فریم 333">
+        <p class="caption">خروجی OCR: <code>58م87245</code></p>
+      </article>
+      <article class="card image-card">
+        <h3>فریم ۳۴۸ — کراپ خام</h3>
+        <img src="plate_348_0.png" alt="کراپ خام پلاک در فریم 348">
+        <p class="caption">خروجی خام OCR: <code>6س57045</code></p>
+      </article>
+      <article class="card image-card">
+        <h3>فریم ۳۴۸ — ورودی اصلاح‌شده</h3>
+        <img src="selected_348.png" alt="کراپ اصلاح‌شده پلاک در فریم 348">
+        <p class="caption">خروجی OCR: <code>58م87245</code></p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>آستانه‌های هندسی آزمایش</h2>
+    <table>
+      <thead><tr><th>بررسی</th><th>مقدار</th><th>هدف</th></tr></thead>
+      <tbody>
+        <tr><td>نسبت اولیهٔ عرض کادر به ارتفاع</td><td><code>≥ 1.15</code></td><td>رد کادرهای تقریباً مربع مثل چرخ</td></tr>
+        <tr><td>نسبت چهارضلعی احتمالی پلاک</td><td><code>2.3 … 7.5</code></td><td>پذیرش شکل افقی پلاک</td></tr>
+        <tr><td>مساحت چهارضلعی نسبت به ROI</td><td><code>8% … 90%</code></td><td>رد ناحیه‌های بسیار کوچک یا کل کادر</td></tr>
+        <tr><td>حداقل اندازهٔ چهارضلعی</td><td><code>30 × 8 px</code></td><td>حذف هندسهٔ بسیار کم‌جزئیات</td></tr>
+        <tr><td>نسبت نوار نوشته</td><td><code>2.5 … 8</code></td><td>پیداکردن ردیف افقی نویسه‌ها</td></tr>
+        <tr><td>حداقل عرض نوار نوشته</td><td><code>45%</code> عرض ROI</td><td>رد لکه‌ها و قطعات کوچک</td></tr>
+      </tbody>
+    </table>
+    <p class="note">این مقادیر هنوز آزمایشی‌اند. فیلتر نسبت اولیه ۱۶ تصویر چرخ را حذف کرد، اما سه پلاک واقعیِ بسیار کج را هم کنار گذاشت؛ بنابراین باید در نسخهٔ عمومی همراه با مسیر جایگزین و نگهداری کراپ خام استفاده شود.</p>
+  </section>
+
+  <section class="section">
+    <h2>نتیجهٔ همین ویدیو</h2>
+    <ul>
+      <li>از ۱۴۶ نمونهٔ خودروی ثبت‌شده، مدل در ۷۴ نمونه یک کادر پلاک برگرداند.</li>
+      <li>مسیر خام در هیچ‌کدام از آن‌ها شمارهٔ کامل را دقیق نخواند.</li>
+      <li>پس از اصلاح هندسی، ۳۷ خروجی OCR قابل بررسی تولید شد که ۲۰ مورد دقیقاً درست بودند.</li>
+      <li>سه کاندید نهایی از فریم‌های ۳۱۸، ۳۳۳ و ۳۴۸ انتخاب شدند و هر سه روی یک متن توافق کردند.</li>
+    </ul>
+    <p class="result">58م87245</p>
+    <p class="caption">این نتیجه فقط مربوط به یک خودروی خروجی در همین ویدیو است و هنوز برآورد دقت عمومی برای پارکینگ‌های دیگر محسوب نمی‌شود.</p>
+  </section>
+</main>
+</body>
+</html>

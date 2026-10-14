@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 import cv2
+import numpy as np
 
 from computer_vision_v2.Line_Manager.line_detector import LineDetector
 from computer_vision_v2.streaming.Source_Base import RTSPSource, VideoSource
@@ -36,10 +37,16 @@ def main():
     height, width = original.shape[:2]
     line_point_count = 3 if args.shape == 'l' else 2
     points = []
+    roi = []
+    stage = 'roi'
     window_name = 'Line selector'
 
     def redraw():
         frame = original.copy()
+        if len(roi) > 1:
+            cv2.polylines(frame, [np.asarray(roi, np.int32)], stage != 'roi', (255,200,0), 2)
+        cv2.putText(frame, 'ROI: click polygon, Enter to confirm' if stage == 'roi' else 'Line + inside point; S to save',
+                    (15,30), cv2.FONT_HERSHEY_SIMPLEX, .6, (255,255,255), 2)
         vertices = points[:line_point_count]
         for i, point in enumerate(vertices):
             cv2.circle(frame, point, 6, (0, 255, 255), -1)
@@ -52,6 +59,10 @@ def main():
         cv2.imshow(window_name, frame)
 
     def mouse_click(event, x, y, flags, param):
+        if event == cv2.EVENT_LBUTTONDOWN and stage == 'roi':
+            roi.append((x,y))
+            redraw()
+            return
         if event != cv2.EVENT_LBUTTONDOWN or len(points) >= line_point_count + 1:
             return
         points.append((x, y))
@@ -72,12 +83,14 @@ def main():
                 print(json.dumps(result, indent=2))
         redraw()
 
-    cv2.namedWindow(window_name, cv2.WINDOW_AUTOSIZE)
+    cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+    scale = min(1., 1280/width, 800/height)
+    cv2.resizeWindow(window_name, round(width*scale), round(height*scale))
     cv2.setMouseCallback(window_name, mouse_click)
     redraw()
     print('سه نقطه برای خط L و نقطه چهارم برای داخل پارکینگ' if args.shape == 'l'
           else 'دو نقطه برای خط مستقیم و نقطه سوم برای داخل پارکینگ')
-    print('R: شروع مجدد؛ Q یا Escape: خروج. خروجی را در تنظیمات وارد کنید؛ فایل خودکار تغییر نمی‌کند.')
+    print('ابتدا محدوده ROI را رسم و Enter بزنید؛ سپس خط و نقطه داخل را انتخاب کنید. S: ذخیره؛ R: شروع مجدد؛ Q: خروج')
     try:
         while True:
             key = cv2.waitKey(20) & 0xFF
@@ -85,7 +98,36 @@ def main():
                 break
             if key == ord('r'):
                 points.clear()
+                roi.clear()
+                stage = 'roi'
                 redraw()
+            if key in (10,13) and stage == 'roi' and len(roi) >= 3:
+                if cv2.contourArea(np.asarray(roi,np.int32)) > 0:
+                    stage = 'line'
+                    redraw()
+            if key == ord('s') and stage == 'line' and len(points) == line_point_count+1:
+                normalized = [[px/width,py/height] for px,py in points]
+                try:
+                    LineDetector(camera['id'], normalized[:-1], camera['dir'],
+                                 inside_point=normalized[-1], coordinate_space='normalized')
+                    polygon = np.asarray(roi,np.float32)
+                    if any(cv2.pointPolygonTest(polygon, p, False) < 0 for p in points[:-1]):
+                        raise ValueError('Reference line must be inside ROI')
+                except ValueError as error:
+                    print(error)
+                    continue
+                latest = json.loads(args.config.read_text(encoding='utf-8'))
+                target = next((c for c in latest.get('cameras',[]) if c['id']==camera['id']),None)
+                if target is None or target['source'] != camera['source'] or target['dir'] != camera['dir']:
+                    print('تنظیم دوربین تغییر کرده است؛ پنجره را دوباره باز کنید.')
+                    break
+                target.update(roi=[[px/width,py/height] for px,py in roi], line=normalized[:-1],
+                              inside_point=normalized[-1], coordinate_space='normalized')
+                temporary = args.config.with_suffix('.geometry.tmp')
+                temporary.write_text(json.dumps(latest,ensure_ascii=False,indent=2),encoding='utf-8')
+                temporary.replace(args.config)
+                print('تنظیمات ذخیره شد؛ برنامهٔ پردازش را دوباره اجرا کنید.')
+                break
             if cv2.getWindowProperty(window_name, cv2.WND_PROP_VISIBLE) < 1:
                 break
     finally:

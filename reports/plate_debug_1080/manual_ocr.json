@@ -1,0 +1,32 @@
+[
+  {
+    "variant": "manual_axis_aligned",
+    "text": "5م57345",
+    "ocr_confidence": 0.6620075787816729,
+    "crop_size": [
+      125,
+      55
+    ],
+    "expected_visual_reading": "58م87245"
+  },
+  {
+    "variant": "manual_rectified",
+    "text": "58م87245",
+    "ocr_confidence": 0.9923775643110275,
+    "crop_size": [
+      120,
+      32
+    ],
+    "expected_visual_reading": "58م87245"
+  },
+  {
+    "variant": "manual_rectified_clahe",
+    "text": "58م87245",
+    "ocr_confidence": 0.9973196014761925,
+    "crop_size": [
+      120,
+      32
+    ],
+    "expected_visual_reading": "58م87245"
+  }
+]

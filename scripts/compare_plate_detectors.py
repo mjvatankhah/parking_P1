@@ -41,15 +41,15 @@ def main():
     config['cameras'] = [camera]
     comparisons, events = [], []
 
-    class ComparisonReader:
-        def read(self, crop):
+    class ComparisonReader(PlateReader):
+        def detect_plate(self, crop):
             index = len(comparisons) + 1
             input_path = args.output / f'vehicle_{index}.png'
             if not cv2.imwrite(str(input_path), crop):
                 raise OSError(f'Could not save {input_path}')
             result = {'input': str(input_path.resolve()), 'shape': list(crop.shape)}
             comparisons.append(result)
-            return None, 0.0, None
+            return super().detect_plate(crop)
 
     def collect_events(items, _alive):
         while True:

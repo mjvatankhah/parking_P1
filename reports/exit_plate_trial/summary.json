@@ -1,0 +1,92 @@
+{
+  "source": "src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
+  "target_track": 1,
+  "sampled_logged_frames": 146,
+  "frame_range": [
+    1,
+    441
+  ],
+  "baseline_detections": 74,
+  "baseline_exact": 0,
+  "corrected_outputs": 37,
+  "corrected_exact": 20,
+  "stage_counts": {
+    "reject_aspect": 19,
+    "no_geometry": 18,
+    "ocr": 37
+  },
+  "selected": [
+    {
+      "frame": 348,
+      "candidate": 0,
+      "quality": 0.18393517829165032,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -16.961705886532908,
+        "rect": [
+          13,
+          22,
+          83,
+          23
+        ],
+        "geometry_quality": 0.21749431167878294,
+        "aspect": 3.608695652173913
+      },
+      "detector_score": 0.8457010984420776,
+      "text": "58م87245",
+      "ocr_confidence": 0.9672903716564178,
+      "valid_format": true
+    },
+    {
+      "frame": 333,
+      "candidate": 0,
+      "quality": 0.15839310182517483,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -17.899489837357475,
+        "rect": [
+          12,
+          24,
+          85,
+          21
+        ],
+        "geometry_quality": 0.20566666155073374,
+        "aspect": 4.0476190476190474
+      },
+      "detector_score": 0.7701447606086731,
+      "text": "58م87245",
+      "ocr_confidence": 0.9160169064998627,
+      "valid_format": true
+    },
+    {
+      "frame": 318,
+      "candidate": 0,
+      "quality": 0.15537174626375572,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -18.758650347842234,
+        "rect": [
+          13,
+          25,
+          86,
+          22
+        ],
+        "geometry_quality": 0.2020371355820267,
+        "aspect": 3.909090909090909
+      },
+      "detector_score": 0.7690256834030151,
+      "text": "58م87245",
+      "ocr_confidence": 0.9546210542321205,
+      "valid_format": true
+    }
+  ],
+  "final_text": "58م87245",
+  "reference": "visual reading of frame_300.png; expected label used only for evaluation",
+  "limits": [
+    "one vehicle and one exit, not a production accuracy estimate",
+    "parameters developed on this clip, not an independent test set",
+    "offline replay uses logged vehicle boxes and IDs; does not test online scheduling or ID switches",
+    "deskew/text-band extraction is automatic; no manually selected corners",
+    "not all candidates become readable, and some cases deliberately abstain"
+  ]
+}

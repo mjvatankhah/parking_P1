@@ -1,0 +1,97 @@
+{
+  "roi": [
+    0.1,
+    0.1,
+    0.75,
+    0.65
+  ],
+  "frame_spacing": 3,
+  "candidate_separation_frames": 15,
+  "candidate_count": 22,
+  "stage_counts": {
+    "outside_roi_or_sampling": 33,
+    "sampled_frames": 80,
+    "rejected_aspect": 19,
+    "no_geometry": 12
+  },
+  "selected": [
+    {
+      "frame": 336,
+      "candidate": 0,
+      "quality": 0.1676201540015009,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -17.85622325731425,
+        "rect": [
+          13,
+          22,
+          85,
+          21
+        ],
+        "geometry_quality": 0.2091271679331481,
+        "aspect": 4.0476190476190474
+      },
+      "detector_score": 0.8015226125717163,
+      "text": "58م87345",
+      "ocr_confidence": 0.9330756217241287,
+      "valid_format": true
+    },
+    {
+      "frame": 318,
+      "candidate": 0,
+      "quality": 0.15537174626375572,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -18.758650347842234,
+        "rect": [
+          13,
+          25,
+          86,
+          22
+        ],
+        "geometry_quality": 0.2020371355820267,
+        "aspect": 3.909090909090909
+      },
+      "detector_score": 0.7690256834030151,
+      "text": "58م87245",
+      "ocr_confidence": 0.9546210542321205,
+      "valid_format": true
+    },
+    {
+      "frame": 303,
+      "candidate": 0,
+      "quality": 0.13572775355765987,
+      "geometry": {
+        "method": "edge_deskew_text_band",
+        "angle": -19.890582129960418,
+        "rect": [
+          13,
+          29,
+          85,
+          23
+        ],
+        "geometry_quality": 0.1887183584764808,
+        "aspect": 3.6956521739130435
+      },
+      "detector_score": 0.7192080020904541,
+      "text": "58م87245",
+      "ocr_confidence": 0.9747982323169708,
+      "valid_format": true
+    }
+  ],
+  "votes": {
+    "58م87345": 0.15640227940844467,
+    "58م87245": 0.2806283144605523
+  },
+  "occurrences": {
+    "58م87345": 1,
+    "58م87245": 2
+  },
+  "final_text": "58م87245",
+  "decision": "agreed",
+  "expected_for_evaluation_only": "58م87245",
+  "correct": true,
+  "ocr_calls": 3,
+  "last_observed_frame": 336,
+  "scope": "one known exiting track; no multi-car ID-switch validation"
+}
