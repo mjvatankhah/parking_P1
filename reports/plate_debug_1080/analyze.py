@@ -20,7 +20,7 @@ def session(path):
  return ort.InferenceSession(str(path),sess_options=options,providers=['CPUExecutionProvider'])
 plate_ocr._session=session
 reader=InspectableReader()
-config=json.loads((ROOT/'src/computer_vision_v2/reno/data/cameras.json').read_text())
+config=json.loads((ROOT/'src/reno/data/cameras.json').read_text())
 tracker=CameraTracker('sample',str(ROOT/config['model_path']),config.get('detection_interval',3))
 
 def probe(crop,prefix):

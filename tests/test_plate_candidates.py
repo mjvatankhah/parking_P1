@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 import numpy as np
-from computer_vision_v2.plate_candidates import PlateCandidates, Candidate
+from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates, Candidate
 from computer_vision_v2.tracking.frame_info import Detection, TrackedFrame
 from computer_vision_v2.inference.plate_ocr import PlateReader
 from computer_vision_v2.inference.plate_geometry import PreparedPlate
@@ -13,7 +13,7 @@ class CandidateTests(unittest.TestCase):
         self.reader = Mock()
         self.reader.detect_plate.return_value = (self.crop,.9,self.crop)
         self.pool = PlateCandidates(self.reader)
-        geometry = patch('computer_vision_v2.plate_candidates.prepare_plate',
+        geometry = patch('computer_vision_v2.ocr_worker.plate_candidates.prepare_plate',
                          return_value=PreparedPlate(self.crop,1.))
         self.geometry = geometry.start()
         self.addCleanup(geometry.stop)

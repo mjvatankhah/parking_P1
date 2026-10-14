@@ -1,8 +1,8 @@
 """Plate display must retain the OCR's physical order inside Persian pages."""
 import unittest
 from kivy.clock import Clock
-from computer_vision_v2.reno.ui.theme import register_app_font
-from computer_vision_v2.reno.ui.components.iranian_plate import IranianPlate, plate_segments
+from reno.ui.theme import register_app_font
+from reno.ui.components.iranian_plate import IranianPlate, plate_segments
 
 
 class IranianPlateTests(unittest.TestCase):

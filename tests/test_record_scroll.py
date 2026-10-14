@@ -7,11 +7,11 @@ from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.boxlayout import BoxLayout
 
-from computer_vision_v2.reno.ui.dashboard import DashboardScreen
-from computer_vision_v2.reno.ui import theme
-from computer_vision_v2.reno.models.plate_record import PlateRecord
-from computer_vision_v2.reno.services.camera_service import camera_service
-from computer_vision_v2.reno.services.dashboard_service import DashboardStatistics
+from reno.ui.dashboard import DashboardScreen
+from reno.ui import theme
+from reno.models.plate_record import PlateRecord
+from reno.services.camera_service import camera_service
+from reno.services.dashboard_service import DashboardStatistics
 
 
 def layout():

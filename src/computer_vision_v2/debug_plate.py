@@ -25,9 +25,9 @@ from computer_vision_v2.tracking.tracker import CameraTracker
 VIDEO_SOURCE = "src/computer_vision_v2/video/InShot_20261012_210725035.mp4"
 # زمان شروع پردازش ویدیو برحسب ثانیه؛ صفر یعنی ابتدای ویدیو.
 START_SECONDS = 50
-CONFIG_PATH = Path(__file__).parent / "reno" / "data" / "cameras.json"
+CONFIG_PATH = Path(__file__).parent.parent / "reno" / "data" / "cameras.json"
 WINDOW = "Plate debug | Space: pause | N: next | S: save | Q/Esc: quit"
-FONT_PATH = Path(__file__).parent / "reno" / "assets" / "fonts" / "Vazirmatn-Regular.ttf"
+FONT_PATH = Path(__file__).parent.parent / "reno" / "assets" / "fonts" / "Vazirmatn-Regular.ttf"
 
 
 @lru_cache(maxsize=4)

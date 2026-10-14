@@ -8,9 +8,9 @@ import numpy as np
 from kivy.clock import Clock
 
 from computer_vision_v2.preview import PreviewPublisher
-from computer_vision_v2.reno.models.camera import Camera
-from computer_vision_v2.reno.ui.theme import register_app_font
-from computer_vision_v2.reno.ui.components.camera_card import CameraCard
+from reno.models.camera import Camera
+from reno.ui.theme import register_app_font
+from reno.ui.components.camera_card import CameraCard
 from computer_vision_v2.tracking.frame_info import TrackedFrame
 
 

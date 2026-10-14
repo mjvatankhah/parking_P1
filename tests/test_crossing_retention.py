@@ -6,7 +6,7 @@ from unittest.mock import Mock
 import numpy as np
 
 from computer_vision_v2.Line_Manager.line_detector import LineDetector
-from computer_vision_v2.plate_candidates import CompletedPassage, PlateCandidates
+from computer_vision_v2.ocr_worker.plate_candidates import CompletedPassage, PlateCandidates
 from computer_vision_v2.workers.workers import observation_worker
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.database.database_worker import _save_event

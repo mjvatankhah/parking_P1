@@ -3,19 +3,19 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from computer_vision_v2.reno.main import RenoApp
+from reno.main import RenoApp
 from kivy.clock import Clock
 from kivy.core.window import Window
-from computer_vision_v2.reno.ui import theme
-from computer_vision_v2.reno.ui.components.icons import _ICON_FILES, APP_ICON
-from computer_vision_v2.reno.ui.components.brand import BrandMark
-from computer_vision_v2.reno.ui.components.raw_camera_card import RawCameraCard
-from computer_vision_v2.reno.ui.components.traffic_record import TrafficRecordRow
-from computer_vision_v2.reno.models.plate_record import PlateRecord
-from computer_vision_v2.reno.services.dashboard_service import DashboardStatistics, dashboard_service
-from computer_vision_v2.reno.services.plate_service import plate_service
+from reno.ui import theme
+from reno.ui.components.icons import _ICON_FILES, APP_ICON
+from reno.ui.components.brand import BrandMark
+from reno.ui.components.camera_card import CameraCard
+from reno.ui.components.traffic_record import TrafficRecordRow
+from reno.models.plate_record import PlateRecord
+from reno.services.dashboard_service import DashboardStatistics, dashboard_service
+from reno.services.plate_service import plate_service
 
-APP_PATH = Path(__file__).resolve().parents[1] / 'src/computer_vision_v2/reno'
+APP_PATH = Path(__file__).resolve().parents[1] / 'src/reno'
 
 
 def layout():
@@ -46,7 +46,7 @@ class ReferenceUIContractTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.dashboard.on_leave()
-        cls.root.get_screen('cameras').on_leave()
+        cls.root.get_screen('live_detection').on_leave()
         Window.remove_widget(cls.root)
         for p in cls.patches:
             p.stop()
@@ -61,7 +61,7 @@ class ReferenceUIContractTests(unittest.TestCase):
             self.assertIn('viewBox="0 0 24 24"', svg)
         self.assertTrue((APP_PATH / 'assets/icons/lucide/LICENSE').is_file())
         self.assertEqual(self.app.icon, APP_ICON)
-        for screen_name in ('login', 'dashboard', 'cameras', 'reports', 'camera_settings'):
+        for screen_name in ('login', 'dashboard', 'live_detection', 'reports', 'camera_settings'):
             marks = [w for w in self.root.get_screen(screen_name).walk(restrict=True) if isinstance(w, BrandMark)]
             self.assertTrue(marks, screen_name)
             self.assertTrue(all(w.source == APP_ICON for w in marks))
@@ -96,14 +96,14 @@ class ReferenceUIContractTests(unittest.TestCase):
             self.assertLess(screen._chart.right, screen._record_panel.x)
             self.assertGreaterEqual(screen._today.width, 160)
             self.assertLessEqual(screen._alerts.right, screen._shell.frame.right)
-            self.assertFalse(any(isinstance(w, RawCameraCard) for w in screen.walk(restrict=True)))
+            self.assertFalse(any(isinstance(w, CameraCard) for w in screen.walk(restrict=True)))
         self.root.size = Window.size
         layout()
 
     def test_dashboard_neon_frames_are_visible_and_move(self):
         from tempfile import TemporaryDirectory
         from PIL import Image, ImageChops
-        from computer_vision_v2.reno.ui.components.common import Card
+        from reno.ui.components.common import Card
 
         self.app._navigate('dashboard')
         layout()
@@ -138,7 +138,7 @@ class ReferenceUIContractTests(unittest.TestCase):
                     self.assertGreaterEqual(max(high for low, high in difference.getextrema()), 30)
 
     def test_neon_hairline_keeps_its_width_on_wide_cards(self):
-        from computer_vision_v2.reno.ui.components.common import Card
+        from reno.ui.components.common import Card
 
         card = Card(size_hint=(None, None), size=(360, 112),
                     border_gradient=('#39F5D0', '#247DAD'),
@@ -217,13 +217,14 @@ class ReferenceUIContractTests(unittest.TestCase):
         button._track_pointer(Window, (-100, -100))
         self.assertFalse(button.hovered)
     def test_four_destinations_and_logout_work(self):
-        expected = ['dashboard', 'cameras', 'reports', 'camera_settings', 'logout']
+        expected = ['dashboard', 'live_detection', 'reports', 'camera_settings', 'logout']
         self.assertEqual(list(self.dashboard._shell.sidebar._items), expected)
-        # Drive the real page navigation without opening installation-specific camera sources.
-        with patch.object(RawCameraCard, 'start_stream'):
-            for destination in ('reports', 'camera_settings', 'cameras', 'dashboard', 'logout'):
+        # Drive page navigation without polling the backend preview.
+        with patch.object(CameraCard, 'ensure_stream_started'):
+            for destination in ('reports', 'camera_settings', 'live_detection', 'dashboard', 'logout'):
                 self.dashboard._shell.sidebar._items[destination].dispatch('on_release')
                 self.assertEqual(self.root.current, 'login' if destination == 'logout' else destination)
+        self.assertFalse(self.root.has_screen('cameras'))
         self.assertEqual(len(self.root.get_screen('reports')._shell.main.children[0].children), 0)
 
 

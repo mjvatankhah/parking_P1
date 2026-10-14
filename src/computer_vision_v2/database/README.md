@@ -4,7 +4,7 @@
 independent; `camera.gate_id` is unique, so a gate cannot have two cameras.
 Configure the gate and camera records in PostgreSQL before starting the vision
 pipeline. The pipeline checks this relation and synchronizes the camera source,
-type and role from `reno/data/cameras.json` on each start.
+type and role from `src/reno/data/cameras.json` on each start.
 
 For a new camera configured as `cam-1`, register its distinct gate first:
 

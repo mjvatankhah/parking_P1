@@ -29,7 +29,7 @@ Run the reproducible offline comparison from the project root:
 
 ```bash
 PYTHONPATH=src .venv/bin/python scripts/compare_plate_detectors.py \
-  --config src/computer_vision_v2/reno/data/cameras.json \
+  --config src/reno/data/cameras.json \
   --video src/computer_vision_v2/video/MyRecord_20261010091951.mp4 \
   --baseline src/computer_vision_v2/ocr_worker/models/plate_yolo.platrix-backup.onnx \
   --candidate src/computer_vision_v2/ocr_worker/models/plate_yolo_yolov8m.onnx \

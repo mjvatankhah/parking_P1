@@ -11,7 +11,7 @@ import numpy as np
 from computer_vision_v2.tracking.frame_info import Detection
 from computer_vision_v2.tracking.tracker import CameraTracker
 from computer_vision_v2.Line_Manager.line_detector import LineDetector
-from computer_vision_v2.plate_candidates import PlateCandidates
+from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates
 from computer_vision_v2.inference.plate_geometry import PreparedPlate
 from computer_vision_v2.workers.workers import observation_worker
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
@@ -56,7 +56,7 @@ class HybridTrackingTests(unittest.TestCase):
         events = []
         boxes = [Detection(7, (50, 40 + dy, 120, 100 + dy), 2, .9) for dy in (0, 24)]
         with patch.object(tracker, '_detect', side_effect=[[box] for box in boxes]), \
-             patch('computer_vision_v2.plate_candidates.prepare_plate',
+             patch('computer_vision_v2.ocr_worker.plate_candidates.prepare_plate',
                    return_value=PreparedPlate(scene()[40:60,50:120],1.)):
             for i in range(4):
                 frame = tracker.process(i + 1, i / 25, scene(dy=i * 8))
@@ -165,7 +165,7 @@ class HybridTrackingTests(unittest.TestCase):
         self.assertAlmostEqual(y2 - y1, 60, delta=2)
 
     def test_ui_save_preserves_detection_interval(self):
-        from computer_vision_v2.reno.services.camera_service import CameraService
+        from reno.services.camera_service import CameraService
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'cameras.json'
             path.write_text(json.dumps({'model_path': 'test.pt', 'detection_interval': 1, 'cameras': []}))

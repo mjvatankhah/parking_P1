@@ -4,8 +4,8 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from computer_vision_v2.reno.models.camera import STATUS_ONLINE, STATUS_OFFLINE
-from computer_vision_v2.reno.services.camera_service import CameraService
+from reno.models.camera import STATUS_ONLINE, STATUS_OFFLINE
+from reno.services.camera_service import CameraService
 
 
 class CameraConfigReloadTests(unittest.TestCase):
@@ -14,7 +14,7 @@ class CameraConfigReloadTests(unittest.TestCase):
         self.addCleanup(self.directory.cleanup)
         self.path = Path(self.directory.name) / 'cameras.json'
         self.write_config('old.mp4')
-        with patch('computer_vision_v2.reno.services.camera_service.os.path.join',
+        with patch('reno.services.camera_service.os.path.join',
                    return_value=str(self.path)):
             self.service = CameraService()
         self.listener = Mock()

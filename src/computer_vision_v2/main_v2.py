@@ -12,7 +12,7 @@ os.environ["TORCH_CPP_LOG_LEVEL"] = "ERROR"
 
 from computer_vision_v2.streaming.Cameras_Manager import CameraManager
 from computer_vision_v2.preview import PreviewPublisher
-from computer_vision_v2.plate_candidates import PlateCandidates
+from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates
 from computer_vision_v2.Line_Manager.line_detector import LineDetectorManager
 from computer_vision_v2.inference.plate_ocr import PlateReader
 from computer_vision_v2.workers.workers import observation_worker
@@ -124,7 +124,7 @@ class Pipeline:
 #  راه اندازی سیستم از طریق یک کامند
 def main():
     BASE_DIR = Path(__file__).resolve().parent
-    CONFIG_PATH = BASE_DIR / "reno" / "data" / "cameras.json"
+    CONFIG_PATH = BASE_DIR.parent / "reno" / "data" / "cameras.json"
 
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config = json.load(f)

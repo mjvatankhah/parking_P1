@@ -7,7 +7,7 @@ from computer_vision_v2.tracking.frame_info import Detection,TrackedFrame
 root=Path(__file__).resolve().parents[2];out=root/'reports/plate_debug_2000_2060'
 rows=[json.loads(l) for l in (root/'reports/plate_debug/20261012-200343/results.jsonl').read_text().splitlines()]
 rows=[r for r in rows if r.get('track')==1]
-config=json.loads((root/'src/computer_vision_v2/reno/data/cameras.json').read_text());cam=config['cameras'][0]
+config=json.loads((root/'src/reno/data/cameras.json').read_text());cam=config['cameras'][0]
 selector=selection.BestCropSelector();line=lines.LineDetectorManager(config);clock=SimpleNamespace(monotonic=lambda:current_time)
 selection.time=clock;lines.time=clock
 capture=cv2.VideoCapture(str(root/'src/computer_vision_v2/video/Rec 0073.mp4'))

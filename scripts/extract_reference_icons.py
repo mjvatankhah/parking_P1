@@ -9,7 +9,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP = ROOT / 'src/computer_vision_v2/reno'
+APP = ROOT / 'src/reno'
 OUTPUT = APP / 'assets/icons/reference'
 
 

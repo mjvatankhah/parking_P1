@@ -4,7 +4,7 @@ import numpy as np
 
 from computer_vision_v2.tracking.tracker import CameraTracker
 from computer_vision_v2.tracking.frame_info import Detection
-from computer_vision_v2.reno.models.camera import Camera
+from reno.models.camera import Camera
 
 
 class RoiTests(unittest.TestCase):
