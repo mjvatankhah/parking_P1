@@ -1,0 +1,266 @@
+[[1;32mINFO[0m   ] [Logger      ] Record log in /home/mjr/.kivy/logs/kivy_26-10-15_7.txt
+[[1;32mINFO[0m   ] [Kivy        ] v2.3.1
+[[1;32mINFO[0m   ] [Kivy        ] Installed at "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/__init__.py"
+[[1;32mINFO[0m   ] [Python      ] v3.13.16 (main, Oct  3 2026, 01:06:22) [Clang 22.1.3 ]
+[[1;32mINFO[0m   ] [Python      ] Interpreter at "/home/mjr/plakino/.venv/bin/python"
+[[1;32mINFO[0m   ] [Logger      ] Purge log fired. Processing...
+[[1;32mINFO[0m   ] [Logger      ] Purge finished!
+[[1;32mINFO[0m   ] [Factory     ] 195 symbols loaded
+[[1;32mINFO[0m   ] [Image       ] Providers: img_tex, img_dds, img_sdl2, img_pil (img_ffpyplayer ignored)
+[[1;31mERROR[0m  ] [Input       ] MTDev is not supported by your version of linux
+Traceback (most recent call last):
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/input/providers/__init__.py", line 41, in <module>
+    import kivy.input.providers.mtdev
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/input/providers/mtdev.py", line 94, in <module>
+    from kivy.lib.mtdev import Device, \
+    ...<5 lines>...
+        MTDEV_ABS_TOUCH_MAJOR, MTDEV_TYPE_EV_SYN
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/lib/mtdev.py", line 30, in <module>
+    libmtdev = cdll.LoadLibrary('libmtdev.so.1')
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/ctypes/__init__.py", line 482, in LoadLibrary
+    return self._dlltype(name)
+           ~~~~~~~~~~~~~^^^^^^
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/ctypes/__init__.py", line 361, in __init__
+    self._handle = self._load_library(name, mode, handle, winmode)
+                   ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/ctypes/__init__.py", line 403, in _load_library
+    return _dlopen(name, mode)
+OSError: libmtdev.so.1: cannot open shared object file: No such file or directory
+[[1;32mINFO[0m   ] [Window      ] Provider: sdl2
+[[1;32mINFO[0m   ] [GL          ] Using the "OpenGL" graphics system
+[[1;32mINFO[0m   ] [GL          ] Backend used <sdl2>
+[[1;32mINFO[0m   ] [GL          ] OpenGL version <b'4.5 (Compatibility Profile) Mesa 26.0.8-1ubuntu0.3'>
+[[1;32mINFO[0m   ] [GL          ] OpenGL vendor <b'Mesa'>
+[[1;32mINFO[0m   ] [GL          ] OpenGL renderer <b'llvmpipe (LLVM 21.1.8, 256 bits)'>
+[[1;32mINFO[0m   ] [GL          ] OpenGL parsed version: 4, 5
+[[1;32mINFO[0m   ] [GL          ] Shading version <b'4.50'>
+[[1;32mINFO[0m   ] [GL          ] Texture max size <16384>
+[[1;32mINFO[0m   ] [GL          ] Texture max units <32>
+[[1;32mINFO[0m   ] [Window      ] auto add sdl2 input provider
+[[1;32mINFO[0m   ] [Window      ] virtual keyboard not allowed, single mode, not docked
+[[1;32mINFO[0m   ] [Text        ] Provider: sdl2
+[[1;36mDEBUG[0m  ] [matplotlib data path] /home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data
+[[1;36mDEBUG[0m  ] CONFIGDIR=/home/mjr/.config/matplotlib
+[[1;36mDEBUG[0m  ] interactive is False
+[[1;36mDEBUG[0m  ] platform is linux
+[[1;36mDEBUG[0m  ] CACHEDIR=/home/mjr/.cache/matplotlib
+[[1;36mDEBUG[0m  ] Using fontManager instance from /home/mjr/.cache/matplotlib/fontlist-v3.11.0.json
+[[1;31mERROR[0m  ] [Image       ] Not found </home/mjr/plakino/src/reno/assets/icons/lucide/app.png>
+[[1;31mERROR[0m  ] [Image       ] Not found </home/mjr/plakino/src/reno/assets/icons/lucide/app.png>
+[[1;32mINFO[0m   ] [Clipboard   ] Provider: sdl2(['clipboard_xclip', 'clipboard_xsel', 'clipboard_dbusklipper', 'clipboard_gtk3'] ignored)
+[[1;31mCRITICAL[0m] [Cutbuffer   ] Unable to find any valuable Cutbuffer provider. Please enable debug logging (e.g. add -d if running from the command line, or change the log level in the config) and re-run your app to identify potential causes
+xclip - FileNotFoundError: [Errno 2] No such file or directory: 'xclip'
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/core/__init__.py", line 59, in core_select_lib
+    mod = importlib.__import__(name='{2}.{0}.{1}'.format(
+        basemodule, modulename, base),
+        globals=globals(),
+        locals=locals(),
+        fromlist=[modulename], level=0)
+  File "<frozen importlib._bootstrap>", line 1483, in __import__
+  File "<frozen importlib._bootstrap>", line 1404, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1369, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1340, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/core/clipboard/clipboard_xclip.py", line 17, in <module>
+    p = subprocess.Popen(['xclip', '-version'], stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL)
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1040, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1992, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+
+xsel - FileNotFoundError: [Errno 2] No such file or directory: 'xsel'
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/core/__init__.py", line 59, in core_select_lib
+    mod = importlib.__import__(name='{2}.{0}.{1}'.format(
+        basemodule, modulename, base),
+        globals=globals(),
+        locals=locals(),
+        fromlist=[modulename], level=0)
+  File "<frozen importlib._bootstrap>", line 1483, in __import__
+  File "<frozen importlib._bootstrap>", line 1404, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1369, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1340, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/core/clipboard/clipboard_xsel.py", line 15, in <module>
+    p = subprocess.Popen(['xsel', '--version'], stdout=subprocess.PIPE)
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1040, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1992, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+
+[[1;32mINFO[0m   ] [GL          ] NPOT texture support is available
+[[1;31mERROR[0m  ] [Image       ] Not found </home/mjr/plakino/src/reno/assets/icons/lucide/app.png>
+[[1;31mERROR[0m  ] [Image       ] Not found </home/mjr/plakino/src/reno/assets/icons/lucide/app.png>
+[[1;31mERROR[0m  ] [Image       ] Not found </home/mjr/plakino/src/reno/assets/icons/lucide/app.png>
+[[1;31mERROR[0m  ] [Image       ] Not found </home/mjr/plakino/src/reno/assets/icons/lucide/app.png>
+[[1;36mDEBUG[0m  ] [findfont    ] Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymBol.ttf', index=0, name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmb10.ttf', index=0, name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneral.ttf', index=0, name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBolIta.ttf', index=0, name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmss10.ttf', index=0, name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif.ttf', index=0, name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf', index=0, name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmr10.ttf', index=0, name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf', index=0, name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmtt10.ttf', index=0, name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansDisplay.ttf', index=0, name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Bold.ttf', index=0, name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono.ttf', index=0, name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-BoldOblique.ttf', index=0, name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Oblique.ttf', index=0, name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmmi10.ttf', index=0, name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Oblique.ttf', index=0, name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymBol.ttf', index=0, name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBol.ttf', index=0, name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmex10.ttf', index=0, name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Italic.ttf', index=0, name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFiveSymReg.ttf', index=0, name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymReg.ttf', index=0, name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralItalic.ttf', index=0, name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymReg.ttf', index=0, name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymReg.ttf', index=0, name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerifDisplay.ttf', index=0, name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniIta.ttf', index=0, name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/LastResortHE-Regular.ttf', index=0, name='Last Resort High-Efficiency', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf', index=0, name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBol.ttf', index=0, name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-BoldItalic.ttf', index=0, name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-BoldOblique.ttf', index=0, name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymReg.ttf', index=0, name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymBol.ttf', index=0, name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBolIta.ttf', index=0, name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymBol.ttf', index=0, name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Bold.ttf', index=0, name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUni.ttf', index=0, name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/cmti10.ttf', index=0, name='cmti10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf', index=0, name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-Italic[wdth,wght].ttf', index=0, name='Ubuntu', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuSansMono-Italic[wght].ttf', index=0, name='Ubuntu Sans Mono', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-RI.ttf', index=0, name='Ubuntu', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-C.ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf', index=0, name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-MI.ttf', index=0, name='Ubuntu', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuMono-B.ttf', index=0, name='Ubuntu Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuMono[wght].ttf', index=0, name='Ubuntu Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-Th.ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-L.ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuSans[wdth,wght].ttf', index=0, name='Ubuntu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', index=0, name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuMono-BI.ttf', index=0, name='Ubuntu Mono', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu[wdth,wght].ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuMono-Italic[wght].ttf', index=0, name='Ubuntu Mono', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', index=0, name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuMono-R.ttf', index=0, name='Ubuntu Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf', index=0, name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-BI.ttf', index=0, name='Ubuntu', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-M.ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf', index=0, name='Ubuntu', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuSans-Italic[wdth,wght].ttf', index=0, name='Ubuntu Sans', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuSansMono[wght].ttf', index=0, name='Ubuntu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/Ubuntu-LI.ttf', index=0, name='Ubuntu', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/ubuntu/UbuntuMono-RI.ttf', index=0, name='Ubuntu Mono', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf', index=0, name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', index=0, name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+[[1;36mDEBUG[0m  ] [findfont    ] score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf', index=0, name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+[[1;36mDEBUG[0m  ] [findfont    ] Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/mjr/plakino/.venv/lib/python3.13/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+[[1;36mDEBUG[0m  ] Importing AvifImagePlugin
+[[1;36mDEBUG[0m  ] Importing BlpImagePlugin
+[[1;36mDEBUG[0m  ] Importing BmpImagePlugin
+[[1;36mDEBUG[0m  ] Importing BufrStubImagePlugin
+[[1;36mDEBUG[0m  ] Importing CurImagePlugin
+[[1;36mDEBUG[0m  ] Importing DcxImagePlugin
+[[1;36mDEBUG[0m  ] Importing DdsImagePlugin
+[[1;36mDEBUG[0m  ] Importing EpsImagePlugin
+[[1;36mDEBUG[0m  ] Importing FitsImagePlugin
+[[1;36mDEBUG[0m  ] Importing FliImagePlugin
+[[1;36mDEBUG[0m  ] Importing FpxImagePlugin
+[[1;36mDEBUG[0m  ] [Image       ] failed to import FpxImagePlugin: No module named 'olefile'
+[[1;36mDEBUG[0m  ] Importing FtexImagePlugin
+[[1;36mDEBUG[0m  ] Importing GbrImagePlugin
+[[1;36mDEBUG[0m  ] Importing GifImagePlugin
+[[1;36mDEBUG[0m  ] Importing GribStubImagePlugin
+[[1;36mDEBUG[0m  ] Importing Hdf5StubImagePlugin
+[[1;36mDEBUG[0m  ] Importing IcnsImagePlugin
+[[1;36mDEBUG[0m  ] Importing IcoImagePlugin
+[[1;36mDEBUG[0m  ] Importing ImImagePlugin
+[[1;36mDEBUG[0m  ] Importing ImtImagePlugin
+[[1;36mDEBUG[0m  ] Importing IptcImagePlugin
+[[1;36mDEBUG[0m  ] Importing JpegImagePlugin
+[[1;36mDEBUG[0m  ] Importing Jpeg2KImagePlugin
+[[1;36mDEBUG[0m  ] Importing McIdasImagePlugin
+[[1;36mDEBUG[0m  ] Importing MicImagePlugin
+[[1;36mDEBUG[0m  ] [Image       ] failed to import MicImagePlugin: No module named 'olefile'
+[[1;36mDEBUG[0m  ] Importing MpegImagePlugin
+[[1;36mDEBUG[0m  ] Importing MpoImagePlugin
+[[1;36mDEBUG[0m  ] Importing MspImagePlugin
+[[1;36mDEBUG[0m  ] Importing PalmImagePlugin
+[[1;36mDEBUG[0m  ] Importing PcdImagePlugin
+[[1;36mDEBUG[0m  ] Importing PcxImagePlugin
+[[1;36mDEBUG[0m  ] Importing PdfImagePlugin
+[[1;36mDEBUG[0m  ] Importing PixarImagePlugin
+[[1;36mDEBUG[0m  ] Importing PngImagePlugin
+[[1;36mDEBUG[0m  ] Importing PpmImagePlugin
+[[1;36mDEBUG[0m  ] Importing PsdImagePlugin
+[[1;36mDEBUG[0m  ] Importing QoiImagePlugin
+[[1;36mDEBUG[0m  ] Importing SgiImagePlugin
+[[1;36mDEBUG[0m  ] Importing SpiderImagePlugin
+[[1;36mDEBUG[0m  ] Importing SunImagePlugin
+[[1;36mDEBUG[0m  ] Importing TgaImagePlugin
+[[1;36mDEBUG[0m  ] Importing TiffImagePlugin
+[[1;36mDEBUG[0m  ] Importing WebPImagePlugin
+[[1;36mDEBUG[0m  ] Importing WmfImagePlugin
+[[1;36mDEBUG[0m  ] Importing XbmImagePlugin
+[[1;36mDEBUG[0m  ] Importing XpmImagePlugin
+[[1;36mDEBUG[0m  ] Importing XVThumbImagePlugin
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2242
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2242
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2500
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2490
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2431
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2417
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2533
+[[1;36mDEBUG[0m  ] STREAM b'IHDR' 16 13
+[[1;36mDEBUG[0m  ] STREAM b'IDAT' 41 2552
+ ....F.....
+ ======================================================================
+ FAIL: test_icons_share_lucide_sources_and_application_brand (test_reference_ui.ReferenceUIContractTests.test_icons_share_lucide_sources_and_application_brand)
+ ----------------------------------------------------------------------
+ Traceback (most recent call last):
+   File "/home/mjr/plakino/tests/test_reference_ui.py", line 58, in test_icons_share_lucide_sources_and_application_brand
+     self.assertTrue(asset.is_file())
+     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+ AssertionError: False is not true
+ 
+ ----------------------------------------------------------------------
+ Ran 10 tests in 3.102s
+ 
+ FAILED (failures=1)

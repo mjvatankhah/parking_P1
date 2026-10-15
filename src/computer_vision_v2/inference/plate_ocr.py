@@ -170,34 +170,65 @@ class PlateReader:
         return plate_crop, float(scores[best]), context
 
     def recognize_candidates(self, candidates):
-        readings, images = [], []
+        """Read bounded raw/geometry alternatives, with at most one vote per frame.
+
+        Keep the previous five geometry choices and up to five raw choices.
+        A failed transform never discards raw evidence. Conflicting credible
+        alternatives from one frame abstain instead of manufacturing agreement.
+        """
         prepared = []
+        by_frame = {}
         for candidate in candidates:
-            result = candidate.prepared if candidate.prepared is not None else prepare_plate(
-                candidate.context if candidate.context is not None else candidate.crop)
-            if result is not None:
-                prepared.append((candidate, result))
-        prepared.sort(key=lambda pair: pair[0].confidence * pair[1].quality, reverse=True)
-        for candidate, result in prepared:
-            image = result.image
-            text, confidence = self._ctc_decode(self.ocr.run(None, {self.ocr_input:self._prep_ocr(image)})[0])
-            letter = text[2:-5]
-            valid = (len(text) >= 8 and text[:2].isdigit() and text[-5:].isdigit()
-                     and letter in self.labels and not letter.isdigit())
-            readings.append({'text':text, 'confidence':confidence, 'valid':valid,
-                             'frame_idx':candidate.frame_idx})
-            images.append(image)
-            if len(readings) == 5:
-                break
+            if candidate.frame_idx in by_frame:
+                continue
+            by_frame[candidate.frame_idx] = candidate
+            result = candidate.prepared
+            if result is None:
+                try:
+                    result = prepare_plate(candidate.context if candidate.context is not None else candidate.crop)
+                except Exception:
+                    logging.getLogger(__name__).exception('Plate geometry failed during recognition')
+            prepared.append((candidate, result))
+        geometry = sorted((pair for pair in prepared if pair[1] is not None),
+                          key=lambda pair: pair[0].confidence * pair[1].quality, reverse=True)[:5]
+        raw = sorted(prepared, key=lambda pair: pair[0].quality, reverse=True)[:5]
+        selected = {c.frame_idx: (c, result) for c, result in geometry + raw}
+        readings, images = [], []
+        for candidate, result in selected.values():
+            variants = [('raw', candidate.crop)]
+            if result is not None and not np.array_equal(candidate.crop, result.image):
+                variants.append(('geometry', result.image))
+            alternatives = []
+            for source, image in variants:
+                text, confidence = self._ctc_decode(
+                    self.ocr.run(None, {self.ocr_input: self._prep_ocr(image)})[0])
+                letter = text[2:-5]
+                valid = (len(text) >= 8 and text[:2].isdigit() and text[-5:].isdigit()
+                         and letter in self.labels and not letter.isdigit())
+                alternatives.append(dict(text=text, confidence=confidence, valid=valid, source=source))
+            credible = [r for r in alternatives if r['valid'] and r['confidence'] >= .8]
+            conflict = len({r['text'] for r in credible}) > 1
+            chosen = max(credible or alternatives, key=lambda r: r['confidence'])
+            reading = dict(chosen, frame_idx=candidate.frame_idx,
+                           conflict=conflict, alternatives=alternatives)
+            if conflict:
+                reading['valid'] = False
+            readings.append(reading)
+            images.append(variants[next(i for i,r in enumerate(alternatives) if r is chosen)][1])
         votes = Counter(r['text'] for r in readings if r['valid'] and r['confidence'] >= .8)
-        winner, count = votes.most_common(1)[0] if votes else (None,0)
-        status = 'read' if count >= 2 else 'uncertain' if any(r['text'] for r in readings) else 'unread'
-        matching = [r['confidence'] for r in readings if r['text']==winner]
-        confidence = sum(matching)/len(matching) if matching else 0.
+        ranked = votes.most_common()
+        winner, count = ranked[0] if ranked else (None, 0)
+        runner_up = ranked[1][1] if len(ranked) > 1 else 0
+        status = ('read' if count >= 2 and count > runner_up else
+                  'uncertain' if any(r['text'] for r in readings) else 'unread')
+        matching = [r['confidence'] for r in readings if r['valid'] and r['text'] == winner]
+        confidence = sum(matching) / len(matching) if matching else 0.
         fallback_image = images[0] if images else candidates[0].crop if candidates else None
-        image = next((im for im,r in zip(images,readings) if r['text']==winner), fallback_image)
-        return {'plate_text':winner if status=='read' else None, 'recognition_status':status,
-                'confidence':confidence, 'readings':readings, 'image':image}
+        image = next((im for im,r in zip(images,readings)
+                      if r['valid'] and r['text'] == winner), fallback_image)
+        return dict(plate_text=winner if status == 'read' else None,
+                    recognition_status=status, confidence=confidence,
+                    readings=readings, image=image)
 
         # ---------- OCR -------
     def _prep_ocr(self, plate_crop):

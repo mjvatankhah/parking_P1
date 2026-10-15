@@ -1,0 +1,12 @@
+{
+  "processed_frames": 2255,
+  "expected_frames": 2255,
+  "events": 4,
+  "elapsed_seconds": 76.0824743789999,
+  "max_pending_bytes": 14442789,
+  "pending_bytes": 0,
+  "dropped_vehicle_samples": 167,
+  "drained": true,
+  "errors": [],
+  "scope": "real-time recorded tracking replay; original images; no DB writes"
+}

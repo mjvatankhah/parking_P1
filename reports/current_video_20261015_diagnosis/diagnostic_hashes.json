@@ -1,0 +1,8 @@
+{
+  "src/computer_vision_v2/inference/plate_geometry.py": "43caa63f88c36934de94347866b3d7bda14cc2666e98591a457bd864892c8698",
+  "src/computer_vision_v2/inference/plate_ocr.py": "9abe6e3694edd9b5ef07271a72815469cdba8a740b39d3d293bc3bbc3b6bb168",
+  "src/computer_vision_v2/ocr_worker/plate_candidates.py": "d0bef5b42d372945e1d8e20e188d82798753989c76440f5b34bb881041d99ce6",
+  "src/computer_vision_v2/ocr_worker/models/plate_yolo.onnx": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6",
+  "src/computer_vision_v2/ocr_worker/models/plate_yolo_fallback.onnx": "a6974fcb0a79755c270d50f1ebefd4d96d765c879a29051a19aac00dfda8b5af",
+  "src/computer_vision_v2/ocr_worker/models/ocr_crnn.onnx": "45f8c45f29eb1ee91f6274cb8d9c328da1a2050ea7d8596bae61f4a6b9f9fb1e"
+}

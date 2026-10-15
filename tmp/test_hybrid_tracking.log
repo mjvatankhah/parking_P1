@@ -1,0 +1,47 @@
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=5 processing
+[FRAME] camera=cam frame=6 processing
+[FRAME] camera=cam frame=7 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+[FRAME] camera=cam frame=3 processing
+[FRAME] camera=cam frame=4 processing
+[FRAME] camera=cam frame=5 processing
+[FRAME] camera=cam frame=6 processing
+[FRAME] camera=cam frame=7 processing
+[FRAME] camera=cam frame=1 processing
+[FRAME] camera=cam frame=2 processing
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.076s
+
+OK

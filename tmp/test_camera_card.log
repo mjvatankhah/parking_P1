@@ -1,0 +1,47 @@
+[[1;32mINFO[0m   ] [Logger      ] Record log in /home/mjr/.kivy/logs/kivy_26-10-15_3.txt
+[[1;32mINFO[0m   ] [Kivy        ] v2.3.1
+[[1;32mINFO[0m   ] [Kivy        ] Installed at "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/__init__.py"
+[[1;32mINFO[0m   ] [Python      ] v3.13.16 (main, Oct  3 2026, 01:06:22) [Clang 22.1.3 ]
+[[1;32mINFO[0m   ] [Python      ] Interpreter at "/home/mjr/plakino/.venv/bin/python"
+[[1;32mINFO[0m   ] [Logger      ] Purge log fired. Processing...
+[[1;32mINFO[0m   ] [Logger      ] Purge finished!
+[[1;32mINFO[0m   ] [Factory     ] 195 symbols loaded
+[[1;32mINFO[0m   ] [Image       ] Providers: img_tex, img_dds, img_sdl2, img_pil (img_ffpyplayer ignored)
+[[1;32mINFO[0m   ] [Text        ] Provider: sdl2
+[[1;31mERROR[0m  ] [Input       ] MTDev is not supported by your version of linux
+Traceback (most recent call last):
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/input/providers/__init__.py", line 41, in <module>
+    import kivy.input.providers.mtdev
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/input/providers/mtdev.py", line 94, in <module>
+    from kivy.lib.mtdev import Device, \
+    ...<5 lines>...
+        MTDEV_ABS_TOUCH_MAJOR, MTDEV_TYPE_EV_SYN
+  File "/home/mjr/plakino/.venv/lib/python3.13/site-packages/kivy/lib/mtdev.py", line 30, in <module>
+    libmtdev = cdll.LoadLibrary('libmtdev.so.1')
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/ctypes/__init__.py", line 482, in LoadLibrary
+    return self._dlltype(name)
+           ~~~~~~~~~~~~~^^^^^^
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/ctypes/__init__.py", line 361, in __init__
+    self._handle = self._load_library(name, mode, handle, winmode)
+                   ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/ctypes/__init__.py", line 403, in _load_library
+    return _dlopen(name, mode)
+OSError: libmtdev.so.1: cannot open shared object file: No such file or directory
+[[1;32mINFO[0m   ] [Window      ] Provider: sdl2
+[[1;32mINFO[0m   ] [GL          ] Using the "OpenGL" graphics system
+[[1;32mINFO[0m   ] [GL          ] Backend used <sdl2>
+[[1;32mINFO[0m   ] [GL          ] OpenGL version <b'4.5 (Compatibility Profile) Mesa 26.0.8-1ubuntu0.3'>
+[[1;32mINFO[0m   ] [GL          ] OpenGL vendor <b'Mesa'>
+[[1;32mINFO[0m   ] [GL          ] OpenGL renderer <b'llvmpipe (LLVM 21.1.8, 256 bits)'>
+[[1;32mINFO[0m   ] [GL          ] OpenGL parsed version: 4, 5
+[[1;32mINFO[0m   ] [GL          ] Shading version <b'4.50'>
+[[1;32mINFO[0m   ] [GL          ] Texture max size <16384>
+[[1;32mINFO[0m   ] [GL          ] Texture max units <32>
+[[1;32mINFO[0m   ] [Window      ] auto add sdl2 input provider
+[[1;32mINFO[0m   ] [Window      ] virtual keyboard not allowed, single mode, not docked
+[[1;32mINFO[0m   ] [GL          ] NPOT texture support is available
+ .
+ ----------------------------------------------------------------------
+ Ran 1 test in 0.130s
+ 
+ OK

@@ -1,0 +1,37 @@
+{
+  "plate_text": "58م87245",
+  "recognition_status": "read",
+  "confidence": 0.95,
+  "readings": [
+    {
+      "text": "58م87245",
+      "confidence": 0.95,
+      "valid": true,
+      "frame_idx": 0
+    },
+    {
+      "text": "58م87246",
+      "confidence": 0.95,
+      "valid": true,
+      "frame_idx": 1
+    },
+    {
+      "text": "58م87245",
+      "confidence": 0.95,
+      "valid": true,
+      "frame_idx": 2
+    },
+    {
+      "text": "58م87246",
+      "confidence": 0.95,
+      "valid": true,
+      "frame_idx": 3
+    },
+    {
+      "text": "",
+      "confidence": 0.0,
+      "valid": false,
+      "frame_idx": 4
+    }
+  ]
+}

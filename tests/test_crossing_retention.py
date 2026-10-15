@@ -43,6 +43,7 @@ class CrossingRetentionTests(unittest.TestCase):
         crop_q.put(SimpleNamespace(camera_id='cam'))
         crop_q.put(None)
         selector = Mock()
+        selector.close.return_value = []
         selector.observe.side_effect = [[], [CompletedPassage(event, [])]]
         lines = Mock()
         lines.update.side_effect = [[event], []]
@@ -94,7 +95,7 @@ class CrossingRetentionTests(unittest.TestCase):
             worker.join(timeout=3)
         self.assertFalse(worker.is_alive())
 
-    def test_stopping_while_car_is_visible_does_not_finalize_it(self):
+    def test_stopping_while_car_is_visible_flushes_accepted_crossing(self):
         frame_q, ocr_q = queue.Queue(), queue.Queue()
         image = np.zeros((100, 150, 3), np.uint8)
         detection = SimpleNamespace(track_id=1, bbox=(10, 10, 100, 90), class_id=2)
@@ -107,4 +108,5 @@ class CrossingRetentionTests(unittest.TestCase):
         reader = Mock()
         reader.detect_plate.return_value = None
         observation_worker(frame_q, ocr_q, lines, PlateCandidates(reader), lambda: False)
-        self.assertTrue(ocr_q.empty())
+        self.assertEqual(ocr_q.qsize(), 1)
+        self.assertEqual(ocr_q.get()['event']['track_id'], 1)

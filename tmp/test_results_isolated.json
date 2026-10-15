@@ -1,0 +1,140 @@
+[
+  {
+    "test": "test_camera_card.py",
+    "exit_code": 0,
+    "count": 1,
+    "seconds": 0.89
+  },
+  {
+    "test": "test_camera_config_reload.py",
+    "exit_code": 0,
+    "count": 6,
+    "seconds": 0.16
+  },
+  {
+    "test": "test_camera_registration.py",
+    "exit_code": 0,
+    "count": 3,
+    "seconds": 2.91
+  },
+  {
+    "test": "test_crossing_retention.py",
+    "exit_code": 0,
+    "count": 5,
+    "seconds": 0.5
+  },
+  {
+    "test": "test_debug_plate.py",
+    "exit_code": 1,
+    "count": 1,
+    "seconds": 0.22
+  },
+  {
+    "test": "test_deferred_plate_evidence.py",
+    "exit_code": 0,
+    "count": 10,
+    "seconds": 2.92
+  },
+  {
+    "test": "test_hybrid_tracking.py",
+    "exit_code": 0,
+    "count": 12,
+    "seconds": 2.75
+  },
+  {
+    "test": "test_iranian_plate.py",
+    "exit_code": 0,
+    "count": 2,
+    "seconds": 0.72
+  },
+  {
+    "test": "test_line_selection.py",
+    "exit_code": 0,
+    "count": 9,
+    "seconds": 0.34
+  },
+  {
+    "test": "test_live_detection.py",
+    "exit_code": 0,
+    "count": 2,
+    "seconds": 1.59
+  },
+  {
+    "test": "test_lossless_replay.py",
+    "exit_code": 0,
+    "count": 1,
+    "seconds": 2.75
+  },
+  {
+    "test": "test_person_crop.py",
+    "exit_code": 0,
+    "count": 3,
+    "seconds": 0.45
+  },
+  {
+    "test": "test_pipeline_shutdown.py",
+    "exit_code": 0,
+    "count": 2,
+    "seconds": 3.37
+  },
+  {
+    "test": "test_plate_candidates.py",
+    "exit_code": 0,
+    "count": 12,
+    "seconds": 0.41
+  },
+  {
+    "test": "test_plate_evidence_regression.py",
+    "exit_code": 0,
+    "count": 1,
+    "seconds": 0.62
+  },
+  {
+    "test": "test_plate_fallback_geometry.py",
+    "exit_code": 0,
+    "count": 9,
+    "seconds": 0.49
+  },
+  {
+    "test": "test_preview.py",
+    "exit_code": 0,
+    "count": 6,
+    "seconds": 0.48
+  },
+  {
+    "test": "test_record_scroll.py",
+    "exit_code": 0,
+    "count": 6,
+    "seconds": 5.25
+  },
+  {
+    "test": "test_reference_ui.py",
+    "exit_code": 1,
+    "count": 10,
+    "seconds": 4.85
+  },
+  {
+    "test": "test_stream_runtime.py",
+    "exit_code": 0,
+    "count": 5,
+    "seconds": 4.7
+  },
+  {
+    "test": "test_tracking_roi.py",
+    "exit_code": 0,
+    "count": 3,
+    "seconds": 2.67
+  },
+  {
+    "test": "test_video_source_path.py",
+    "exit_code": 0,
+    "count": 1,
+    "seconds": 0.25
+  },
+  {
+    "test": "test_weekly_ui.py",
+    "exit_code": 0,
+    "count": 7,
+    "seconds": 2.15
+  }
+]

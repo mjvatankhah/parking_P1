@@ -1,0 +1,204 @@
+[
+  {
+    "raw_result": {
+      "plate_text": "48د38467",
+      "recognition_status": "read",
+      "confidence": 0.9921868368983269,
+      "readings": [
+        {
+          "text": "48د38467",
+          "confidence": 0.9967345967888832,
+          "valid": true,
+          "frame_idx": 4
+        },
+        {
+          "text": "48د38467",
+          "confidence": 0.9876390770077705,
+          "valid": true,
+          "frame_idx": 7
+        }
+      ]
+    },
+    "event": 1,
+    "track": 1,
+    "captured_status": "uncertain",
+    "cached_result": {
+      "plate_text": null,
+      "recognition_status": "uncertain",
+      "confidence": 0.0,
+      "readings": [
+        {
+          "text": "12ز00",
+          "confidence": 0.33231969475746154,
+          "valid": false,
+          "frame_idx": 4
+        }
+      ]
+    },
+    "comparisons": [
+      {
+        "frame": 4,
+        "raw": {
+          "text": "48د38467",
+          "confidence": 0.9967345967888832,
+          "size": [
+            123,
+            29
+          ]
+        },
+        "prepared": {
+          "text": "12ز00",
+          "confidence": 0.33231969475746154,
+          "size": [
+            112,
+            18
+          ]
+        }
+      },
+      {
+        "frame": 7,
+        "raw": {
+          "text": "48د38467",
+          "confidence": 0.9876390770077705,
+          "size": [
+            135,
+            35
+          ]
+        },
+        "prepared": null
+      }
+    ]
+  },
+  {
+    "raw_result": {
+      "plate_text": "93ب52733",
+      "recognition_status": "read",
+      "confidence": 0.9565642541274428,
+      "readings": [
+        {
+          "text": "93ب52733",
+          "confidence": 0.8644605241715908,
+          "valid": true,
+          "frame_idx": 4
+        },
+        {
+          "text": "93ب52733",
+          "confidence": 0.9961985722184181,
+          "valid": true,
+          "frame_idx": 23
+        },
+        {
+          "text": "93ب52733",
+          "confidence": 0.9964168816804886,
+          "valid": true,
+          "frame_idx": 20
+        },
+        {
+          "text": "93ب52733",
+          "confidence": 0.9691810384392738,
+          "valid": true,
+          "frame_idx": 10
+        }
+      ]
+    },
+    "event": 2,
+    "track": 2,
+    "captured_status": "uncertain",
+    "cached_result": {
+      "plate_text": null,
+      "recognition_status": "uncertain",
+      "confidence": 0.8948818854987621,
+      "readings": [
+        {
+          "text": "93ب52733",
+          "confidence": 0.8948818854987621,
+          "valid": true,
+          "frame_idx": 4
+        },
+        {
+          "text": "93ب527",
+          "confidence": 0.9768938620885214,
+          "valid": false,
+          "frame_idx": 20
+        },
+        {
+          "text": "93ب527",
+          "confidence": 0.9396275083223978,
+          "valid": false,
+          "frame_idx": 10
+        }
+      ]
+    },
+    "comparisons": [
+      {
+        "frame": 4,
+        "raw": {
+          "text": "93ب52733",
+          "confidence": 0.8644605241715908,
+          "size": [
+            105,
+            25
+          ]
+        },
+        "prepared": {
+          "text": "93ب52733",
+          "confidence": 0.8948818854987621,
+          "size": [
+            119,
+            31
+          ]
+        }
+      },
+      {
+        "frame": 20,
+        "raw": {
+          "text": "93ب52733",
+          "confidence": 0.9964168816804886,
+          "size": [
+            149,
+            34
+          ]
+        },
+        "prepared": {
+          "text": "93ب527",
+          "confidence": 0.9768938620885214,
+          "size": [
+            103,
+            25
+          ]
+        }
+      },
+      {
+        "frame": 10,
+        "raw": {
+          "text": "93ب52733",
+          "confidence": 0.9691810384392738,
+          "size": [
+            111,
+            28
+          ]
+        },
+        "prepared": {
+          "text": "93ب527",
+          "confidence": 0.9396275083223978,
+          "size": [
+            85,
+            23
+          ]
+        }
+      },
+      {
+        "frame": 23,
+        "raw": {
+          "text": "93ب52733",
+          "confidence": 0.9961985722184181,
+          "size": [
+            149,
+            36
+          ]
+        },
+        "prepared": null
+      }
+    ]
+  }
+]

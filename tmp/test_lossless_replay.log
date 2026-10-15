@@ -1,0 +1,7 @@
+EVENT 1 frame 20 {'plate_text': None, 'recognition_status': 'unread', 'readings': []}
+DONE 20 frames; 1 vehicle events; 0 seconds
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.037s
+
+OK

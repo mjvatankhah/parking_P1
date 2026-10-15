@@ -1,0 +1,150 @@
+[
+  {
+    "case": "old",
+    "expected": "58م87245",
+    "candidates": [
+      {
+        "frame": 301,
+        "ts": 10.028172167391181,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_301_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_301_prepared.png"
+      },
+      {
+        "frame": 310,
+        "ts": 10.32801784681484,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_310_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_310_prepared.png"
+      },
+      {
+        "frame": 328,
+        "ts": 10.927709205662152,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_328_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_328_prepared.png"
+      },
+      {
+        "frame": 340,
+        "ts": 11.327503444893694,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_340_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_340_prepared.png"
+      },
+      {
+        "frame": 349,
+        "ts": 11.62734912431735,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_349_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_349_prepared.png"
+      },
+      {
+        "frame": 352,
+        "ts": 11.727297684125237,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_352_raw.png",
+        "geometry_quality": 1.0
+      },
+      {
+        "frame": 364,
+        "ts": 12.127091923356778,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_364_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_364_prepared.png"
+      },
+      {
+        "frame": 373,
+        "ts": 12.426937602780434,
+        "confidence": 0.8,
+        "quality": 0.8,
+        "raw_file": "old_373_raw.png",
+        "geometry_quality": 1.0,
+        "prepared_file": "old_373_prepared.png"
+      }
+    ],
+    "source": "debug_first_two JPEG evidence; separate from full lossless run"
+  },
+  {
+    "case": "current1",
+    "expected": "48د38467",
+    "candidates": [
+      {
+        "frame": 4,
+        "ts": 0.13320937137137137,
+        "confidence": 0.8541855216026306,
+        "quality": 0.8579217160469951,
+        "prepared": true,
+        "raw_file": "current1_4_raw.png",
+        "prepared_file": "current1_4_prepared.png",
+        "geometry_quality": 1.1707058650722515
+      },
+      {
+        "frame": 7,
+        "ts": 0.2331163998998999,
+        "confidence": 0.7901173830032349,
+        "quality": 0.838608429053473,
+        "prepared": false,
+        "raw_file": "current1_7_raw.png",
+        "geometry_quality": 0.01
+      }
+    ]
+  },
+  {
+    "case": "current2",
+    "expected": "93ب52733",
+    "candidates": [
+      {
+        "frame": 4,
+        "ts": 0.13320937137137137,
+        "confidence": 0.7544236779212952,
+        "quality": 0.7286837792055947,
+        "prepared": true,
+        "raw_file": "current2_4_raw.png",
+        "prepared_file": "current2_4_prepared.png",
+        "geometry_quality": 1.325515130642976
+      },
+      {
+        "frame": 20,
+        "ts": 0.6660468568568568,
+        "confidence": 0.6843501329421997,
+        "quality": 0.7223155672753511,
+        "prepared": true,
+        "raw_file": "current2_20_raw.png",
+        "prepared_file": "current2_20_prepared.png",
+        "geometry_quality": 1.4466279063083276
+      },
+      {
+        "frame": 10,
+        "ts": 0.3330234284284284,
+        "confidence": 0.4309314489364624,
+        "quality": 0.5869402973117975,
+        "prepared": true,
+        "raw_file": "current2_10_raw.png",
+        "prepared_file": "current2_10_prepared.png",
+        "geometry_quality": 2.274143607802673
+      },
+      {
+        "frame": 23,
+        "ts": 0.7659538853853854,
+        "confidence": 0.7477386593818665,
+        "quality": 0.7793793574275585,
+        "prepared": false,
+        "raw_file": "current2_23_raw.png",
+        "geometry_quality": 0.01
+      }
+    ]
+  }
+]

@@ -1,0 +1,85 @@
+[
+  {
+    "raw_result": {
+      "plate_text": "93ب52733",
+      "recognition_status": "read",
+      "confidence": 0.9827989600598812,
+      "readings": [
+        {
+          "text": "93ب52733",
+          "confidence": 0.9964168816804886,
+          "valid": true,
+          "frame_idx": 20
+        },
+        {
+          "text": "93ب52733",
+          "confidence": 0.9691810384392738,
+          "valid": true,
+          "frame_idx": 10
+        }
+      ]
+    },
+    "event": 2,
+    "track": 2,
+    "captured_status": "uncertain",
+    "cached_result": {
+      "plate_text": null,
+      "recognition_status": "uncertain",
+      "confidence": 0.0,
+      "readings": [
+        {
+          "text": "93ب527",
+          "confidence": 0.9768938620885214,
+          "valid": false,
+          "frame_idx": 20
+        },
+        {
+          "text": "93ب527",
+          "confidence": 0.9396275083223978,
+          "valid": false,
+          "frame_idx": 10
+        }
+      ]
+    },
+    "comparisons": [
+      {
+        "frame": 20,
+        "raw": {
+          "text": "93ب52733",
+          "confidence": 0.9964168816804886,
+          "size": [
+            149,
+            34
+          ]
+        },
+        "prepared": {
+          "text": "93ب527",
+          "confidence": 0.9768938620885214,
+          "size": [
+            103,
+            25
+          ]
+        }
+      },
+      {
+        "frame": 10,
+        "raw": {
+          "text": "93ب52733",
+          "confidence": 0.9691810384392738,
+          "size": [
+            111,
+            28
+          ]
+        },
+        "prepared": {
+          "text": "93ب527",
+          "confidence": 0.9396275083223978,
+          "size": [
+            85,
+            23
+          ]
+        }
+      }
+    ]
+  }
+]

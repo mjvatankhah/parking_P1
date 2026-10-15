@@ -1,0 +1,1275 @@
+{
+  "complete": true,
+  "metadata_frames": 1998,
+  "decodable_frames": 1998,
+  "target_frames": 1998,
+  "processed_frames": 1998,
+  "dropped_frames": 0,
+  "database_writes": false,
+  "elapsed_seconds": 766.9613401070001,
+  "video_seconds": 66.538081,
+  "fps": 30.02791739665591,
+  "stage_seconds": {
+    "decode": 12.562255375981294,
+    "tracking": 175.97547013399435,
+    "observation": 577.0761010029955
+  },
+  "detector_calls": {
+    "primary": 1649,
+    "fallback": 1124,
+    "accepted": 577
+  },
+  "reader_seconds": {
+    "primary": 340.71947291900597,
+    "fallback": 228.58296732898907,
+    "ocr": 0.7118165910014795
+  },
+  "crossings": [
+    {
+      "camera_id": "cam2",
+      "track_id": 1,
+      "bbox": [
+        1052.90966796875,
+        156.44973754882812,
+        1759.8096923828125,
+        763.3236083984375
+      ],
+      "class_id": 2,
+      "confidence": 0.5496858358383179,
+      "frame_idx": 10,
+      "ts": 0.3330234284284284,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 2,
+      "bbox": [
+        439.7195739746094,
+        127.2609634399414,
+        1134.3582763671875,
+        763.1820068359375
+      ],
+      "class_id": 2,
+      "confidence": 0.803577184677124,
+      "frame_idx": 23,
+      "ts": 0.7659538853853854,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 11,
+      "bbox": [
+        1621.6911597855901,
+        224.7061900130807,
+        1920.0,
+        767.3684293909608
+      ],
+      "class_id": 2,
+      "confidence": 0.8081657290458679,
+      "frame_idx": 106,
+      "ts": 3.5300483413413413,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 31,
+      "bbox": [
+        511.9360656738281,
+        128.68333435058594,
+        1920.0,
+        766.1800537109375
+      ],
+      "class_id": 2,
+      "confidence": 0.6444872617721558,
+      "frame_idx": 340,
+      "ts": 11.322796566566566,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 33,
+      "bbox": [
+        264.9808044433594,
+        257.936279296875,
+        460.0221252441406,
+        773.2156372070312
+      ],
+      "class_id": 0,
+      "confidence": 0.7881098985671997,
+      "frame_idx": 577,
+      "ts": 19.21545182032032,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 59,
+      "bbox": [
+        787.2951742169911,
+        132.4984524290511,
+        1920.0,
+        793.6583113013468
+      ],
+      "class_id": 2,
+      "confidence": 0.8370647430419922,
+      "frame_idx": 782,
+      "ts": 26.042432103103103,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 62,
+      "bbox": [
+        169.88891808814697,
+        142.0883859759636,
+        1473.2239469420176,
+        748.6566507973168
+      ],
+      "class_id": 2,
+      "confidence": 0.9188100099563599,
+      "frame_idx": 942,
+      "ts": 31.37080695795796,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 66,
+      "bbox": [
+        0.0,
+        132.00685781064522,
+        1243.4446471112285,
+        778.9886038402876
+      ],
+      "class_id": 2,
+      "confidence": 0.6030395030975342,
+      "frame_idx": 1058,
+      "ts": 35.23387872772773,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 73,
+      "bbox": [
+        13.74344544564292,
+        149.8063643150099,
+        888.3064942265229,
+        762.0129715643512
+      ],
+      "class_id": 2,
+      "confidence": 0.6908926367759705,
+      "frame_idx": 1173,
+      "ts": 39.06364815465466,
+      "side": 1,
+      "direction": "entry"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 78,
+      "bbox": [
+        708.9215331467003,
+        236.98035837004528,
+        1497.7239297541887,
+        739.3108410589
+      ],
+      "class_id": 2,
+      "confidence": 0.9024247527122498,
+      "frame_idx": 1286,
+      "ts": 42.8268128958959,
+      "side": -1,
+      "direction": "exit"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 99,
+      "bbox": [
+        1378.988525390625,
+        448.1116638183594,
+        1642.520263671875,
+        730.4415893554688
+      ],
+      "class_id": 2,
+      "confidence": 0.9197635650634766,
+      "frame_idx": 1452,
+      "ts": 48.35500180780781,
+      "side": -1,
+      "direction": "exit"
+    },
+    {
+      "camera_id": "cam2",
+      "track_id": 160,
+      "bbox": [
+        1427.29052734375,
+        431.408203125,
+        1662.6033935546875,
+        739.591552734375
+      ],
+      "class_id": 2,
+      "confidence": 0.9117477536201477,
+      "frame_idx": 1801,
+      "ts": 59.977519459959964,
+      "side": -1,
+      "direction": "exit"
+    }
+  ],
+  "vehicle_events": [
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 1,
+        "bbox": [
+          1052.90966796875,
+          156.44973754882812,
+          1759.8096923828125,
+          763.3236083984375
+        ],
+        "class_id": 2,
+        "confidence": 0.5496858358383179,
+        "frame_idx": 10,
+        "ts": 0.3330234284284284,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 47,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 4,
+          "ts": 0.13320937137137137,
+          "confidence": 0.8541855216026306,
+          "quality": 0.8579217160469951,
+          "prepared": true
+        },
+        {
+          "frame": 7,
+          "ts": 0.2331163998998999,
+          "confidence": 0.7901173830032349,
+          "quality": 0.838608429053473,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": null,
+        "recognition_status": "uncertain",
+        "confidence": 0.0,
+        "readings": [
+          {
+            "text": "12ز00",
+            "confidence": 0.33231969475746154,
+            "valid": false,
+            "frame_idx": 4
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 2,
+        "bbox": [
+          439.7195739746094,
+          127.2609634399414,
+          1134.3582763671875,
+          763.1820068359375
+        ],
+        "class_id": 2,
+        "confidence": 0.803577184677124,
+        "frame_idx": 23,
+        "ts": 0.7659538853853854,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 63,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 4,
+          "ts": 0.13320937137137137,
+          "confidence": 0.7544236779212952,
+          "quality": 0.7286837792055947,
+          "prepared": true
+        },
+        {
+          "frame": 20,
+          "ts": 0.6660468568568568,
+          "confidence": 0.6843501329421997,
+          "quality": 0.7223155672753511,
+          "prepared": true
+        },
+        {
+          "frame": 10,
+          "ts": 0.3330234284284284,
+          "confidence": 0.4309314489364624,
+          "quality": 0.5869402973117975,
+          "prepared": true
+        },
+        {
+          "frame": 23,
+          "ts": 0.7659538853853854,
+          "confidence": 0.7477386593818665,
+          "quality": 0.7793793574275585,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": null,
+        "recognition_status": "uncertain",
+        "confidence": 0.8948818854987621,
+        "readings": [
+          {
+            "text": "93ب52733",
+            "confidence": 0.8948818854987621,
+            "valid": true,
+            "frame_idx": 4
+          },
+          {
+            "text": "93ب527",
+            "confidence": 0.9768938620885214,
+            "valid": false,
+            "frame_idx": 20
+          },
+          {
+            "text": "93ب527",
+            "confidence": 0.9396275083223978,
+            "valid": false,
+            "frame_idx": 10
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 11,
+        "bbox": [
+          1621.6911597855901,
+          224.7061900130807,
+          1920.0,
+          767.3684293909608
+        ],
+        "class_id": 2,
+        "confidence": 0.8081657290458679,
+        "frame_idx": 106,
+        "ts": 3.5300483413413413,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 133,
+      "reason": "left_roi",
+      "candidates": [],
+      "result": {
+        "plate_text": null,
+        "recognition_status": "unread",
+        "confidence": 0.0,
+        "readings": []
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 31,
+        "bbox": [
+          511.9360656738281,
+          128.68333435058594,
+          1920.0,
+          766.1800537109375
+        ],
+        "class_id": 2,
+        "confidence": 0.6444872617721558,
+        "frame_idx": 340,
+        "ts": 11.322796566566566,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 365,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 328,
+          "ts": 10.923168452452453,
+          "confidence": 0.5753496885299683,
+          "quality": 0.7108445357507275,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": null,
+        "recognition_status": "unread",
+        "confidence": 0.0,
+        "readings": []
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 59,
+        "bbox": [
+          787.2951742169911,
+          132.4984524290511,
+          1920.0,
+          793.6583113013468
+        ],
+        "class_id": 2,
+        "confidence": 0.8370647430419922,
+        "frame_idx": 782,
+        "ts": 26.042432103103103,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 819,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 778,
+          "ts": 25.90922273173173,
+          "confidence": 0.8657426834106445,
+          "quality": 0.7573922331457399,
+          "prepared": true
+        },
+        {
+          "frame": 775,
+          "ts": 25.809315703203204,
+          "confidence": 0.8474063873291016,
+          "quality": 0.7239833025072442,
+          "prepared": true
+        },
+        {
+          "frame": 784,
+          "ts": 26.10903678878879,
+          "confidence": 0.8354429006576538,
+          "quality": 0.7116030909622099,
+          "prepared": true
+        },
+        {
+          "frame": 769,
+          "ts": 25.609501646146146,
+          "confidence": 0.8423905372619629,
+          "quality": 0.6995938622584709,
+          "prepared": true
+        },
+        {
+          "frame": 772,
+          "ts": 25.709408674674673,
+          "confidence": 0.8110654950141907,
+          "quality": 0.6979186229759996,
+          "prepared": true
+        },
+        {
+          "frame": 781,
+          "ts": 26.00912976026026,
+          "confidence": 0.7868410348892212,
+          "quality": 0.7663840191018197,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": "83ن25855",
+        "recognition_status": "read",
+        "confidence": 0.9966388419270515,
+        "readings": [
+          {
+            "text": "83ن25855",
+            "confidence": 0.996882863342762,
+            "valid": true,
+            "frame_idx": 775
+          },
+          {
+            "text": "83ن25855",
+            "confidence": 0.996941976249218,
+            "valid": true,
+            "frame_idx": 778
+          },
+          {
+            "text": "83ن25855",
+            "confidence": 0.9967399910092354,
+            "valid": true,
+            "frame_idx": 784
+          },
+          {
+            "text": "83ن25855",
+            "confidence": 0.9958456605672836,
+            "valid": true,
+            "frame_idx": 769
+          },
+          {
+            "text": "83ن25855",
+            "confidence": 0.9967837184667587,
+            "valid": true,
+            "frame_idx": 772
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 62,
+        "bbox": [
+          169.88891808814697,
+          142.0883859759636,
+          1473.2239469420176,
+          748.6566507973168
+        ],
+        "class_id": 2,
+        "confidence": 0.9188100099563599,
+        "frame_idx": 942,
+        "ts": 31.37080695795796,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 1012,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 928,
+          "ts": 30.90457415815816,
+          "confidence": 0.6935428977012634,
+          "quality": 0.6995713711716234,
+          "prepared": true
+        },
+        {
+          "frame": 913,
+          "ts": 30.405039015515516,
+          "confidence": 0.8070073127746582,
+          "quality": 0.6992833214332755,
+          "prepared": true
+        },
+        {
+          "frame": 931,
+          "ts": 31.004481186686686,
+          "confidence": 0.7486041784286499,
+          "quality": 0.6861946700197278,
+          "prepared": true
+        },
+        {
+          "frame": 907,
+          "ts": 30.20522495845846,
+          "confidence": 0.7311161160469055,
+          "quality": 0.6797144296272356,
+          "prepared": true
+        },
+        {
+          "frame": 895,
+          "ts": 29.805596844344343,
+          "confidence": 0.7792986631393433,
+          "quality": 0.6553865490029933,
+          "prepared": true
+        },
+        {
+          "frame": 904,
+          "ts": 30.10531792992993,
+          "confidence": 0.6982283592224121,
+          "quality": 0.6478965208854204,
+          "prepared": true
+        },
+        {
+          "frame": 910,
+          "ts": 30.305131986986986,
+          "confidence": 0.6874881386756897,
+          "quality": 0.6444924160968458,
+          "prepared": true
+        },
+        {
+          "frame": 916,
+          "ts": 30.504946044044043,
+          "confidence": 0.6843571066856384,
+          "quality": 0.6385574853243532,
+          "prepared": true
+        },
+        {
+          "frame": 901,
+          "ts": 30.0054109014014,
+          "confidence": 0.6557586193084717,
+          "quality": 0.6176572939065785,
+          "prepared": true
+        },
+        {
+          "frame": 889,
+          "ts": 29.60578278728729,
+          "confidence": 0.7604238986968994,
+          "quality": 0.6138956136571037,
+          "prepared": true
+        },
+        {
+          "frame": 898,
+          "ts": 29.905503872872874,
+          "confidence": 0.7465161085128784,
+          "quality": 0.6057619245891678,
+          "prepared": true
+        },
+        {
+          "frame": 892,
+          "ts": 29.705689815815816,
+          "confidence": 0.7989404201507568,
+          "quality": 0.594155190351471,
+          "prepared": true
+        },
+        {
+          "frame": 955,
+          "ts": 31.803737414914917,
+          "confidence": 0.8383544683456421,
+          "quality": 0.8654287348864441,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": "97ن32977",
+        "recognition_status": "read",
+        "confidence": 0.9967752676457167,
+        "readings": [
+          {
+            "text": "97ن32977",
+            "confidence": 0.9967736899852753,
+            "valid": true,
+            "frame_idx": 895
+          },
+          {
+            "text": "97ن32977",
+            "confidence": 0.9966806024312973,
+            "valid": true,
+            "frame_idx": 898
+          },
+          {
+            "text": "97ن32977",
+            "confidence": 0.9972249493002892,
+            "valid": true,
+            "frame_idx": 928
+          },
+          {
+            "text": "97ن22977",
+            "confidence": 0.9833696633577347,
+            "valid": true,
+            "frame_idx": 892
+          },
+          {
+            "text": "97ن32977",
+            "confidence": 0.9964218288660049,
+            "valid": true,
+            "frame_idx": 907
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 66,
+        "bbox": [
+          0.0,
+          132.00685781064522,
+          1243.4446471112285,
+          778.9886038402876
+        ],
+        "class_id": 2,
+        "confidence": 0.6030395030975342,
+        "frame_idx": 1058,
+        "ts": 35.23387872772773,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 1138,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 1011,
+          "ts": 33.66866861411412,
+          "confidence": 0.7263509035110474,
+          "quality": 0.8346329061843603,
+          "prepared": true
+        },
+        {
+          "frame": 1026,
+          "ts": 34.16820375675676,
+          "confidence": 0.7898876667022705,
+          "quality": 0.8025651255003902,
+          "prepared": true
+        },
+        {
+          "frame": 1017,
+          "ts": 33.86848267117117,
+          "confidence": 0.7448662519454956,
+          "quality": 0.783158412714507,
+          "prepared": true
+        },
+        {
+          "frame": 1053,
+          "ts": 35.06736701351351,
+          "confidence": 0.8106430768966675,
+          "quality": 0.8739717216608491,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": "37ی58799",
+        "recognition_status": "read",
+        "confidence": 0.9805851007501284,
+        "readings": [
+          {
+            "text": "37ی58799",
+            "confidence": 0.9963911026716232,
+            "valid": true,
+            "frame_idx": 1026
+          },
+          {
+            "text": "37ی58799",
+            "confidence": 0.9890321791172028,
+            "valid": true,
+            "frame_idx": 1011
+          },
+          {
+            "text": "37ی58799",
+            "confidence": 0.9563320204615593,
+            "valid": true,
+            "frame_idx": 1017
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 73,
+        "bbox": [
+          13.74344544564292,
+          149.8063643150099,
+          888.3064942265229,
+          762.0129715643512
+        ],
+        "class_id": 2,
+        "confidence": 0.6908926367759705,
+        "frame_idx": 1173,
+        "ts": 39.06364815465466,
+        "side": 1,
+        "direction": "entry"
+      },
+      "finalized_at": 1243,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 1158,
+          "ts": 38.564113012012015,
+          "confidence": 0.8606047630310059,
+          "quality": 0.8641779475352342,
+          "prepared": true
+        },
+        {
+          "frame": 1152,
+          "ts": 38.364298954954954,
+          "confidence": 0.8110391497612,
+          "quality": 0.8342690622358551,
+          "prepared": true
+        },
+        {
+          "frame": 1143,
+          "ts": 38.06457786936937,
+          "confidence": 0.8197734355926514,
+          "quality": 0.8180362914445136,
+          "prepared": true
+        },
+        {
+          "frame": 1140,
+          "ts": 37.96467084084084,
+          "confidence": 0.7502717971801758,
+          "quality": 0.7483695900379139,
+          "prepared": true
+        },
+        {
+          "frame": 1181,
+          "ts": 39.3300668973974,
+          "confidence": 0.7948139905929565,
+          "quality": 0.8860542561993541,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": "37ص26255",
+        "recognition_status": "read",
+        "confidence": 0.9917705704768499,
+        "readings": [
+          {
+            "text": "37ص26255",
+            "confidence": 0.9937212243676186,
+            "valid": true,
+            "frame_idx": 1158
+          },
+          {
+            "text": "37س26255",
+            "confidence": 0.9468798562884331,
+            "valid": true,
+            "frame_idx": 1152
+          },
+          {
+            "text": "37ص26255",
+            "confidence": 0.9922435209155083,
+            "valid": true,
+            "frame_idx": 1143
+          },
+          {
+            "text": "37ص26255",
+            "confidence": 0.9893469661474228,
+            "valid": true,
+            "frame_idx": 1140
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 78,
+        "bbox": [
+          708.9215331467003,
+          236.98035837004528,
+          1497.7239297541887,
+          739.3108410589
+        ],
+        "class_id": 2,
+        "confidence": 0.9024247527122498,
+        "frame_idx": 1286,
+        "ts": 42.8268128958959,
+        "side": -1,
+        "direction": "exit"
+      },
+      "finalized_at": 1400,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 1296,
+          "ts": 43.159836324324324,
+          "confidence": 0.8286179304122925,
+          "quality": 0.9042793233114277,
+          "prepared": true
+        },
+        {
+          "frame": 1284,
+          "ts": 42.76020821021021,
+          "confidence": 0.7794220447540283,
+          "quality": 0.8875712652284402,
+          "prepared": true
+        },
+        {
+          "frame": 1272,
+          "ts": 42.36058009609609,
+          "confidence": 0.7796652317047119,
+          "quality": 0.886930987757185,
+          "prepared": true
+        },
+        {
+          "frame": 1302,
+          "ts": 43.359650381381385,
+          "confidence": 0.7922440767288208,
+          "quality": 0.8773959752214633,
+          "prepared": true
+        },
+        {
+          "frame": 1254,
+          "ts": 41.761137924924924,
+          "confidence": 0.7504091858863831,
+          "quality": 0.8750405740914404,
+          "prepared": true
+        },
+        {
+          "frame": 1275,
+          "ts": 42.46048712462463,
+          "confidence": 0.7511545419692993,
+          "quality": 0.8747013433426081,
+          "prepared": true
+        },
+        {
+          "frame": 1305,
+          "ts": 43.45955740990991,
+          "confidence": 0.73747718334198,
+          "quality": 0.8512551924602064,
+          "prepared": true
+        },
+        {
+          "frame": 1263,
+          "ts": 42.06085901051051,
+          "confidence": 0.7580456733703613,
+          "quality": 0.8415199721857408,
+          "prepared": true
+        },
+        {
+          "frame": 1251,
+          "ts": 41.6612308963964,
+          "confidence": 0.6781489849090576,
+          "quality": 0.8390744924545287,
+          "prepared": true
+        },
+        {
+          "frame": 1266,
+          "ts": 42.16076603903904,
+          "confidence": 0.6558531522750854,
+          "quality": 0.8275474888774064,
+          "prepared": true
+        },
+        {
+          "frame": 1257,
+          "ts": 41.86104495345345,
+          "confidence": 0.6521050930023193,
+          "quality": 0.8255162358071156,
+          "prepared": true
+        },
+        {
+          "frame": 1290,
+          "ts": 42.96002226726727,
+          "confidence": 0.8771410584449768,
+          "quality": 0.9374663285998736,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": "31ق65456",
+        "recognition_status": "read",
+        "confidence": 0.9966321840882302,
+        "readings": [
+          {
+            "text": "31ق65456",
+            "confidence": 0.9965563118457794,
+            "valid": true,
+            "frame_idx": 1302
+          },
+          {
+            "text": "31ق65456",
+            "confidence": 0.9968263208866119,
+            "valid": true,
+            "frame_idx": 1296
+          },
+          {
+            "text": "31ق65456",
+            "confidence": 0.9968351721763611,
+            "valid": true,
+            "frame_idx": 1305
+          },
+          {
+            "text": "31ق65456",
+            "confidence": 0.9965646639466286,
+            "valid": true,
+            "frame_idx": 1284
+          },
+          {
+            "text": "31ق65456",
+            "confidence": 0.9963784515857697,
+            "valid": true,
+            "frame_idx": 1272
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 99,
+        "bbox": [
+          1378.988525390625,
+          448.1116638183594,
+          1642.520263671875,
+          730.4415893554688
+        ],
+        "class_id": 2,
+        "confidence": 0.9197635650634766,
+        "frame_idx": 1452,
+        "ts": 48.35500180780781,
+        "side": -1,
+        "direction": "exit"
+      },
+      "finalized_at": 1681,
+      "reason": "left_roi",
+      "candidates": [
+        {
+          "frame": 1485,
+          "ts": 49.45397912162162,
+          "confidence": 0.7004684209823608,
+          "quality": 0.7448652702347085,
+          "prepared": true
+        },
+        {
+          "frame": 1494,
+          "ts": 49.75370020720721,
+          "confidence": 0.6456542015075684,
+          "quality": 0.7290771007537842,
+          "prepared": true
+        },
+        {
+          "frame": 1500,
+          "ts": 49.953514264264264,
+          "confidence": 0.6806216239929199,
+          "quality": 0.7259202901744821,
+          "prepared": true
+        },
+        {
+          "frame": 1482,
+          "ts": 49.354072093093095,
+          "confidence": 0.6498953104019165,
+          "quality": 0.7249406538823078,
+          "prepared": true
+        },
+        {
+          "frame": 1467,
+          "ts": 48.85453695045045,
+          "confidence": 0.689691424369812,
+          "quality": 0.7112380036883487,
+          "prepared": true
+        },
+        {
+          "frame": 1476,
+          "ts": 49.15425803603603,
+          "confidence": 0.49377474188804626,
+          "quality": 0.6270787606796911,
+          "prepared": true
+        },
+        {
+          "frame": 1497,
+          "ts": 49.85360723573574,
+          "confidence": 0.4600604176521301,
+          "quality": 0.6264368413204886,
+          "prepared": true
+        },
+        {
+          "frame": 1503,
+          "ts": 50.05342129279279,
+          "confidence": 0.4498222768306732,
+          "quality": 0.6193873962399832,
+          "prepared": true
+        },
+        {
+          "frame": 1473,
+          "ts": 49.054351007507506,
+          "confidence": 0.46688559651374817,
+          "quality": 0.6186884891279673,
+          "prepared": true
+        },
+        {
+          "frame": 1491,
+          "ts": 49.65379317867868,
+          "confidence": 0.490906298160553,
+          "quality": 0.6153653623335067,
+          "prepared": true
+        },
+        {
+          "frame": 1479,
+          "ts": 49.25416506456457,
+          "confidence": 0.4402746558189392,
+          "quality": 0.6061406842446679,
+          "prepared": true
+        },
+        {
+          "frame": 1527,
+          "ts": 50.85267752102102,
+          "confidence": 0.4942786693572998,
+          "quality": 0.6011328159656573,
+          "prepared": true
+        },
+        {
+          "frame": 1464,
+          "ts": 48.754629921921925,
+          "confidence": 0.6000826358795166,
+          "quality": 0.6616975698990075,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": null,
+        "recognition_status": "uncertain",
+        "confidence": 0.8385123237967491,
+        "readings": [
+          {
+            "text": "87و7939",
+            "confidence": 0.5803138400827136,
+            "valid": false,
+            "frame_idx": 1485
+          },
+          {
+            "text": "97و39533",
+            "confidence": 0.8385123237967491,
+            "valid": true,
+            "frame_idx": 1467
+          },
+          {
+            "text": "97و4913",
+            "confidence": 0.828393816947937,
+            "valid": false,
+            "frame_idx": 1482
+          },
+          {
+            "text": "87م7933",
+            "confidence": 0.6221302492277963,
+            "valid": false,
+            "frame_idx": 1500
+          },
+          {
+            "text": "97ل49334",
+            "confidence": 0.552556823939085,
+            "valid": true,
+            "frame_idx": 1494
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "camera_id": "cam2",
+        "track_id": 160,
+        "bbox": [
+          1427.29052734375,
+          431.408203125,
+          1662.6033935546875,
+          739.591552734375
+        ],
+        "class_id": 2,
+        "confidence": 0.9117477536201477,
+        "frame_idx": 1801,
+        "ts": 59.977519459959964,
+        "side": -1,
+        "direction": "exit"
+      },
+      "finalized_at": 1998,
+      "reason": "eof",
+      "candidates": [
+        {
+          "frame": 1848,
+          "ts": 61.542729573573574,
+          "confidence": 0.7127962708473206,
+          "quality": 0.735700838000686,
+          "prepared": true
+        },
+        {
+          "frame": 1851,
+          "ts": 61.6426366021021,
+          "confidence": 0.662153959274292,
+          "quality": 0.7111708191512287,
+          "prepared": true
+        },
+        {
+          "frame": 1842,
+          "ts": 61.34291551651652,
+          "confidence": 0.660886824131012,
+          "quality": 0.701247053645378,
+          "prepared": true
+        },
+        {
+          "frame": 1816,
+          "ts": 60.47705460260261,
+          "confidence": 0.723898708820343,
+          "quality": 0.6920488737442395,
+          "prepared": true
+        },
+        {
+          "frame": 1819,
+          "ts": 60.576961631131134,
+          "confidence": 0.7035984992980957,
+          "quality": 0.6888537936053186,
+          "prepared": true
+        },
+        {
+          "frame": 1834,
+          "ts": 61.076496773773776,
+          "confidence": 0.6609519720077515,
+          "quality": 0.6854924961351432,
+          "prepared": true
+        },
+        {
+          "frame": 1825,
+          "ts": 60.77677568818819,
+          "confidence": 0.7099131345748901,
+          "quality": 0.6850909766028909,
+          "prepared": true
+        },
+        {
+          "frame": 1845,
+          "ts": 61.44282254504505,
+          "confidence": 0.6067143082618713,
+          "quality": 0.6812638097188689,
+          "prepared": true
+        },
+        {
+          "frame": 1822,
+          "ts": 60.67686865965966,
+          "confidence": 0.7267305850982666,
+          "quality": 0.6799752438743158,
+          "prepared": true
+        },
+        {
+          "frame": 1837,
+          "ts": 61.1764038023023,
+          "confidence": 0.5862856507301331,
+          "quality": 0.6547135748749688,
+          "prepared": true
+        },
+        {
+          "frame": 1813,
+          "ts": 60.37714757407407,
+          "confidence": 0.5976366400718689,
+          "quality": 0.6477579539153665,
+          "prepared": true
+        },
+        {
+          "frame": 1831,
+          "ts": 60.97658974524525,
+          "confidence": 0.5691840648651123,
+          "quality": 0.6365322719430023,
+          "prepared": true
+        },
+        {
+          "frame": 1810,
+          "ts": 60.277240545545546,
+          "confidence": 0.62800133228302,
+          "quality": 0.6478470836366925,
+          "prepared": false
+        }
+      ],
+      "result": {
+        "plate_text": "94ن63788",
+        "recognition_status": "read",
+        "confidence": 0.9580378942191601,
+        "readings": [
+          {
+            "text": "94ن63788",
+            "confidence": 0.9523749202489853,
+            "valid": true,
+            "frame_idx": 1816
+          },
+          {
+            "text": "94ن6378",
+            "confidence": 0.9478576694216047,
+            "valid": false,
+            "frame_idx": 1813
+          },
+          {
+            "text": "94ن63984",
+            "confidence": 0.7997526451945305,
+            "valid": true,
+            "frame_idx": 1825
+          },
+          {
+            "text": "94ن62788",
+            "confidence": 0.9258381575345993,
+            "valid": true,
+            "frame_idx": 1822
+          },
+          {
+            "text": "94ن63788",
+            "confidence": 0.9637008681893349,
+            "valid": true,
+            "frame_idx": 1819
+          }
+        ]
+      }
+    }
+  ],
+  "active_tracks": 0,
+  "vehicle_yolo_calls": 797,
+  "flow_frames": 1201,
+  "flow_fallbacks": 209,
+  "scope": "full_video",
+  "mode": "sequential; timestamps from video; no new image filters",
+  "vehicle_crossing_count": 11,
+  "finalized_vehicle_events": 11,
+  "remaining_pending_events": 0
+}

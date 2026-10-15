@@ -1,0 +1,29 @@
+{
+  "model_path": "src/models/vehicle/yolo26n_openvino_model",
+  "detection_interval": 3,
+  "plate_sampling": {},
+  "cameras": [
+    {
+      "id": "cam2",
+      "type": "video",
+      "source": "/home/mjr/plakino/src/computer_vision_v2/video/InShot_20261015_111930971.mp4",
+      "line": [
+        [
+          0.9973958333333334,
+          0.7018518518518518
+        ],
+        [
+          0.0328125,
+          0.6842592592592592
+        ]
+      ],
+      "dir": "entry_exit",
+      "inside_point": [
+        0.6026041666666667,
+        0.8092592592592592
+      ],
+      "coordinate_space": "normalized",
+      "roi": null
+    }
+  ]
+}

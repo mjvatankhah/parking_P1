@@ -28,6 +28,7 @@ class StreamManager:
         self.tracker = CameraTracker(camera_id, model_path, detection_interval, roi=roi)
 
         self._stop = threading.Event()
+        self.ended = threading.Event()
         self._condition = threading.Condition()
         self._latest_capture = None
         self._latest_tracked = None
@@ -84,6 +85,7 @@ class StreamManager:
         finally:
             if source is not None:
                 source.disconnect()
+            self.ended.set()
 
     def _capture_loop(self):
         retry_delay = 1

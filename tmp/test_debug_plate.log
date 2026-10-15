@@ -1,0 +1,20 @@
+E
+======================================================================
+ERROR: test_debug_plate (unittest.loader._FailedTest.test_debug_plate)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_debug_plate
+Traceback (most recent call last):
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/unittest/loader.py", line 403, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/home/mjr/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/unittest/loader.py", line 346, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/home/mjr/plakino/tests/test_debug_plate.py", line 7, in <module>
+    from computer_vision_v2.debug_plate import choose_camera, inspect_passage, process_frame
+ModuleNotFoundError: No module named 'computer_vision_v2.debug_plate'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)

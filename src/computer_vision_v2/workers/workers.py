@@ -1,8 +1,28 @@
 """Keep crossing evidence until its vehicle leaves the camera ROI."""
 import logging
+from dataclasses import dataclass
 from computer_vision_v2.workers.queueing import offer_event
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class CameraEnded:
+    camera_id: str
+
+
+def _offer_passages(passages, ocr_queue, is_running):
+    for passage in passages:
+        event = passage.event
+        logger.info('Vehicle evidence complete camera=%s track=%s candidates=%s',
+                    event['camera_id'], event['track_id'], len(passage.candidates))
+        offer_event(ocr_queue, {'event':event, 'candidates':passage.candidates, 'person':None},
+                    'ocr', stopping=not is_running())
+
+
+def plate_detection_worker(candidates, ocr_queue, is_running):
+    while not candidates.drained:
+        _offer_passages(candidates.process_pending(timeout=.05), ocr_queue, is_running)
 
 
 def observation_worker(frame_queue, ocr_queue, lines, candidates, is_running):
@@ -10,7 +30,14 @@ def observation_worker(frame_queue, ocr_queue, lines, candidates, is_running):
         frame = frame_queue.get()
         try:
             if frame is None:
+                try:
+                    _offer_passages(candidates.close(), ocr_queue, is_running)
+                except Exception:
+                    logger.exception('Could not drain observation evidence')
                 return
+            if isinstance(frame, CameraEnded):
+                _offer_passages(candidates.close(frame.camera_id), ocr_queue, is_running)
+                continue
             crossings = lines.update(frame)
             completed = candidates.observe(frame, crossings)
             for event in crossings:
@@ -20,12 +47,7 @@ def observation_worker(frame_queue, ocr_queue, lines, candidates, is_running):
                 person = frame.image[max(0,y1):max(0,y2), max(0,x1):max(0,x2)].copy()
                 offer_event(ocr_queue, {'event':event, 'candidates':[], 'person':person},
                             'ocr', stopping=not is_running())
-            for passage in completed:
-                event, crops = passage.event, passage.candidates
-                logger.info('Vehicle left ROI camera=%s track=%s direction=%s candidates=%s',
-                            event['camera_id'], event['track_id'], event['direction'], len(crops))
-                offer_event(ocr_queue, {'event':event, 'candidates':crops, 'person':None},
-                            'ocr', stopping=not is_running())
+            _offer_passages(completed, ocr_queue, is_running)
         except Exception:
             logger.exception('Observation failed')
         finally:

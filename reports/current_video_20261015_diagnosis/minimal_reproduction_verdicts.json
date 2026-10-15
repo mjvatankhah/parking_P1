@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "current_prepared",
+    "exit_code": 1,
+    "seconds": 0.703
+  },
+  {
+    "mode": "raw",
+    "exit_code": 0,
+    "seconds": 0.753
+  },
+  {
+    "mode": "current_prepared",
+    "exit_code": 1,
+    "seconds": 0.663
+  },
+  {
+    "mode": "raw",
+    "exit_code": 0,
+    "seconds": 0.509
+  }
+]

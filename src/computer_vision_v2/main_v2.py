@@ -15,7 +15,7 @@ from computer_vision_v2.preview import PreviewPublisher
 from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates
 from computer_vision_v2.Line_Manager.line_detector import LineDetectorManager
 from computer_vision_v2.inference.plate_ocr import PlateReader
-from computer_vision_v2.workers.workers import observation_worker
+from computer_vision_v2.workers.workers import observation_worker, plate_detection_worker, CameraEnded
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.database.database_worker import database_worker
 
@@ -31,7 +31,7 @@ class Pipeline:
         self.camera_manager = CameraManager(self.config) 
         self.lines = LineDetectorManager(self.config) 
         self.plate_reader = PlateReader() 
-        self.candidates = PlateCandidates(self.plate_reader, **config.get('plate_sampling', {}))
+        self.candidates = PlateCandidates(self.plate_reader, **{'deferred': True, **config.get('plate_sampling', {})})
 
         self.frame_queue = queue.Queue(maxsize=4)
         self.ocr_queue = queue.Queue(maxsize=16)
@@ -42,6 +42,7 @@ class Pipeline:
 
         self._worker_stages = []
         self._dispatch_thread = None
+        self._detection_thread = None
         
     # ساخت و شروع بکارانواع ورکر
     def _start_workers(self, target, args):
@@ -62,6 +63,8 @@ class Pipeline:
             (self.ocr_queue, self._start_workers(ocr_worker, (self.ocr_queue, self.db_queue, self.plate_reader, alive))),
             (self.db_queue, self._start_workers(database_worker, (self.db_queue, alive))),
         ]
+        self._detection_thread = self._start_workers(
+            plate_detection_worker, (self.candidates, self.ocr_queue, alive))
         self.camera_manager.start_all()
         if not self.camera_manager.streams:
             self.stop()
@@ -72,12 +75,19 @@ class Pipeline:
     def _run_pipline(self):
         while self.running:
             frames = self.camera_manager.get_all_frame()
-            if not frames :
-                time.sleep(0.005)
-                continue
             for frame in frames:
                 self.preview.publish(frame)
                 self._dispatch_frame(self.frame_queue,frame)
+            for camera_id in self.camera_manager.get_finished_cameras():
+                # EOF is control data and must not be evicted like a preview frame.
+                while self.running:
+                    try:
+                        self.frame_queue.put(CameraEnded(camera_id), timeout=.1)
+                        break
+                    except queue.Full:
+                        continue
+            if not frames:
+                time.sleep(.005)
 
     @staticmethod
     def _dispatch_frame(my_queue,frame):
@@ -85,8 +95,11 @@ class Pipeline:
             my_queue.put_nowait(frame)
         except queue.Full:
             try:
-                my_queue.get_nowait()
+                previous = my_queue.get_nowait()
                 my_queue.task_done()
+                if isinstance(previous, CameraEnded):
+                    my_queue.put_nowait(previous)
+                    return
             except queue.Empty:
                 pass
         
@@ -106,9 +119,18 @@ class Pipeline:
 
         # هر مرحله تمام شود، سپس مرحله بعد سیگنال پایان بگیرد.
         still_running = []
-        for input_queue, worker in self._worker_stages:
+        for index, (input_queue, worker) in enumerate(self._worker_stages):
+            if index == 1 and getattr(self, '_detection_thread', None) is not None:
+                self._detection_thread.join(timeout=30)
+                if self._detection_thread.is_alive():
+                    logger.error('Plate detector is still draining; downstream workers remain available')
+                    return
+                self._detection_thread = None
             if not worker.is_alive():
                 logger.error("Pipeline worker %s stopped unexpectedly", worker.name)
+                if index == 0 and hasattr(self, 'candidates'):
+                    from computer_vision_v2.workers.workers import _offer_passages
+                    _offer_passages(self.candidates.close(), self.ocr_queue, lambda: False)
                 continue
             try:
                 input_queue.put(None, timeout=5)

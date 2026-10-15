@@ -13,6 +13,7 @@ class CameraManager:
         self.config = config_file
         self.streams = {}
         self.last_idx = {}
+        self._ended_cameras = set()
 
     def start_all(self):
 
@@ -41,6 +42,16 @@ class CameraManager:
             self.last_idx[C_id] = f.frame_idx
             frames.append(f) 
         return frames
+
+    def get_finished_cameras(self):
+        finished = []
+        for camera_id, stream in self.streams.items():
+            if camera_id not in self._ended_cameras and stream.ended.is_set():
+                last = stream.get_latest_frame()
+                if last is None or self.last_idx[camera_id] >= last.frame_idx:
+                    self._ended_cameras.add(camera_id)
+                    finished.append(camera_id)
+        return finished
 
     def stop_all(self) :
         for camera_id, stream in list(self.streams.items()):

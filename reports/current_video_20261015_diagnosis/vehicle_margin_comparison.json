@@ -1,0 +1,107 @@
+[
+  {
+    "frame": 328,
+    "margin": 0,
+    "detected": true,
+    "detector_confidence": 0.5753496885299683,
+    "raw": {
+      "text": "3ث7396",
+      "confidence": 0.8093283474445343,
+      "size": [
+        105,
+        31
+      ]
+    },
+    "prepared": null
+  },
+  {
+    "frame": 328,
+    "margin": 0.1,
+    "detected": true,
+    "detector_confidence": 0.5930879712104797,
+    "raw": {
+      "text": "3ث76961",
+      "confidence": 0.7638943067618779,
+      "size": [
+        114,
+        32
+      ]
+    },
+    "prepared": null
+  },
+  {
+    "frame": 328,
+    "margin": 0.2,
+    "detected": true,
+    "detector_confidence": 0.5292363166809082,
+    "raw": {
+      "text": "3ث73967",
+      "confidence": 0.703644648194313,
+      "size": [
+        108,
+        31
+      ]
+    },
+    "prepared": null
+  },
+  {
+    "frame": 334,
+    "margin": 0,
+    "detected": false
+  },
+  {
+    "frame": 334,
+    "margin": 0.1,
+    "detected": true,
+    "detector_confidence": 0.5005632638931274,
+    "raw": {
+      "text": "34ز7305",
+      "confidence": 0.4847549966403416,
+      "size": [
+        127,
+        37
+      ]
+    },
+    "prepared": null
+  },
+  {
+    "frame": 334,
+    "margin": 0.2,
+    "detected": true,
+    "detector_confidence": 0.41867464780807495,
+    "raw": {
+      "text": "34الف73",
+      "confidence": 0.5705020010471344,
+      "size": [
+        131,
+        38
+      ]
+    },
+    "prepared": null
+  },
+  {
+    "frame": 340,
+    "margin": 0,
+    "detected": false
+  },
+  {
+    "frame": 340,
+    "margin": 0.1,
+    "detected": false
+  },
+  {
+    "frame": 340,
+    "margin": 0.2,
+    "detected": true,
+    "detector_confidence": 0.36324644088745117,
+    "raw": {
+      "text": "33ث7696",
+      "confidence": 0.8418133088520595,
+      "size": [
+        157,
+        43
+      ]
+    },
+    "prepared": null
+  }
+]

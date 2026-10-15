@@ -1,0 +1,772 @@
+[
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 1,
+      "bbox": [
+        563.0922667022205,
+        186.52854101813452,
+        1278.8438179990126,
+        579.392169560005
+      ],
+      "class_id": 2,
+      "confidence": 0.9481808543205261,
+      "frame_idx": 164,
+      "ts": 5.463854472727273,
+      "side": 1,
+      "direction": "exit"
+    },
+    "candidate_frames": [
+      382,
+      337,
+      304,
+      319,
+      274,
+      367,
+      352,
+      256,
+      241
+    ],
+    "result": {
+      "plate_text": "58م87245",
+      "recognition_status": "read",
+      "confidence": 0.9479795899242163,
+      "readings": [
+        {
+          "text": "58م87345",
+          "confidence": 0.9374106600880623,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 337,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "6س57066",
+              "confidence": 0.4464740199702127,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "58م87345",
+              "confidence": 0.9374106600880623,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9428876489400864,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 382,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "56م5704",
+              "confidence": 0.543491563626698,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "58م87245",
+              "confidence": 0.9428876489400864,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9782385230064392,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 304,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "6ب65760",
+              "confidence": 0.589662470987865,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "58م87245",
+              "confidence": 0.9782385230064392,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.946785531938076,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 319,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "56ب652960",
+              "confidence": 0.6509290768040551,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "58م87245",
+              "confidence": 0.946785531938076,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9240066558122635,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 274,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "56ت60960",
+              "confidence": 0.5386165790259838,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "58م87245",
+              "confidence": 0.9240066558122635,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "6ص57035",
+          "confidence": 0.5287561246326992,
+          "valid": false,
+          "source": "raw",
+          "frame_idx": 367,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "6ص57035",
+              "confidence": 0.5287561246326992,
+              "valid": false,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "56م57445",
+          "confidence": 0.5556515529751778,
+          "valid": true,
+          "source": "raw",
+          "frame_idx": 352,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "56م57445",
+              "confidence": 0.5556515529751778,
+              "valid": true,
+              "source": "raw"
+            }
+          ]
+        }
+      ]
+    },
+    "recognition_seconds": 0.2926423999997496
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 5,
+      "bbox": [
+        236.98193860754336,
+        248.59792018243152,
+        649.4731091522407,
+        691.3907399497133
+      ],
+      "class_id": 2,
+      "confidence": 0.882118284702301,
+      "frame_idx": 1074,
+      "ts": 35.78158355920178,
+      "side": 1,
+      "direction": "entry"
+    },
+    "candidate_frames": [
+      862,
+      865,
+      853,
+      847,
+      856,
+      844,
+      859,
+      877,
+      871,
+      850,
+      883,
+      841
+    ],
+    "result": {
+      "plate_text": "13ط33345",
+      "recognition_status": "read",
+      "confidence": 0.8643173463642597,
+      "readings": [
+        {
+          "text": "13ح34445",
+          "confidence": 0.8151617757976055,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 862,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "16ع43446",
+              "confidence": 0.41669078171253204,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "13ح34445",
+              "confidence": 0.8151617757976055,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "14ژ64495",
+          "confidence": 0.6789700239896774,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 841,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "16ع33305",
+              "confidence": 0.4656206928193569,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "14ژ64495",
+              "confidence": 0.6789700239896774,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "13ه44445",
+          "confidence": 0.7905457019805908,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 844,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "1ع23305",
+              "confidence": 0.4437879962580545,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "13ه44445",
+              "confidence": 0.7905457019805908,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "13ه33395",
+          "confidence": 0.8815259858965874,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 853,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "14ع33395",
+              "confidence": 0.5854284912347794,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "13ه33395",
+              "confidence": 0.8815259858965874,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "13ط33345",
+          "confidence": 0.8175061419606209,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 859,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "13ع33395",
+              "confidence": 0.6091165915131569,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "13ط33345",
+              "confidence": 0.8175061419606209,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "13ح33345",
+          "confidence": 0.8439194560050964,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 865,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "18پ04096",
+              "confidence": 0.31363798305392265,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "13ح33345",
+              "confidence": 0.8439194560050964,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "84ه44445",
+          "confidence": 0.8548295423388481,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 847,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "26ع42445",
+              "confidence": 0.48852996714413166,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "84ه44445",
+              "confidence": 0.8548295423388481,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "13ط33345",
+          "confidence": 0.9111285507678986,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 856,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "11ع33345",
+              "confidence": 0.7162931449711323,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "13ط33345",
+              "confidence": 0.9111285507678986,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        }
+      ]
+    },
+    "recognition_seconds": 0.27578269799778354
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 9,
+      "bbox": [
+        596.3741078946719,
+        170.8137359762671,
+        1212.6311609494496,
+        528.6805862028677
+      ],
+      "class_id": 2,
+      "confidence": 0.9299808740615845,
+      "frame_idx": 1678,
+      "ts": 55.90455978802661,
+      "side": -1,
+      "direction": "entry"
+    },
+    "candidate_frames": [
+      1523,
+      1535,
+      1526,
+      1541,
+      1538,
+      1547,
+      1529,
+      1532,
+      1559,
+      1550,
+      1577,
+      1571
+    ],
+    "result": {
+      "plate_text": "83و63745",
+      "recognition_status": "read",
+      "confidence": 0.9541542536268631,
+      "readings": [
+        {
+          "text": "83و63745",
+          "confidence": 0.9784149378538132,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1535,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "54و63745",
+              "confidence": 0.7214911729097366,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و63745",
+              "confidence": 0.9784149378538132,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.912188533693552,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1538,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "53الف63745",
+              "confidence": 0.7992648333311081,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و63745",
+              "confidence": 0.912188533693552,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.9662847146391869,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1541,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "84الف63745",
+              "confidence": 0.7685200776904821,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و63745",
+              "confidence": 0.9662847146391869,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.9066271781921387,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1547,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "53الف63705",
+              "confidence": 0.6666981466114521,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و63745",
+              "confidence": 0.9066271781921387,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "83و62795",
+          "confidence": 0.9142702966928482,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1550,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "53الف63795",
+              "confidence": 0.7593887448310852,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و62795",
+              "confidence": 0.9142702966928482,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.9801291674375534,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1523,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "54د63795",
+              "confidence": 0.6622600052505732,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و63745",
+              "confidence": 0.9801291674375534,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.9812809899449348,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 1526,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "54الف63745",
+              "confidence": 0.7120063342154026,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "83و63745",
+              "confidence": 0.9812809899449348,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        }
+      ]
+    },
+    "recognition_seconds": 0.25068359999932
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 11,
+      "bbox": [
+        204.39626698718,
+        239.0379262456557,
+        767.1343038824637,
+        684.9622454272949
+      ],
+      "class_id": 2,
+      "confidence": 0.867436945438385,
+      "frame_idx": 2155,
+      "ts": 71.79638041906874,
+      "side": 1,
+      "direction": "entry"
+    },
+    "candidate_frames": [
+      2093,
+      2111,
+      2105,
+      2117,
+      2141,
+      2099,
+      2096,
+      2153,
+      2123,
+      2135,
+      2147
+    ],
+    "result": {
+      "plate_text": null,
+      "recognition_status": "uncertain",
+      "confidence": 0.9535199627280235,
+      "readings": [
+        {
+          "text": "81ط795453",
+          "confidence": 0.907849927743276,
+          "valid": false,
+          "source": "geometry",
+          "frame_idx": 2141,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "8م795453",
+              "confidence": 0.8313518464565277,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "81ط795453",
+              "confidence": 0.907849927743276,
+              "valid": false,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "81ط7954504",
+          "confidence": 0.7329178005456924,
+          "valid": false,
+          "source": "geometry",
+          "frame_idx": 2111,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "5م3550",
+              "confidence": 0.6844983945290247,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "81ط7954504",
+              "confidence": 0.7329178005456924,
+              "valid": false,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "28م5350",
+          "confidence": 0.5725033389670509,
+          "valid": false,
+          "source": "geometry",
+          "frame_idx": 2105,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "51س29555",
+              "confidence": 0.5243911650031805,
+              "valid": true,
+              "source": "raw"
+            },
+            {
+              "text": "28م5350",
+              "confidence": 0.5725033389670509,
+              "valid": false,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "81ط795353",
+          "confidence": 0.8939394387933943,
+          "valid": false,
+          "source": "geometry",
+          "frame_idx": 2117,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "5ب75555",
+              "confidence": 0.7460874148777553,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "81ط795353",
+              "confidence": 0.8939394387933943,
+              "valid": false,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "81ط79545",
+          "confidence": 0.9535199627280235,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 2093,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "5س26665",
+              "confidence": 0.5494929828814098,
+              "valid": false,
+              "source": "raw"
+            },
+            {
+              "text": "81ط79545",
+              "confidence": 0.9535199627280235,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "51س295605",
+          "confidence": 0.6039511660734812,
+          "valid": false,
+          "source": "raw",
+          "frame_idx": 2099,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "51س295605",
+              "confidence": 0.6039511660734812,
+              "valid": false,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "51س24565",
+          "confidence": 0.5818135756999254,
+          "valid": true,
+          "source": "raw",
+          "frame_idx": 2096,
+          "conflict": false,
+          "alternatives": [
+            {
+              "text": "51س24565",
+              "confidence": 0.5818135756999254,
+              "valid": true,
+              "source": "raw"
+            }
+          ]
+        }
+      ]
+    },
+    "recognition_seconds": 0.23375990000204183
+  }
+]

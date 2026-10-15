@@ -80,13 +80,15 @@ class CandidateTests(unittest.TestCase):
             self.assertEqual([r['frame_idx'] for r in result['readings']],[0,1,2,3,4])
             if status!='read':self.assertIsNone(result['plate_text'])
 
-    def test_failed_geometry_does_not_run_ocr_and_keeps_review_image(self):
+    def test_failed_geometry_reads_raw_and_keeps_review_image(self):
         reader=PlateReader.__new__(PlateReader)
-        reader.ocr=Mock()
+        reader.labels=['X'];reader.ocr=Mock();reader.ocr_input='input'
+        reader.ocr.run.return_value=[None];reader._prep_ocr=Mock(return_value=None)
+        reader._ctc_decode=Mock(return_value=('12X34567',.99))
         with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',return_value=None):
             result=reader.recognize_candidates([Candidate(self.crop,0.,1,.9,1.)])
-        reader.ocr.run.assert_not_called()
-        self.assertEqual(result['recognition_status'],'unread')
+        reader.ocr.run.assert_called_once()
+        self.assertEqual(result['recognition_status'],'uncertain')
         self.assertIs(result['image'],self.crop)
 
     def test_one_clear_ocr_reading_is_still_uncertain(self):
