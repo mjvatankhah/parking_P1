@@ -1,0 +1,180 @@
+{
+  "expected": "58م87245",
+  "scope": "38 correlated frames of one labelled vehicle; development set, not independent validation",
+  "summaries": {
+    "baseline": {
+      "n": 38,
+      "correct": 21,
+      "recovered": [],
+      "lost": [],
+      "fixed_top5": {
+        "frames": [
+          348,
+          357,
+          345,
+          339,
+          336
+        ],
+        "votes": {
+          "58م87245": 2,
+          "58م87335": 1,
+          "58م87345": 1
+        },
+        "status": "read",
+        "text": "58م87245"
+      }
+    },
+    "clahe": {
+      "n": 38,
+      "correct": 25,
+      "recovered": [
+        273,
+        324,
+        336,
+        372
+      ],
+      "lost": [],
+      "fixed_top5": {
+        "frames": [
+          348,
+          357,
+          345,
+          339,
+          336
+        ],
+        "votes": {
+          "58م87245": 3,
+          "58م87235": 1
+        },
+        "status": "read",
+        "text": "58م87245"
+      }
+    },
+    "mild_unsharp": {
+      "n": 38,
+      "correct": 22,
+      "recovered": [
+        273
+      ],
+      "lost": [],
+      "fixed_top5": {
+        "frames": [
+          348,
+          357,
+          345,
+          339,
+          336
+        ],
+        "votes": {
+          "58م87245": 2,
+          "58م87335": 1,
+          "58م87345": 1
+        },
+        "status": "read",
+        "text": "58م87245"
+      }
+    },
+    "illumination_division": {
+      "n": 38,
+      "correct": 29,
+      "recovered": [
+        273,
+        324,
+        336,
+        369,
+        372,
+        375,
+        381,
+        387
+      ],
+      "lost": [],
+      "fixed_top5": {
+        "frames": [
+          348,
+          357,
+          345,
+          339,
+          336
+        ],
+        "votes": {
+          "58م87245": 3,
+          "58م87235": 1
+        },
+        "status": "read",
+        "text": "58م87245"
+      }
+    },
+    "bilateral_clahe": {
+      "n": 38,
+      "correct": 17,
+      "recovered": [
+        381
+      ],
+      "lost": [
+        303,
+        309,
+        321,
+        333,
+        345
+      ],
+      "fixed_top5": {
+        "frames": [
+          348,
+          357,
+          345,
+          339,
+          336
+        ],
+        "votes": {
+          "58م87245": 1,
+          "58م87345": 2,
+          "58م87235": 1,
+          "58م87335": 1
+        },
+        "status": "read",
+        "text": "58م87345"
+      }
+    },
+    "otsu": {
+      "n": 38,
+      "correct": 12,
+      "recovered": [
+        339,
+        357,
+        369
+      ],
+      "lost": [
+        276,
+        294,
+        300,
+        309,
+        312,
+        342,
+        345,
+        348,
+        384,
+        390,
+        396,
+        402
+      ],
+      "fixed_top5": {
+        "frames": [
+          348,
+          357,
+          345,
+          339,
+          336
+        ],
+        "votes": {
+          "68م87345": 1,
+          "58م87245": 2,
+          "58م87345": 1,
+          "58م83245": 1
+        },
+        "status": "read",
+        "text": "58م87245"
+      }
+    }
+  },
+  "all_six_filters_median_ms": 1.5298000000143475
+}

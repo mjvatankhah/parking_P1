@@ -1,0 +1,35 @@
+{
+  "complete": false,
+  "metadata_frames": 2255,
+  "decodable_frames": 2255,
+  "target_frames": 2255,
+  "processed_frames": 67,
+  "dropped_frames": 0,
+  "database_writes": false,
+  "elapsed_seconds": 24.02146196800004,
+  "video_seconds": 2.2321844492239467,
+  "fps": 30.01544071471942,
+  "stage_seconds": {
+    "decode": 0.9536850990007224,
+    "tracking": 20.631566293000105,
+    "observation": 2.4239865770023243
+  },
+  "detector_calls": {
+    "primary": 1,
+    "fallback": 1,
+    "accepted": 0
+  },
+  "reader_seconds": {
+    "primary": 1.0311541910000415,
+    "fallback": 1.0461599909999677,
+    "ocr": 0.0
+  },
+  "crossings": [],
+  "vehicle_events": [],
+  "active_tracks": 1,
+  "vehicle_yolo_calls": 23,
+  "flow_frames": 44,
+  "flow_fallbacks": 0,
+  "scope": "full_video",
+  "mode": "sequential; timestamps from video; no new image filters"
+}

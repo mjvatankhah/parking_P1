@@ -1,0 +1,2258 @@
+[
+  {
+    "frame": 1,
+    "detected": false
+  },
+  {
+    "frame": 3,
+    "detected": false
+  },
+  {
+    "frame": 6,
+    "detected": false
+  },
+  {
+    "frame": 9,
+    "detected": false
+  },
+  {
+    "frame": 12,
+    "detected": false
+  },
+  {
+    "frame": 15,
+    "detected": false
+  },
+  {
+    "frame": 18,
+    "detected": false
+  },
+  {
+    "frame": 21,
+    "detected": false
+  },
+  {
+    "frame": 24,
+    "detected": false
+  },
+  {
+    "frame": 27,
+    "detected": false
+  },
+  {
+    "frame": 30,
+    "detected": false
+  },
+  {
+    "frame": 33,
+    "detected": false
+  },
+  {
+    "frame": 36,
+    "detected": false
+  },
+  {
+    "frame": 39,
+    "detected": false
+  },
+  {
+    "frame": 42,
+    "detected": false
+  },
+  {
+    "frame": 45,
+    "detected": false
+  },
+  {
+    "frame": 48,
+    "detected": false
+  },
+  {
+    "frame": 51,
+    "detected": false
+  },
+  {
+    "frame": 54,
+    "detected": false
+  },
+  {
+    "frame": 57,
+    "detected": false
+  },
+  {
+    "frame": 60,
+    "detected": false
+  },
+  {
+    "frame": 63,
+    "detected": false
+  },
+  {
+    "frame": 66,
+    "detected": false
+  },
+  {
+    "frame": 69,
+    "detected": false
+  },
+  {
+    "frame": 72,
+    "detected": false
+  },
+  {
+    "frame": 75,
+    "detected": false
+  },
+  {
+    "frame": 78,
+    "detected": false
+  },
+  {
+    "frame": 81,
+    "detected": false
+  },
+  {
+    "frame": 84,
+    "detected": false
+  },
+  {
+    "frame": 87,
+    "detected": false
+  },
+  {
+    "frame": 90,
+    "detected": false
+  },
+  {
+    "frame": 93,
+    "detected": false
+  },
+  {
+    "frame": 96,
+    "detected": false
+  },
+  {
+    "frame": 99,
+    "detected": false
+  },
+  {
+    "frame": 102,
+    "detected": false
+  },
+  {
+    "frame": 105,
+    "detected": false
+  },
+  {
+    "frame": 108,
+    "detected": false
+  },
+  {
+    "frame": 111,
+    "detected": false
+  },
+  {
+    "frame": 114,
+    "detected": false
+  },
+  {
+    "frame": 117,
+    "detected": false
+  },
+  {
+    "frame": 120,
+    "detected": false
+  },
+  {
+    "frame": 123,
+    "detected": false
+  },
+  {
+    "frame": 126,
+    "detected": false
+  },
+  {
+    "frame": 129,
+    "detected": false
+  },
+  {
+    "frame": 132,
+    "detected": false
+  },
+  {
+    "frame": 135,
+    "detected": false
+  },
+  {
+    "frame": 138,
+    "detected": false
+  },
+  {
+    "frame": 141,
+    "detected": false
+  },
+  {
+    "frame": 144,
+    "detected": false
+  },
+  {
+    "frame": 147,
+    "detected": false
+  },
+  {
+    "frame": 150,
+    "detected": false
+  },
+  {
+    "frame": 153,
+    "detected": false
+  },
+  {
+    "frame": 156,
+    "detected": false
+  },
+  {
+    "frame": 159,
+    "detected": true,
+    "det_conf": 0.44281744956970215,
+    "raw": {
+      "text": "19ز62",
+      "confidence": 0.3442569077014923,
+      "correct": false,
+      "size": [
+        97,
+        98
+      ],
+      "ms": 293.9131089988223
+    },
+    "geometry_ms": 31.86980099781067,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 162,
+    "detected": true,
+    "det_conf": 0.42659372091293335,
+    "raw": {
+      "text": "29پ2",
+      "confidence": 0.34143946692347527,
+      "correct": false,
+      "size": [
+        96,
+        103
+      ],
+      "ms": 128.4010039998975
+    },
+    "geometry_ms": 24.203001001296798,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 165,
+    "detected": false
+  },
+  {
+    "frame": 168,
+    "detected": false
+  },
+  {
+    "frame": 171,
+    "detected": true,
+    "det_conf": 0.4554327726364136,
+    "raw": {
+      "text": "59ز423",
+      "confidence": 0.3014391362667084,
+      "correct": false,
+      "size": [
+        94,
+        104
+      ],
+      "ms": 280.3644080013328
+    },
+    "geometry_ms": 144.4478049997997,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 174,
+    "detected": false
+  },
+  {
+    "frame": 177,
+    "detected": true,
+    "det_conf": 0.41176870465278625,
+    "raw": {
+      "text": "59پ5",
+      "confidence": 0.3495536111295223,
+      "correct": false,
+      "size": [
+        92,
+        112
+      ],
+      "ms": 324.99310999992304
+    },
+    "geometry_ms": 31.41020100156311,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 180,
+    "detected": true,
+    "det_conf": 0.47747063636779785,
+    "raw": {
+      "text": "19ز529",
+      "confidence": 0.33029529949029285,
+      "correct": false,
+      "size": [
+        92,
+        106
+      ],
+      "ms": 134.11180399998557
+    },
+    "geometry_ms": 34.55600099914591,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 183,
+    "detected": true,
+    "det_conf": 0.4133487939834595,
+    "raw": {
+      "text": "59ز655",
+      "confidence": 0.3389907355109851,
+      "correct": false,
+      "size": [
+        93,
+        101
+      ],
+      "ms": 267.48540900007356
+    },
+    "geometry_ms": 31.561900999804493,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 186,
+    "detected": false
+  },
+  {
+    "frame": 189,
+    "detected": true,
+    "det_conf": 0.3572334051132202,
+    "raw": {
+      "text": "59ب55",
+      "confidence": 0.37231330275535585,
+      "correct": false,
+      "size": [
+        90,
+        113
+      ],
+      "ms": 145.0862040001084
+    },
+    "geometry_ms": 36.12100200189161,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 192,
+    "detected": true,
+    "det_conf": 0.38538676500320435,
+    "raw": {
+      "text": "19ز225",
+      "confidence": 0.32966111103693646,
+      "correct": false,
+      "size": [
+        89,
+        104
+      ],
+      "ms": 318.0077100005292
+    },
+    "geometry_ms": 48.21300099865766,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 195,
+    "detected": true,
+    "det_conf": 0.5406716465950012,
+    "raw": {
+      "text": "59ز630",
+      "confidence": 0.31797482818365097,
+      "correct": false,
+      "size": [
+        89,
+        110
+      ],
+      "ms": 317.1236089983722
+    },
+    "geometry_ms": 65.7989049977914,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 198,
+    "detected": true,
+    "det_conf": 0.5530528426170349,
+    "raw": {
+      "text": "56ز35",
+      "confidence": 0.3389948934316635,
+      "correct": false,
+      "size": [
+        87,
+        101
+      ],
+      "ms": 306.08386699896073
+    },
+    "geometry_ms": 27.83680599895888,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 201,
+    "detected": true,
+    "det_conf": 0.4713774621486664,
+    "raw": {
+      "text": "59پ6559",
+      "confidence": 0.4517877059323447,
+      "correct": false,
+      "size": [
+        82,
+        121
+      ],
+      "ms": 145.16973100035102
+    },
+    "geometry_ms": 21.42190499944263,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 204,
+    "detected": true,
+    "det_conf": 0.4757826328277588,
+    "raw": {
+      "text": "59و699",
+      "confidence": 0.2957402343551318,
+      "correct": false,
+      "size": [
+        84,
+        107
+      ],
+      "ms": 120.81222599954344
+    },
+    "geometry_ms": 30.743905997951515,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 207,
+    "detected": true,
+    "det_conf": 0.5538402795791626,
+    "raw": {
+      "text": "59پ625",
+      "confidence": 0.3565400217970212,
+      "correct": false,
+      "size": [
+        84,
+        108
+      ],
+      "ms": 171.8331379997835
+    },
+    "geometry_ms": 22.35820400164812,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 210,
+    "detected": true,
+    "det_conf": 0.44983479380607605,
+    "raw": {
+      "text": "59ت9",
+      "confidence": 0.24908480420708656,
+      "correct": false,
+      "size": [
+        78,
+        121
+      ],
+      "ms": 209.2115460000059
+    },
+    "geometry_ms": 35.596207999333274,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 213,
+    "detected": true,
+    "det_conf": 0.41921788454055786,
+    "raw": {
+      "text": "56پ5525",
+      "confidence": 0.479329845735005,
+      "correct": false,
+      "size": [
+        81,
+        92
+      ],
+      "ms": 139.33372999963467
+    },
+    "geometry_ms": 26.943405999190873,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 216,
+    "detected": false
+  },
+  {
+    "frame": 219,
+    "detected": false
+  },
+  {
+    "frame": 222,
+    "detected": false
+  },
+  {
+    "frame": 225,
+    "detected": true,
+    "det_conf": 0.3728722035884857,
+    "raw": {
+      "text": "59ز9955",
+      "confidence": 0.4450870007276535,
+      "correct": false,
+      "size": [
+        74,
+        94
+      ],
+      "ms": 146.5068319994316
+    },
+    "geometry_ms": 21.55330499954289,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 228,
+    "detected": true,
+    "det_conf": 0.43517905473709106,
+    "raw": {
+      "text": "36ت33340",
+      "confidence": 0.30417111702263355,
+      "correct": false,
+      "size": [
+        59,
+        53
+      ],
+      "ms": 186.10833999991883
+    },
+    "geometry_ms": 11.78440299918293,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 231,
+    "detected": true,
+    "det_conf": 0.37222427129745483,
+    "raw": {
+      "text": "26پ203",
+      "confidence": 0.38009779155254364,
+      "correct": false,
+      "size": [
+        104,
+        58
+      ],
+      "ms": 160.2360350007075
+    },
+    "geometry_ms": 25.37400599976536,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 234,
+    "detected": true,
+    "det_conf": 0.4456130564212799,
+    "raw": {
+      "text": "46ت6426",
+      "confidence": 0.3277881784098489,
+      "correct": false,
+      "size": [
+        61,
+        54
+      ],
+      "ms": 176.41013899992686
+    },
+    "geometry_ms": 10.032801998022478,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 237,
+    "detected": true,
+    "det_conf": 0.4090935289859772,
+    "raw": {
+      "text": "46ت646",
+      "confidence": 0.37876754502455395,
+      "correct": false,
+      "size": [
+        65,
+        58
+      ],
+      "ms": 117.14192599902162
+    },
+    "geometry_ms": 16.413502999057528,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 240,
+    "detected": true,
+    "det_conf": 0.5204685926437378,
+    "raw": {
+      "text": "46ت64262",
+      "confidence": 0.2954002507030964,
+      "correct": false,
+      "size": [
+        67,
+        56
+      ],
+      "ms": 228.29414999796427
+    },
+    "geometry_ms": 24.213305001467234,
+    "prepared": {
+      "text": "25م3322",
+      "confidence": 0.5203482338360378,
+      "correct": false,
+      "size": [
+        82,
+        35
+      ],
+      "ms": 228.23854899979779
+    },
+    "prepared_clahe": {
+      "text": "65الف3830",
+      "confidence": 0.6482863043035779,
+      "correct": false,
+      "size": [
+        82,
+        35
+      ],
+      "ms": 98.45492100066622
+    }
+  },
+  {
+    "frame": 243,
+    "detected": true,
+    "det_conf": 0.5865564942359924,
+    "raw": {
+      "text": "46ت66620",
+      "confidence": 0.3630432039499283,
+      "correct": false,
+      "size": [
+        72,
+        57
+      ],
+      "ms": 196.5194420008629
+    },
+    "geometry_ms": 17.49720400039223,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 246,
+    "detected": true,
+    "det_conf": 0.6343733072280884,
+    "raw": {
+      "text": "49ت6460",
+      "confidence": 0.31741270210061756,
+      "correct": false,
+      "size": [
+        71,
+        57
+      ],
+      "ms": 155.47343299840577
+    },
+    "geometry_ms": 45.81260999839287,
+    "prepared": {
+      "text": "5م383335",
+      "confidence": 0.6296274065971375,
+      "correct": false,
+      "size": [
+        83,
+        34
+      ],
+      "ms": 236.41955199855147
+    },
+    "prepared_clahe": {
+      "text": "58م87335",
+      "confidence": 0.8138681203126907,
+      "correct": false,
+      "size": [
+        83,
+        34
+      ],
+      "ms": 103.15532199820154
+    }
+  },
+  {
+    "frame": 249,
+    "detected": true,
+    "det_conf": 0.4962387681007385,
+    "raw": {
+      "text": "49ت65430",
+      "confidence": 0.37284998036921024,
+      "correct": false,
+      "size": [
+        74,
+        58
+      ],
+      "ms": 295.79416400156333
+    },
+    "geometry_ms": 57.56141300298623,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 252,
+    "detected": true,
+    "det_conf": 0.5727065801620483,
+    "raw": {
+      "text": "49ت6630",
+      "confidence": 0.38981244606631144,
+      "correct": false,
+      "size": [
+        69,
+        58
+      ],
+      "ms": 441.1289960007707
+    },
+    "geometry_ms": 72.17541499994695,
+    "prepared": {
+      "text": "5م383335",
+      "confidence": 0.6703871116042137,
+      "correct": false,
+      "size": [
+        84,
+        34
+      ],
+      "ms": 383.8678840002103
+    },
+    "prepared_clahe": {
+      "text": "5م87345",
+      "confidence": 0.8242270435605731,
+      "correct": false,
+      "size": [
+        84,
+        34
+      ],
+      "ms": 459.728300000279
+    }
+  },
+  {
+    "frame": 255,
+    "detected": true,
+    "det_conf": 0.5791524052619934,
+    "raw": {
+      "text": "26ت4560",
+      "confidence": 0.40177459163325174,
+      "correct": false,
+      "size": [
+        70,
+        56
+      ],
+      "ms": 232.16920000049868
+    },
+    "geometry_ms": 30.646700000943383,
+    "prepared": {
+      "text": "25م382335",
+      "confidence": 0.5891956090927124,
+      "correct": false,
+      "size": [
+        85,
+        35
+      ],
+      "ms": 194.94830000257934
+    },
+    "prepared_clahe": {
+      "text": "58م87345",
+      "confidence": 0.8948732353746891,
+      "correct": false,
+      "size": [
+        85,
+        35
+      ],
+      "ms": 358.0800919989997
+    }
+  },
+  {
+    "frame": 258,
+    "detected": true,
+    "det_conf": 0.501359224319458,
+    "raw": {
+      "text": "46ت53300",
+      "confidence": 0.4581178203225136,
+      "correct": false,
+      "size": [
+        75,
+        55
+      ],
+      "ms": 294.7670930007007
+    },
+    "geometry_ms": 23.90009999726317,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 261,
+    "detected": true,
+    "det_conf": 0.591850996017456,
+    "raw": {
+      "text": "56ب652440",
+      "confidence": 0.6020221412181854,
+      "correct": false,
+      "size": [
+        75,
+        50
+      ],
+      "ms": 160.99809600200388
+    },
+    "geometry_ms": 33.90169900012552,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 264,
+    "detected": true,
+    "det_conf": 0.6318463683128357,
+    "raw": {
+      "text": "56ب65244",
+      "confidence": 0.6278135739266872,
+      "correct": false,
+      "size": [
+        72,
+        51
+      ],
+      "ms": 314.66849200296565
+    },
+    "geometry_ms": 25.285199997597374,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 267,
+    "detected": true,
+    "det_conf": 0.6477932929992676,
+    "raw": {
+      "text": "56ص652040",
+      "confidence": 0.5105103717909919,
+      "correct": false,
+      "size": [
+        75,
+        57
+      ],
+      "ms": 133.80219700047746
+    },
+    "geometry_ms": 16.711698997823987,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 270,
+    "detected": true,
+    "det_conf": 0.6784448027610779,
+    "raw": {
+      "text": "56ب650949",
+      "confidence": 0.537247724003262,
+      "correct": false,
+      "size": [
+        73,
+        57
+      ],
+      "ms": 252.38669399914215
+    },
+    "geometry_ms": 14.185100000759121,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 273,
+    "detected": true,
+    "det_conf": 0.6813416481018066,
+    "raw": {
+      "text": "56ب65094",
+      "confidence": 0.5369937904179096,
+      "correct": false,
+      "size": [
+        78,
+        58
+      ],
+      "ms": 415.97609000018565
+    },
+    "geometry_ms": 31.42819899949245,
+    "prepared": {
+      "text": "58م87345",
+      "confidence": 0.9447882547974586,
+      "correct": false,
+      "size": [
+        87,
+        28
+      ],
+      "ms": 323.6236920020019
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9778301864862442,
+      "correct": true,
+      "size": [
+        87,
+        28
+      ],
+      "ms": 208.7863960005052
+    }
+  },
+  {
+    "frame": 276,
+    "detected": true,
+    "det_conf": 0.6850122809410095,
+    "raw": {
+      "text": "56ب5440",
+      "confidence": 0.5339498817920685,
+      "correct": false,
+      "size": [
+        81,
+        56
+      ],
+      "ms": 332.4738920018717
+    },
+    "geometry_ms": 56.23849900075584,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9795076474547386,
+      "correct": true,
+      "size": [
+        88,
+        28
+      ],
+      "ms": 209.90249500027858
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9973590821027756,
+      "correct": true,
+      "size": [
+        88,
+        28
+      ],
+      "ms": 310.81519199869945
+    }
+  },
+  {
+    "frame": 279,
+    "detected": true,
+    "det_conf": 0.6722227334976196,
+    "raw": {
+      "text": "56ب52940",
+      "confidence": 0.5321554467082024,
+      "correct": false,
+      "size": [
+        77,
+        58
+      ],
+      "ms": 253.4770940001181
+    },
+    "geometry_ms": 18.435499998304294,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 282,
+    "detected": true,
+    "det_conf": 0.6701503396034241,
+    "raw": {
+      "text": "460ب65260",
+      "confidence": 0.5935002134905921,
+      "correct": false,
+      "size": [
+        81,
+        57
+      ],
+      "ms": 405.87639099976514
+    },
+    "geometry_ms": 35.32859899860341,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9890162870287895,
+      "correct": true,
+      "size": [
+        89,
+        33
+      ],
+      "ms": 168.1492959978641
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9949715211987495,
+      "correct": true,
+      "size": [
+        89,
+        33
+      ],
+      "ms": 392.5178909994429
+    }
+  },
+  {
+    "frame": 285,
+    "detected": true,
+    "det_conf": 0.7069392204284668,
+    "raw": {
+      "text": "46ب65730",
+      "confidence": 0.610830795019865,
+      "correct": false,
+      "size": [
+        82,
+        56
+      ],
+      "ms": 149.8422959994059
+    },
+    "geometry_ms": 23.991698999452638,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9754538461565971,
+      "correct": true,
+      "size": [
+        89,
+        28
+      ],
+      "ms": 370.6308920009178
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9871909022331238,
+      "correct": true,
+      "size": [
+        89,
+        28
+      ],
+      "ms": 126.48529700163635
+    }
+  },
+  {
+    "frame": 288,
+    "detected": true,
+    "det_conf": 0.6876590847969055,
+    "raw": {
+      "text": "56ب452330",
+      "confidence": 0.48715832498338485,
+      "correct": false,
+      "size": [
+        80,
+        55
+      ],
+      "ms": 226.54919500200776
+    },
+    "geometry_ms": 15.22359999944456,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9879663363099098,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 213.98299499924178
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9964244961738586,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 168.2314959980431
+    }
+  },
+  {
+    "frame": 291,
+    "detected": true,
+    "det_conf": 0.7153070569038391,
+    "raw": {
+      "text": "60ت652030",
+      "confidence": 0.46881184147463906,
+      "correct": false,
+      "size": [
+        79,
+        56
+      ],
+      "ms": 161.982096000429
+    },
+    "geometry_ms": 16.07079999666894,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 294,
+    "detected": true,
+    "det_conf": 0.7082369923591614,
+    "raw": {
+      "text": "56ب50930",
+      "confidence": 0.5577908121049404,
+      "correct": false,
+      "size": [
+        80,
+        56
+      ],
+      "ms": 266.2782910010719
+    },
+    "geometry_ms": 16.756199998781085,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9810153990983963,
+      "correct": true,
+      "size": [
+        87,
+        29
+      ],
+      "ms": 143.71079499687767
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9734502360224724,
+      "correct": true,
+      "size": [
+        87,
+        29
+      ],
+      "ms": 239.2253920006624
+    }
+  },
+  {
+    "frame": 297,
+    "detected": true,
+    "det_conf": 0.7377611398696899,
+    "raw": {
+      "text": "56ب5230",
+      "confidence": 0.5750218374388558,
+      "correct": false,
+      "size": [
+        82,
+        54
+      ],
+      "ms": 166.70999500274775
+    },
+    "geometry_ms": 24.510698996891733,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9793738052248955,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 303.8888900009624
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9973902553319931,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 126.87409600039246
+    }
+  },
+  {
+    "frame": 300,
+    "detected": true,
+    "det_conf": 0.7330124378204346,
+    "raw": {
+      "text": "46ب65720",
+      "confidence": 0.6424144059419632,
+      "correct": false,
+      "size": [
+        89,
+        56
+      ],
+      "ms": 218.6666929992498
+    },
+    "geometry_ms": 29.32829899873468,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9875175058841705,
+      "correct": true,
+      "size": [
+        90,
+        33
+      ],
+      "ms": 139.63509500172222
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9968471527099609,
+      "correct": true,
+      "size": [
+        90,
+        33
+      ],
+      "ms": 277.00199099854217
+    }
+  },
+  {
+    "frame": 303,
+    "detected": true,
+    "det_conf": 0.7192080020904541,
+    "raw": {
+      "text": "6ب657960",
+      "confidence": 0.5272035375237465,
+      "correct": false,
+      "size": [
+        81,
+        55
+      ],
+      "ms": 122.97069600026589
+    },
+    "geometry_ms": 24.156498999218456,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9747982323169708,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 301.78339000121923
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9973874688148499,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 262.667691000388
+    }
+  },
+  {
+    "frame": 306,
+    "detected": true,
+    "det_conf": 0.7256402969360352,
+    "raw": {
+      "text": "6م57960",
+      "confidence": 0.5334047249385289,
+      "correct": false,
+      "size": [
+        82,
+        52
+      ],
+      "ms": 141.28279599754023
+    },
+    "geometry_ms": 14.341799000249011,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9594739079475403,
+      "correct": true,
+      "size": [
+        90,
+        26
+      ],
+      "ms": 323.02019000053406
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.996215745806694,
+      "correct": true,
+      "size": [
+        90,
+        26
+      ],
+      "ms": 168.59899399787537
+    }
+  },
+  {
+    "frame": 309,
+    "detected": true,
+    "det_conf": 0.7314043045043945,
+    "raw": {
+      "text": "6م652960",
+      "confidence": 0.4893499072641134,
+      "correct": false,
+      "size": [
+        82,
+        53
+      ],
+      "ms": 277.482590998261
+    },
+    "geometry_ms": 30.15579900238663,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9354623407125473,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 214.89709299930837
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9941559061408043,
+      "correct": true,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 184.6197939994454
+    }
+  },
+  {
+    "frame": 312,
+    "detected": true,
+    "det_conf": 0.7185714244842529,
+    "raw": {
+      "text": "6م657000",
+      "confidence": 0.5053352266550064,
+      "correct": false,
+      "size": [
+        84,
+        52
+      ],
+      "ms": 194.5535929990001
+    },
+    "geometry_ms": 27.386198999010958,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.8637916743755341,
+      "correct": true,
+      "size": [
+        89,
+        36
+      ],
+      "ms": 192.74999399931403
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9420013129711151,
+      "correct": true,
+      "size": [
+        89,
+        36
+      ],
+      "ms": 209.90289299879805
+    }
+  },
+  {
+    "frame": 315,
+    "detected": true,
+    "det_conf": 0.7268896698951721,
+    "raw": {
+      "text": "6م560",
+      "confidence": 0.5349077701568603,
+      "correct": false,
+      "size": [
+        88,
+        52
+      ],
+      "ms": 152.7650949974486
+    },
+    "geometry_ms": 14.388898998731747,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 318,
+    "detected": true,
+    "det_conf": 0.7690256834030151,
+    "raw": {
+      "text": "6ب657460",
+      "confidence": 0.5415911860764027,
+      "correct": false,
+      "size": [
+        83,
+        50
+      ],
+      "ms": 249.937492000754
+    },
+    "geometry_ms": 26.177398998697754,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9546210542321205,
+      "correct": true,
+      "size": [
+        90,
+        26
+      ],
+      "ms": 130.66889599940623
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9933989197015762,
+      "correct": true,
+      "size": [
+        90,
+        26
+      ],
+      "ms": 129.5033960013825
+    }
+  },
+  {
+    "frame": 321,
+    "detected": true,
+    "det_conf": 0.766032338142395,
+    "raw": {
+      "text": "6ص57966",
+      "confidence": 0.4920709346021925,
+      "correct": false,
+      "size": [
+        81,
+        48
+      ],
+      "ms": 248.0396920000203
+    },
+    "geometry_ms": 26.72499899927061,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9025759920477867,
+      "correct": true,
+      "size": [
+        89,
+        26
+      ],
+      "ms": 139.67759500155807
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9927978217601776,
+      "correct": true,
+      "size": [
+        89,
+        26
+      ],
+      "ms": 288.56949100008933
+    }
+  },
+  {
+    "frame": 324,
+    "detected": true,
+    "det_conf": 0.759131669998169,
+    "raw": {
+      "text": "56ب652966",
+      "confidence": 0.5643161767058902,
+      "correct": false,
+      "size": [
+        81,
+        50
+      ],
+      "ms": 433.87878599969554
+    },
+    "geometry_ms": 51.750799000728875,
+    "prepared": {
+      "text": "58م87335",
+      "confidence": 0.9260825365781784,
+      "correct": false,
+      "size": [
+        88,
+        27
+      ],
+      "ms": 340.3298899975198
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.917130134999752,
+      "correct": true,
+      "size": [
+        88,
+        27
+      ],
+      "ms": 354.12958999950206
+    }
+  },
+  {
+    "frame": 327,
+    "detected": true,
+    "det_conf": 0.7226317524909973,
+    "raw": {
+      "text": "56س65260",
+      "confidence": 0.5551520362496376,
+      "correct": false,
+      "size": [
+        84,
+        52
+      ],
+      "ms": 377.3597899999004
+    },
+    "geometry_ms": 43.55239800133859,
+    "prepared": {
+      "text": "5م87235",
+      "confidence": 0.8760924935340881,
+      "correct": false,
+      "size": [
+        90,
+        35
+      ],
+      "ms": 321.45379099893034
+    },
+    "prepared_clahe": {
+      "text": "5م87735",
+      "confidence": 0.8269623475415366,
+      "correct": false,
+      "size": [
+        90,
+        35
+      ],
+      "ms": 159.2643960029818
+    }
+  },
+  {
+    "frame": 330,
+    "detected": true,
+    "det_conf": 0.7858861684799194,
+    "raw": {
+      "text": "6ب52965",
+      "confidence": 0.4756257789475577,
+      "correct": false,
+      "size": [
+        84,
+        50
+      ],
+      "ms": 400.6315890001133
+    },
+    "geometry_ms": 21.275799001159612,
+    "prepared": {
+      "text": "5م87235",
+      "confidence": 0.8445199728012085,
+      "correct": false,
+      "size": [
+        89,
+        34
+      ],
+      "ms": 130.57149699670845
+    },
+    "prepared_clahe": {
+      "text": "65م87235",
+      "confidence": 0.8309724926948547,
+      "correct": false,
+      "size": [
+        89,
+        34
+      ],
+      "ms": 199.3969940012903
+    }
+  },
+  {
+    "frame": 333,
+    "detected": true,
+    "det_conf": 0.7701447606086731,
+    "raw": {
+      "text": "6م529340",
+      "confidence": 0.40178029984235764,
+      "correct": false,
+      "size": [
+        80,
+        48
+      ],
+      "ms": 220.4181939996488
+    },
+    "geometry_ms": 17.16619899889338,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9160169064998627,
+      "correct": true,
+      "size": [
+        89,
+        25
+      ],
+      "ms": 161.28539599958458
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.99122354388237,
+      "correct": true,
+      "size": [
+        89,
+        25
+      ],
+      "ms": 295.8887909990153
+    }
+  },
+  {
+    "frame": 336,
+    "detected": true,
+    "det_conf": 0.8015226125717163,
+    "raw": {
+      "text": "6م5746",
+      "confidence": 0.5088891585667928,
+      "correct": false,
+      "size": [
+        81,
+        45
+      ],
+      "ms": 134.8740959983843
+    },
+    "geometry_ms": 24.51109899993753,
+    "prepared": {
+      "text": "58م87345",
+      "confidence": 0.9330756217241287,
+      "correct": false,
+      "size": [
+        89,
+        25
+      ],
+      "ms": 201.9119939977827
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9705700054764748,
+      "correct": true,
+      "size": [
+        89,
+        25
+      ],
+      "ms": 226.5424940014782
+    }
+  },
+  {
+    "frame": 339,
+    "detected": true,
+    "det_conf": 0.8260651230812073,
+    "raw": {
+      "text": "6س57966",
+      "confidence": 0.4457738271781376,
+      "correct": false,
+      "size": [
+        80,
+        47
+      ],
+      "ms": 182.8618949984957
+    },
+    "geometry_ms": 57.24919800195494,
+    "prepared": {
+      "text": "58م87335",
+      "confidence": 0.9448160529136658,
+      "correct": false,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 233.70249399886234
+    },
+    "prepared_clahe": {
+      "text": "58م87235",
+      "confidence": 0.9386257603764534,
+      "correct": false,
+      "size": [
+        89,
+        27
+      ],
+      "ms": 157.23599500051932
+    }
+  },
+  {
+    "frame": 342,
+    "detected": true,
+    "det_conf": 0.7977479696273804,
+    "raw": {
+      "text": "6س57940",
+      "confidence": 0.44374276059014456,
+      "correct": false,
+      "size": [
+        81,
+        47
+      ],
+      "ms": 249.0811930001655
+    },
+    "geometry_ms": 20.987799998692935,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9799613356590271,
+      "correct": true,
+      "size": [
+        89,
+        25
+      ],
+      "ms": 180.88389400145388
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9952109381556511,
+      "correct": true,
+      "size": [
+        89,
+        25
+      ],
+      "ms": 185.86209500062978
+    }
+  },
+  {
+    "frame": 345,
+    "detected": true,
+    "det_conf": 0.8018369674682617,
+    "raw": {
+      "text": "6م57045",
+      "confidence": 0.4896961918898991,
+      "correct": false,
+      "size": [
+        79,
+        44
+      ],
+      "ms": 190.7186950011237
+    },
+    "geometry_ms": 17.958699001610512,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9326288253068924,
+      "correct": true,
+      "size": [
+        88,
+        27
+      ],
+      "ms": 139.45329599664547
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9925707504153252,
+      "correct": true,
+      "size": [
+        88,
+        27
+      ],
+      "ms": 158.0670959992858
+    }
+  },
+  {
+    "frame": 348,
+    "detected": true,
+    "det_conf": 0.8457010984420776,
+    "raw": {
+      "text": "6س57045",
+      "confidence": 0.5150714835950306,
+      "correct": false,
+      "size": [
+        78,
+        44
+      ],
+      "ms": 237.8914929977327
+    },
+    "geometry_ms": 29.015498999797273,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9672903716564178,
+      "correct": true,
+      "size": [
+        87,
+        27
+      ],
+      "ms": 209.47079399775248
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.949185885488987,
+      "correct": true,
+      "size": [
+        87,
+        27
+      ],
+      "ms": 237.75579299763194
+    }
+  },
+  {
+    "frame": 351,
+    "detected": true,
+    "det_conf": 0.7981367111206055,
+    "raw": {
+      "text": "6س57065",
+      "confidence": 0.5465936958789825,
+      "correct": false,
+      "size": [
+        77,
+        45
+      ],
+      "ms": 171.08689500309993
+    },
+    "geometry_ms": 16.56099899992114,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 354,
+    "detected": true,
+    "det_conf": 0.7712446451187134,
+    "raw": {
+      "text": "56ص57440",
+      "confidence": 0.5845774747431278,
+      "correct": false,
+      "size": [
+        76,
+        41
+      ],
+      "ms": 261.2521929986542
+    },
+    "geometry_ms": 29.554599001130555,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 357,
+    "detected": true,
+    "det_conf": 0.8374229669570923,
+    "raw": {
+      "text": "6م5704",
+      "confidence": 0.5424163093169531,
+      "correct": false,
+      "size": [
+        75,
+        39
+      ],
+      "ms": 130.97979700251017
+    },
+    "geometry_ms": 19.590898999013007,
+    "prepared": {
+      "text": "5م87345",
+      "confidence": 0.897134508405413,
+      "correct": false,
+      "size": [
+        84,
+        29
+      ],
+      "ms": 231.22919500019634
+    },
+    "prepared_clahe": {
+      "text": "5م87245",
+      "confidence": 0.8821640270096915,
+      "correct": false,
+      "size": [
+        84,
+        29
+      ],
+      "ms": 182.79879599867854
+    }
+  },
+  {
+    "frame": 363,
+    "detected": true,
+    "det_conf": 0.7730007171630859,
+    "raw": {
+      "text": "56م5765",
+      "confidence": 0.5366944862263543,
+      "correct": false,
+      "size": [
+        73,
+        40
+      ],
+      "ms": 251.47259599907557
+    },
+    "geometry_ms": 22.448899999290006,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 369,
+    "detected": true,
+    "det_conf": 0.7074439525604248,
+    "raw": {
+      "text": "56م57945",
+      "confidence": 0.4606399144977331,
+      "correct": false,
+      "size": [
+        72,
+        37
+      ],
+      "ms": 176.7490970014478
+    },
+    "geometry_ms": 20.447800001420546,
+    "prepared": {
+      "text": "58م87235",
+      "confidence": 0.9597503766417503,
+      "correct": false,
+      "size": [
+        79,
+        21
+      ],
+      "ms": 166.57299700091244
+    },
+    "prepared_clahe": {
+      "text": "58م87235",
+      "confidence": 0.9738318100571632,
+      "correct": false,
+      "size": [
+        79,
+        21
+      ],
+      "ms": 205.9784960001707
+    }
+  },
+  {
+    "frame": 372,
+    "detected": true,
+    "det_conf": 0.7205325365066528,
+    "raw": {
+      "text": "56ع5735",
+      "confidence": 0.6136161003793988,
+      "correct": false,
+      "size": [
+        71,
+        36
+      ],
+      "ms": 227.8988960024435
+    },
+    "geometry_ms": 16.618199999356875,
+    "prepared": {
+      "text": "58م87345",
+      "confidence": 0.9735320582985878,
+      "correct": false,
+      "size": [
+        77,
+        21
+      ],
+      "ms": 139.30129700020188
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9637131318449974,
+      "correct": true,
+      "size": [
+        77,
+        21
+      ],
+      "ms": 102.93279800316668
+    }
+  },
+  {
+    "frame": 375,
+    "detected": true,
+    "det_conf": 0.6949079632759094,
+    "raw": {
+      "text": "5ص57406",
+      "confidence": 0.4158807396888733,
+      "correct": false,
+      "size": [
+        69,
+        34
+      ],
+      "ms": 126.43499700061511
+    },
+    "geometry_ms": 20.840599998336984,
+    "prepared": {
+      "text": "5م87235",
+      "confidence": 0.9126785312380109,
+      "correct": false,
+      "size": [
+        76,
+        23
+      ],
+      "ms": 163.07049699753406
+    },
+    "prepared_clahe": {
+      "text": "5م87235",
+      "confidence": 0.9649961846215385,
+      "correct": false,
+      "size": [
+        76,
+        23
+      ],
+      "ms": 99.1929980009445
+    }
+  },
+  {
+    "frame": 378,
+    "detected": true,
+    "det_conf": 0.6591775417327881,
+    "raw": {
+      "text": "56م57030",
+      "confidence": 0.5873437337577343,
+      "correct": false,
+      "size": [
+        71,
+        34
+      ],
+      "ms": 134.07739800095442
+    },
+    "geometry_ms": 34.039499998471,
+    "prepared": {
+      "text": "5م87335",
+      "confidence": 0.8605562278202602,
+      "correct": false,
+      "size": [
+        77,
+        25
+      ],
+      "ms": 419.5062920007331
+    },
+    "prepared_clahe": {
+      "text": "65م87235",
+      "confidence": 0.8543536253273487,
+      "correct": false,
+      "size": [
+        77,
+        25
+      ],
+      "ms": 173.24259700035327
+    }
+  },
+  {
+    "frame": 381,
+    "detected": true,
+    "det_conf": 0.6368942856788635,
+    "raw": {
+      "text": "56م8740",
+      "confidence": 0.6268376878329686,
+      "correct": false,
+      "size": [
+        69,
+        33
+      ],
+      "ms": 247.5419949987554
+    },
+    "geometry_ms": 27.747300002374686,
+    "prepared": {
+      "text": "5م87245",
+      "confidence": 0.9744141953332084,
+      "correct": false,
+      "size": [
+        75,
+        23
+      ],
+      "ms": 276.77099500215263
+    },
+    "prepared_clahe": {
+      "text": "5م87245",
+      "confidence": 0.9924561892236982,
+      "correct": false,
+      "size": [
+        75,
+        23
+      ],
+      "ms": 220.47729599944432
+    }
+  },
+  {
+    "frame": 384,
+    "detected": true,
+    "det_conf": 0.6887293457984924,
+    "raw": {
+      "text": "56م52030",
+      "confidence": 0.4680163338780403,
+      "correct": false,
+      "size": [
+        65,
+        35
+      ],
+      "ms": 366.4647929981584
+    },
+    "geometry_ms": 49.039399997127475,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9558865427970886,
+      "correct": true,
+      "size": [
+        74,
+        21
+      ],
+      "ms": 458.80549200228415
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9511374235153198,
+      "correct": true,
+      "size": [
+        74,
+        21
+      ],
+      "ms": 302.5689940004668
+    }
+  },
+  {
+    "frame": 387,
+    "detected": true,
+    "det_conf": 0.6969413757324219,
+    "raw": {
+      "text": "56ص87000",
+      "confidence": 0.5225953944027424,
+      "correct": false,
+      "size": [
+        64,
+        33
+      ],
+      "ms": 105.28379899915308
+    },
+    "geometry_ms": 17.42719899993972,
+    "prepared": {
+      "text": "5م87245",
+      "confidence": 0.9709467376981463,
+      "correct": false,
+      "size": [
+        72,
+        21
+      ],
+      "ms": 252.96159600111423
+    },
+    "prepared_clahe": {
+      "text": "5م87245",
+      "confidence": 0.9575930322919574,
+      "correct": false,
+      "size": [
+        72,
+        21
+      ],
+      "ms": 338.76939399851835
+    }
+  },
+  {
+    "frame": 390,
+    "detected": true,
+    "det_conf": 0.5092442035675049,
+    "raw": {
+      "text": "96م82440",
+      "confidence": 0.5206856206059456,
+      "correct": false,
+      "size": [
+        64,
+        33
+      ],
+      "ms": 426.54849300015485
+    },
+    "geometry_ms": 48.50529900068068,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9615348726511002,
+      "correct": true,
+      "size": [
+        72,
+        21
+      ],
+      "ms": 288.4262950028642
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9451098814606667,
+      "correct": true,
+      "size": [
+        72,
+        21
+      ],
+      "ms": 384.8207929986529
+    }
+  },
+  {
+    "frame": 393,
+    "detected": true,
+    "det_conf": 0.5476760864257812,
+    "raw": {
+      "text": "6م57940",
+      "confidence": 0.6284202443701881,
+      "correct": false,
+      "size": [
+        62,
+        30
+      ],
+      "ms": 145.85459700174397
+    },
+    "geometry_ms": 12.167299999418901,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 396,
+    "detected": true,
+    "det_conf": 0.564566969871521,
+    "raw": {
+      "text": "6م87906",
+      "confidence": 0.5366437605449131,
+      "correct": false,
+      "size": [
+        64,
+        32
+      ],
+      "ms": 300.68449799728114
+    },
+    "geometry_ms": 17.32120000087889,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9774777963757515,
+      "correct": true,
+      "size": [
+        69,
+        20
+      ],
+      "ms": 221.5061999995669
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.9785849452018738,
+      "correct": true,
+      "size": [
+        69,
+        20
+      ],
+      "ms": 181.24010000246926
+    }
+  },
+  {
+    "frame": 399,
+    "detected": true,
+    "det_conf": 0.5599563121795654,
+    "raw": {
+      "text": "6م87900",
+      "confidence": 0.5873036810329982,
+      "correct": false,
+      "size": [
+        63,
+        31
+      ],
+      "ms": 224.79350000139675
+    },
+    "geometry_ms": 26.967099998728372,
+    "prepared": null,
+    "prepared_clahe": null
+  },
+  {
+    "frame": 402,
+    "detected": true,
+    "det_conf": 0.3533034324645996,
+    "raw": {
+      "text": "6م8750",
+      "confidence": 0.6285593012968699,
+      "correct": false,
+      "size": [
+        66,
+        31
+      ],
+      "ms": 387.9201000017929
+    },
+    "geometry_ms": 49.18639999959851,
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.90387973934412,
+      "correct": true,
+      "size": [
+        66,
+        21
+      ],
+      "ms": 250.36370000088937
+    },
+    "prepared_clahe": {
+      "text": "58م87245",
+      "confidence": 0.8752753585577011,
+      "correct": true,
+      "size": [
+        66,
+        21
+      ],
+      "ms": 252.40710000070976
+    }
+  },
+  {
+    "frame": 405,
+    "detected": true,
+    "det_conf": 0.45313069224357605,
+    "raw": {
+      "text": "56م8740",
+      "confidence": 0.6235991546085903,
+      "correct": false,
+      "size": [
+        64,
+        31
+      ],
+      "ms": 248.80839999968885
+    },
+    "geometry_ms": 49.14170000120066,
+    "prepared": null,
+    "prepared_clahe": null
+  }
+]

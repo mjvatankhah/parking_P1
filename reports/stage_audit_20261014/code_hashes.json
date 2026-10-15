@@ -1,0 +1,7 @@
+{
+  "src/computer_vision_v2/inference/plate_ocr.py": "aa3e36f6b93c529ab8a25330b3cac3ed3ca6857e3312d920af368ae1c52a375f",
+  "src/computer_vision_v2/inference/plate_geometry.py": "44813c3a475a8c129c7c5c004f89267266e745bb3b2cce366bbed49a1b24b510",
+  "src/computer_vision_v2/ocr_worker/plate_candidates.py": "d0bef5b42d372945e1d8e20e188d82798753989c76440f5b34bb881041d99ce6",
+  "src/computer_vision_v2/main_v2.py": "0e09fee4cb519e6d6ede84cd986e452451403be80c892f2c8e7528898fe0066a",
+  "src/reno/data/cameras.json": "95eabf44443121db9e61c3f065ab4bae0c7f6b518ac215bba4a45aa0d5e85f8a"
+}

@@ -1,0 +1,514 @@
+[
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 1,
+      "bbox": [
+        563.0922667022205,
+        186.52854101813452,
+        1278.8438179990126,
+        579.392169560005
+      ],
+      "class_id": 2,
+      "confidence": 0.9481808543205261,
+      "frame_idx": 164,
+      "ts": 5.463854472727273,
+      "side": 1,
+      "direction": "exit"
+    },
+    "finalized_at": 407,
+    "reason": "left_roi",
+    "candidates": [
+      {
+        "frame": 346,
+        "ts": 11.527400290022173,
+        "confidence": 0.8329775333404541,
+        "quality": 0.8763892306491576,
+        "prepared": true
+      },
+      {
+        "frame": 328,
+        "ts": 10.927708945454546,
+        "confidence": 0.7910098433494568,
+        "quality": 0.865332922966011,
+        "prepared": true
+      },
+      {
+        "frame": 337,
+        "ts": 11.22755461773836,
+        "confidence": 0.7896382808685303,
+        "quality": 0.8639392894540479,
+        "prepared": true
+      },
+      {
+        "frame": 349,
+        "ts": 11.627348847450111,
+        "confidence": 0.8047902584075928,
+        "quality": 0.860257972678387,
+        "prepared": true
+      },
+      {
+        "frame": 340,
+        "ts": 11.327503175166298,
+        "confidence": 0.7884649038314819,
+        "quality": 0.8580595926885494,
+        "prepared": true
+      },
+      {
+        "frame": 373,
+        "ts": 12.426937306873615,
+        "confidence": 0.7124840617179871,
+        "quality": 0.8479771463912426,
+        "prepared": true
+      },
+      {
+        "frame": 334,
+        "ts": 11.127606060310422,
+        "confidence": 0.7504181265830994,
+        "quality": 0.8434422158091156,
+        "prepared": true
+      },
+      {
+        "frame": 367,
+        "ts": 12.22704019201774,
+        "confidence": 0.7012629508972168,
+        "quality": 0.8386802077921472,
+        "prepared": true
+      },
+      {
+        "frame": 325,
+        "ts": 10.827760388026608,
+        "confidence": 0.7465852499008179,
+        "quality": 0.8379842977960796,
+        "prepared": true
+      },
+      {
+        "frame": 319,
+        "ts": 10.627863273170732,
+        "confidence": 0.7532429695129395,
+        "quality": 0.8369226404165315,
+        "prepared": true
+      },
+      {
+        "frame": 382,
+        "ts": 12.726782979157429,
+        "confidence": 0.6730037331581116,
+        "quality": 0.82865408787341,
+        "prepared": true
+      },
+      {
+        "frame": 331,
+        "ts": 11.027657502882484,
+        "confidence": 0.7398872971534729,
+        "quality": 0.8279103136334853,
+        "prepared": true
+      },
+      {
+        "frame": 364,
+        "ts": 12.127091634589801,
+        "confidence": 0.8074098825454712,
+        "quality": 0.8829950363685686,
+        "prepared": false
+      }
+    ],
+    "result": {
+      "plate_text": "58م87245",
+      "recognition_status": "read",
+      "confidence": 0.9425852944453558,
+      "readings": [
+        {
+          "text": "58م87245",
+          "confidence": 0.967225968837738,
+          "valid": true,
+          "frame_idx": 346
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.924769327044487,
+          "valid": true,
+          "frame_idx": 349
+        },
+        {
+          "text": "58م87335",
+          "confidence": 0.9702677354216576,
+          "valid": true,
+          "frame_idx": 340
+        },
+        {
+          "text": "58م87345",
+          "confidence": 0.9532580152153969,
+          "valid": true,
+          "frame_idx": 337
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9357605874538422,
+          "valid": true,
+          "frame_idx": 319
+        }
+      ]
+    }
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 5,
+      "bbox": [
+        236.98193860754336,
+        248.59792018243152,
+        649.4731091522407,
+        691.3907399497133
+      ],
+      "class_id": 2,
+      "confidence": 0.882118284702301,
+      "frame_idx": 1074,
+      "ts": 35.78158355920178,
+      "side": 1,
+      "direction": "entry"
+    },
+    "finalized_at": 1149,
+    "reason": "left_roi",
+    "candidates": [
+      {
+        "frame": 868,
+        "ts": 28.91844928248337,
+        "confidence": 0.6392762064933777,
+        "quality": 0.7228013997165752,
+        "prepared": true
+      },
+      {
+        "frame": 874,
+        "ts": 29.118346397339245,
+        "confidence": 0.6306899189949036,
+        "quality": 0.7204298284649848,
+        "prepared": true
+      },
+      {
+        "frame": 883,
+        "ts": 29.41819206962306,
+        "confidence": 0.6374958157539368,
+        "quality": 0.698848747110915,
+        "prepared": true
+      },
+      {
+        "frame": 850,
+        "ts": 28.318757937915745,
+        "confidence": 0.5808584094047546,
+        "quality": 0.6984473652486851,
+        "prepared": true
+      },
+      {
+        "frame": 847,
+        "ts": 28.218809380487805,
+        "confidence": 0.5537011623382568,
+        "quality": 0.6941704123760091,
+        "prepared": true
+      },
+      {
+        "frame": 871,
+        "ts": 29.01839783991131,
+        "confidence": 0.5694368481636047,
+        "quality": 0.6893427218510103,
+        "prepared": true
+      },
+      {
+        "frame": 853,
+        "ts": 28.41870649534368,
+        "confidence": 0.5815625786781311,
+        "quality": 0.6874199252765057,
+        "prepared": true
+      },
+      {
+        "frame": 856,
+        "ts": 28.51865505277162,
+        "confidence": 0.545852541923523,
+        "quality": 0.6808832851472447,
+        "prepared": true
+      },
+      {
+        "frame": 859,
+        "ts": 28.618603610199557,
+        "confidence": 0.5181411504745483,
+        "quality": 0.6660651463728685,
+        "prepared": true
+      },
+      {
+        "frame": 886,
+        "ts": 29.518140627050997,
+        "confidence": 0.49797379970550537,
+        "quality": 0.6447217664410991,
+        "prepared": true
+      },
+      {
+        "frame": 844,
+        "ts": 28.11886082305987,
+        "confidence": 0.4500117897987366,
+        "quality": 0.6440139059782027,
+        "prepared": true
+      },
+      {
+        "frame": 916,
+        "ts": 30.517626201330376,
+        "confidence": 0.6391376256942749,
+        "quality": 0.6431590243528515,
+        "prepared": true
+      },
+      {
+        "frame": 928,
+        "ts": 30.917420431042128,
+        "confidence": 0.6633536219596863,
+        "quality": 0.5726588698749518,
+        "prepared": false
+      }
+    ],
+    "result": {
+      "plate_text": null,
+      "recognition_status": "uncertain",
+      "confidence": 0.8283284977078438,
+      "readings": [
+        {
+          "text": "13ه33445",
+          "confidence": 0.8283284977078438,
+          "valid": true,
+          "frame_idx": 883
+        },
+        {
+          "text": "14ه44445",
+          "confidence": 0.8000781983137131,
+          "valid": true,
+          "frame_idx": 874
+        },
+        {
+          "text": "13ه33345",
+          "confidence": 0.9620199948549271,
+          "valid": true,
+          "frame_idx": 868
+        },
+        {
+          "text": "84ه44445",
+          "confidence": 0.7732764966785908,
+          "valid": true,
+          "frame_idx": 847
+        },
+        {
+          "text": "14ح44445",
+          "confidence": 0.7711145840585232,
+          "valid": true,
+          "frame_idx": 850
+        }
+      ]
+    }
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 9,
+      "bbox": [
+        596.3741078946719,
+        170.8137359762671,
+        1212.6311609494496,
+        528.6805862028677
+      ],
+      "class_id": 2,
+      "confidence": 0.9299808740615845,
+      "frame_idx": 1678,
+      "ts": 55.90455978802661,
+      "side": -1,
+      "direction": "entry"
+    },
+    "finalized_at": 1755,
+    "reason": "left_roi",
+    "candidates": [
+      {
+        "frame": 1541,
+        "ts": 51.34024233215078,
+        "confidence": 0.59568190574646,
+        "quality": 0.6622601373522888,
+        "prepared": true
+      },
+      {
+        "frame": 1535,
+        "ts": 51.1403452172949,
+        "confidence": 0.5301703214645386,
+        "quality": 0.6546794060258952,
+        "prepared": true
+      },
+      {
+        "frame": 1523,
+        "ts": 50.74055098758315,
+        "confidence": 0.49723318219184875,
+        "quality": 0.6514492131495963,
+        "prepared": true
+      },
+      {
+        "frame": 1526,
+        "ts": 50.840499545011085,
+        "confidence": 0.4917363226413727,
+        "quality": 0.6496800577700873,
+        "prepared": true
+      },
+      {
+        "frame": 1550,
+        "ts": 51.64008800443459,
+        "confidence": 0.5951799750328064,
+        "quality": 0.64099498964273,
+        "prepared": true
+      },
+      {
+        "frame": 1544,
+        "ts": 51.440190889578716,
+        "confidence": 0.5053970813751221,
+        "quality": 0.630842396730764,
+        "prepared": true
+      },
+      {
+        "frame": 1559,
+        "ts": 51.939933676718404,
+        "confidence": 0.6199519038200378,
+        "quality": 0.6277592950774534,
+        "prepared": true
+      },
+      {
+        "frame": 1529,
+        "ts": 50.94044810243903,
+        "confidence": 0.4646992087364197,
+        "quality": 0.6272314909581637,
+        "prepared": true
+      },
+      {
+        "frame": 1532,
+        "ts": 51.040396659866964,
+        "confidence": 0.38387757539749146,
+        "quality": 0.5918331761238874,
+        "prepared": true
+      },
+      {
+        "frame": 1568,
+        "ts": 52.23977934900222,
+        "confidence": 0.5965489149093628,
+        "quality": 0.5866346942179207,
+        "prepared": true
+      },
+      {
+        "frame": 1556,
+        "ts": 51.83998511929047,
+        "confidence": 0.4767768681049347,
+        "quality": 0.5736805762882385,
+        "prepared": true
+      },
+      {
+        "frame": 1565,
+        "ts": 52.13983079157428,
+        "confidence": 0.4878464937210083,
+        "quality": 0.5726554743840366,
+        "prepared": true
+      },
+      {
+        "frame": 1538,
+        "ts": 51.240293774722836,
+        "confidence": 0.583964467048645,
+        "quality": 0.6421914761216423,
+        "prepared": false
+      }
+    ],
+    "result": {
+      "plate_text": "83و63745",
+      "recognition_status": "read",
+      "confidence": 0.9474113707741102,
+      "readings": [
+        {
+          "text": "83و63745",
+          "confidence": 0.9217379912734032,
+          "valid": true,
+          "frame_idx": 1559
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.9325569197535515,
+          "valid": true,
+          "frame_idx": 1541
+        },
+        {
+          "text": "83و62745",
+          "confidence": 0.9210548549890518,
+          "valid": true,
+          "frame_idx": 1550
+        },
+        {
+          "text": "83و62745",
+          "confidence": 0.9315893277525902,
+          "valid": true,
+          "frame_idx": 1535
+        },
+        {
+          "text": "83و63745",
+          "confidence": 0.9879392012953758,
+          "valid": true,
+          "frame_idx": 1568
+        }
+      ]
+    }
+  },
+  {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 11,
+      "bbox": [
+        204.39626698718,
+        239.0379262456557,
+        767.1343038824637,
+        684.9622454272949
+      ],
+      "class_id": 2,
+      "confidence": 0.867436945438385,
+      "frame_idx": 2155,
+      "ts": 71.79638041906874,
+      "side": 1,
+      "direction": "entry"
+    },
+    "finalized_at": 2194,
+    "reason": "left_roi",
+    "candidates": [
+      {
+        "frame": 2132,
+        "ts": 71.03010814545455,
+        "confidence": 0.3806401193141937,
+        "quality": 0.4676343040733091,
+        "prepared": true
+      },
+      {
+        "frame": 2141,
+        "ts": 71.32995381773836,
+        "confidence": 0.48795896768569946,
+        "quality": 0.40459278909569263,
+        "prepared": true
+      },
+      {
+        "frame": 2129,
+        "ts": 70.93015958802661,
+        "confidence": 0.47472500801086426,
+        "quality": 0.5252175011230843,
+        "prepared": false
+      }
+    ],
+    "result": {
+      "plate_text": null,
+      "recognition_status": "uncertain",
+      "confidence": 0.0,
+      "readings": [
+        {
+          "text": "81ط7954539",
+          "confidence": 0.879579895734787,
+          "valid": false,
+          "frame_idx": 2141
+        },
+        {
+          "text": "81ط795453",
+          "confidence": 0.9724648263719347,
+          "valid": false,
+          "frame_idx": 2132
+        }
+      ]
+    }
+  }
+]

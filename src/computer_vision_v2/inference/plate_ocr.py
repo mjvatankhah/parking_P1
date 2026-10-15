@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 from collections import Counter
 from .plate_geometry import prepare_plate
@@ -60,11 +61,18 @@ class PlateReader:
     ):
         self.conf_thr = conf_thr
 
+        self._fallback_path = fallback_detector_path
+        self._fallback_detector = None
+        self._fallback_attempted = False
+
         # اماده کردن مدل ها
         try:
             self.detector = _session(detector_path)
         except Exception:
+            if fallback_detector_path is None:
+                raise
             self.detector = _session(fallback_detector_path)
+            self._fallback_attempted = True
 
         self.ocr = _session(ocr_path)
         
@@ -100,9 +108,27 @@ class PlateReader:
     
     # ---------- تشخیص پلاک --------
     def detect_plate(self, vehicle_crop):
+        result = self._detect_plate(vehicle_crop, self.detector, self.det_input)
+        if result is not None:
+            return result
+        # Load once, on the first miss. A missing optional model must not stop playback.
+        if not self._fallback_attempted:
+            self._fallback_attempted = True
+            if self._fallback_path is not None:
+                try:
+                    self._fallback_detector = _session(self._fallback_path)
+                except Exception:
+                    logging.getLogger(__name__).warning(
+                        "Could not load plate fallback detector", exc_info=True)
+        if self._fallback_detector is None:
+            return None
+        return self._detect_plate(vehicle_crop, self._fallback_detector,
+                                  self._fallback_detector.get_inputs()[0].name)
+
+    def _detect_plate(self, vehicle_crop, detector, input_name):
         img, scale, dx, dy = _letterbox(vehicle_crop, self.det_size)
         blob = img[:, :, ::-1].transpose(2, 0, 1)[None].astype(np.float32) / 255.0
-        out = self.detector.run(None, {self.det_input: blob})[0]
+        out = detector.run(None, {input_name: blob})[0]
         pred = np.squeeze(out)
         if pred.ndim != 2:
             return None
@@ -143,15 +169,6 @@ class PlateReader:
         context = vehicle_crop[max(0,y1-pad):min(h,y2+pad), max(0,x1-pad):min(w,x2+pad)].copy()
         return plate_crop, float(scores[best]), context
 
-    @staticmethod
-    def _prepared_sharpness(image):
-        """Score edges in the prepared text band, excluding its crop boundary."""
-        gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-        edges = cv.Laplacian(gray, cv.CV_32F)
-        if min(edges.shape) > 4:
-            edges = edges[2:-2, 2:-2]
-        return float(edges.var())
-
     def recognize_candidates(self, candidates):
         readings, images = [], []
         prepared = []
@@ -160,7 +177,7 @@ class PlateReader:
                 candidate.context if candidate.context is not None else candidate.crop)
             if result is not None:
                 prepared.append((candidate, result))
-        prepared.sort(key=lambda pair: self._prepared_sharpness(pair[1].image), reverse=True)
+        prepared.sort(key=lambda pair: pair[0].confidence * pair[1].quality, reverse=True)
         for candidate, result in prepared:
             image = result.image
             text, confidence = self._ctc_decode(self.ocr.run(None, {self.ocr_input:self._prep_ocr(image)})[0])

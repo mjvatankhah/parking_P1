@@ -1,0 +1,1560 @@
+[
+  {
+    "frame": 240,
+    "outputs": {
+      "baseline": {
+        "text": "25م3322",
+        "confidence": 0.5203482338360378,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "65الف3830",
+        "confidence": 0.6482863043035779,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م3322",
+        "confidence": 0.5572118187944094,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "65الف830",
+        "confidence": 0.6061948090791702,
+        "correct": false,
+        "valid": false
+      },
+      "bilateral_clahe": {
+        "text": "6م38830",
+        "confidence": 0.6101592608860561,
+        "correct": false,
+        "valid": false
+      },
+      "otsu": {
+        "text": "4و66326",
+        "confidence": 0.5695976487227848,
+        "correct": false,
+        "valid": false
+      }
+    }
+  },
+  {
+    "frame": 246,
+    "outputs": {
+      "baseline": {
+        "text": "5م383335",
+        "confidence": 0.6296274065971375,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "58م87335",
+        "confidence": 0.8138681203126907,
+        "correct": false,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "5م387335",
+        "confidence": 0.6367163956165314,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87335",
+        "confidence": 0.9391120374202728,
+        "correct": false,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "6م38733",
+        "confidence": 0.7644440361431667,
+        "correct": false,
+        "valid": false
+      },
+      "otsu": {
+        "text": "6م386346",
+        "confidence": 0.826437197625637,
+        "correct": false,
+        "valid": false
+      }
+    }
+  },
+  {
+    "frame": 252,
+    "outputs": {
+      "baseline": {
+        "text": "5م383335",
+        "confidence": 0.6703871116042137,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "5م87345",
+        "confidence": 0.8242270435605731,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م382335",
+        "confidence": 0.6866313219070435,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87345",
+        "confidence": 0.8787045143544674,
+        "correct": false,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "56م87345",
+        "confidence": 0.7226962931454182,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "6م82346",
+        "confidence": 0.8793485164642334,
+        "correct": false,
+        "valid": false
+      }
+    }
+  },
+  {
+    "frame": 255,
+    "outputs": {
+      "baseline": {
+        "text": "25م382335",
+        "confidence": 0.5891956090927124,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "58م87345",
+        "confidence": 0.8948732353746891,
+        "correct": false,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "28م382335",
+        "confidence": 0.6180962953302596,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87345",
+        "confidence": 0.9409925565123558,
+        "correct": false,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "68م87340",
+        "confidence": 0.7072771266102791,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "65م86346",
+        "confidence": 0.7090476043522358,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 273,
+    "outputs": {
+      "baseline": {
+        "text": "58م87345",
+        "confidence": 0.9447882547974586,
+        "correct": false,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9778301864862442,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.952097937464714,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9432904794812202,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.9240207895636559,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87345",
+        "confidence": 0.9041500762104988,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 276,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9795076474547386,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9973590821027756,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9867600426077843,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.991924524307251,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9774002730846405,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87345",
+        "confidence": 0.9799961447715759,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 282,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9890162870287895,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9949715211987495,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9919464439153671,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9967435672879219,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9851077571511269,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9632646292448044,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 285,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9754538461565971,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9871909022331238,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9877096861600876,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9756974801421165,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9698649495840073,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9590715020895004,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 288,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9879663363099098,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9964244961738586,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9929824769496918,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9976412430405617,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.990024745464325,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9526324197649956,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 294,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9810153990983963,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9734502360224724,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9910086989402771,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9723802953958511,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9538656249642372,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87345",
+        "confidence": 0.9626422673463821,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 297,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9793738052248955,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9973902553319931,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9915595501661301,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9976132065057755,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9607595130801201,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9831693917512894,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 300,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9875175058841705,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9968471527099609,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.993650883436203,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9967934265732765,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9834254905581474,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87248",
+        "confidence": 0.9097725227475166,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 303,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9747982323169708,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9973874688148499,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9890896677970886,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9976292848587036,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.9365609362721443,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9642428010702133,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 306,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9594739079475403,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.996215745806694,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9767557755112648,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9976501613855362,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.961370937526226,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9843250885605812,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 309,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9354623407125473,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9941559061408043,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9708630815148354,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9976313337683678,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.9552453830838203,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م87345",
+        "confidence": 0.9077629819512367,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 312,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.8637916743755341,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9420013129711151,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.8894571140408516,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9654045328497887,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.961228147149086,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م86245",
+        "confidence": 0.8383507132530212,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 318,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9546210542321205,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9933989197015762,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9622453451156616,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.996905729174614,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9665173888206482,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9739651307463646,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 321,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9025759920477867,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9927978217601776,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9466106668114662,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9957630559802055,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.9153157211840153,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9166997857391834,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 324,
+    "outputs": {
+      "baseline": {
+        "text": "58م87335",
+        "confidence": 0.9260825365781784,
+        "correct": false,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.917130134999752,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87335",
+        "confidence": 0.917614720761776,
+        "correct": false,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9507209360599518,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87335",
+        "confidence": 0.9685350805521011,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م86445",
+        "confidence": 0.8927436769008636,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 327,
+    "outputs": {
+      "baseline": {
+        "text": "5م87235",
+        "confidence": 0.8760924935340881,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "5م87735",
+        "confidence": 0.8269623475415366,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م87235",
+        "confidence": 0.9010857258524213,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87235",
+        "confidence": 0.8571994118392467,
+        "correct": false,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87235",
+        "confidence": 0.7860440984368324,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م87345",
+        "confidence": 0.8168599680066109,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 330,
+    "outputs": {
+      "baseline": {
+        "text": "5م87235",
+        "confidence": 0.8445199728012085,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "65م87235",
+        "confidence": 0.8309724926948547,
+        "correct": false,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "5م87235",
+        "confidence": 0.8044917157718113,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87235",
+        "confidence": 0.8257920518517494,
+        "correct": false,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87235",
+        "confidence": 0.8013187348842621,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م87745",
+        "confidence": 0.8692110702395439,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 333,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9160169064998627,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.99122354388237,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.938410110771656,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9942839071154594,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87235",
+        "confidence": 0.9066893458366394,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9444920271635056,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 336,
+    "outputs": {
+      "baseline": {
+        "text": "58م87345",
+        "confidence": 0.9330756217241287,
+        "correct": false,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9705700054764748,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87345",
+        "confidence": 0.930489256978035,
+        "correct": false,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9927524700760841,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.9538777396082878,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م83245",
+        "confidence": 0.9157719686627388,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 339,
+    "outputs": {
+      "baseline": {
+        "text": "58م87335",
+        "confidence": 0.9448160529136658,
+        "correct": false,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87235",
+        "confidence": 0.9386257603764534,
+        "correct": false,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87335",
+        "confidence": 0.9248391091823578,
+        "correct": false,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87235",
+        "confidence": 0.9239905700087547,
+        "correct": false,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87335",
+        "confidence": 0.9842984601855278,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9775206074118614,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 342,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9799613356590271,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9952109381556511,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.981463648378849,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9954330027103424,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.8811910673975945,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م83245",
+        "confidence": 0.9825829192996025,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 345,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9326288253068924,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9925707504153252,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9490241259336472,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9939218759536743,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87235",
+        "confidence": 0.9163697063922882,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87345",
+        "confidence": 0.9241202175617218,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 348,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9672903716564178,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.949185885488987,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.977134458720684,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9731199443340302,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9421313777565956,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م87345",
+        "confidence": 0.921506330370903,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 357,
+    "outputs": {
+      "baseline": {
+        "text": "5م87345",
+        "confidence": 0.897134508405413,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "5م87245",
+        "confidence": 0.8821640270096915,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م87345",
+        "confidence": 0.8779051303863525,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "5م87245",
+        "confidence": 0.879402152129582,
+        "correct": false,
+        "valid": false
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.8443267941474915,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9579818174242973,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 369,
+    "outputs": {
+      "baseline": {
+        "text": "58م87235",
+        "confidence": 0.9597503766417503,
+        "correct": false,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87235",
+        "confidence": 0.9738318100571632,
+        "correct": false,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87235",
+        "confidence": 0.9818041622638702,
+        "correct": false,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9776152968406677,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87235",
+        "confidence": 0.9157624393701553,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87245",
+        "confidence": 0.9673826992511749,
+        "correct": true,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 372,
+    "outputs": {
+      "baseline": {
+        "text": "58م87345",
+        "confidence": 0.9735320582985878,
+        "correct": false,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9637131318449974,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87345",
+        "confidence": 0.9484801888465881,
+        "correct": false,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9874330684542656,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87345",
+        "confidence": 0.9611931294202805,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م82245",
+        "confidence": 0.9492807909846306,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 375,
+    "outputs": {
+      "baseline": {
+        "text": "5م87235",
+        "confidence": 0.9126785312380109,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "5م87235",
+        "confidence": 0.9649961846215385,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م87235",
+        "confidence": 0.9562574880463737,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9190744310617447,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87235",
+        "confidence": 0.8753804266452789,
+        "correct": false,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م87335",
+        "confidence": 0.8718668147921562,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 378,
+    "outputs": {
+      "baseline": {
+        "text": "5م87335",
+        "confidence": 0.8605562278202602,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "65م87235",
+        "confidence": 0.8543536253273487,
+        "correct": false,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "5م87235",
+        "confidence": 0.818992052759443,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "5م87235",
+        "confidence": 0.8535254001617432,
+        "correct": false,
+        "valid": false
+      },
+      "bilateral_clahe": {
+        "text": "5م87335",
+        "confidence": 0.8761455076081412,
+        "correct": false,
+        "valid": false
+      },
+      "otsu": {
+        "text": "68م87235",
+        "confidence": 0.9129190519452095,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 381,
+    "outputs": {
+      "baseline": {
+        "text": "5م87245",
+        "confidence": 0.9744141953332084,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "5م87245",
+        "confidence": 0.9924561892236982,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م87245",
+        "confidence": 0.978426958833422,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.988755851984024,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9507312104105949,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87236",
+        "confidence": 0.9325014650821686,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 384,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9558865427970886,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9511374235153198,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9180499687790871,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9911449402570724,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9864426255226135,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م87245",
+        "confidence": 0.8724706768989563,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 387,
+    "outputs": {
+      "baseline": {
+        "text": "5م87245",
+        "confidence": 0.9709467376981463,
+        "correct": false,
+        "valid": false
+      },
+      "clahe": {
+        "text": "5م87245",
+        "confidence": 0.9575930322919574,
+        "correct": false,
+        "valid": false
+      },
+      "mild_unsharp": {
+        "text": "5م87245",
+        "confidence": 0.9492148160934448,
+        "correct": false,
+        "valid": false
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9667162671685219,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "5م87345",
+        "confidence": 0.9610912799835205,
+        "correct": false,
+        "valid": false
+      },
+      "otsu": {
+        "text": "58م87445",
+        "confidence": 0.8924316391348839,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 390,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9615348726511002,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9451098814606667,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9399941638112068,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9846614226698875,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9472506195306778,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87345",
+        "confidence": 0.8619197830557823,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 396,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.9774777963757515,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.9785849452018738,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.971350371837616,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9846044778823853,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.9625305607914925,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "58م87395",
+        "confidence": 0.9522855505347252,
+        "correct": false,
+        "valid": true
+      }
+    }
+  },
+  {
+    "frame": 402,
+    "outputs": {
+      "baseline": {
+        "text": "58م87245",
+        "confidence": 0.90387973934412,
+        "correct": true,
+        "valid": true
+      },
+      "clahe": {
+        "text": "58م87245",
+        "confidence": 0.8752753585577011,
+        "correct": true,
+        "valid": true
+      },
+      "mild_unsharp": {
+        "text": "58م87245",
+        "confidence": 0.9259997606277466,
+        "correct": true,
+        "valid": true
+      },
+      "illumination_division": {
+        "text": "58م87245",
+        "confidence": 0.9000367224216461,
+        "correct": true,
+        "valid": true
+      },
+      "bilateral_clahe": {
+        "text": "58م87245",
+        "confidence": 0.8693747222423553,
+        "correct": true,
+        "valid": true
+      },
+      "otsu": {
+        "text": "68م82340",
+        "confidence": 0.8840362727642059,
+        "correct": false,
+        "valid": true
+      }
+    }
+  }
+]

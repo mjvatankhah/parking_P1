@@ -1,0 +1,655 @@
+[
+  {
+    "id": 102,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/d92734255bb6417cb59d424a59d120d0.jpg"
+  },
+  {
+    "id": 101,
+    "plate": "83و63745",
+    "status": "read",
+    "readings": [
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1523,
+        "confidence": 0.9614546597003937
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1526,
+        "confidence": 0.9502593725919724
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1529,
+        "confidence": 0.9214108437299728
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1541,
+        "confidence": 0.9325569197535515
+      },
+      {
+        "text": "83ل62745",
+        "valid": true,
+        "frame_idx": 1532,
+        "confidence": 0.9114966690540314
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/a0994cda9f8a4afc9d1a4094796a88ed.jpg"
+  },
+  {
+    "id": 100,
+    "plate": "13ه33345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "13ه33445",
+        "valid": true,
+        "frame_idx": 853,
+        "confidence": 0.8627384826540947
+      },
+      {
+        "text": "84ه44445",
+        "valid": true,
+        "frame_idx": 847,
+        "confidence": 0.7732764966785908
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 868,
+        "confidence": 0.9620199948549271
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 871,
+        "confidence": 0.9458251968026161
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 844,
+        "confidence": 0.8757749050855637
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/4cf4d112e544431a88272e372767548b.jpg"
+  },
+  {
+    "id": 99,
+    "plate": "58م87335",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 379,
+        "confidence": 0.9833877012133598
+      },
+      {
+        "text": "58م87335",
+        "valid": true,
+        "frame_idx": 373,
+        "confidence": 0.9442181587219238
+      },
+      {
+        "text": "58م87335",
+        "valid": true,
+        "frame_idx": 376,
+        "confidence": 0.9169983267784119
+      },
+      {
+        "text": "5م87245",
+        "valid": false,
+        "frame_idx": 382,
+        "confidence": 0.9370701568467277
+      },
+      {
+        "text": "5م87235",
+        "valid": false,
+        "frame_idx": 367,
+        "confidence": 0.8778898077351707
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/1c1518af373b4433b94c56d24bebecea.jpg"
+  },
+  {
+    "id": 98,
+    "plate": null,
+    "status": "uncertain",
+    "readings": [
+      {
+        "text": "81ط79545",
+        "valid": true,
+        "frame_idx": 2095,
+        "confidence": 0.9666785299777985
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/eca1ac67c5e44cc5988a2d4119b8be9e.jpg"
+  },
+  {
+    "id": 97,
+    "plate": "12ه33335",
+    "status": "read",
+    "readings": [
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 925,
+        "confidence": 0.8875074312090874
+      },
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 940,
+        "confidence": 0.9556475132703781
+      },
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 985,
+        "confidence": 0.9817210957407951
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/3296317a9e90424988da62bcbe95e559.jpg"
+  },
+  {
+    "id": 96,
+    "plate": null,
+    "status": "uncertain",
+    "readings": [
+      {
+        "text": "58م87335",
+        "valid": true,
+        "frame_idx": 340,
+        "confidence": 0.9744589328765869
+      },
+      {
+        "text": "5م87235",
+        "valid": false,
+        "frame_idx": 364,
+        "confidence": 0.8590987324714661
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 349,
+        "confidence": 0.9484452307224274
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/335a9ad661554b1a9aa1546eff16c9f0.jpg"
+  },
+  {
+    "id": 95,
+    "plate": "83و63745",
+    "status": "read",
+    "readings": [
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1541,
+        "confidence": 0.9724360257387161
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1562,
+        "confidence": 0.9847326055169106
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1520,
+        "confidence": 0.8582946434617043
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/3bd93ecf454d4ec0b5f677d285e79a88.jpg"
+  },
+  {
+    "id": 94,
+    "plate": "12ه33335",
+    "status": "read",
+    "readings": [
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 997,
+        "confidence": 0.9441457837820053
+      },
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 976,
+        "confidence": 0.980401411652565
+      },
+      {
+        "text": "12ه34335",
+        "valid": true,
+        "frame_idx": 928,
+        "confidence": 0.770423099398613
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/2930fcc61ebf40b6afe31524edbc6dc1.jpg"
+  },
+  {
+    "id": 93,
+    "plate": "58م87245",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 349,
+        "confidence": 0.933778241276741
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 307,
+        "confidence": 0.9293905720114708
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 331,
+        "confidence": 0.9604991301894188
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/8937016d24b641c6aefafc6fdac62bbb.jpg"
+  },
+  {
+    "id": 92,
+    "plate": "83و63745",
+    "status": "read",
+    "readings": [
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1541,
+        "confidence": 0.9724360257387161
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1562,
+        "confidence": 0.9847326055169106
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1520,
+        "confidence": 0.8582946434617043
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/1e31b245ccc4465eb31a45242bf5379b.jpg"
+  },
+  {
+    "id": 91,
+    "plate": "12ه33335",
+    "status": "read",
+    "readings": [
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 997,
+        "confidence": 0.9441457837820053
+      },
+      {
+        "text": "12ه33335",
+        "valid": true,
+        "frame_idx": 976,
+        "confidence": 0.980401411652565
+      },
+      {
+        "text": "12ه34335",
+        "valid": true,
+        "frame_idx": 928,
+        "confidence": 0.770423099398613
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/50dfffe249b64cfe916698e6aa74da0a.jpg"
+  },
+  {
+    "id": 90,
+    "plate": "58م87245",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 349,
+        "confidence": 0.933778241276741
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 307,
+        "confidence": 0.9293905720114708
+      },
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 331,
+        "confidence": 0.9604991301894188
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/9e62550cfb7145d8afc380d8b2a547c5.jpg"
+  },
+  {
+    "id": 89,
+    "plate": "83و63745",
+    "status": "read",
+    "readings": [
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1524,
+        "confidence": 0.9416238889098167
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1472,
+        "confidence": 0.8098499849438667
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/bb0cc08316584e98bf39aefcf9e91401.jpg"
+  },
+  {
+    "id": 88,
+    "plate": "13ه33345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 861,
+        "confidence": 0.9353799223899841
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 881,
+        "confidence": 0.9804735630750656
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 905,
+        "confidence": 0.97040194272995
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/05a4fa13cde244a285c2423db39a8a77.jpg"
+  },
+  {
+    "id": 87,
+    "plate": "58م87345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 347,
+        "confidence": 0.9703876972198486
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 323,
+        "confidence": 0.9366688281297684
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 371,
+        "confidence": 0.9764215424656868
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/ba558d3e751643538d189a44e3e7ebe2.jpg"
+  },
+  {
+    "id": 86,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 85,
+    "plate": "83و63745",
+    "status": "read",
+    "readings": [
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1524,
+        "confidence": 0.9416238889098167
+      },
+      {
+        "text": "83و63745",
+        "valid": true,
+        "frame_idx": 1472,
+        "confidence": 0.8098499849438667
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/00e9a7bf0db94948b4b9b1338ad55127.jpg"
+  },
+  {
+    "id": 84,
+    "plate": "13ه33345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 861,
+        "confidence": 0.9353799223899841
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 881,
+        "confidence": 0.9804735630750656
+      },
+      {
+        "text": "13ه33345",
+        "valid": true,
+        "frame_idx": 905,
+        "confidence": 0.97040194272995
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/99a1fca5a69c4814bbcdd6d59e0a45c9.jpg"
+  },
+  {
+    "id": 83,
+    "plate": "58م87345",
+    "status": "read",
+    "readings": [
+      {
+        "text": "58م87245",
+        "valid": true,
+        "frame_idx": 347,
+        "confidence": 0.9703876972198486
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 323,
+        "confidence": 0.9366688281297684
+      },
+      {
+        "text": "58م87345",
+        "valid": true,
+        "frame_idx": 371,
+        "confidence": 0.9764215424656868
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/e9555af4c3c547d6bbca7e6bc7274046.jpg"
+  },
+  {
+    "id": 82,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/a19c16a7a3144178844bddec605662e7.jpg"
+  },
+  {
+    "id": 81,
+    "plate": "97ن32977",
+    "status": "read",
+    "readings": [
+      {
+        "text": "97ن32977",
+        "valid": true,
+        "frame_idx": 37,
+        "confidence": 0.9965879544615746
+      },
+      {
+        "text": "97ن32977",
+        "valid": true,
+        "frame_idx": 25,
+        "confidence": 0.9956566244363785
+      },
+      {
+        "text": "97ن32977",
+        "valid": true,
+        "frame_idx": 13,
+        "confidence": 0.8885021954774857
+      }
+    ],
+    "image": "/home/MJR/parking_P1/src/captured_plates/9a6b65ef54194775b21d7d28d1bb0b3a.jpg"
+  },
+  {
+    "id": 74,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 73,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 71,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 70,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 69,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 68,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 67,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 66,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 65,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 61,
+    "plate": null,
+    "status": "unread",
+    "readings": [],
+    "image": null
+  },
+  {
+    "id": 28,
+    "plate": "97ن32937",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1791256035277.jpg"
+  },
+  {
+    "id": 27,
+    "plate": "97ن32977",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1791255904678.jpg"
+  },
+  {
+    "id": 26,
+    "plate": "37ی58799",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1790763392340.jpg"
+  },
+  {
+    "id": 25,
+    "plate": "97ن32977",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1790763365659.jpg"
+  },
+  {
+    "id": 24,
+    "plate": "37ی58799",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1790761716117.jpg"
+  },
+  {
+    "id": 23,
+    "plate": "97ن32977",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1790761696332.jpg"
+  },
+  {
+    "id": 22,
+    "plate": "37ی58799",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1790761536509.jpg"
+  },
+  {
+    "id": 21,
+    "plate": "97ن32977",
+    "status": "read",
+    "readings": [],
+    "image": "/home/MJR/parking_P1/src/captured_plates/plate_1790761483790.jpg"
+  }
+]

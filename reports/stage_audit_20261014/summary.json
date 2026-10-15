@@ -1,0 +1,24 @@
+{
+  "frames": 146,
+  "detected": 74,
+  "raw": {
+    "count": 74,
+    "correct": 0
+  },
+  "prepared": {
+    "count": 38,
+    "correct": 21
+  },
+  "prepared_clahe": {
+    "count": 38,
+    "correct": 25
+  },
+  "raw_correct_lost_by_geometry": [],
+  "geometry_correct_lost_by_clahe": [],
+  "clahe_recovers": [
+    273,
+    324,
+    336,
+    372
+  ]
+}

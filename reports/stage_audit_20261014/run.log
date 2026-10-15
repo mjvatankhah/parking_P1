@@ -1,0 +1,10 @@
+[0;93m2026-10-14 15:58:20.251656087 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+MANUAL {"axis": {"text": "5م57345", "confidence": 0.6620075787816729, "correct": false, "size": [125, 55], "ms": 128.05319800099824}, "corners": {"text": "58م87245", "confidence": 0.9923775643110275, "correct": true, "size": [120, 32], "ms": 136.1999989967444}, "corners_clahe": {"text": "58م87245", "confidence": 0.9973196014761925, "correct": true, "size": [120, 32], "ms": 159.49069800262805}}
+cached frame 180
+cached frame 210
+cached frame 240
+cached frame 270
+cached frame 300
+cached frame 330
+cached frame 390
+SUMMARY {"frames": 146, "detected": 74, "raw": {"count": 74, "correct": 0}, "prepared": {"count": 38, "correct": 21}, "prepared_clahe": {"count": 38, "correct": 25}, "raw_correct_lost_by_geometry": [], "geometry_correct_lost_by_clahe": [], "clahe_recovers": [273, 324, 336, 372]}

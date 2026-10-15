@@ -1,0 +1,32 @@
+[
+  {
+    "path": "ocr_crnn.onnx",
+    "oid": "c933bbd6be460a26c8929693ee6b82a0d5d56909",
+    "lfs": {
+      "oid": "45f8c45f29eb1ee91f6274cb8d9c328da1a2050ea7d8596bae61f4a6b9f9fb1e",
+      "size": 10452525,
+      "pointerSize": 133
+    },
+    "size": 10452525
+  },
+  {
+    "path": "plate_yolo.onnx",
+    "oid": "6602edd2ff38af08d35fb9fcf8aaa13eaa4d6e33",
+    "lfs": {
+      "oid": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6",
+      "size": 12608775,
+      "pointerSize": 133
+    },
+    "size": 12608775
+  },
+  {
+    "path": "plate_yolo_fallback.onnx",
+    "oid": "fb6ce502ca5cf12a678e2c86c2a36da8ac7e425f",
+    "lfs": {
+      "oid": "a6974fcb0a79755c270d50f1ebefd4d96d765c879a29051a19aac00dfda8b5af",
+      "size": 12265080,
+      "pointerSize": 133
+    },
+    "size": 12265080
+  }
+]

@@ -1,0 +1,784 @@
+[
+  {
+    "frame": 159,
+    "raw": {
+      "text": "15پ6226",
+      "confidence": 0.34835427360875265,
+      "correct": false
+    }
+  },
+  {
+    "frame": 162,
+    "raw": {
+      "text": "59ث629",
+      "confidence": 0.2877628107865651,
+      "correct": false
+    }
+  },
+  {
+    "frame": 171,
+    "raw": {
+      "text": "56پ65",
+      "confidence": 0.3514235347509384,
+      "correct": false
+    }
+  },
+  {
+    "frame": 177,
+    "raw": {
+      "text": "59ت555",
+      "confidence": 0.3899911592404048,
+      "correct": false
+    }
+  },
+  {
+    "frame": 180,
+    "raw": {
+      "text": "57ز53555",
+      "confidence": 0.3888500705361366,
+      "correct": false
+    }
+  },
+  {
+    "frame": 183,
+    "raw": {
+      "text": "5ز6",
+      "confidence": 0.5724809567133585,
+      "correct": false
+    }
+  },
+  {
+    "frame": 189,
+    "raw": {
+      "text": "59ب555",
+      "confidence": 0.3654112021128337,
+      "correct": false
+    }
+  },
+  {
+    "frame": 192,
+    "raw": {
+      "text": "57ز25955",
+      "confidence": 0.39870205521583557,
+      "correct": false
+    }
+  },
+  {
+    "frame": 195,
+    "raw": {
+      "text": "565ز6659",
+      "confidence": 0.38744988292455673,
+      "correct": false
+    }
+  },
+  {
+    "frame": 198,
+    "raw": {
+      "text": "56ز05",
+      "confidence": 0.3747889012098312,
+      "correct": false
+    }
+  },
+  {
+    "frame": 201,
+    "raw": {
+      "text": "59پ6559",
+      "confidence": 0.45595563522406984,
+      "correct": false
+    }
+  },
+  {
+    "frame": 204,
+    "raw": {
+      "text": "52ث659",
+      "confidence": 0.3256538063287735,
+      "correct": false
+    }
+  },
+  {
+    "frame": 207,
+    "raw": {
+      "text": "59ز4659",
+      "confidence": 0.3575968955244337,
+      "correct": false
+    }
+  },
+  {
+    "frame": 210,
+    "raw": {
+      "text": "59ت699",
+      "confidence": 0.3335024242599805,
+      "correct": false
+    }
+  },
+  {
+    "frame": 213,
+    "raw": {
+      "text": "56ز5550",
+      "confidence": 0.5019212386437825,
+      "correct": false
+    }
+  },
+  {
+    "frame": 225,
+    "raw": {
+      "text": "59ز9955",
+      "confidence": 0.5246264210769108,
+      "correct": false
+    }
+  },
+  {
+    "frame": 228,
+    "raw": {
+      "text": "60پ6645",
+      "confidence": 0.35052140057086945,
+      "correct": false
+    }
+  },
+  {
+    "frame": 231,
+    "raw": {
+      "text": "6ب203",
+      "confidence": 0.5078726828098297,
+      "correct": false
+    }
+  },
+  {
+    "frame": 234,
+    "raw": {
+      "text": "560پ6635",
+      "confidence": 0.4534018225967884,
+      "correct": false
+    }
+  },
+  {
+    "frame": 237,
+    "raw": {
+      "text": "60پ66335",
+      "confidence": 0.37493693083524704,
+      "correct": false
+    }
+  },
+  {
+    "frame": 240,
+    "raw": {
+      "text": "60م633",
+      "confidence": 0.40547094245751697,
+      "correct": false
+    },
+    "prepared": {
+      "text": "56م830",
+      "confidence": 0.6943954080343246,
+      "correct": false
+    }
+  },
+  {
+    "frame": 243,
+    "raw": {
+      "text": "60پ64330",
+      "confidence": 0.4670822322368622,
+      "correct": false
+    }
+  },
+  {
+    "frame": 246,
+    "raw": {
+      "text": "560ج65360",
+      "confidence": 0.41845301455921596,
+      "correct": false
+    },
+    "prepared": {
+      "text": "68م81338",
+      "confidence": 0.7587514631450176,
+      "correct": false
+    }
+  },
+  {
+    "frame": 249,
+    "raw": {
+      "text": "60پ62460",
+      "confidence": 0.5198291353881359,
+      "correct": false
+    }
+  },
+  {
+    "frame": 252,
+    "raw": {
+      "text": "60پ6560",
+      "confidence": 0.44610193158899036,
+      "correct": false
+    },
+    "prepared": {
+      "text": "56م87348",
+      "confidence": 0.7525405436754227,
+      "correct": false
+    }
+  },
+  {
+    "frame": 255,
+    "raw": {
+      "text": "6065950",
+      "confidence": 0.48160591082913534,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87330",
+      "confidence": 0.7001819387078285,
+      "correct": false
+    }
+  },
+  {
+    "frame": 258,
+    "raw": {
+      "text": "60ع65450",
+      "confidence": 0.57299430295825,
+      "correct": false
+    }
+  },
+  {
+    "frame": 261,
+    "raw": {
+      "text": "6ع452440",
+      "confidence": 0.6426318921148777,
+      "correct": false
+    }
+  },
+  {
+    "frame": 264,
+    "raw": {
+      "text": "56ع652440",
+      "confidence": 0.6536101864443885,
+      "correct": false
+    }
+  },
+  {
+    "frame": 267,
+    "raw": {
+      "text": "6ط656440",
+      "confidence": 0.5437127910554409,
+      "correct": false
+    }
+  },
+  {
+    "frame": 270,
+    "raw": {
+      "text": "6م650440",
+      "confidence": 0.620465774089098,
+      "correct": false
+    }
+  },
+  {
+    "frame": 273,
+    "raw": {
+      "text": "60م656440",
+      "confidence": 0.6116869416501787,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9799078777432442,
+      "correct": true
+    }
+  },
+  {
+    "frame": 276,
+    "raw": {
+      "text": "56ب5440",
+      "confidence": 0.6130767932959965,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9965192377567291,
+      "correct": true
+    }
+  },
+  {
+    "frame": 279,
+    "raw": {
+      "text": "60م652940",
+      "confidence": 0.5807028015454611,
+      "correct": false
+    }
+  },
+  {
+    "frame": 282,
+    "raw": {
+      "text": "66م65240",
+      "confidence": 0.6537012755870819,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9951666221022606,
+      "correct": true
+    }
+  },
+  {
+    "frame": 285,
+    "raw": {
+      "text": "66م452000",
+      "confidence": 0.5975483357906342,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.940041646361351,
+      "correct": true
+    }
+  },
+  {
+    "frame": 288,
+    "raw": {
+      "text": "6ع45345",
+      "confidence": 0.4708807042666844,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9970090463757515,
+      "correct": true
+    }
+  },
+  {
+    "frame": 291,
+    "raw": {
+      "text": "6ژ45203",
+      "confidence": 0.4464988282748631,
+      "correct": false
+    }
+  },
+  {
+    "frame": 294,
+    "raw": {
+      "text": "56ع530",
+      "confidence": 0.6172321935494741,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9976246133446693,
+      "correct": true
+    }
+  },
+  {
+    "frame": 297,
+    "raw": {
+      "text": "565ج45030",
+      "confidence": 0.5690112991465462,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9974807500839233,
+      "correct": true
+    }
+  },
+  {
+    "frame": 300,
+    "raw": {
+      "text": "66م6520",
+      "confidence": 0.6501041395323617,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9917212128639221,
+      "correct": true
+    }
+  },
+  {
+    "frame": 303,
+    "raw": {
+      "text": "66م0530",
+      "confidence": 0.6038825043610164,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.99687460064888,
+      "correct": true
+    }
+  },
+  {
+    "frame": 306,
+    "raw": {
+      "text": "6م5356",
+      "confidence": 0.5059007207552592,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.997062124311924,
+      "correct": true
+    }
+  },
+  {
+    "frame": 309,
+    "raw": {
+      "text": "6م653066",
+      "confidence": 0.5038811713457108,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9740765020251274,
+      "correct": true
+    }
+  },
+  {
+    "frame": 312,
+    "raw": {
+      "text": "6م652466",
+      "confidence": 0.5864721722900867,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.8714526742696762,
+      "correct": true
+    }
+  },
+  {
+    "frame": 315,
+    "raw": {
+      "text": "6م652666",
+      "confidence": 0.6160347163677216,
+      "correct": false
+    }
+  },
+  {
+    "frame": 318,
+    "raw": {
+      "text": "6م457466",
+      "confidence": 0.6052446812391281,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9963812902569771,
+      "correct": true
+    }
+  },
+  {
+    "frame": 321,
+    "raw": {
+      "text": "6م45366",
+      "confidence": 0.5890577690941947,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9760901927947998,
+      "correct": true
+    }
+  },
+  {
+    "frame": 324,
+    "raw": {
+      "text": "6م65266",
+      "confidence": 0.5973241414342608,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87235",
+      "confidence": 0.9065525755286217,
+      "correct": false
+    }
+  },
+  {
+    "frame": 327,
+    "raw": {
+      "text": "6الف652060",
+      "confidence": 0.5498020872473717,
+      "correct": false
+    },
+    "prepared": {
+      "text": "5م87435",
+      "confidence": 0.7930411994457245,
+      "correct": false
+    }
+  },
+  {
+    "frame": 330,
+    "raw": {
+      "text": "6م652060",
+      "confidence": 0.4635072611272335,
+      "correct": false
+    },
+    "prepared": {
+      "text": "65م87235",
+      "confidence": 0.7436416521668434,
+      "correct": false
+    }
+  },
+  {
+    "frame": 333,
+    "raw": {
+      "text": "6الف45246",
+      "confidence": 0.566846924168723,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.978481762111187,
+      "correct": true
+    }
+  },
+  {
+    "frame": 336,
+    "raw": {
+      "text": "6الف45246",
+      "confidence": 0.6354329586029053,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9917790740728378,
+      "correct": true
+    }
+  },
+  {
+    "frame": 339,
+    "raw": {
+      "text": "6الف453545",
+      "confidence": 0.5515356622636318,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9518560022115707,
+      "correct": true
+    }
+  },
+  {
+    "frame": 342,
+    "raw": {
+      "text": "56الف45353",
+      "confidence": 0.5499879643321037,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9858675673604012,
+      "correct": true
+    }
+  },
+  {
+    "frame": 345,
+    "raw": {
+      "text": "6الف52560",
+      "confidence": 0.5856239667960575,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87235",
+      "confidence": 0.9389880374073982,
+      "correct": false
+    }
+  },
+  {
+    "frame": 348,
+    "raw": {
+      "text": "6الف52645",
+      "confidence": 0.5264811090060643,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9436757937073708,
+      "correct": true
+    }
+  },
+  {
+    "frame": 351,
+    "raw": {
+      "text": "6الف57665",
+      "confidence": 0.577534807579858,
+      "correct": false
+    }
+  },
+  {
+    "frame": 354,
+    "raw": {
+      "text": "6ط452040",
+      "confidence": 0.7028019018471241,
+      "correct": false
+    }
+  },
+  {
+    "frame": 357,
+    "raw": {
+      "text": "6ط52040",
+      "confidence": 0.5599134606974465,
+      "correct": false
+    },
+    "prepared": {
+      "text": "5م87245",
+      "confidence": 0.8296188030924115,
+      "correct": false
+    }
+  },
+  {
+    "frame": 363,
+    "raw": {
+      "text": "56م82545",
+      "confidence": 0.5531858541071415,
+      "correct": false
+    }
+  },
+  {
+    "frame": 369,
+    "raw": {
+      "text": "56ع8530",
+      "confidence": 0.5283961083207812,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9827857464551926,
+      "correct": true
+    }
+  },
+  {
+    "frame": 372,
+    "raw": {
+      "text": "56ع52645",
+      "confidence": 0.6304526925086975,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9900488257408142,
+      "correct": true
+    }
+  },
+  {
+    "frame": 375,
+    "raw": {
+      "text": "5م83035",
+      "confidence": 0.6338252552918026,
+      "correct": false
+    },
+    "prepared": {
+      "text": "5م87235",
+      "confidence": 0.9343017680304391,
+      "correct": false
+    }
+  },
+  {
+    "frame": 378,
+    "raw": {
+      "text": "96م52040",
+      "confidence": 0.6164990365505219,
+      "correct": false
+    },
+    "prepared": {
+      "text": "5م87235",
+      "confidence": 0.8834685172353473,
+      "correct": false
+    }
+  },
+  {
+    "frame": 381,
+    "raw": {
+      "text": "6م52645",
+      "confidence": 0.5275062918663025,
+      "correct": false
+    },
+    "prepared": {
+      "text": "5م87245",
+      "confidence": 0.9904236708368573,
+      "correct": false
+    }
+  },
+  {
+    "frame": 384,
+    "raw": {
+      "text": "6م02660",
+      "confidence": 0.6167741928781781,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9639217182993889,
+      "correct": true
+    }
+  },
+  {
+    "frame": 387,
+    "raw": {
+      "text": "56م8746",
+      "confidence": 0.6750393211841583,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9360387325286865,
+      "correct": true
+    }
+  },
+  {
+    "frame": 390,
+    "raw": {
+      "text": "6م8260",
+      "confidence": 0.5789282123247782,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9879504814743996,
+      "correct": true
+    }
+  },
+  {
+    "frame": 393,
+    "raw": {
+      "text": "6م52565",
+      "confidence": 0.6284454933234623,
+      "correct": false
+    }
+  },
+  {
+    "frame": 396,
+    "raw": {
+      "text": "6م87660",
+      "confidence": 0.6219486381326403,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9623730704188347,
+      "correct": true
+    }
+  },
+  {
+    "frame": 399,
+    "raw": {
+      "text": "6م8700",
+      "confidence": 0.7882782618204752,
+      "correct": false
+    }
+  },
+  {
+    "frame": 402,
+    "raw": {
+      "text": "6م87030",
+      "confidence": 0.7142687652792249,
+      "correct": false
+    },
+    "prepared": {
+      "text": "58م87245",
+      "confidence": 0.9508340731263161,
+      "correct": true
+    }
+  },
+  {
+    "frame": 405,
+    "raw": {
+      "text": "6م87060",
+      "confidence": 0.6093324656997409,
+      "correct": false
+    }
+  }
+]

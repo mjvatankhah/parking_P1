@@ -1,0 +1,134 @@
+[
+  {
+    "event_id": 101,
+    "size": [
+      76,
+      20
+    ],
+    "outputs": {
+      "current": {
+        "text": "83و63745",
+        "confidence": 0.9672220125794411
+      },
+      "publisher": {
+        "text": "78ل63725",
+        "confidence": 0.7831628769636154
+      },
+      "clahe": {
+        "text": "83ل63745",
+        "confidence": 0.7843281365931034
+      }
+    },
+    "ground_truth": null
+  },
+  {
+    "event_id": 100,
+    "size": [
+      68,
+      16
+    ],
+    "outputs": {
+      "current": {
+        "text": "13ه33345",
+        "confidence": 0.9554443284869194
+      },
+      "publisher": {
+        "text": "13ه33345",
+        "confidence": 0.9353371039032936
+      },
+      "clahe": {
+        "text": "13ه33345",
+        "confidence": 0.9157787039875984
+      }
+    },
+    "ground_truth": null
+  },
+  {
+    "event_id": 99,
+    "size": [
+      77,
+      21
+    ],
+    "outputs": {
+      "current": {
+        "text": "58م87335",
+        "confidence": 0.9591678082942963
+      },
+      "publisher": {
+        "text": "58م87235",
+        "confidence": 0.9746911227703094
+      },
+      "clahe": {
+        "text": "58م87335",
+        "confidence": 0.8851645588874817
+      }
+    },
+    "ground_truth": null
+  },
+  {
+    "event_id": 98,
+    "size": [
+      71,
+      14
+    ],
+    "outputs": {
+      "current": {
+        "text": "81ط79545",
+        "confidence": 0.980460949242115
+      },
+      "publisher": {
+        "text": "81ط79545",
+        "confidence": 0.9745070189237595
+      },
+      "clahe": {
+        "text": "81ط79545",
+        "confidence": 0.9729603230953217
+      }
+    },
+    "ground_truth": null
+  },
+  {
+    "event_id": 97,
+    "size": [
+      77,
+      21
+    ],
+    "outputs": {
+      "current": {
+        "text": "12ه33335",
+        "confidence": 0.8762486129999161
+      },
+      "publisher": {
+        "text": "12ه34345",
+        "confidence": 0.8886169865727425
+      },
+      "clahe": {
+        "text": "12ه34345",
+        "confidence": 0.8899365738034248
+      }
+    },
+    "ground_truth": null
+  },
+  {
+    "event_id": 95,
+    "size": [
+      80,
+      22
+    ],
+    "outputs": {
+      "current": {
+        "text": "83و63745",
+        "confidence": 0.9717173427343369
+      },
+      "publisher": {
+        "text": "83و63745",
+        "confidence": 0.9638322964310646
+      },
+      "clahe": {
+        "text": "83و63745",
+        "confidence": 0.9440518543124199
+      }
+    },
+    "ground_truth": null
+  }
+]

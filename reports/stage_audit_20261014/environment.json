@@ -1,0 +1,23 @@
+{
+  "cpu_count": 4,
+  "opencv_threads": 4,
+  "ort_version": "1.29.0",
+  "opencv_version": "5.0.0",
+  "ocr_shape": [
+    "batch",
+    1,
+    32,
+    128
+  ],
+  "ocr_output_shape": [
+    "batch",
+    31,
+    33
+  ],
+  "ocr_labels": 32,
+  "hashes": {
+    "/home/MJR/parking_P1/src/computer_vision_v2/ocr_worker/models/plate_yolo.onnx": "a54e475c402e6036bb5c70f1a6ff75179e76098a5c8039bb5d148c0b6421f5c6",
+    "/home/MJR/parking_P1/src/computer_vision_v2/ocr_worker/models/ocr_crnn.onnx": "45f8c45f29eb1ee91f6274cb8d9c328da1a2050ea7d8596bae61f4a6b9f9fb1e",
+    "/home/MJR/parking_P1/src/computer_vision_v2/ocr_worker/models/ocr_crnn.labels.json": "8a3082edb92cbac729d27f84c4c11909e34174c277cb8aa2c3a8a646d5651c45"
+  }
+}

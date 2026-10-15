@@ -1,5 +1,4 @@
 import unittest
-import cv2
 from unittest.mock import Mock, patch
 import numpy as np
 from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates, Candidate
@@ -80,28 +79,6 @@ class CandidateTests(unittest.TestCase):
             self.assertEqual(result['recognition_status'],status)
             self.assertEqual([r['frame_idx'] for r in result['readings']],[0,1,2,3,4])
             if status!='read':self.assertIsNone(result['plate_text'])
-
-    def test_ocr_prefers_sharp_prepared_text_over_detector_and_geometry_scores(self):
-        reader = PlateReader.__new__(PlateReader)
-        reader.labels = ['م']
-        reader.ocr = Mock()
-        reader.ocr_input = 'input'
-        reader.ocr.run.return_value = [None]
-        reader._prep_ocr = Mock(return_value=None)
-        reader._ctc_decode = Mock(return_value=('58م87245', .95))
-        sharp = np.full((32, 128, 3), 220, dtype=np.uint8)
-        cv2.putText(sharp, '123456', (4, 24), cv2.FONT_HERSHEY_SIMPLEX,
-                    .6, (30, 30, 30), 1, cv2.LINE_AA)
-        blurry = cv2.GaussianBlur(sharp, (9, 9), 2)
-        # Raw crops and old ranking favor the blurry prepared images.
-        candidates = [Candidate(sharp, i * .1, i, .99, 1.,
-                                prepared=PreparedPlate(blurry, 1.)) for i in range(5)]
-        candidates.append(Candidate(blurry, .5, 5, .4, .1,
-                                    prepared=PreparedPlate(sharp, .1)))
-        result = reader.recognize_candidates(candidates)
-        self.assertEqual([r['frame_idx'] for r in result['readings']], [5, 0, 1, 2, 3])
-        self.assertEqual(reader.ocr.run.call_count, 5)
-        self.assertIs(reader._prep_ocr.call_args_list[0].args[0], sharp)
 
     def test_failed_geometry_does_not_run_ocr_and_keeps_review_image(self):
         reader=PlateReader.__new__(PlateReader)

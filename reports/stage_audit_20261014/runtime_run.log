@@ -1,0 +1,6 @@
+WARNING:root:Failed to create openvino_telemetry file. Please allow write access to the following directory: /home/MJR
+WARNING:root:Could not create directory for storing client ID. No data will be sent.
+[0;93m2026-10-14 16:07:29.168539689 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+compiled
+{'frame': 300, 'max_abs_difference': 0.00189208984375, 'ms': {'ort': [3338.526750998426, 2960.719049002364, 3051.9076009986748], 'openvino': [4482.141546999628, 2967.3108819988556, 3776.0550120001426]}, 'median_ms': {'ort': 3051.9076009986748, 'openvino': 3776.0550120001426}, 'max_score': {'ort': 0.7330124378204346, 'openvino': 0.7330120205879211}}
+{'frame': 348, 'max_abs_difference': 0.00067138671875, 'ms': {'ort': [2860.418699998263, 2149.856992000423, 1494.5030529997894], 'openvino': [2471.603989997675, 2219.9984619983297, 1866.934940997453]}, 'median_ms': {'ort': 2149.856992000423, 'openvino': 2219.9984619983297}, 'max_score': {'ort': 0.8457010984420776, 'openvino': 0.8457010388374329}}
