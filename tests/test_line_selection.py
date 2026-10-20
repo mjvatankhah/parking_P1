@@ -20,6 +20,44 @@ class LineSelectionTests(unittest.TestCase):
         selection.click((100, 100))
         return selection
 
+    def test_skip_roi_and_save(self):
+        selection = Selection(200, 200)
+        selection.confirm()
+        self.assertEqual(selection.stage, Stage.LINE)
+        selection.click((40, 100))
+        selection.click((100, 100))
+        selection.confirm()
+        selection.click((70, 50))
+        self.assertIsNone(selection.geometry()['roi'])
+        camera = dict(id='cam', source='video.mp4', type='video', dir='entry_exit')
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'cameras.json'
+            path.write_text(json.dumps(dict(cameras=[dict(camera, roi=[[0, 0], [1, 0], [1, 1]])])))
+            save_geometry(path, camera, selection)
+            saved = json.loads(path.read_text())['cameras'][0]
+            self.assertIsNone(saved['roi'])
+            self.assertEqual(saved['line'], [[.2, .5], [.5, .5]])
+
+    def test_invalid_roi_still_rejected(self):
+        for points in ([(10, 10)], [(10, 10), (20, 20)],
+                       [(10, 10), (20, 20), (30, 30)]):
+            with self.subTest(points=points):
+                selection = Selection(200, 200)
+                for point in points:
+                    selection.click(point)
+                with self.assertRaises(ValueError):
+                    selection.confirm()
+                self.assertEqual(selection.stage, Stage.ROI)
+
+    def test_selected_roi_still_restricts_line(self):
+        selection = Selection(200, 200)
+        for point in ((20, 20), (100, 20), (100, 100), (20, 100)):
+            selection.click(point)
+        selection.confirm()
+        with self.assertRaises(ValueError):
+            selection.click((150, 150))
+        self.assertEqual(selection.line, [])
+
     def test_straight_line_save_advances_to_side_without_consuming_point(self):
         selection = self.selection()
         self.assertEqual(selection.stage, Stage.LINE)

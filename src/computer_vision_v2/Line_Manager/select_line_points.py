@@ -43,7 +43,7 @@ class Selection:
         elif self.stage == Stage.LINE:
             if self.line and point == self.line[-1]:
                 raise ValueError('Choose a different endpoint.')
-            if cv2.pointPolygonTest(np.asarray(self.roi, np.float32), point, False) < 0:
+            if self.roi and cv2.pointPolygonTest(np.asarray(self.roi, np.float32), point, False) < 0:
                 raise ValueError('Reference line must be inside ROI.')
             self.line.append(point)
             if len(self.line) == 3:
@@ -53,7 +53,8 @@ class Selection:
 
     def confirm(self):
         if self.stage == Stage.ROI:
-            if len(self.roi) < 3 or cv2.contourArea(np.asarray(self.roi, np.float32)) <= 0:
+            if self.roi and (len(self.roi) < 3 or
+                             cv2.contourArea(np.asarray(self.roi, np.float32)) <= 0):
                 raise ValueError('Select an ROI with at least three corners.')
             self.stage = Stage.LINE
         elif self.stage == Stage.LINE:
@@ -89,7 +90,8 @@ class Selection:
     def geometry(self):
         if self.stage != Stage.SIDE or self.inside_point is None:
             raise ValueError('Select the parking side before saving.')
-        return dict(roi=self.normalize(self.roi), line=self.normalize(self.line),
+        return dict(roi=self.normalize(self.roi) if self.roi else None,
+                    line=self.normalize(self.line),
                     inside_point=self.normalize([self.inside_point])[0],
                     coordinate_space='normalized')
 
@@ -130,7 +132,7 @@ def draw_frame(original, selection, cursor, message='', timestamp=None):
                         color, 3, cv2.LINE_AA, tipLength=.35)
         cv2.circle(frame, target, 5, color, 1, cv2.LINE_AA)
     instructions = {
-        Stage.ROI: 'ROI: click corners, Enter / S to confirm',
+        Stage.ROI: 'ROI (optional): click corners; Enter / S: confirm or skip if empty',
         Stage.LINE: 'Line: 2 points + S to confirm, or click a 3rd point for L',
         Stage.SIDE: f'Click {"OUTSIDE" if selection.outside else "INSIDE"} parking; I/O: change side; S: save',
     }
