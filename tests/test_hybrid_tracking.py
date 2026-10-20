@@ -28,7 +28,9 @@ def scene(dx=0, dy=0):
 class HybridTrackingTests(unittest.TestCase):
     def make_tracker(self, interval=3):
         with patch('computer_vision_v2.tracking.tracker.YOLO'):
-            tracker = CameraTracker('cam', 'unused', interval)
+            # These motion fixtures run at 25 FPS; refresh after 120 ms.
+            tracker = CameraTracker('cam', 'unused', interval,
+                                    detection_period=interval / 25)
         return tracker
 
     def test_schedule_motion_and_same_id_across_detector_refresh(self):
@@ -119,7 +121,7 @@ class HybridTrackingTests(unittest.TestCase):
         self.assertEqual(tracker.flow_fallbacks, 1)
 
     def test_gap_and_resolution_change_force_detection(self):
-        for index, ts, image in [(4, .04, scene()), (2, 2, scene()),
+        for index, ts, image in [(1, .04, scene()), (2, 0, scene()), (2, 2, scene()),
                                  (2, .04, cv2.resize(scene(), (120, 90)))]:
             with self.subTest(index=index, ts=ts, shape=image.shape):
                 tracker = self.make_tracker()
@@ -127,6 +129,34 @@ class HybridTrackingTests(unittest.TestCase):
                     tracker.process(1, 0, scene())
                     tracker.process(index, ts, image)
                 self.assertEqual(detect.call_count, 2)
+
+    def test_forward_frame_skip_uses_flow_before_time_deadline(self):
+        tracker = self.make_tracker()
+        with patch.object(tracker, '_detect', return_value=[Detection(7, (50,40,120,100),2,.9)]) as detect:
+            tracker.process(1, 0, scene())
+            frame = tracker.process(4, .04, scene(dx=3))
+        self.assertEqual(detect.call_count, 1)
+        self.assertTrue(frame.detections[0].is_predicted)
+
+    def test_default_refresh_is_time_based(self):
+        with patch('computer_vision_v2.tracking.tracker.YOLO'):
+            tracker = CameraTracker('cam', 'unused')
+        with patch.object(tracker, '_detect', return_value=[]) as detect:
+            for index, ts in [(1,0.), (4,.04), (10,.1), (16,.15), (20,.199)]:
+                tracker.process(index, ts, scene())
+            self.assertEqual(detect.call_count, 1)
+            tracker.process(21,.2,scene())
+            self.assertEqual(detect.call_count, 2)
+
+    def test_fast_motion_still_emits_entry(self):
+        tracker = self.make_tracker()
+        line = LineDetector('cam', line=((0,120),(240,120)), direction='entry')
+        boxes = [[Detection(7,(50,40,120,100),2,.9)],
+                 [Detection(7,(50,90,120,150),2,.9)]]
+        with patch.object(tracker, '_detect', side_effect=boxes) as detect:
+            self.assertEqual(line.update(tracker.process(1,0,scene())), [])
+            events = line.update(tracker.process(2,.04,scene(dy=50)))
+        self.assertEqual([e['direction'] for e in events], ['entry'])
 
     def test_empty_scene_keeps_periodic_detection_for_new_arrivals(self):
         tracker = self.make_tracker()

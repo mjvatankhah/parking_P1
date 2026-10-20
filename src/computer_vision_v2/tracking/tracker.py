@@ -1,4 +1,5 @@
 from ultralytics import YOLO
+import math
 import cv2
 import numpy as np
 
@@ -10,9 +11,13 @@ VEHICLE_CLASSES = [0, 2]
 
 
 class CameraTracker:
-    def __init__(self, camera_id, model_path, detection_interval=3, roi=None):
+    def __init__(self, camera_id, model_path, detection_interval=3, roi=None, *,
+                 detection_period=0.2, max_tracking_gap=0.5):
         if isinstance(detection_interval, bool) or not isinstance(detection_interval, int) or detection_interval < 1:
             raise ValueError("detection_interval must be a positive integer")
+        if (not math.isfinite(detection_period) or detection_period <= 0
+                or not math.isfinite(max_tracking_gap) or max_tracking_gap <= 0):
+            raise ValueError("Tracking time limits must be finite and positive")
         self.camera_id = camera_id
         self.roi = None
         if roi is not None:
@@ -23,8 +28,10 @@ class CameraTracker:
         # Keep the deployed backend/size unchanged for this tracking change.
         self.model = YOLO(model_path, task="detect")
         self.detection_interval = detection_interval
+        self.detection_period = detection_period
+        self.max_tracking_gap = max_tracking_gap
         self.flow = OpticalFlow()
-        self._since_detection = detection_interval
+        self._last_detection_ts = None
         self._last_idx = None
         self._last_ts = None
         self.yolo_calls = 0
@@ -61,11 +68,17 @@ class CameraTracker:
             mask = np.zeros((rh,rw), np.uint8)
             cv2.fillPoly(mask, [polygon-[offset_x,offset_y]], 255)
             image[mask==0] = 0
-        # LK requires adjacent images. Re-detect after a discontinuity or long outage.
+        # RTSP may skip captured frame numbers while retaining a short time gap.
+        # Allow LK to assess those pairs; reset on backwards input or long gaps.
         discontinuity = self._last_idx is not None and (
-            frame_idx != self._last_idx + 1 or ts <= self._last_ts or ts - self._last_ts > 1.0
+            frame_idx <= self._last_idx or ts <= self._last_ts
+            or ts - self._last_ts > self.max_tracking_gap
         )
-        detect = self._since_detection >= self.detection_interval - 1 or discontinuity
+        # interval=1 remains the explicit detect-every-frame mode. Otherwise
+        # schedule by source timestamps, not frame count or wall-clock replay speed.
+        due = (self._last_detection_ts is None
+               or ts - self._last_detection_ts + 1e-9 >= self.detection_period)
+        detect = self.detection_interval == 1 or due or discontinuity
         detections = None
         if not detect:
             detections = self.flow.advance(image)
@@ -74,11 +87,10 @@ class CameraTracker:
                 detect = True
         if detect:
             detections = self._detect(image)
-            self._since_detection = 0
+            self._last_detection_ts = ts
             if self.detection_interval > 1:
                 self.flow.seed(image, detections)
         else:
-            self._since_detection += 1
             self.flow_frames += 1
         self._last_idx, self._last_ts = frame_idx, ts
         output = []
