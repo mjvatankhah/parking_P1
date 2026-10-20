@@ -84,6 +84,7 @@ class PlateReader:
 
         self.ocr_input = self.ocr.get_inputs()[0].name
         ocr_shape = self.ocr.get_inputs()[0].shape
+        self.ocr_batch_size = ocr_shape[0] if isinstance(ocr_shape[0], int) else None
         
         self.ocr_h = ocr_shape[2] if isinstance(ocr_shape[2], int) else 32
         self.ocr_w = ocr_shape[3] if isinstance(ocr_shape[3], int) else 128
@@ -169,35 +170,113 @@ class PlateReader:
         context = vehicle_crop[max(0,y1-pad):min(h,y2+pad), max(0,x1-pad):min(w,x2+pad)].copy()
         return plate_crop, float(scores[best]), context
 
-    def recognize_candidates(self, candidates):
-        readings, images = [], []
-        prepared = []
-        for candidate in candidates:
-            result = candidate.prepared if candidate.prepared is not None else prepare_plate(
-                candidate.context if candidate.context is not None else candidate.crop)
-            if result is not None:
-                prepared.append((candidate, result))
-        prepared.sort(key=lambda pair: pair[0].confidence * pair[1].quality, reverse=True)
-        for candidate, result in prepared:
-            image = result.image
-            text, confidence = self._ctc_decode(self.ocr.run(None, {self.ocr_input:self._prep_ocr(image)})[0])
-            letter = text[2:-5]
-            valid = (len(text) >= 8 and text[:2].isdigit() and text[-5:].isdigit()
-                     and letter in self.labels and not letter.isdigit())
-            readings.append({'text':text, 'confidence':confidence, 'valid':valid,
-                             'frame_idx':candidate.frame_idx})
-            images.append(image)
-            if len(readings) == 5:
+    @staticmethod
+    def _select_reserved(pairs, groups, score):
+        """Three quality choices plus two time-separated recent choices."""
+        quality_ids, recent_ids = set(groups['quality']), set(groups['recent'])
+        best = sorted((p for p in pairs if p[0].frame_idx in quality_ids),
+                      key=score, reverse=True)
+        selected = best[:3]
+        seen = {c.frame_idx for c, _ in selected}
+        recent = sorted((p for p in pairs if p[0].frame_idx in recent_ids
+                         and p[0].frame_idx not in seen), key=lambda p: p[0].ts)
+        # Endpoints maximize the time separation of the two recent choices.
+        extra = [recent[0]] if recent else []
+        if len(recent) > 1:
+            extra.append(recent[-1])
+        selected.extend(extra)
+        seen.update(c.frame_idx for c, _ in extra)
+        # Shared frames count once; fill missing slots when evidence permits.
+        for pair in best[3:] + recent:
+            if len(selected) >= 5:
                 break
+            if pair[0].frame_idx not in seen:
+                selected.append(pair)
+                seen.add(pair[0].frame_idx)
+        return selected
+
+    def _recognize_batch(self, images):
+        """Decode one group; padding for fixed-size models never creates votes."""
+        if not images:
+            return []
+        tensors = [self._prep_ocr(image) for image in images]
+        batch_size = self.ocr_batch_size or len(tensors)
+        decoded = []
+        for start in range(0, len(tensors), batch_size):
+            chunk = tensors[start:start + batch_size]
+            count = len(chunk)
+            padded = chunk + [chunk[-1]] * (batch_size - count)
+            logits = self.ocr.run(None, {
+                self.ocr_input: np.concatenate(padded, axis=0),
+            })[0]
+            if logits.ndim != 3 or logits.shape[0] != batch_size:
+                raise ValueError(f'Expected batch-first OCR logits, got {logits.shape}')
+            decoded.extend(self._ctc_decode(logits[i]) for i in range(count))
+        return decoded
+
+    def recognize_candidates(self, candidates):
+        """Read up to five raw and five geometry images in separate batches.
+
+        Each selected image casts its own vote if its format is valid and its
+        OCR confidence reaches 0.8, including two versions of the same frame.
+        """
+        prepared = []
+        by_frame = {}
+        for candidate in candidates:
+            if candidate.frame_idx in by_frame:
+                continue
+            by_frame[candidate.frame_idx] = candidate
+            result = candidate.prepared
+            if result is None:
+                try:
+                    result = prepare_plate(candidate.context if candidate.context is not None else candidate.crop)
+                except Exception:
+                    logging.getLogger(__name__).exception('Plate geometry failed during recognition')
+            prepared.append((candidate, result))
+        geometric = [pair for pair in prepared if pair[1] is not None]
+        groups = getattr(candidates, 'selection_groups', None)
+        if groups is not None:
+            geometry = self._select_reserved(
+                geometric, groups['geometry'], lambda pair: pair[0].confidence * pair[1].quality)
+            raw = self._select_reserved(prepared, groups['raw'], lambda pair: pair[0].quality)
+        else:
+            # Standalone callers and the single-candidate fallback have no reserves.
+            geometry = sorted(geometric, key=lambda pair: pair[0].confidence * pair[1].quality,
+                              reverse=True)[:5]
+            raw = sorted(prepared, key=lambda pair: pair[0].quality, reverse=True)[:5]
+        readings, images = [], []
+        for source, selected in (('raw', raw), ('geometry', geometry)):
+            batch_images = [c.crop if source == 'raw' else result.image
+                            for c, result in selected]
+            decoded = self._recognize_batch(batch_images)
+            for (candidate, _), image, (text, confidence) in zip(selected, batch_images, decoded):
+                letter = text[2:-5]
+                valid = (len(text) >= 8 and text[:2].isdigit() and text[-5:].isdigit()
+                         and letter in self.labels and not letter.isdigit())
+                reading = dict(text=text, confidence=confidence, valid=valid, source=source)
+                reserve_groups = groups[source] if groups is not None else {}
+                readings.append(dict(
+                    reading, frame_idx=candidate.frame_idx, conflict=False,
+                    reserves=[name for name, frames in reserve_groups.items()
+                              if candidate.frame_idx in frames],
+                    alternatives=[reading.copy()],
+                ))
+                images.append(image)
         votes = Counter(r['text'] for r in readings if r['valid'] and r['confidence'] >= .8)
-        winner, count = votes.most_common(1)[0] if votes else (None,0)
-        status = 'read' if count >= 2 else 'uncertain' if any(r['text'] for r in readings) else 'unread'
-        matching = [r['confidence'] for r in readings if r['text']==winner]
-        confidence = sum(matching)/len(matching) if matching else 0.
+        ranked = votes.most_common()
+        winner, count = ranked[0] if ranked else (None, 0)
+        runner_up = ranked[1][1] if len(ranked) > 1 else 0
+        status = ('read' if count >= 2 and count > runner_up else
+                  'uncertain' if any(r['text'] for r in readings) else 'unread')
+        matching = [r['confidence'] for r in readings
+                    if r['valid'] and r['confidence'] >= .8 and r['text'] == winner]
+        confidence = sum(matching) / len(matching) if matching else 0.
         fallback_image = images[0] if images else candidates[0].crop if candidates else None
-        image = next((im for im,r in zip(images,readings) if r['text']==winner), fallback_image)
-        return {'plate_text':winner if status=='read' else None, 'recognition_status':status,
-                'confidence':confidence, 'readings':readings, 'image':image}
+        image = next((im for im,r in zip(images,readings)
+                      if r['valid'] and r['confidence'] >= .8 and r['text'] == winner), fallback_image)
+        return dict(plate_text=winner if status == 'read' else None,
+                    recognition_status=status, confidence=confidence,
+                    readings=readings, image=image)
 
         # ---------- OCR -------
     def _prep_ocr(self, plate_crop):

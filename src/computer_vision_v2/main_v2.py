@@ -15,7 +15,7 @@ from computer_vision_v2.preview import PreviewPublisher
 from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates
 from computer_vision_v2.Line_Manager.line_detector import LineDetectorManager
 from computer_vision_v2.inference.plate_ocr import PlateReader
-from computer_vision_v2.workers.workers import observation_worker
+from computer_vision_v2.workers.workers import observation_worker, plate_detection_worker
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.database.database_worker import database_worker
 
@@ -31,7 +31,7 @@ class Pipeline:
         self.camera_manager = CameraManager(self.config) 
         self.lines = LineDetectorManager(self.config) 
         self.plate_reader = PlateReader() 
-        self.candidates = PlateCandidates(self.plate_reader, **config.get('plate_sampling', {}))
+        self.candidates = PlateCandidates(self.plate_reader, **{'deferred': True, **config.get('plate_sampling', {})})
 
         self.frame_queue = queue.Queue(maxsize=4)
         self.ocr_queue = queue.Queue(maxsize=16)
@@ -42,6 +42,7 @@ class Pipeline:
 
         self._worker_stages = []
         self._dispatch_thread = None
+        self._detection_thread = None
         
     # ساخت و شروع بکارانواع ورکر
     def _start_workers(self, target, args):
@@ -62,6 +63,8 @@ class Pipeline:
             (self.ocr_queue, self._start_workers(ocr_worker, (self.ocr_queue, self.db_queue, self.plate_reader, alive))),
             (self.db_queue, self._start_workers(database_worker, (self.db_queue, alive))),
         ]
+        self._detection_thread = self._start_workers(
+            plate_detection_worker, (self.candidates, self.ocr_queue, alive))
         self.camera_manager.start_all()
         if not self.camera_manager.streams:
             self.stop()
@@ -103,6 +106,15 @@ class Pipeline:
 
         self.camera_manager.stop_all()
         self.preview.stop()
+
+        # Stop the added detector before shutting down its downstream OCR worker.
+        detection_thread = getattr(self, '_detection_thread', None)
+        if detection_thread is not None:
+            detection_thread.join(timeout=30)
+            if detection_thread.is_alive():
+                logger.error('Plate detector did not stop; downstream workers remain available')
+                return
+            self._detection_thread = None
 
         # هر مرحله تمام شود، سپس مرحله بعد سیگنال پایان بگیرد.
         still_running = []

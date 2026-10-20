@@ -64,43 +64,78 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual([c.frame_idx for c in state.candidates],[3])
         self.assertEqual(state.fallback.frame_idx,0)
 
-    def test_vote_states_include_nearby_frames_and_limit_to_five(self):
+    def test_vote_states_limit_each_variant_to_five_and_reject_ties(self):
         reader=PlateReader.__new__(PlateReader)
         reader.labels=['م'];reader.ocr=Mock();reader.ocr_input='input'
-        reader.ocr.run.return_value=[None]
-        reader._prep_ocr=Mock(return_value=None)
+        reader.ocr_batch_size = 1
+        reader.ocr.run.return_value=[np.zeros((1, 1, 1))]
+        reader._prep_ocr=Mock(return_value=np.zeros((1, 1, 1, 1)))
         candidates=[Candidate(self.crop,t,i,.9,1.) for i,t in enumerate([0,.1,.2,.3,.4,.5])]
         for outputs,status in [([('58م87245',.95)]*5,'read'),
                                ([('58م87245',.95),('58م87246',.95),('',0),('',0),('',0)],'uncertain'),
                                ([('',0)]*5,'unread')]:
-            reader._ctc_decode=Mock(side_effect=outputs)
+            reader._ctc_decode=Mock(side_effect=outputs * 2)
             with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',return_value=PreparedPlate(self.crop,1.)):
                 result=reader.recognize_candidates(candidates)
             self.assertEqual(result['recognition_status'],status)
-            self.assertEqual([r['frame_idx'] for r in result['readings']],[0,1,2,3,4])
+            self.assertEqual([r['frame_idx'] for r in result['readings']],[0,1,2,3,4] * 2)
             if status!='read':self.assertIsNone(result['plate_text'])
 
-    def test_failed_geometry_does_not_run_ocr_and_keeps_review_image(self):
+    def test_failed_geometry_reads_raw_and_keeps_review_image(self):
         reader=PlateReader.__new__(PlateReader)
-        reader.ocr=Mock()
+        reader.ocr=Mock();reader.labels=['X'];reader.ocr_input='input'
+        reader.ocr_batch_size=1
+        reader.ocr.run.return_value=[np.zeros((1, 1, 1))]
+        reader._prep_ocr=Mock(return_value=np.zeros((1, 1, 1, 1)))
+        reader._ctc_decode=Mock(return_value=('12X34567',.99))
         with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',return_value=None):
             result=reader.recognize_candidates([Candidate(self.crop,0.,1,.9,1.)])
-        reader.ocr.run.assert_not_called()
-        self.assertEqual(result['recognition_status'],'unread')
+        reader.ocr.run.assert_called_once()
+        self.assertEqual(result['recognition_status'],'uncertain')
         self.assertIs(result['image'],self.crop)
 
     def test_one_clear_ocr_reading_is_still_uncertain(self):
         reader=PlateReader.__new__(PlateReader)
         reader.labels=['م'];reader.ocr=Mock();reader.ocr_input='input'
-        reader.ocr.run.return_value=[None]
-        reader._prep_ocr=Mock(return_value=None)
+        reader.ocr_batch_size = 1
+        reader.ocr.run.return_value=[np.zeros((1, 1, 1))]
+        reader._prep_ocr=Mock(return_value=np.zeros((1, 1, 1, 1)))
         reader._ctc_decode=Mock(return_value=('58م87245',.99))
         with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',
-                   return_value=PreparedPlate(self.crop,1.)):
+                   return_value=None):
             result=reader.recognize_candidates([Candidate(self.crop,0.,1,.9,1.)])
         self.assertEqual(result['recognition_status'],'uncertain')
         self.assertEqual(result['readings'][0]['text'],'58م87245')
         self.assertIsNone(result['plate_text'])
+
+    def test_deferred_queue_is_bounded_and_processes_after_vehicle_leaves(self):
+        pool = PlateCandidates(self.reader, deferred=True, sample_capacity=4)
+        for i in range(10):
+            pool.observe(self.frame(i * .1), [self.crossing()] if i == 0 else [])
+        self.reader.detect_plate.assert_not_called()
+        pending = pool.tracks[('cam', 1)].pending
+        self.assertEqual(len(pending), 4)
+        self.assertEqual((pending[0].frame_idx, pending[-1].frame_idx), (0, 27))
+        self.assertEqual(pool.dropped_samples, 6)
+        self.assertEqual(pool.observe(self.frame(2., track=None)), [])
+        completed = []
+        for _ in range(4):
+            completed.extend(pool.process_pending())
+        self.assertEqual(len(completed), 1)
+        self.assertEqual(pool.pending_bytes, 0)
+        self.assertEqual(self.reader.detect_plate.call_count, 4)
+
+    def test_fixed_batch_padding_does_not_add_votes(self):
+        reader = PlateReader.__new__(PlateReader)
+        reader.ocr_batch_size = 4
+        reader.ocr_input = 'input'
+        reader.ocr = Mock()
+        reader.ocr.run.return_value = [np.zeros((4, 1, 1))]
+        reader._prep_ocr = Mock(return_value=np.zeros((1, 1, 1, 1)))
+        reader._ctc_decode = Mock(return_value=('12X34567', .99))
+        self.assertEqual(len(reader._recognize_batch([self.crop] * 5)), 5)
+        self.assertEqual(reader.ocr.run.call_count, 2)
+        self.assertEqual(reader._ctc_decode.call_count, 5)
 
     def test_crossing_collects_later_frames_until_vehicle_leaves(self):
         self.pool.observe(self.frame(0))
