@@ -2,6 +2,7 @@
 
 Only the newest frame per camera is retained. JPEG encoding and drawing run
 outside the pipeline thread; original images and detections are never modified.
+Preview images are produced only while a UI subscription is being renewed.
 """
 import hashlib
 import logging
@@ -10,18 +11,61 @@ from pathlib import Path
 import tempfile
 import threading
 import time
+from uuid import uuid4
 
 import cv2
 import numpy as np
 
 
 MAX_FRAME_AGE = 5.0
+PREVIEW_INTERVAL = 1.0 / 3.0
+VIEWER_TIMEOUT = 3.0
 
 
 def preview_path(camera_id, source):
     key = hashlib.sha256(f"{camera_id}\0{source}".encode()).hexdigest()
     user = str(os.getuid()) if hasattr(os, "getuid") else os.environ.get("USERNAME", "local")
     return Path(tempfile.gettempdir()) / f"kalpino-preview-{user}" / f"{key}.jpg"
+
+
+class PreviewSubscription:
+    """Expiring viewer request shared by the UI and a separate pipeline process."""
+
+    def __init__(self, path):
+        self.path = path.with_name(f"{path.stem}.viewer-{uuid4().hex}")
+        self._renewed_at = None
+
+    def renew(self):
+        now = time.monotonic()
+        if self._renewed_at is not None and now - self._renewed_at < 1.0:
+            return
+        try:
+            self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            self.path.touch()
+            self._renewed_at = now
+        except OSError:
+            logging.getLogger(__name__).warning("Could not request camera preview")
+
+    def close(self):
+        self._renewed_at = None
+        try:
+            self.path.unlink(missing_ok=True)
+        except OSError:
+            logging.getLogger(__name__).warning("Could not remove preview request")
+
+
+def _has_viewer(path):
+    now = time.time()
+    active = False
+    for request in path.parent.glob(f"{path.stem}.viewer-*"):
+        try:
+            if now - request.stat().st_mtime <= VIEWER_TIMEOUT:
+                active = True
+            else:
+                request.unlink(missing_ok=True)
+        except OSError:
+            continue
+    return active
 
 
 def annotate_frame(frame):
@@ -47,6 +91,7 @@ class PreviewPublisher:
     def __init__(self, cameras):
         self._paths = {c['id']: preview_path(c['id'], c['source']) for c in cameras}
         self._pending = {}
+        self._active = set()
         self._lock = threading.Lock()
         self._stop = threading.Event()
         self._thread = None
@@ -57,6 +102,8 @@ class PreviewPublisher:
 
     def publish(self, frame):
         with self._lock:
+            # Keep one unencoded frame even while hidden, so opening a viewer
+            # cannot race the producer or depend on another capture arriving.
             self._pending[frame.camera_id] = (frame, time.time())
 
     def stop(self):
@@ -68,6 +115,7 @@ class PreviewPublisher:
                 return
         with self._lock:
             self._pending.clear()
+            self._active.clear()
         for path in self._paths.values():
             try:
                 path.unlink(missing_ok=True)
@@ -75,10 +123,20 @@ class PreviewPublisher:
                 logging.getLogger(__name__).warning("Could not remove preview %s", path)
 
     def _run(self):
-        while not self._stop.wait(0.1):
+        while not self._stop.wait(PREVIEW_INTERVAL):
+            active = {camera_id for camera_id, path in self._paths.items()
+                      if _has_viewer(path)}
             with self._lock:
-                pending, self._pending = self._pending, {}
+                self._active = active
+                pending = {}
+                for camera_id, item in list(self._pending.items()):
+                    if time.time() - item[1] > MAX_FRAME_AGE:
+                        del self._pending[camera_id]
+                    elif camera_id in active:
+                        pending[camera_id] = self._pending.pop(camera_id)
             for camera_id, (frame, received_at) in pending.items():
+                if camera_id not in active:
+                    continue
                 try:
                     self._write(self._paths[camera_id], frame, received_at)
                 except Exception:

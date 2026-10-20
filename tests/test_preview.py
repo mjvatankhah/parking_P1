@@ -3,12 +3,15 @@ from pathlib import Path
 import tempfile
 import time
 import unittest
+import subprocess
+import sys
 from unittest.mock import Mock, patch
 
 import numpy as np
 
 from computer_vision_v2.preview import (
-    MAX_FRAME_AGE, PreviewPublisher, annotate_frame, preview_path, read_preview,
+    MAX_FRAME_AGE, PREVIEW_INTERVAL, PreviewPublisher, PreviewSubscription,
+    annotate_frame, preview_path, read_preview,
 )
 from computer_vision_v2.tracking.frame_info import Detection, TrackedFrame
 
@@ -61,6 +64,8 @@ class PreviewTests(unittest.TestCase):
             path = Path(directory) / 'preview.jpg'
             with patch('computer_vision_v2.preview.preview_path', return_value=path):
                 publisher = PreviewPublisher([{'id': 'camera', 'source': 'unused'}])
+            viewer = PreviewSubscription(path)
+            viewer.renew()
             for _ in range(100):
                 publisher.publish(self.frame)
             self.assertEqual(len(publisher._pending), 1)
@@ -71,9 +76,77 @@ class PreviewTests(unittest.TestCase):
                     time.sleep(.01)
                 self.assertIsNotNone(read_preview(path)[0])
             finally:
+                viewer.close()
                 publisher.stop()
             self.assertFalse(path.exists())
             self.assertFalse(publisher._thread.is_alive())
+
+    def test_viewer_open_close_reopen_uses_latest_frame_without_new_capture(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'preview.jpg'
+            with patch('computer_vision_v2.preview.preview_path', return_value=path):
+                publisher = PreviewPublisher([{'id': 'camera', 'source': 'unused'}])
+            viewer = PreviewSubscription(path)
+            publisher.start()
+            try:
+                publisher.publish(self.frame)
+                time.sleep(PREVIEW_INTERVAL * 2)
+                self.assertFalse(path.exists(), 'Hidden preview must not encode images')
+                viewer.renew()
+                deadline = time.monotonic() + 2
+                while not path.exists() and time.monotonic() < deadline:
+                    time.sleep(.01)
+                self.assertIsNotNone(read_preview(path)[0], 'Opening the viewer must show the available frame')
+                viewer.close()
+                time.sleep(PREVIEW_INTERVAL * 2)
+                version = read_preview(path)[1]
+                publisher.publish(self.frame)
+                time.sleep(PREVIEW_INTERVAL * 2)
+                self.assertEqual(read_preview(path)[1], version)
+                viewer.renew()
+                deadline = time.monotonic() + 2
+                while read_preview(path)[1] == version and time.monotonic() < deadline:
+                    time.sleep(.01)
+                self.assertNotEqual(read_preview(path)[1], version)
+            finally:
+                viewer.close()
+                publisher.stop()
+
+    def test_viewer_request_reaches_separate_publisher_process(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'preview.jpg'
+            code = '''
+import sys, time
+from pathlib import Path
+import numpy as np
+from computer_vision_v2.preview import PreviewPublisher
+from computer_vision_v2.tracking.frame_info import TrackedFrame
+p = PreviewPublisher([])
+p._paths = {'camera': Path(sys.argv[1])}
+p.start()
+try:
+    p.publish(TrackedFrame('camera', 1, 0, np.full((12, 22, 3), 128, np.uint8), []))
+    print('ready', flush=True)
+    sys.stdin.readline()
+finally:
+    p.stop()
+'''
+            child = subprocess.Popen([sys.executable, '-u', '-c', code, str(path)],
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+            viewer = PreviewSubscription(path)
+            try:
+                self.assertEqual(child.stdout.readline().strip(), 'ready')
+                viewer.renew()
+                deadline = time.monotonic() + 3
+                while not path.exists() and time.monotonic() < deadline:
+                    time.sleep(.01)
+                image, _ = read_preview(path)
+                self.assertIsNotNone(image)
+                self.assertEqual(image.shape, (12, 22, 3))
+            finally:
+                viewer.close()
+                child.communicate('\n', timeout=5)
+            self.assertEqual(child.returncode, 0)
 
 
 if __name__ == '__main__':

@@ -17,7 +17,9 @@ from reno.models.camera import Camera, STATUS_ONLINE, STATUS_OFFLINE
 from reno.ui import theme
 from reno.ui.theme import COLORS, FONT_SIZE, SPACING, rtl
 from reno.ui.components.common import Card, StatusDot
-from computer_vision_v2.preview import preview_path, read_preview
+from computer_vision_v2.preview import (
+    PREVIEW_INTERVAL, PreviewSubscription, preview_path, read_preview,
+)
 from reno.services.camera_service import camera_service
 
 
@@ -29,6 +31,7 @@ class CameraCard(Card):
         super().__init__(**kwargs)
         self.camera = camera
         self._preview_path = preview_path(camera.id, camera.source)
+        self._preview_subscription = PreviewSubscription(self._preview_path)
         self._version = None
         self._poll_event = None
         self._state = None
@@ -89,13 +92,14 @@ class CameraCard(Card):
         if self._poll_event is not None or self.parent is None:
             return
         self._apply_state("connecting")
-        self._poll_event = Clock.schedule_interval(self._update_frame, 1 / 10)
+        self._poll_event = Clock.schedule_interval(self._update_frame, PREVIEW_INTERVAL)
         self._update_frame(0)
 
     def stop_stream(self):
         if self._poll_event is not None:
             self._poll_event.cancel()
             self._poll_event = None
+        self._preview_subscription.close()
         self._version = None
         self._video_surface.opacity = 0
 
@@ -118,6 +122,7 @@ class CameraCard(Card):
         )
 
     def _update_frame(self, _dt):
+        self._preview_subscription.renew()
         frame, version = read_preview(self._preview_path, self._version)
         self._version = version
         if version is None:
