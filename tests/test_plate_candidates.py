@@ -125,6 +125,29 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(pool.pending_bytes, 0)
         self.assertEqual(self.reader.detect_plate.call_count, 4)
 
+    def test_default_queue_keeps_thirty_large_samples_without_byte_limit(self):
+        pool = PlateCandidates(self.reader, deferred=True)
+        image = np.zeros((1024, 1024, 3), dtype=np.uint8)
+        for i in range(30):
+            frame = TrackedFrame('cam', i, i * .1, image,
+                                 [Detection(1, (0, 0, 1024, 1024), 2, .9)])
+            pool.observe(frame)
+        state = pool.tracks[('cam', 1)]
+        self.assertEqual(len(state.pending), 30)
+        self.assertEqual(pool.dropped_samples, 0)
+        self.assertEqual(pool.pending_bytes, 30 * image.nbytes)
+        self.assertGreater(pool.pending_bytes, 64 * 1024 * 1024)
+        pool.observe(TrackedFrame('cam', 30, 3., image, frame.detections))
+        self.assertEqual(len(state.pending), 30)
+        self.assertEqual(pool.dropped_samples, 1)
+        self.assertEqual((state.pending[0].frame_idx, state.pending[-1].frame_idx), (0, 30))
+        self.assertEqual(pool.pending_bytes, 30 * image.nbytes)
+        self.reader.detect_plate.return_value = None
+        for _ in range(30):
+            pool.process_pending()
+        self.assertEqual(state.pending, [])
+        self.assertEqual(pool.pending_bytes, 0)
+
     def test_fixed_batch_padding_does_not_add_votes(self):
         reader = PlateReader.__new__(PlateReader)
         reader.ocr_batch_size = 4

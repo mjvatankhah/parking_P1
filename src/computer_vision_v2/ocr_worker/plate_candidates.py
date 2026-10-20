@@ -74,8 +74,7 @@ class CompletedPassage:
 class PlateCandidates:
     def __init__(self, reader, interval=0.1, capacity=6, near=0.09, stale=5.0,
                  exit_delay=0.75, reid_gap=0.5, reid_iou=0.35,
-                 deferred=False, vehicle_margin=0.2, sample_capacity=8,
-                 max_pending_bytes=64 * 1024 * 1024):
+                 deferred=False, vehicle_margin=0.2, sample_capacity=30):
         if (not all(math.isfinite(v) for v in (interval, near, stale, exit_delay, reid_gap, reid_iou))
                 or interval <= 0 or near < 0 or stale <= 0 or exit_delay <= 0
                 or reid_gap <= 0 or reid_gap > exit_delay or not 0 < reid_iou <= 1
@@ -83,11 +82,10 @@ class PlateCandidates:
             raise ValueError('Invalid candidate buffer limits')
         if (not math.isfinite(vehicle_margin) or not 0 <= vehicle_margin <= .3
                 or isinstance(sample_capacity, bool) or not isinstance(sample_capacity, int)
-                or sample_capacity < 2 or isinstance(max_pending_bytes, bool)
-                or not isinstance(max_pending_bytes, int) or max_pending_bytes < 1):
+                or sample_capacity < 2):
             raise ValueError('Invalid raw sample limits')
         self.deferred, self.vehicle_margin = deferred, vehicle_margin
-        self.sample_capacity, self.max_pending_bytes = sample_capacity, max_pending_bytes
+        self.sample_capacity = sample_capacity
         self.pending_bytes = 0
         self.dropped_samples = 0
         self._lock = threading.RLock()
@@ -192,10 +190,6 @@ class PlateCandidates:
             self._work_order.append(key)
         while len(state.pending) > self.sample_capacity:
             self._evict_sample(state)
-        while self.pending_bytes > self.max_pending_bytes:
-            largest = max((s for s in self.tracks.values() if s.pending),
-                          key=lambda s: sum(p.image.nbytes for p in s.pending))
-            self._evict_sample(largest)
         self._wake.notify_all()
 
     def _evict_sample(self, state):
