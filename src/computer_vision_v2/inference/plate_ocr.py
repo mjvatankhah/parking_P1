@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 from collections import Counter
 from .plate_geometry import prepare_plate
+from .hezar_ocr import HezarOCR
 
 
 import cv2 as cv
@@ -13,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_DIR = BASE_DIR / "ocr_worker" / "models"
 DEFAULT_DETECTOR = MODEL_DIR / "iranian_plate_yolo26n.onnx"
 DEFAULT_FALLBACK = MODEL_DIR / "plate_yolo_fallback.onnx"
-DEFAULT_OCR = MODEL_DIR / "ocr_crnn.onnx"
+DEFAULT_OCR_DIRECTORY = MODEL_DIR
 DEFAULT_LABELS = MODEL_DIR / "ocr_crnn.labels.json"
 # منطق پشت این کد بررسی شود
 def _session(path):
@@ -53,11 +54,13 @@ def _nms(boxes, scores, iou_thr=0.45):
     return keep
 
 class PlateReader:
-    def __init__(self, detector_path=DEFAULT_DETECTOR,
-                ocr_path=DEFAULT_OCR,
-                labels_path =DEFAULT_LABELS,
-                fallback_detector_path=DEFAULT_FALLBACK,
-                conf_thr=0.35
+    def __init__(
+        self,
+        detector_path=DEFAULT_DETECTOR,
+        ocr_model_directory=DEFAULT_OCR_DIRECTORY,
+        labels_path=DEFAULT_LABELS,
+        fallback_detector_path=DEFAULT_FALLBACK,
+        conf_thr=0.35,
     ):
         self.conf_thr = conf_thr
 
@@ -74,22 +77,10 @@ class PlateReader:
             self.detector = _session(fallback_detector_path)
             self._fallback_attempted = True
 
-        self.ocr = _session(ocr_path)
-        
-
+        self.ocr = HezarOCR(ocr_model_directory)
         self.det_input = self.detector.get_inputs()[0].name
         self.det_size = 640
-        
-        
-
-        self.ocr_input = self.ocr.get_inputs()[0].name
-        ocr_shape = self.ocr.get_inputs()[0].shape
-        self.ocr_batch_size = ocr_shape[0] if isinstance(ocr_shape[0], int) else None
-        
-        self.ocr_h = ocr_shape[2] if isinstance(ocr_shape[2], int) else 32
-        self.ocr_w = ocr_shape[3] if isinstance(ocr_shape[3], int) else 128
-        self.ocr_c = ocr_shape[1] if isinstance(ocr_shape[1], int) else 1
-
+        # Existing plate-format vocabulary, not Hezar's CTC class mapping.
         self.labels = self._load_labels(labels_path)
 
     @staticmethod
@@ -196,23 +187,10 @@ class PlateReader:
         return selected
 
     def _recognize_batch(self, images):
-        """Decode one group; padding for fixed-size models never creates votes."""
+        """Read crops through the configured OCR model boundary."""
         if not images:
             return []
-        tensors = [self._prep_ocr(image) for image in images]
-        batch_size = self.ocr_batch_size or len(tensors)
-        decoded = []
-        for start in range(0, len(tensors), batch_size):
-            chunk = tensors[start:start + batch_size]
-            count = len(chunk)
-            padded = chunk + [chunk[-1]] * (batch_size - count)
-            logits = self.ocr.run(None, {
-                self.ocr_input: np.concatenate(padded, axis=0),
-            })[0]
-            if logits.ndim != 3 or logits.shape[0] != batch_size:
-                raise ValueError(f'Expected batch-first OCR logits, got {logits.shape}')
-            decoded.extend(self._ctc_decode(logits[i]) for i in range(count))
-        return decoded
+        return self.ocr.recognize(images)
 
     def recognize_candidates(self, candidates):
         """Read up to five raw and five geometry images in separate batches.
@@ -278,52 +256,6 @@ class PlateReader:
                     recognition_status=status, confidence=confidence,
                     readings=readings, image=image)
 
-        # ---------- OCR -------
-    def _prep_ocr(self, plate_crop):
-        img = plate_crop
-        if self.ocr_c == 1:
-            img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-        img = cv.resize(img, (self.ocr_w, self.ocr_h))
-        img = img.astype(np.float32) / 255.0
-        
-        if self.ocr_c == 1:
-            img = img[None, None, :, :]
-        else:
-            img = img[:, :, ::-1].transpose(2, 0, 1)[None]
-        return np.ascontiguousarray(img, dtype=np.float32)
-
-    def _ctc_decode(self, logits):
-        arr = np.squeeze(logits)
-
-        if arr.ndim != 2:
-            return "", 0.0
-
-        exp = np.exp(arr - arr.max(axis=-1, keepdims=True))
-        probs = exp / exp.sum(axis=-1, keepdims=True)
-
-        ids = probs.argmax(axis=-1)
-        confs = probs.max(axis=-1)
-
-        chars = []
-        char_confs = []
-        prev = -1
-
-        for i, c in zip(ids, confs):
-
-            i = int(i)
-
-            if i != prev and i != 32:
-                chars.append(str(self.labels[i]))
-                char_confs.append(float(c))
-
-            prev = i
-
-        text = "".join(chars)
-
-        conf = float(np.mean(char_confs)) if char_confs else 0.0
-
-        return text, conf
-
     def read(self, vehicle_crop):
         """کراپ خودرو -> (متن پلاک، اطمینان)"""
         det = self.detect_plate(vehicle_crop)
@@ -334,9 +266,7 @@ class PlateReader:
         if prepared is not None:
             plate_crop = prepared.image
         image_path = None
-        blob = self._prep_ocr(plate_crop)
-        out = self.ocr.run(None, {self.ocr_input: blob})[0]
-        text, ocr_conf = self._ctc_decode(out)
+        text, ocr_conf = self._recognize_batch([plate_crop])[0]
         if not text:
             return None, 0.0 , image_path
         return text, float(det_conf * 0.3 + ocr_conf * 0.7), image_path

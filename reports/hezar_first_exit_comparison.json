@@ -1,0 +1,132 @@
+{
+  "model_directory": "/home/mjr/plakino/src/computer_vision_v2/ocr_worker/models",
+  "readings": [
+    {
+      "file": "01_frame_372_raw.png",
+      "frame": 372,
+      "source": "raw",
+      "old_text": "6ع57045",
+      "old_confidence": 0.5560232060296195,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.984457790851593
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "02_frame_351_raw.png",
+      "frame": 351,
+      "source": "raw",
+      "old_text": "56م57065",
+      "old_confidence": 0.5870691109448671,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.9838361740112305
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "03_frame_330_raw.png",
+      "frame": 330,
+      "source": "raw",
+      "old_text": "6م65230",
+      "old_confidence": 0.5100631075245994,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.9758520126342773
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "04_frame_407_raw.png",
+      "frame": 407,
+      "source": "raw",
+      "old_text": "56ع5250",
+      "old_confidence": 0.6585976013115474,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.9795002341270447
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "05_frame_442_raw.png",
+      "frame": 442,
+      "source": "raw",
+      "old_text": "6پ0600",
+      "old_confidence": 0.5725047787030538,
+      "hezar": {
+        "text": "۵۸م۹۶۴۲",
+        "score": 0.9408147931098938
+      },
+      "normalized_text": "58م9642"
+    },
+    {
+      "file": "06_frame_372_prepared.png",
+      "frame": 372,
+      "source": "geometry",
+      "old_text": "5م87235",
+      "old_confidence": 0.8296195779527936,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.9824998378753662
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "07_frame_330_prepared.png",
+      "frame": 330,
+      "source": "geometry",
+      "old_text": "5م87235",
+      "old_confidence": 0.8663336294037955,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.9788916707038879
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "08_frame_323_prepared.png",
+      "frame": 323,
+      "source": "geometry",
+      "old_text": "58م87235",
+      "old_confidence": 0.9004446044564247,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴۵",
+        "score": 0.9802622199058533
+      },
+      "normalized_text": "58م87245"
+    },
+    {
+      "file": "09_frame_400_prepared.png",
+      "frame": 400,
+      "source": "geometry",
+      "old_text": "5م87245",
+      "old_confidence": 0.8681031380380902,
+      "hezar": {
+        "text": "۵۸م۸۷۲۴",
+        "score": 0.975428581237793
+      },
+      "normalized_text": "58م8724"
+    },
+    {
+      "file": "10_frame_442_prepared.png",
+      "frame": 442,
+      "source": "geometry",
+      "old_text": "64م03440",
+      "old_confidence": 0.6753861680626869,
+      "hezar": {
+        "text": "۲۴هم۸",
+        "score": 0.9527163505554199
+      },
+      "normalized_text": "24هم8"
+    }
+  ],
+  "text_counts": {
+    "58م87245": 7,
+    "58م9642": 1,
+    "58م8724": 1,
+    "24هم8": 1
+  },
+  "note": "Hezar scores and existing OCR confidence use different formulas; this is a crop comparison, not production acceptance or accuracy validation."
+}

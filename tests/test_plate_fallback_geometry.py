@@ -22,10 +22,9 @@ def detector(hit=False, name='images'):
 
 class FallbackTests(unittest.TestCase):
     def reader(self, primary, fallback):
-        ocr = detector()
-        session = patch(MODULE+'._session', side_effect=[primary, ocr, fallback]).start()
+        session = patch(MODULE+'._session', side_effect=[primary, fallback]).start()
         self.addCleanup(patch.stopall)
-        with patch.object(PlateReader, '_load_labels', return_value=[]):
+        with patch(MODULE+'.HezarOCR'), patch.object(PlateReader, '_load_labels', return_value=[]):
             reader = PlateReader()
         return reader, session
 
@@ -33,14 +32,14 @@ class FallbackTests(unittest.TestCase):
         reader, session = self.reader(detector(True), detector(True))
         result = reader.detect_plate(np.zeros((100, 200, 3), np.uint8))
         self.assertEqual(result[0].shape, (25, 100, 3))
-        self.assertEqual(session.call_count, 2)
+        self.assertEqual(session.call_count, 1)
 
     def test_miss_loads_once_and_uses_fallback_input_name(self):
         fallback = detector(True, 'fallback_input')
         reader, session = self.reader(detector(), fallback)
         for _ in range(2):
             self.assertIsNotNone(reader.detect_plate(np.zeros((100, 200, 3), np.uint8)))
-        self.assertEqual(session.call_count, 3)
+        self.assertEqual(session.call_count, 2)
         self.assertIn('fallback_input', fallback.run.call_args.args[1])
 
     def test_both_miss(self):
@@ -52,15 +51,15 @@ class FallbackTests(unittest.TestCase):
         with self.assertLogs(MODULE, level='WARNING'):
             self.assertIsNone(reader.detect_plate(np.zeros((100, 200, 3), np.uint8)))
         self.assertIsNone(reader.detect_plate(np.zeros((100, 200, 3), np.uint8)))
-        self.assertEqual(session.call_count, 3)
+        self.assertEqual(session.call_count, 2)
 
     def test_load_failure_promotes_fallback_without_running_twice(self):
         fallback = detector()
-        with patch(MODULE+'._session', side_effect=[RuntimeError('primary'), fallback, detector()]) as session:
-            with patch.object(PlateReader, '_load_labels', return_value=[]):
+        with patch(MODULE+'._session', side_effect=[RuntimeError('primary'), fallback]) as session:
+            with patch(MODULE+'.HezarOCR'), patch.object(PlateReader, '_load_labels', return_value=[]):
                 reader = PlateReader()
             self.assertIsNone(reader.detect_plate(np.zeros((100, 200, 3), np.uint8)))
-        self.assertEqual(session.call_count, 3)
+        self.assertEqual(session.call_count, 2)
         self.assertEqual(fallback.run.call_count, 1)
 
 

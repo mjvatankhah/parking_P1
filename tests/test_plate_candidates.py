@@ -66,15 +66,12 @@ class CandidateTests(unittest.TestCase):
 
     def test_vote_states_limit_each_variant_to_five_and_reject_ties(self):
         reader=PlateReader.__new__(PlateReader)
-        reader.labels=['م'];reader.ocr=Mock();reader.ocr_input='input'
-        reader.ocr_batch_size = 1
-        reader.ocr.run.return_value=[np.zeros((1, 1, 1))]
-        reader._prep_ocr=Mock(return_value=np.zeros((1, 1, 1, 1)))
+        reader.labels=['م'];reader.ocr=Mock()
         candidates=[Candidate(self.crop,t,i,.9,1.) for i,t in enumerate([0,.1,.2,.3,.4,.5])]
         for outputs,status in [([('58م87245',.95)]*5,'read'),
                                ([('58م87245',.95),('58م87246',.95),('',0),('',0),('',0)],'uncertain'),
                                ([('',0)]*5,'unread')]:
-            reader._ctc_decode=Mock(side_effect=outputs * 2)
+            reader.ocr.recognize=Mock(side_effect=[outputs, outputs])
             with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',return_value=PreparedPlate(self.crop,1.)):
                 result=reader.recognize_candidates(candidates)
             self.assertEqual(result['recognition_status'],status)
@@ -83,30 +80,37 @@ class CandidateTests(unittest.TestCase):
 
     def test_failed_geometry_reads_raw_and_keeps_review_image(self):
         reader=PlateReader.__new__(PlateReader)
-        reader.ocr=Mock();reader.labels=['X'];reader.ocr_input='input'
-        reader.ocr_batch_size=1
-        reader.ocr.run.return_value=[np.zeros((1, 1, 1))]
-        reader._prep_ocr=Mock(return_value=np.zeros((1, 1, 1, 1)))
-        reader._ctc_decode=Mock(return_value=('12X34567',.99))
+        reader.ocr=Mock();reader.labels=['X']
+        reader.ocr.recognize.return_value=[('12X34567',.99)]
         with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',return_value=None):
             result=reader.recognize_candidates([Candidate(self.crop,0.,1,.9,1.)])
-        reader.ocr.run.assert_called_once()
+        reader.ocr.recognize.assert_called_once()
         self.assertEqual(result['recognition_status'],'uncertain')
         self.assertIs(result['image'],self.crop)
 
     def test_one_clear_ocr_reading_is_still_uncertain(self):
         reader=PlateReader.__new__(PlateReader)
-        reader.labels=['م'];reader.ocr=Mock();reader.ocr_input='input'
-        reader.ocr_batch_size = 1
-        reader.ocr.run.return_value=[np.zeros((1, 1, 1))]
-        reader._prep_ocr=Mock(return_value=np.zeros((1, 1, 1, 1)))
-        reader._ctc_decode=Mock(return_value=('58م87245',.99))
+        reader.labels=['م'];reader.ocr=Mock()
+        reader.ocr.recognize.return_value=[('58م87245',.99)]
         with patch('computer_vision_v2.inference.plate_ocr.prepare_plate',
                    return_value=None):
             result=reader.recognize_candidates([Candidate(self.crop,0.,1,.9,1.)])
         self.assertEqual(result['recognition_status'],'uncertain')
         self.assertEqual(result['readings'][0]['text'],'58م87245')
         self.assertIsNone(result['plate_text'])
+
+    def test_single_crop_read_uses_the_same_ocr_backend(self):
+        reader = PlateReader.__new__(PlateReader)
+        reader.detect_plate = Mock(return_value=(self.crop, .9, self.crop))
+        reader.ocr = Mock()
+        reader.ocr.recognize.return_value = [('58م87245', .95)]
+        with patch('computer_vision_v2.inference.plate_ocr.prepare_plate', return_value=None):
+            text, confidence, image_path = reader.read(self.crop)
+        self.assertEqual(text, '58م87245')
+        self.assertAlmostEqual(confidence, .9 * .3 + .95 * .7)
+        self.assertIsNone(image_path)
+        reader.ocr.recognize.assert_called_once()
+        self.assertIs(reader.ocr.recognize.call_args.args[0][0], self.crop)
 
     def test_deferred_queue_is_bounded_and_processes_after_vehicle_leaves(self):
         pool = PlateCandidates(self.reader, deferred=True, sample_capacity=4)
@@ -147,18 +151,6 @@ class CandidateTests(unittest.TestCase):
             pool.process_pending()
         self.assertEqual(state.pending, [])
         self.assertEqual(pool.pending_bytes, 0)
-
-    def test_fixed_batch_padding_does_not_add_votes(self):
-        reader = PlateReader.__new__(PlateReader)
-        reader.ocr_batch_size = 4
-        reader.ocr_input = 'input'
-        reader.ocr = Mock()
-        reader.ocr.run.return_value = [np.zeros((4, 1, 1))]
-        reader._prep_ocr = Mock(return_value=np.zeros((1, 1, 1, 1)))
-        reader._ctc_decode = Mock(return_value=('12X34567', .99))
-        self.assertEqual(len(reader._recognize_batch([self.crop] * 5)), 5)
-        self.assertEqual(reader.ocr.run.call_count, 2)
-        self.assertEqual(reader._ctc_decode.call_count, 5)
 
     def test_crossing_collects_later_frames_until_vehicle_leaves(self):
         self.pool.observe(self.frame(0))

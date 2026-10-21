@@ -1,0 +1,310 @@
+{
+  "scope": "first vehicle exit only; sequential replay without frame drops; no database writes",
+  "config": {
+    "model_path": "src/models/vehicle/yolo26n_openvino_model",
+    "detection_interval": 3,
+    "plate_sampling": {},
+    "cameras": [
+      {
+        "id": "cam2",
+        "type": "video",
+        "source": "src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
+        "line": [
+          [
+            0.058333333333333334,
+            0.5601851851851852
+          ],
+          [
+            0.4666666666666667,
+            0.26851851851851855
+          ]
+        ],
+        "dir": "entry_exit",
+        "inside_point": [
+          0.4666666666666667,
+          0.5277777777777778
+        ],
+        "coordinate_space": "normalized",
+        "roi": null
+      }
+    ]
+  },
+  "processed_frames": 478,
+  "dropped_frames": 0,
+  "event": {
+    "event": {
+      "camera_id": "cam2",
+      "track_id": 1,
+      "bbox": [
+        317.24095924287303,
+        180.83606921512984,
+        747.15258829152,
+        435.0806660109112
+      ],
+      "class_id": 2,
+      "confidence": 0.573599100112915,
+      "frame_idx": 341,
+      "ts": 11.36081936097561,
+      "side": -1,
+      "direction": "exit"
+    },
+    "finalized_at": 478,
+    "reason": "left_roi",
+    "candidates": [
+      {
+        "frame": 372,
+        "ts": 12.393621121064301,
+        "confidence": 0.7013161778450012,
+        "quality": 0.8506580889225005,
+        "prepared": true
+      },
+      {
+        "frame": 330,
+        "ts": 10.994341317073172,
+        "confidence": 0.6830518841743469,
+        "quality": 0.8415259420871734,
+        "prepared": true
+      },
+      {
+        "frame": 323,
+        "ts": 10.761128016407982,
+        "confidence": 0.6823610067367554,
+        "quality": 0.8411805033683776,
+        "prepared": true
+      },
+      {
+        "frame": 400,
+        "ts": 13.326474323725055,
+        "confidence": 0.60794597864151,
+        "quality": 0.8039729893207549,
+        "prepared": true
+      },
+      {
+        "frame": 407,
+        "ts": 13.559687624390245,
+        "confidence": 0.5920504331588745,
+        "quality": 0.7960252165794373,
+        "prepared": true
+      },
+      {
+        "frame": 442,
+        "ts": 14.725754127716186,
+        "confidence": 0.38783344626426697,
+        "quality": 0.6876667231321335,
+        "prepared": true
+      },
+      {
+        "frame": 351,
+        "ts": 11.693981219068736,
+        "confidence": 0.6914853453636169,
+        "quality": 0.8457426726818084,
+        "prepared": false
+      },
+      {
+        "frame": 435,
+        "ts": 14.492540827050998,
+        "confidence": 0.6002172827720642,
+        "quality": 0.7813586413860322,
+        "prepared": false
+      }
+    ],
+    "result": {
+      "plate_text": "58م87245",
+      "recognition_status": "read",
+      "confidence": 0.930318398135049,
+      "readings": [
+        {
+          "text": "58م87245",
+          "confidence": 0.9757344722747803,
+          "valid": true,
+          "source": "raw",
+          "frame_idx": 372,
+          "conflict": false,
+          "reserves": [
+            "quality"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.9757344722747803,
+              "valid": true,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9328573346138,
+          "valid": true,
+          "source": "raw",
+          "frame_idx": 351,
+          "conflict": false,
+          "reserves": [
+            "quality"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.9328573346138,
+              "valid": true,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.8874127864837646,
+          "valid": true,
+          "source": "raw",
+          "frame_idx": 330,
+          "conflict": false,
+          "reserves": [
+            "quality"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.8874127864837646,
+              "valid": true,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.8386868238449097,
+          "valid": true,
+          "source": "raw",
+          "frame_idx": 407,
+          "conflict": false,
+          "reserves": [
+            "recent"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.8386868238449097,
+              "valid": true,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "58م9642",
+          "confidence": 0.4952669143676758,
+          "valid": false,
+          "source": "raw",
+          "frame_idx": 442,
+          "conflict": false,
+          "reserves": [
+            "recent"
+          ],
+          "alternatives": [
+            {
+              "text": "58م9642",
+              "confidence": 0.4952669143676758,
+              "valid": false,
+              "source": "raw"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9702335596084595,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 372,
+          "conflict": false,
+          "reserves": [
+            "quality"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.9702335596084595,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9680358171463013,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 330,
+          "conflict": false,
+          "reserves": [
+            "quality"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.9680358171463013,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م87245",
+          "confidence": 0.9392679929733276,
+          "valid": true,
+          "source": "geometry",
+          "frame_idx": 323,
+          "conflict": false,
+          "reserves": [
+            "quality"
+          ],
+          "alternatives": [
+            {
+              "text": "58م87245",
+              "confidence": 0.9392679929733276,
+              "valid": true,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "58م8724",
+          "confidence": 0.9620686769485474,
+          "valid": false,
+          "source": "geometry",
+          "frame_idx": 400,
+          "conflict": false,
+          "reserves": [
+            "recent"
+          ],
+          "alternatives": [
+            {
+              "text": "58م8724",
+              "confidence": 0.9620686769485474,
+              "valid": false,
+              "source": "geometry"
+            }
+          ]
+        },
+        {
+          "text": "24هم8",
+          "confidence": 0.6378688216209412,
+          "valid": false,
+          "source": "geometry",
+          "frame_idx": 442,
+          "conflict": false,
+          "reserves": [
+            "recent"
+          ],
+          "alternatives": [
+            {
+              "text": "24هم8",
+              "confidence": 0.6378688216209412,
+              "valid": false,
+              "source": "geometry"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "validation": "40 focused unit tests passed; existing test_debug_plate import fails because debug_plate.py is absent in HEAD"
+}

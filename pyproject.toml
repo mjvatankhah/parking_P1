@@ -6,7 +6,10 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "arabic-reshaper>=3.0.1",
+    "hezar==1.0.0",
+    "transformers>=4.30,<5",
     "kivy>=2.3.1",
+    "lap>=0.5.12",
     "matplotlib>=3.11.1,<4",
     "onnx>=1.23.0",
     "onnxruntime>=1.29.0",
