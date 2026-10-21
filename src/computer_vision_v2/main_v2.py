@@ -33,7 +33,7 @@ class Pipeline:
         self.plate_reader = PlateReader() 
         self.candidates = PlateCandidates(self.plate_reader, **{'deferred': True, **config.get('plate_sampling', {})})
 
-        self.frame_queue = queue.Queue(maxsize=4)
+        self.frame_queue = queue.Queue(maxsize=30)
         self.ocr_queue = queue.Queue(maxsize=16)
         self.db_queue = queue.Queue(maxsize=200)
 
