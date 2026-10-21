@@ -11,7 +11,7 @@ import onnxruntime as ort
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_DIR = BASE_DIR / "ocr_worker" / "models"
-DEFAULT_DETECTOR = MODEL_DIR / "plate_yolo.onnx"
+DEFAULT_DETECTOR = MODEL_DIR / "iranian_plate_yolo26n.onnx"
 DEFAULT_FALLBACK = MODEL_DIR / "plate_yolo_fallback.onnx"
 DEFAULT_OCR = MODEL_DIR / "ocr_crnn.onnx"
 DEFAULT_LABELS = MODEL_DIR / "ocr_crnn.labels.json"
