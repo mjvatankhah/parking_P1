@@ -6,21 +6,25 @@
     {
       "id": "cam2",
       "type": "video",
-      "source": "src/computer_vision_v2/video/vlc-record-2026-10-21-05h30m33s-InShot_20261015_111930971.mp4-.mp4",
+      "source": "src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
       "line": [
         [
-          0.109375,
-          0.8
+          0.04375,
+          0.6509259259259259
         ],
         [
-          0.9765625,
-          0.21574074074074073
+          0.5890625,
+          0.4962962962962963
+        ],
+        [
+          0.5177083333333333,
+          0.24444444444444444
         ]
       ],
       "dir": "entry_exit",
       "inside_point": [
-        0.7651041666666667,
-        0.6555555555555556
+        0.56875,
+        0.7092592592592593
       ],
       "coordinate_space": "normalized",
       "roi": null

@@ -88,6 +88,48 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(result['recognition_status'],'uncertain')
         self.assertIs(result['image'],self.crop)
 
+    def test_preview_prefers_matching_geometry_and_falls_back_to_matching_raw(self):
+        reader = PlateReader.__new__(PlateReader)
+        reader.labels = ['م']
+        reader.ocr = Mock()
+        corrected = np.full_like(self.crop, 100)
+        candidate = Candidate(self.crop, 0., 1, .9, 1.,
+                              prepared=PreparedPlate(corrected, 1.))
+        for text, score, use_geometry in [
+            ('58م87245', .95, True),
+            ('58م87245', .79, False),
+            ('58م8724', .95, False),
+            ('', 0., False),
+        ]:
+            with self.subTest(text=text, score=score):
+                reader.ocr.recognize.side_effect = [
+                    [('58م87245', .95)], [(text, score)],
+                ]
+                result = reader.recognize_candidates([candidate])
+                self.assertIs(result['image'], corrected if use_geometry else self.crop)
+
+    def test_preview_skips_geometry_with_a_different_plate(self):
+        reader = PlateReader.__new__(PlateReader)
+        reader.labels = ['م']
+        reader.ocr = Mock()
+        corrected = [np.full_like(self.crop, value) for value in (100, 150)]
+        candidates = [Candidate(self.crop, i * .1, i, .9, 1.,
+                                prepared=PreparedPlate(image, 1.))
+                      for i, image in enumerate(corrected)]
+        for second_reading, expected in [
+            (('58م87245', .95), corrected[1]),
+            (('', 0.), self.crop),
+        ]:
+            with self.subTest(second_reading=second_reading):
+                reader.ocr.recognize.side_effect = [
+                    [('58م87245', .95)] * 2,
+                    [('58م87246', .95), second_reading],
+                ]
+                result = reader.recognize_candidates(candidates)
+                self.assertEqual(result['plate_text'], '58م87245')
+                self.assertEqual(result['recognition_status'], 'read')
+                self.assertIs(result['image'], expected)
+
     def test_one_clear_ocr_reading_is_still_uncertain(self):
         reader=PlateReader.__new__(PlateReader)
         reader.labels=['م'];reader.ocr=Mock()

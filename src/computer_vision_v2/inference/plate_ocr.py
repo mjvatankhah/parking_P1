@@ -249,12 +249,23 @@ class PlateReader:
         matching = [r['confidence'] for r in readings
                     if r['valid'] and r['confidence'] >= .8 and r['text'] == winner]
         confidence = sum(matching) / len(matching) if matching else 0.
-        fallback_image = images[0] if images else candidates[0].crop if candidates else None
-        image = next((im for im,r in zip(images,readings)
-                      if r['valid'] and r['confidence'] >= .8 and r['text'] == winner), fallback_image)
+        image = self._select_preview(images, readings, winner, candidates)
         return dict(plate_text=winner if status == 'read' else None,
                     recognition_status=status, confidence=confidence,
                     readings=readings, image=image)
+
+    @staticmethod
+    def _select_preview(images, readings, winner, candidates):
+        """Prefer a matching geometry reading, then a matching raw reading."""
+        matching = [(image, reading) for image, reading in zip(images, readings)
+                    if reading['valid'] and reading['confidence'] >= .8
+                    and reading['text'] == winner]
+        for source in ('geometry', 'raw'):
+            for image, reading in matching:
+                if reading['source'] == source:
+                    return image
+        # Unread events still need a review image when evidence is available.
+        return images[0] if images else candidates[0].crop if candidates else None
 
     def read(self, vehicle_crop):
         """کراپ خودرو -> (متن پلاک، اطمینان)"""
