@@ -55,6 +55,10 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, TransitionBase
 
 from reno.ui.theme import register_app_font, rgba, COLORS
+from reno.ui.guard_settings import GuardSettingsScreen
+from reno.ui.components.sidebar import Sidebar
+from reno.ui.components.icons import APP_ICON
+from reno.services.auth_service import auth_service
 from reno.ui.login import LoginScreen
 from reno.ui.dashboard import DashboardScreen
 from reno.ui.live_detection import LiveDetectionScreen
@@ -87,7 +91,7 @@ class InstantTransition(TransitionBase):
 
 class RenoApp(App):
     title = "PLAKINO"
-    icon = str(Path(__file__).resolve().parent / "assets/icons/lucide/app.png")
+    icon = APP_ICON
     _camera_config_poll = None
 
     def build(self):
@@ -110,7 +114,7 @@ class RenoApp(App):
         )
 
         for screen in (login_screen, dashboard_screen, live_detection_screen, camera_settings_screen,
-                       reports_screen):
+                       reports_screen, GuardSettingsScreen(name="guard_settings", on_navigate=self._navigate)):
             self.screen_manager.add_widget(screen)
             # Keep every pre-built page sized even before its first transition.
             # A deferred layout may otherwise leave the first page at Kivy's
@@ -129,11 +133,20 @@ class RenoApp(App):
         self._show_screen("dashboard")
 
     def _show_screen(self, name):
+        if name != "login" and not auth_service.current_role:
+            name = "login"
+        if name == "guard_settings" and not auth_service.is_admin:
+            name = "dashboard" if auth_service.current_role else "login"
+        for screen in self.screen_manager.screens:
+            for widget in screen.walk():
+                if isinstance(widget, Sidebar):
+                    widget.set_admin_access(auth_service.is_admin)
         camera_service.reload()
         self.screen_manager.current = name
 
     def _navigate(self, screen_name: str):
         if screen_name == "logout":
+            auth_service.logout()
             self._show_screen("login")
             return
         self._show_screen(screen_name)

@@ -1,23 +1,23 @@
 """Reference-branded login; authentication stays behind the existing interface."""
 
+from threading import Thread
+from kivy.clock import Clock
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
-from kivy.uix.checkbox import CheckBox
-from kivy.uix.popup import Popup
-from kivy.animation import Animation
 from kivy.graphics import Color, Mesh, Line
 
 from reno.ui import theme
 from reno.ui.theme import COLORS, FONT_SIZE, rtl
 from reno.ui.components.common import (
-    Card, PrimaryButton, RoundedTextInput, RTLLabel, HoverBehavior,
+    Card, PrimaryButton, RoundedTextInput, RTLLabel,
 )
 from reno.ui.components.icons import Icon
 from reno.ui.components.brand import BrandMark, Brand
 from reno.ui.components.ambient_background import AmbientBackground
 from reno.ui.components.app_header import WindowControls
+from reno.ui.components.username_input import UsernameInput
 from reno.services.auth_service import auth_service
 
 APP_NAME = "PLAKINO"
@@ -64,7 +64,6 @@ class LoginScreen(Screen):
         card.add_widget(self._build_brand())
         card.add_widget(self._build_field("نام کاربری :", "username"))
         card.add_widget(self._build_field("رمز عبور:", "password", is_password=True))
-        card.add_widget(self._build_remember_row())
 
         self._error_label = Label(
             text="",
@@ -84,10 +83,6 @@ class LoginScreen(Screen):
         self._password_input.bind(on_text_validate=self._attempt_login)
         self._username_input.bind(on_text_validate=lambda *_: setattr(self._password_input, "focus", True))
         card.add_widget(login_button)
-
-        forgot = _LinkLabel(text=rtl("رمز عبور را فراموش کرده‌اید؟"))
-        forgot.bind(on_release=self._show_forgot_password_popup)
-        card.add_widget(forgot)
 
         shell.add_widget(card)
         root.add_widget(shell)
@@ -142,34 +137,34 @@ class LoginScreen(Screen):
         )
         label.bind(size=lambda w, *_: setattr(w, "text_size", w.size))
 
-        text_input = RoundedTextInput(password=is_password, size_hint_y=None, height=44,
-                                       halign="right")
+        input_class = RoundedTextInput if is_password else UsernameInput
+        text_input = input_class(password=is_password, size_hint_y=None, height=44,
+                                 halign="right" if is_password else "left")
+        if not is_password:
+            text_input.bind(input_error=lambda _, error: setattr(self._error_label, 'text', rtl(error)))
         setattr(self, f"_{field_key}_input", text_input)
 
         box.add_widget(label)
         box.add_widget(text_input)
         return box
 
-    def _build_remember_row(self):
-        row = BoxLayout(orientation="horizontal", size_hint_y=None, height=32, spacing=6)
-        self._remember_checkbox = CheckBox(size_hint=(None, None), size=(24, 24),
-                                            color=theme.rgba(COLORS["primary"]))
-        label = Label(
-            text=rtl("مرا به خاطر بسپار"),
-            font_name=theme.APP_FONT_NAME,
-            font_size=FONT_SIZE["caption"],
-            color=theme.rgba(COLORS["text_secondary"]),
-        )
-        row.add_widget(label)
-        row.add_widget(self._remember_checkbox)
-        return row
-
     # ------------------------------------------------------------------
     def _attempt_login(self, *_args):
         username = self._username_input.text
         password = self._password_input.text
 
-        result = auth_service.login(username, password)
+        if self._login_button.disabled:
+            return
+        self._login_button.disabled = True
+        self._error_label.text = rtl("در حال ورود…")
+
+        def work():
+            result = auth_service.login(username, password)
+            Clock.schedule_once(lambda _: self._login_complete(result))
+        Thread(target=work, daemon=True).start()
+
+    def _login_complete(self, result):
+        self._login_button.disabled = False
         if result.success:
             self._error_label.text = ""
             self._password_input.text = ""
@@ -177,51 +172,6 @@ class LoginScreen(Screen):
                 self.on_login_success()
         else:
             self._error_label.text = rtl(result.error_message)
-
-    def _show_forgot_password_popup(self, *_args):
-        content = Label(
-            text=rtl("این قابلیت به‌زودی اضافه می‌شود"),
-            font_name=theme.APP_FONT_NAME,
-            font_size=FONT_SIZE["body"],
-            color=theme.rgba(COLORS["text_primary"]),
-        )
-        Popup(
-            title=rtl("فراموشی رمز عبور"),
-            title_font=theme.APP_FONT_NAME,
-            content=content,
-            size_hint=(None, None),
-            size=(300, 160),
-        ).open()
-
-
-class _LinkLabel(HoverBehavior, Label):
-    """A Label that behaves like a clickable text link (used for
-    'forgot password'). Kept in this file since it's only used here."""
-
-    def __init__(self, **kwargs):
-        kwargs.setdefault("font_name", theme.APP_FONT_NAME)
-        kwargs.setdefault("font_size", FONT_SIZE["caption"])
-        kwargs.setdefault("color", theme.rgba(COLORS["primary"]))
-        kwargs.setdefault("size_hint_y", None)
-        kwargs.setdefault("height", 24)
-        super().__init__(**kwargs)
-        self._normal_color = theme.rgba(COLORS["primary"])
-        self.bind(on_touch_down=self._on_touch_down)
-        self.register_event_type("on_release")
-
-    def _on_touch_down(self, widget, touch):
-        if self.collide_point(*touch.pos):
-            self.dispatch("on_release")
-            return True
-        return False
-
-    def on_release(self, *_args):
-        pass
-
-    def on_hovered(self, *_args):
-        target = theme.rgba(COLORS["primary_dark"]) if self.hovered else self._normal_color
-        Animation.cancel_all(self, "color")
-        Animation(color=target, duration=theme.ANIM_FAST, t="out_quad").start(self)
 
 
 class _LoginHero(Card):

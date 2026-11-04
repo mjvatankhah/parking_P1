@@ -1,0 +1,16 @@
+{
+  "input": "/home/mjr/plakino/src/Tpicture/InShot_20261022_055432682.jpg",
+  "detection_confidence": 0.5324407815933228,
+  "context_image": "/home/mjr/plakino/reports/single_plate/InShot_20261022_055432682/plate_context.png",
+  "raw": {
+    "text": "3694114",
+    "confidence": 0.7280770540237427,
+    "image": "/home/mjr/plakino/reports/single_plate/InShot_20261022_055432682/plate_raw.png"
+  },
+  "geometry": {
+    "status": "unavailable",
+    "text": null,
+    "confidence": null,
+    "image": null
+  }
+}

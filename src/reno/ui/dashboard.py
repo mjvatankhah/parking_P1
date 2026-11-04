@@ -194,7 +194,7 @@ class DashboardScreen(Screen):
     def _load(self, revision, camera, day, plate):
         try:
             stats = dashboard_service.get_statistics()
-            records = plate_service.get_recent_records(limit=20, plate=plate)
+            records = plate_service.get_recent_records(limit=50, plate=plate)
             flow = dashboard_service.get_daily_flow(end=day, camera=camera, plate=plate)
         except Exception:
             logging.getLogger(__name__).exception('Dashboard database read failed')

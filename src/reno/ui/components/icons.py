@@ -14,6 +14,9 @@ _ASSET_DIR = os.path.abspath(
 )
 
 _ICON_FILES = {
+    "guard_add": "google/person_add.png",
+    "guard_remove": "google/person_remove.png",
+    "guard_delete": "google/delete.png",
     "maximize": "lucide/maximize.png",
     "minus": "lucide/minus.png",
     "dashboard": "lucide/layout-dashboard.png",
@@ -38,7 +41,7 @@ _ICON_FILES = {
 }
 
 _TEXTURES = {}
-APP_ICON = os.path.join(_ASSET_DIR, "lucide", "app.png")
+APP_ICON = os.path.join(_ASSET_DIR, "google", "app.png")
 
 
 

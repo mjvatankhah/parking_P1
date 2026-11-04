@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from reno.main import RenoApp
+from reno.services.auth_service import auth_service
 from kivy.clock import Clock
 from kivy.core.window import Window
 from reno.ui import theme
@@ -51,13 +52,21 @@ class ReferenceUIContractTests(unittest.TestCase):
         for p in cls.patches:
             p.stop()
 
+    def setUp(self):
+        # Page navigation requires a signed-in session. Guards retain four destinations.
+        auth_service.current_role = 'guard'
+
+    def tearDown(self):
+        auth_service.logout()
+
     def test_icons_share_lucide_sources_and_application_brand(self):
         for filename in _ICON_FILES.values():
-            self.assertTrue(filename.startswith('lucide/'))
+            self.assertTrue(filename.startswith(('lucide/', 'google/')))
             asset = APP_PATH / 'assets/icons' / filename
             self.assertTrue(asset.is_file())
             svg = asset.with_suffix('.svg').read_text()
-            self.assertIn('stroke-width="2"', svg)
+            if filename.startswith('lucide/'):
+                self.assertIn('stroke-width="2"', svg)
             self.assertIn('viewBox="0 0 24 24"', svg)
         self.assertTrue((APP_PATH / 'assets/icons/lucide/LICENSE').is_file())
         self.assertEqual(self.app.icon, APP_ICON)

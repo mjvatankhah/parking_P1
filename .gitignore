@@ -35,3 +35,7 @@ desktop.ini
 *.zip
 *.rar
 *.7z
+
+# Offline UI textures must ship with the desktop application.
+!src/reno/assets/icons/lucide/*.png
+!src/reno/assets/icons/google/*.png

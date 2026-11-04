@@ -98,6 +98,18 @@ class Sidebar(BoxLayout):
         self.add_widget(logout)
         self._redraw()
 
+    def set_admin_access(self, allowed):
+        item = self._items.get('guard_settings')
+        if allowed and item is None:
+            item = _SidebarItem('shield', 'ثبت نگهبان', key='guard_settings',
+                                active=self.active == 'guard_settings')
+            item.bind(on_release=lambda *_: self._navigate('guard_settings'))
+            self._items['guard_settings'] = item
+            self.add_widget(item, index=len(self.children) - 2 - len(_ITEMS))
+        elif not allowed and item is not None:
+            self.remove_widget(item)
+            del self._items['guard_settings']
+
     def _redraw(self, *_):
         self._surface.pos, self._surface.size = self.pos, self.size
         self._edge.points = [self.x, self.y, self.x, self.y+self.height]
