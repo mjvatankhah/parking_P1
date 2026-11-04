@@ -12,9 +12,10 @@ from reno.ui.components.common import RTLLabel, HoverBehavior, make_gradient_tex
 
 _ITEMS = [
     ('dashboard', 'dashboard', 'داشبورد'),
-    ('live_detection', 'camera', 'تشخیص زنده'),
+    ('live_detection', 'camera', 'مانیتورینگ زنده'),
     ('reports', 'reports', 'گزارش‌ها'),
-    ('camera_settings', 'settings', 'تنظیمات'),
+    ('camera_settings', 'settings', 'ثبت دوربین'),
+    ('plate_registration', 'car', 'ثبت پلاک'),
 ]
 
 

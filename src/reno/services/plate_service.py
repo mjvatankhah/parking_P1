@@ -1,5 +1,7 @@
 """Read committed plate events from the pipeline's PostgreSQL database."""
+from computer_vision_v2.database.plate_access import normalize_plate
 
+from computer_vision_v2.database.plate_access import ensure_schema
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -29,16 +31,17 @@ class PlateService:
 
     def get_recent_records(self, limit: int = 50, plate: str = "", camera: str = "", day: str = "") -> List[PlateRecord]:
         """Return the most recent `limit` records, newest first."""
+        plate = normalize_plate(plate)
         if limit <= 0:
             return []
         if MOCK_DATA_ENABLED:
             return [r for r in self._mock_records
-                    if (not plate or plate in r.plate) and (not camera or r.camera == camera)
+                    if (not plate or plate in normalize_plate(r.plate)) and (not camera or r.camera == camera)
                     and (not day or r.date == day)][:limit]
         conditions, params = [], []
         if plate:
-            conditions.append("strpos(COALESCE(plate_number, ''), %s) > 0")
-            params.append(plate)
+            conditions.append("strpos(regexp_replace(translate(COALESCE(plate_number, ''), %s, %s), '[[:space:]‌-]', '', 'g'), %s) > 0")
+            params.extend(['۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩يك', '01234567890123456789یک', plate])
         if camera:
             conditions.append("camera_id = %s")
             params.append(camera)
@@ -49,11 +52,12 @@ class PlateService:
         # Each refresh has its own short transaction and connection. Never
         # share the writer's connection across threads/processes.
         with self._connect() as connection:
+            ensure_schema(connection)
             with connection.cursor() as cursor:
                 cursor.execute("SET TRANSACTION READ ONLY")
                 cursor.execute("SET LOCAL statement_timeout = '5s'")
                 cursor.execute(
-                    f"""SELECT plate_number, captured_at, camera_id, event_type, class_id, image_path, recognition_status
+                    f"""SELECT plate_number, captured_at, camera_id, event_type, class_id, image_path, recognition_status, access_status
                        FROM event {where}
                        ORDER BY captured_at DESC, id DESC
                        LIMIT %s""",
@@ -61,7 +65,9 @@ class PlateService:
                 )
                 rows = cursor.fetchall()
         records = []
-        for plate, captured_at, camera_id, direction, class_id, image_path, status in rows:
+        for row in rows:
+            plate, captured_at, camera_id, direction, class_id, image_path, status = row[:7]
+            access_status = row[7] if len(row)>7 else "guest"
             captured_at = captured_at.astimezone()
             if image_path:
                 path = Path(image_path)
@@ -69,7 +75,7 @@ class PlateService:
             records.append(PlateRecord(
                 plate=plate or ('نامطمئن' if status == 'uncertain' else 'خوانده نشد'), date=captured_at.strftime('%Y-%m-%d'),
                 time=captured_at.strftime('%H:%M:%S'), camera=camera_id,
-                class_id=class_id, direction=direction, image_path=image_path or '',
+                class_id=class_id, direction=direction, image_path=image_path or '', access_status=access_status,
             ))
         return records
 

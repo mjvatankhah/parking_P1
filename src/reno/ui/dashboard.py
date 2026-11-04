@@ -13,6 +13,7 @@ from kivy.uix.screenmanager import Screen
 from reno.ui import theme
 from reno.ui.theme import COLORS
 from reno.ui.components.common import Card, RTLLabel, EmptyState, RoundedTextInput, SecondaryButton, styled_spinner
+from reno.ui.components.plate_input import PlateSearchInput
 from reno.ui.components.page_shell import PageShell
 from reno.ui.components.icons import Icon
 from reno.ui.components.stat_card import StatCard, GRADIENT_TEAL, GRADIENT_BLUE, GRADIENT_ORANGE, GRADIENT_CYAN
@@ -120,8 +121,8 @@ class DashboardScreen(Screen):
                                  color=theme.rgba(COLORS['primary']))
         reset.bind(on_release=self._reset_filters)
         toolbar.add_widget(reset)
-        self._search = RoundedTextInput(hint_text=theme.rtl('جست‌وجوی شماره پلاک…'),
-                                        halign='right', multiline=False, font_size=11)
+        self._search = PlateSearchInput(hint_text=theme.rtl('جست‌وجوی شماره پلاک…'),
+                                        halign='left', multiline=False, font_size=11)
         self._search.bind(text=self._filters_changed)
         toolbar.add_widget(self._search)
         content.add_widget(toolbar)
@@ -249,8 +250,8 @@ class DashboardScreen(Screen):
             self._record_holder.clear_widgets()
             self._record_scroll = scroll = ScrollView(do_scroll_x=True, scroll_x=1, bar_width=4)
             self._record_rows = rows = GridLayout(cols=1, size_hint=(None,None), spacing=3)
-            scroll.bind(width=lambda _, width: setattr(rows, 'width', max(480,width)))
-            rows.width = max(480,scroll.width)
+            scroll.bind(width=lambda _, width: setattr(rows, 'width', max(640,width)))
+            rows.width = max(640,scroll.width)
             rows.bind(minimum_height=rows.setter('height'))
             scroll.add_widget(rows)
             self._record_holder.add_widget(scroll)

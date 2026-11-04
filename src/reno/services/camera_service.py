@@ -57,6 +57,10 @@ class CameraService:
         self._status_listeners: List[Listener] = []
 
     # -- reading ----------------------------------------------------
+    @property
+    def configuration_path(self):
+        return self._store_path
+
     def get_cameras(self) -> List[Camera]:
         """Return a *copy* of the camera list so callers can't mutate
         our internal state by accident."""

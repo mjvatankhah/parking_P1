@@ -1,4 +1,8 @@
 """Non-interactive Matplotlib/Agg chart, rendered at twice the panel resolution."""
+import numpy as np
+from matplotlib.colors import to_rgba
+from matplotlib.path import Path as MplPath
+from matplotlib.patches import PathPatch
 from datetime import date
 from pathlib import Path
 
@@ -13,6 +17,38 @@ from matplotlib.ticker import FuncFormatter, MaxNLocator
 
 from reno.ui import theme
 from reno.ui.components.jalali_calendar import WEEKDAYS
+
+
+def smooth_series(x_values, values, samples=32):
+    """Shape-preserving cubic Hermite curve through the actual measurements.
+
+    Flat tangents at peaks/valleys avoid sharp corners; monotone slope limits
+    prevent invented extrema, overshoot and negative traffic counts.
+    """
+    x,y=np.asarray(x_values,dtype=float),np.asarray(values,dtype=float)
+    if len(x)<3 or np.any(np.diff(x)<=0):
+        return x,y
+    h=np.diff(x)
+    delta=np.diff(y)/h
+    slopes=np.zeros(len(x))
+    for i in range(1,len(x)-1):
+        if delta[i-1]*delta[i]>0:
+            a,b=2*h[i]+h[i-1],h[i]+2*h[i-1]
+            slopes[i]=(a+b)/(a/delta[i-1]+b/delta[i])
+    def endpoint(h0,h1,d0,d1):
+        slope=((2*h0+h1)*d0-h0*d1)/(h0+h1)
+        if slope*d0<=0:
+            return 0.
+        return min(abs(slope),3*abs(d0))*np.sign(d0)
+    slopes[0]=endpoint(h[0],h[1],delta[0],delta[1])
+    slopes[-1]=endpoint(h[-1],h[-2],delta[-1],delta[-2])
+    xx,yy=[],[]
+    for i,width in enumerate(h):
+        t=np.linspace(0,1,samples,endpoint=False)
+        xx.extend(x[i]+t*width)
+        yy.extend((2*t**3-3*t**2+1)*y[i]+(t**3-2*t**2+t)*width*slopes[i]
+                  +(-2*t**3+3*t**2)*y[i+1]+(t**3-t**2)*width*slopes[i+1])
+    return np.append(xx,x[-1]),np.append(yy,y[-1])
 
 
 class TrafficChart(FloatLayout):
@@ -74,11 +110,25 @@ class TrafficChart(FloatLayout):
         x_values = [(date.fromisoformat(row[0]).weekday()+2) % 7 for row in self.data]
         for column in columns:
             entry = column == 1
-            axes.plot(x_values, [row[column] for row in self.data],
+            values = [row[column] for row in self.data]
+            color = theme.COLORS['entry' if entry else 'exit']
+            curve_x, curve_y = smooth_series(x_values, values)
+            if len(values)>1 and any(values):
+                vertices = [(x_values[0],0),*zip(curve_x,curve_y),(x_values[-1],0),(x_values[0],0)]
+                clip=PathPatch(MplPath(vertices),facecolor='none',edgecolor='none')
+                axes.add_patch(clip)
+                gradient=np.zeros((256,1,4))
+                gradient[:,:,:3]=to_rgba(color)[:3]
+                gradient[:,:,3]=np.linspace(0,.24,256)[:,None]
+                fill=axes.imshow(gradient,extent=(min(x_values),max(x_values),0,max(values)),
+                                 origin='lower',aspect='auto',zorder=1,interpolation='bilinear')
+                fill.set_clip_path(clip)
+            axes.plot(curve_x, curve_y,
                       label='ورود' if entry else 'خروج',
-                      color=theme.COLORS['entry' if entry else 'exit'],
-                      linewidth=1.5, linestyle='-' if entry else (0, (4, 2.5)),
+                      color=color,
+                      linewidth=1.5, linestyle='-',
                       marker='o', markersize=3.3, markeredgewidth=0,
+                      markevery=[index for index,value in enumerate(curve_x) if value in x_values],
                       solid_capstyle='round', antialiased=True, clip_on=False)
         font_size = 8.2 if width >= 340 else 7.2
         for label in axes.get_xticklabels() + axes.get_yticklabels():

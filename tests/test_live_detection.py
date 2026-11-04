@@ -56,7 +56,7 @@ class LiveDetectionTests(unittest.TestCase):
                     service.unsubscribe(screen._on_cameras_changed)
 
     def test_app_starts_and_cancels_config_poll(self):
-        app = SimpleNamespace(_refresh_camera_config=Mock(), _camera_config_poll=None,
+        app = SimpleNamespace(camera_health=Mock(), _refresh_camera_config=Mock(), _camera_config_poll=None,
                               screen_manager=Mock())
         with patch('reno.main.Clock.schedule_interval') as schedule:
             RenoApp.on_start(app)

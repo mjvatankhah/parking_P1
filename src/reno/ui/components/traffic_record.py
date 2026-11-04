@@ -22,10 +22,10 @@ class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
         self.image_path = record.image_path if record.image_path and Path(record.image_path).is_file() else ''
         # Physical left-to-right insertion gives an RTL grid with image at far right.
         self._camera = RTLLabel(text=record.camera, font_size=11, halign='center',
-                               padding=[0,0], size_hint_x=.14, shorten=True,
+                               padding=[0,0], size_hint_x=.12, shorten=True,
                                color=theme.rgba(theme.COLORS['text_secondary']))
         self.add_widget(self._camera)
-        stamp = BoxLayout(orientation='vertical', spacing=1, size_hint_x=.22)
+        stamp = BoxLayout(orientation='vertical', spacing=1, size_hint_x=.18)
         self._date_label = RTLLabel(text=jalali_text(record.date), font_size=13, halign='center', padding=[0,0])
         stamp.add_widget(self._date_label)
         stamp.add_widget(RTLLabel(text=theme.fa_number(record.time), font_size=13, halign='center',
@@ -33,13 +33,17 @@ class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
         self.add_widget(stamp)
         event_color = 'entry' if record.direction == 'entry' else 'exit'
         self._event_label = RTLLabel(text=record.direction_label(), font_size=13,
-                                     size_hint_x=.12,
+                                     size_hint_x=.1,
                                      color=theme.rgba(theme.COLORS[event_color+'_text']),
                                      halign='center', padding=[0,0])
         self.add_widget(self._event_label)
-        self._plate = PlainPlate(record.plate, size_hint_x=.26)
+        self._access_label = RTLLabel(text=record.access_label(), font_size=12, size_hint_x=.14,
+                                      halign='center', padding=[0,0],
+                                      color=theme.rgba({'allowed':'#48B78A','guest':'#D8B45F','blocked':'#F87171'}.get(record.access_status,'#A5B1C0')))
+        self.add_widget(self._access_label)
+        self._plate = PlainPlate(record.plate, size_hint_x=.24)
         self.add_widget(self._plate)
-        self._thumbnail = Card(size_hint_x=.26, padding=1, radius=4, hover_effect=False,
+        self._thumbnail = Card(size_hint_x=.22, padding=1, radius=4, hover_effect=False,
             bg_color=theme.rgba(theme.COLORS['background']), border_color=theme.rgba(theme.COLORS['border'],.5))
         if self.image_path:
             image_holder = AnchorLayout()
@@ -86,7 +90,7 @@ class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
 
 def detection_header():
     row = BoxLayout(size_hint_y=None, height=26, padding=[8,0,8,0], spacing=8)
-    for label, ratio in [('دوربین',.14),('تاریخ / ساعت',.22),('رویداد',.12),('شماره پلاک',.26),('تصویر',.26)]:
+    for label, ratio in [('دوربین',.12),('تاریخ / ساعت',.18),('رویداد',.1),('وضعیت پلاک',.14),('شماره پلاک',.24),('تصویر',.22)]:
         row.add_widget(RTLLabel(text=label, font_size=10, size_hint_x=ratio, halign='center',
                                padding=[0,0], color=theme.rgba(theme.COLORS['text_secondary'])))
     return row

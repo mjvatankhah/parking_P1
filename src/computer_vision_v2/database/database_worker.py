@@ -6,6 +6,7 @@ from datetime import datetime
 
 from computer_vision_v2.database.connection import get_connection
 from computer_vision_v2.database import queries
+from computer_vision_v2.database.plate_access import ensure_schema
 
 
 logger = logging.getLogger(__name__)
@@ -55,6 +56,7 @@ def database_worker(db_queue, running_flag):
             try:
                 if connection is None:
                     connection = get_connection()
+                    ensure_schema(connection)
                     cursor = connection.cursor()
                     logger.info("Database connection established")
                 event_id = _save_event(cursor, item)

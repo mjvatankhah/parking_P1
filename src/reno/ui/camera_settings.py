@@ -16,7 +16,10 @@ import base64
 import os
 import subprocess
 import sys
+from threading import Thread
 
+from kivy.uix.image import Image
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
@@ -33,17 +36,19 @@ from reno.ui.components.page_shell import PageShell
 from reno.ui.theme import COLORS, FONT_SIZE, SPACING, rtl, rtl_map, PAGE_BG_TOP, PAGE_BG_BOTTOM
 from reno.ui.components.common import (
     Card, make_gradient_texture, PrimaryButton, SecondaryButton, RoundedTextInput, Divider,
-    StatusDot, RTLLabel, EmptyState, Badge, show_toast, styled_spinner, HoverBehavior,
+    StatusDot, RTLLabel, EmptyState, show_toast, styled_spinner, HoverBehavior,
 )
 from reno.ui.components.sidebar import Sidebar
 from reno.ui.components.app_header import AppHeader
 from reno.ui.components.icons import Icon
+from reno.ui.components.geometry_dialog import GeometryDialog
 
 from reno.models.camera import (
     Camera, SOURCE_TYPE_RTSP, SOURCE_TYPE_VIDEO_FILE, SOURCE_TYPE_LABELS,
     ROLE_ENTRY, ROLE_EXIT, ROLE_ENTRY_AND_EXIT, ROLE_LABELS, STATUS_ONLINE, STATUS_OFFLINE,
 )
 from reno.services.camera_service import camera_service
+from reno.services.camera_setup_service import CameraSetupResult, register_camera, check_connection
 
 # Reshaped-for-display option lists + reverse lookup back to the real
 # (unreshaped) model key. Built once, at import time, from the single
@@ -53,9 +58,6 @@ from reno.services.camera_service import camera_service
 _SOURCE_TYPE_VALUES, _SOURCE_TYPE_BY_DISPLAY = rtl_map(SOURCE_TYPE_LABELS)
 _ROLE_VALUES, _ROLE_BY_DISPLAY = rtl_map(ROLE_LABELS)
 
-_DEFAULT_LINE = (0.2, 0.6, 0.8, 0.6)
-_DEFAULT_INSIDE_POINT = (0.5, 0.3)
-
 
 class CameraSettingsScreen(Screen):
     """`on_navigate` is set by main.py."""
@@ -64,7 +66,15 @@ class CameraSettingsScreen(Screen):
         super().__init__(**kwargs)
         self.on_navigate = on_navigate
         self._editing_camera_id = None  # None => "add" mode
+        self._checking = False
+        self._connection_popup = None
+        self._verified_settings = None
+        self._updating_form = False
         self._build()
+        for field in (self._gate_input, self._id_input, self._source_input,
+                      self._source_type_spinner, self._role_spinner):
+            field.bind(text=self._settings_changed)
+        self._set_connection_state('initial')
         camera_service.subscribe(self._on_cameras_changed)
         camera_service.subscribe_status(self._on_camera_status_changed)
 
@@ -91,86 +101,64 @@ class CameraSettingsScreen(Screen):
 
     # -- form -------------------------------------------------------------
     def _build_form_card(self):
-        card = Card(orientation="vertical", size_hint_y=None, height=450,
+        card = self._form_card = Card(orientation="vertical", size_hint_y=None, height=570,
                     padding=[22, 14, 22, 14], spacing=8)
 
         self._form_title = RTLLabel(text="افزودن دوربین جدید", font_size=FONT_SIZE["subtitle"],
                                      bold=True, size_hint_y=None, height=26)
         card.add_widget(self._form_title)
 
+        self._gate_input = RoundedTextInput(size_hint_y=None, height=44, halign="right")
+        card.add_widget(self._labeled('نام گیت', self._gate_input, fixed_height=68))
+
         fields_row = BoxLayout(orientation="horizontal", spacing=SPACING["md"], size_hint_y=None, height=68)
-        fields_row.add_widget(self._labeled("شناسه دوربین (ID)", self._make_id_input()))
-        fields_row.add_widget(self._labeled("نوع انتقال داده", self._make_source_type_spinner()))
+        camera_name = self._make_id_input()
+        source_type = self._make_source_type_spinner()
         fields_row.add_widget(self._labeled("کارکرد دوربین", self._make_role_spinner()))
+        fields_row.add_widget(self._labeled("نوع ورودی", source_type))
+        fields_row.add_widget(self._labeled("نام دوربین", camera_name))
         card.add_widget(fields_row)
 
         card.add_widget(self._labeled(
             "آدرس منبع (RTSP یا مسیر فایل ویدیو)",
             self._make_source_input(),
-            fixed_height=68,
+            fixed_height=120,
         ))
 
-        line_row = BoxLayout(orientation="horizontal", spacing=SPACING["md"],
-                             size_hint_y=None, height=68)
-        self._line_inputs = []
-        for label, default_value in zip(
-            ("خط: X1 (۰ تا ۱)", "خط: Y1 (۰ تا ۱)",
-             "خط: X2 (۰ تا ۱)", "خط: Y2 (۰ تا ۱)",
-             "L: X3 (اختیاری)", "L: Y3 (اختیاری)"),
-            (*_DEFAULT_LINE, "", ""),
-        ):
-            line_input = RoundedTextInput(
-                text=str(default_value), input_filter="float", size_hint_y=None,
-                height=44, halign="center",
-            )
-            self._line_inputs.append(line_input)
-            line_row.add_widget(self._labeled(label, line_input))
-        card.add_widget(line_row)
-
-        inside_row = BoxLayout(orientation="horizontal", spacing=SPACING["md"],
-                               size_hint_y=None, height=68)
-        self._inside_point_inputs = []
-        for label, default_value in zip(
-            ("داخل پارکینگ: X", "داخل پارکینگ: Y"),
-            _DEFAULT_INSIDE_POINT,
-        ):
-            point_input = RoundedTextInput(
-                text=str(default_value), input_filter="float", size_hint_y=None,
-                height=44, halign="center",
-            )
-            self._inside_point_inputs.append(point_input)
-            inside_row.add_widget(self._labeled(label, point_input))
-        self._inside_point_help = RTLLabel(
-            text="", font_size=FONT_SIZE["caption"],
-            color=theme.rgba(COLORS["text_secondary"]),
-            size_hint_x=2, halign="right", valign="middle",
-        )
-        inside_row.add_widget(self._inside_point_help)
-        card.add_widget(inside_row)
-        self._sync_inside_point_fields()
+        self._geometry_section = BoxLayout(orientation='vertical', size_hint_y=None, height=46, spacing=8)
+        self._geometry_button = _GeometryButton(disabled=True)
+        self._geometry_button.bind(on_release=lambda *_: self._select_geometry())
+        self._geometry_section.add_widget(self._geometry_button)
+        self._geometry_details = BoxLayout(orientation='vertical', size_hint_y=None, height=270, spacing=8)
+        self._geometry_preview = Image(fit_mode='contain', size_hint_x=.72, pos_hint={'center_x': .5})
+        self._geometry_hint = RTLLabel(text='مختصات ثبت شد', font_size=13,
+                                        size_hint_y=None, height=26, halign='center',
+                                        color=theme.rgba(COLORS['online']))
+        self._geometry_details.add_widget(self._geometry_hint)
+        self._geometry_details.add_widget(self._geometry_preview)
+        card.add_widget(self._geometry_section)
 
         buttons_row = BoxLayout(orientation="horizontal", spacing=SPACING["sm"],
                                  size_hint_y=None, height=42)
-        add_button = PrimaryButton(text=rtl("افزودن دوربین"), size_hint_x=None, width=154)
-        add_button.bind(on_release=lambda *_: self._start_add_mode())
-        save_button = PrimaryButton(text=rtl("ذخیره"), size_hint_x=None, width=108)
-        save_button.bind(on_release=lambda *_: self._save())
+        add_button = PrimaryButton(text=rtl("ثبت دوربین"), size_hint_x=None, width=154,
+                                   bg_color_normal=theme.rgba('#237A54'),
+                                   bg_color_hover=theme.rgba('#2B9165'),
+                                   bg_color_down=theme.rgba('#195A3D'),
+                                   border_color=theme.rgba('#237A54'))
+        add_button.bind(on_release=lambda *_: self._save())
         cancel_button = SecondaryButton(text=rtl("انصراف"), size_hint_x=None, width=108)
         cancel_button.bind(on_release=lambda *_: self._start_add_mode())
 
-        buttons_row.add_widget(add_button)
-        geometry_button = SecondaryButton(text=rtl('محدوده و خط'), size_hint_x=None, width=130)
-        geometry_button.bind(on_release=lambda *_: self._select_geometry())
-        buttons_row.add_widget(geometry_button)
-        buttons_row.add_widget(BoxLayout())
         buttons_row.add_widget(cancel_button)
-        buttons_row.add_widget(save_button)
+        buttons_row.add_widget(BoxLayout())
+        buttons_row.add_widget(add_button)
         card.add_widget(buttons_row)
 
         self._error_label = RTLLabel(text="", font_size=FONT_SIZE["caption"],
                                       color=theme.rgba(COLORS["offline"]),
                                       size_hint_y=None, height=20)
-        card.add_widget(self._error_label)
+        card.add_widget(self._error_label, index=1)
+        card.bind(minimum_height=card.setter("height"))
         return card
 
     def _labeled(self, label_text, field_widget, fixed_height=None):
@@ -191,7 +179,7 @@ class CameraSettingsScreen(Screen):
 
     def _make_source_input(self):
         source_row = BoxLayout(orientation="horizontal", spacing=SPACING["sm"])
-        self._source_input = RoundedTextInput(size_hint_y=None, height=44, halign="right")
+        self._source_input = RoundedTextInput(size_hint_y=None, height=44, halign="left")
         self._source_input.bind(on_touch_down=self._open_picker_from_source)
         self._source_picker_button = SecondaryButton(
             text=rtl("انتخاب فایل"), size_hint_x=None, width=118,
@@ -199,8 +187,18 @@ class CameraSettingsScreen(Screen):
         self._source_picker_button.bind(on_release=lambda *_: self._choose_video_file())
         source_row.add_widget(self._source_input)
         source_row.add_widget(self._source_picker_button)
+        controls = BoxLayout(orientation='vertical', spacing=8)
+        controls.add_widget(source_row)
+        check_row = BoxLayout(size_hint_y=None, height=44, spacing=12)
+        self._connection_status = RTLLabel(text='', font_size=12)
+        check_row.add_widget(self._connection_status)
+        self._connection_button = PrimaryButton(text=rtl('بررسی اتصال'),
+                                                size_hint_x=None, width=140)
+        self._connection_button.bind(on_release=lambda *_: self._check_connection())
+        check_row.add_widget(self._connection_button)
+        controls.add_widget(check_row)
         self._sync_source_control()
-        return source_row
+        return controls
 
     def _make_source_type_spinner(self):
         self._source_type_spinner = styled_spinner(
@@ -316,21 +314,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
             values=_ROLE_VALUES,
             initial=rtl(ROLE_LABELS[ROLE_ENTRY]),
         )
-        self._role_spinner.bind(text=self._sync_inside_point_fields)
         return self._role_spinner
-
-    def _sync_inside_point_fields(self, *_args):
-        role = _ROLE_BY_DISPLAY.get(self._role_spinner.text, ROLE_ENTRY)
-        is_dual_role = role == ROLE_ENTRY_AND_EXIT
-        for field in getattr(self, "_inside_point_inputs", []):
-            field.disabled = not is_dual_role
-        help_label = getattr(self, "_inside_point_help", None)
-        if help_label is not None:
-            help_label.set_text(
-                "یک نقطه در سمت داخل پارکینگ وارد کنید؛ نقطه نباید روی خط باشد"
-                if is_dual_role
-                else "برای دوربین تک‌نقش لازم نیست"
-            )
 
     # -- table --------------------------------------------------------
     def _build_table_card(self):
@@ -361,7 +345,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._table_holder.add_widget(header)
         self._table_holder.add_widget(Divider())
 
-        scroll = ScrollView()
+        scroll = ScrollView(do_scroll_x=False, bar_width=0)
         rows = GridLayout(cols=1, size_hint_y=None, spacing=2)
         rows.bind(minimum_height=rows.setter("height"))
         for camera in cameras:
@@ -370,9 +354,9 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._table_holder.add_widget(scroll)
 
     def _build_table_header(self):
-        row = Card(orientation="horizontal", size_hint_y=None, height=36, padding=0,
+        row = Card(orientation="horizontal", size_hint_y=None, height=36, padding=0, spacing=4,
                    radius=4, hover_effect=False, bg_color=theme.rgba(COLORS["surface_alt"]))
-        headers = [("شناسه", 0.22), ("نوع", 0.16), ("کارکرد", 0.2), ("وضعیت", 0.16), ("عملیات", 0.26)]
+        headers = [("عملیات", 0.26), ("وضعیت", 0.16), ("کارکرد", 0.2), ("نوع", 0.16), ("شناسه", 0.22)]
         for text, ratio in headers:
             cell = RTLLabel(text=text, font_size=FONT_SIZE["caption"], bold=True,
                              color=theme.rgba(COLORS["text_secondary"]), size_hint_x=ratio,
@@ -392,38 +376,118 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
                                color=theme.rgba(COLORS["text_secondary"]), size_hint_x=0.2,
                                halign="center")
 
-        status_wrap = BoxLayout(size_hint_x=0.16)
         is_online = camera.status == STATUS_ONLINE
-        status_wrap.add_widget(Badge(
-            text=camera.status_label(),
-            color_hex=COLORS["online"] if is_online else COLORS["offline"],
-        ))
+        status_wrap = RTLLabel(text=camera.status_label(), size_hint_x=0.16,
+                               halign='center', font_size=FONT_SIZE['caption'],
+                               color=theme.rgba('#36B37E' if is_online else '#F87171'))
 
-        actions_box = BoxLayout(size_hint_x=0.26, spacing=4)
+        actions_box = BoxLayout(size_hint_x=0.26)
+        action_buttons = BoxLayout(size_hint=(None, None), size=(68, 32), spacing=4,
+                                   pos_hint={'center_y': .5})
+        actions_box.add_widget(BoxLayout())
+        actions_box.add_widget(action_buttons)
+        actions_box.add_widget(BoxLayout())
         edit_button = _IconOnlyButton(icon_name="edit", color=COLORS["primary"])
         edit_button.bind(on_release=lambda *_, cam=camera: self._start_edit_mode(cam))
         delete_button = _IconOnlyButton(icon_name="delete", color=COLORS["offline"])
         delete_button.bind(on_release=lambda *_, cam=camera: self._delete(cam))
-        actions_box.add_widget(edit_button)
-        actions_box.add_widget(delete_button)
+        action_buttons.add_widget(edit_button)
+        action_buttons.add_widget(delete_button)
 
-        row.add_widget(id_label)
-        row.add_widget(type_label)
-        row.add_widget(role_label)
-        row.add_widget(status_wrap)
         row.add_widget(actions_box)
+        row.add_widget(status_wrap)
+        row.add_widget(role_label)
+        row.add_widget(type_label)
+        row.add_widget(id_label)
         return row
+
+    def _settings_key(self):
+        return (self._gate_input.text.strip(), self._id_input.text.strip(),
+                self._source_input.text.strip(), self._source_type(),
+                _ROLE_BY_DISPLAY.get(self._role_spinner.text))
+
+    def _settings_changed(self, *_):
+        if self._updating_form:
+            return
+        self._verified_settings = None
+        self._set_connection_state('initial')
+        self._connection_status.set_text('')
+        self._show_geometry_preview('')
+
+    def _set_connection_state(self, state):
+        self._connection_state = state
+        colors = {
+            'initial': (COLORS['action'], COLORS['action_hover'], COLORS['primary_dark']),
+            'success': ('#237A54', '#2B9165', '#195A3D'),
+            'failed': ('#B83D4B', '#CC4C5B', '#962D39'),
+        }
+        normal, hover, down = colors[state]
+        button = self._connection_button
+        button.bg_color_normal = theme.rgba(normal)
+        button.bg_color_hover = theme.rgba(hover)
+        button.bg_color_down = theme.rgba(down)
+        button.border_color = theme.rgba(normal)
+        button.color = theme.rgba(COLORS['text_on_primary'])
+        button._redraw()
+        self._geometry_button.disabled = state != 'success'
+
+    def _show_geometry_preview(self, path):
+        visible = bool(path and os.path.isfile(path))
+        self._geometry_preview.source = path if visible else ''
+        if visible:
+            self._geometry_preview.reload()
+            if self._geometry_details.parent is None:
+                self._geometry_section.add_widget(self._geometry_details)
+        elif self._geometry_details.parent is not None:
+            self._geometry_section.remove_widget(self._geometry_details)
+        self._geometry_section.height = 324 if visible else 46
+        self._geometry_hint.set_text('مختصات ثبت شد' if visible else '')
 
     # -- actions --------------------------------------------------------
     def _select_geometry(self):
+        if (self._checking or self._connection_state != 'success'
+                or self._verified_settings != self._settings_key()):
+            self._error_label.set_text('ابتدا بررسی اتصال را انجام دهید؛ نتیجه باید سبز باشد.')
+            return
         camera_id = self._id_input.text.strip()
         if camera_service.get_camera(camera_id) is None:
             self._error_label.set_text('ابتدا دوربین را ذخیره کنید، سپس آن را برای رسم محدوده ویرایش کنید.')
             return
-        subprocess.Popen([sys.executable, '-m', 'computer_vision_v2.Line_Manager.select_line_points',
-                          '--camera', camera_id])
+        camera = camera_service.get_camera(camera_id)
+        if (self._source_input.text.strip() != camera.source or self._source_type() != camera.source_type
+                or _ROLE_BY_DISPLAY.get(self._role_spinner.text) != camera.role):
+            self._error_label.set_text('ابتدا تغییرات منبع و کارکرد دوربین را با بررسی اتصال ثبت کنید.')
+            return
+        if getattr(self, '_geometry_dialog', None) is not None:
+            return
+        dialog = GeometryDialog(camera.to_dict(), camera_service.configuration_path, self._geometry_saved)
+        self._geometry_dialog = dialog
+        dialog.bind(on_dismiss=lambda *_: setattr(self, '_geometry_dialog', None))
+        dialog.open()
+
+    def _geometry_saved(self, preview):
+        camera_service.reload()
+        self._show_geometry_preview('')
+        key = self._settings_key()
+
+        def reveal():
+            if key == self._settings_key():
+                self._show_geometry_preview(preview)
+
+        def notify(_):
+            if key == self._settings_key():
+                self._show_connection_result('مختصات با موفقیت ثبت شد', success=True,
+                                             title='ثبت مختصات', on_confirm=reveal)
+        # Allow the drawing dialog's dismissal animation to finish first.
+        Clock.schedule_once(notify, .25)
+
 
     def _start_add_mode(self):
+        if self._checking:
+            return
+        self._updating_form = True
+        self._verified_settings = None
+        self._gate_input.text = ""
         self._editing_camera_id = None
         self._form_title.set_text("افزودن دوربین جدید")
         self._id_input.text = ""
@@ -432,14 +496,17 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._source_type_spinner.text = rtl(SOURCE_TYPE_LABELS[SOURCE_TYPE_RTSP])
         self._sync_source_control()
         self._role_spinner.text = rtl(ROLE_LABELS[ROLE_ENTRY])
-        for line_input, value in zip(self._line_inputs, (*_DEFAULT_LINE, "", "")):
-            line_input.text = str(value)
-        for point_input, value in zip(self._inside_point_inputs, _DEFAULT_INSIDE_POINT):
-            point_input.text = str(value)
-        self._sync_inside_point_fields()
+        self._show_geometry_preview('')
+        self._updating_form = False
+        self._set_connection_state('initial')
+        self._connection_status.set_text('')
         self._error_label.set_text("")
 
     def _start_edit_mode(self, camera: Camera):
+        if self._checking:
+            return
+        self._updating_form = True
+        self._gate_input.text = camera.gate_id
         self._editing_camera_id = camera.id
         self._form_title.set_text(f"ویرایش دوربین: {camera.id}")
         self._id_input.text = camera.id
@@ -448,20 +515,27 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
         self._source_type_spinner.text = rtl(camera.source_type_label())
         self._sync_source_control()
         self._role_spinner.text = rtl(camera.role_label())
-        line_values = [value for point in camera.line for value in point]
-        line_values += [""] * (6 - len(line_values))
-        for line_input, value in zip(self._line_inputs, line_values):
-            line_input.text = str(value)
-        inside_point = camera.inside_point or _DEFAULT_INSIDE_POINT
-        for point_input, value in zip(self._inside_point_inputs, inside_point):
-            point_input.text = str(value)
-        self._sync_inside_point_fields()
+        self._show_geometry_preview(camera.geometry_preview)
+        self._updating_form = False
+        if self._verified_settings != self._settings_key():
+            self._verified_settings = None
+            self._set_connection_state('initial')
         self._error_label.set_text("")
 
     def _save(self):
+        if self._checking:
+            return
+        gate_name = self._gate_input.text.strip()
+        if not gate_name:
+            self._error_label.set_text('ابتدا نام گیت را وارد کنید')
+            return
         camera_id = self._id_input.text.strip()
         if not camera_id:
-            self._error_label.set_text("شناسه دوربین نمی‌تواند خالی باشد")
+            self._error_label.set_text("نام دوربین نمی‌تواند خالی باشد")
+            return
+
+        if gate_name == camera_id:
+            self._error_label.set_text('نام گیت و دوربین نباید یکسان باشند')
             return
 
         source = self._source_input.text.strip()
@@ -476,47 +550,11 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
 
         source_type = _SOURCE_TYPE_BY_DISPLAY.get(self._source_type_spinner.text, SOURCE_TYPE_RTSP)
         role = _ROLE_BY_DISPLAY.get(self._role_spinner.text, ROLE_ENTRY)
-        try:
-            x1, y1, x2, y2 = (float(field.text) for field in self._line_inputs[:4])
-            line_points = [[x1, y1], [x2, y2]]
-            if any(field.text.strip() for field in self._line_inputs[4:]):
-                line_points.append([float(field.text) for field in self._line_inputs[4:]])
-        except ValueError:
-            self._error_label.set_text("مختصات خط عبور باید کامل و عددی باشند")
-            return
-        if any(a == b for a, b in zip(line_points, line_points[1:])):
-            self._error_label.set_text("دو نقطه خط عبور نمی‌توانند یکسان باشند")
-            return
         existing = camera_service.get_camera(camera_id)
-        if existing is not None and existing.coordinate_space != "normalized":
-            self._error_label.set_text("مختصات پیکسلی قدیمی را ابتدا به بازه صفر تا یک تبدیل کنید")
-            return
-        coordinate_space = "normalized"
-        if not all(0 <= v <= 1 for point in line_points for v in point):
-            self._error_label.set_text("مختصات نرمال‌شده باید بین صفر و یک باشند")
-            return
-        inside_point = None
-        if role == ROLE_ENTRY_AND_EXIT:
-            try:
-                inside_x, inside_y = (float(field.text) for field in self._inside_point_inputs)
-            except ValueError:
-                self._error_label.set_text("مختصات سمت داخل پارکینگ باید کامل و عددی باشند")
-                return
-            if not all(0 <= value <= 1 for value in (inside_x, inside_y)):
-                self._error_label.set_text("مختصات نقطه داخل باید بین صفر و یک باشند")
-                return
-            cross = ((x2 - x1) * (inside_y - y1)
-                     - (y2 - y1) * (inside_x - x1))
-            if abs(cross) <= 1e-9:
-                self._error_label.set_text("نقطه داخل پارکینگ نباید روی خط مرجع باشد")
-                return
-            inside_point = [inside_x, inside_y]
-            for a, b in zip(line_points, line_points[1:]):
-                cross = ((b[0] - a[0]) * (inside_y - a[1])
-                         - (b[1] - a[1]) * (inside_x - a[0]))
-                if abs(cross) <= 1e-9:
-                    self._error_label.set_text("نقطه داخل نباید روی امتداد ضلع خط مرجع باشد")
-                    return
+        same_source = existing is not None and existing.source == source and existing.source_type == source_type
+        line_points = existing.line if same_source else [[.2, .6], [.8, .6]]
+        inside_point = existing.inside_point if same_source and existing.inside_point else [.5, .3]
+        coordinate_space = existing.coordinate_space if same_source else 'normalized'
         # A brand-new camera has no real connection yet, so it starts
         # OFFLINE - "online" would be a fake status nobody verified.
         status = existing.status if existing else STATUS_OFFLINE
@@ -530,19 +568,121 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
             line=line_points,
             inside_point=inside_point,
             coordinate_space=coordinate_space,
-            roi=existing.roi if existing else None,
+            roi=existing.roi if same_source else None,
+            geometry_preview=existing.geometry_preview if same_source else "",
         )
 
-        if is_new:
-            camera_service.add_camera(camera)
-            show_toast(self, f"دوربین «{camera_id}» اضافه شد", kind="success")
-        else:
-            camera_service.update_camera(camera)
-            show_toast(self, f"دوربین «{camera_id}» به‌روزرسانی شد", kind="success")
+        self._verified_settings = None
+        self._set_connection_state('initial')
+        self._checking = True
+        self._form_card.disabled = True
+        self._error_label.color = theme.rgba(COLORS['text_secondary'])
+        self._error_label.set_text('')
+        self._connection_status.color = theme.rgba(COLORS['text_secondary'])
+        self._connection_status.set_text('در حال ثبت دوربین…')
 
-        self._start_add_mode()
+        def work():
+            try:
+                result = register_camera(camera, gate_name)
+            except Exception:
+                result = CameraSetupResult(False, 'ثبت دوربین انجام نشد؛ دوباره تلاش کنید')
+            Clock.schedule_once(lambda _: self._setup_finished(camera, is_new, result))
+        Thread(target=work, daemon=True).start()
+
+    def _setup_finished(self, camera, is_new, result):
+        self._checking = False
+        self._form_card.disabled = False
+        self._error_label.color = theme.rgba(COLORS['offline'])
+        self._connection_status.color = theme.rgba(COLORS['online'] if result.success else COLORS['offline'])
+        self._connection_status.set_text(result.message)
+        if not result.success:
+            self._verified_settings = None
+            self._set_connection_state('initial')
+            self._error_label.set_text("")
+            self._show_connection_result(result.message, success=False, title="ثبت دوربین")
+            return
+        try:
+            if is_new:
+                camera_service.add_camera(camera)
+            else:
+                camera_service.update_camera(camera)
+        except OSError:
+            self._set_connection_state('initial')
+            self._error_label.set_text('')
+            self._show_connection_result('ثبت دیتابیس موفق بود، اما ذخیره تنظیمات محلی انجام نشد', success=False, title='ثبت دوربین')
+            return
+        self._start_edit_mode(camera)
+        self._verified_settings = None
+        self._set_connection_state('initial')
+        self._error_label.color = theme.rgba(COLORS['online'])
+        self._error_label.set_text('')
+        self._show_connection_result(result.message, success=True, title="ثبت دوربین")
+
+    def _check_connection(self):
+        if self._checking:
+            return
+        camera = camera_service.get_camera(self._id_input.text.strip())
+        if camera is None or self._settings_key() != (camera.gate_id, camera.id, camera.source, camera.source_type, camera.role):
+            self._error_label.set_text('ابتدا اطلاعات دوربین را با دکمه ثبت دوربین ذخیره کنید.')
+            return
+        self._verified_settings = None
+        self._set_connection_state('initial')
+        self._checking = True
+        self._form_card.disabled = True
+        key = self._settings_key()
+        self._connection_status.set_text('در حال بررسی اتصال…')
+
+        def work():
+            try:
+                result = check_connection(camera)
+            except Exception:
+                result = CameraSetupResult(False, 'بررسی اتصال انجام نشد؛ دوباره تلاش کنید')
+            Clock.schedule_once(lambda _: self._connection_checked(result, key))
+        Thread(target=work, daemon=True).start()
+
+    def _connection_checked(self, result, key):
+        self._checking = False
+        self._form_card.disabled = False
+        if key != self._settings_key():
+            self._settings_changed()
+            return
+        self._verified_settings = key if result.success else None
+        self._set_connection_state('success' if result.success else 'failed')
+        self._connection_status.color = theme.rgba(COLORS['online'] if result.success else COLORS['offline'])
+        self._connection_status.set_text(result.message)
+        self._show_connection_result(result.message, success=result.success)
+
+    def _show_connection_result(self, message, success, title="نتیجه بررسی اتصال", on_confirm=None):
+        if self._connection_popup:
+            self._connection_popup.dismiss()
+        body = BoxLayout(orientation='vertical', padding=20, spacing=18)
+        body.add_widget(Icon(name='camera', size_hint=(None, None), size=(42, 42),
+                             pos_hint={'center_x': .5},
+                             color=theme.rgba(COLORS['online'] if success else COLORS['offline'])))
+        body.add_widget(RTLLabel(text=message, halign='center', font_size=14))
+        okay = PrimaryButton(text=rtl('باشه'), size_hint=(None, None), size=(120, 44),
+                             pos_hint={'center_x': .5})
+        body.add_widget(okay)
+        popup = Popup(title=rtl(title), title_font=theme.APP_FONT_NAME,
+                      title_align='right', content=body, auto_dismiss=False,
+                      size_hint=(None, None), size=(480, 300), separator_height=1,
+                      background='', background_color=theme.rgba(COLORS['surface']))
+        self._connection_popup = popup
+        def acknowledge(*_):
+            popup.dismiss()
+            if on_confirm:
+                on_confirm()
+        okay.bind(on_release=acknowledge)
+
+        def clear(*_):
+            if self._connection_popup is popup:
+                self._connection_popup = None
+        popup.bind(on_dismiss=clear)
+        popup.open()
 
     def _delete(self, camera: Camera):
+        if self._checking:
+            return
         camera_service.delete_camera(camera.id)
         if self._editing_camera_id == camera.id:
             self._start_add_mode()
@@ -561,6 +701,20 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
     def _handle_navigate(self, key):
         if self.on_navigate:
             self.on_navigate(key)
+
+
+class _GeometryButton(HoverBehavior, ButtonBehavior, Card):
+    def __init__(self, **kwargs):
+        super().__init__(size_hint_y=None, height=46, padding=[16, 8], spacing=12,
+                         radius=9, bg_color=theme.rgba(COLORS['primary_light']), **kwargs)
+        content = FloatLayout()
+        content.add_widget(RTLLabel(text='رسم خط مرجع و محدوده پردازش', font_size=14,
+                                    halign='center', padding=[40, 0],
+                                    pos_hint={'center_x': .5, 'center_y': .5}))
+        content.add_widget(Icon(name='edit', color=theme.rgba(COLORS['primary']),
+                                size_hint=(None, None), size=(23, 23),
+                                pos_hint={'right': 1, 'center_y': .5}))
+        self.add_widget(content)
 
 
 class _IconOnlyButton(HoverBehavior, ButtonBehavior, BoxLayout):

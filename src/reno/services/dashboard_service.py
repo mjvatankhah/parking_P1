@@ -1,4 +1,5 @@
 """Dashboard aggregates from the event table and live camera state."""
+from computer_vision_v2.database.plate_access import normalize_plate
 
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -22,13 +23,14 @@ class DashboardStatistics:
 class DashboardService:
     def get_daily_flow(self, end=None, camera="", plate=""):
         """Seven calendar days including end, zero-filled without truncating events."""
+        plate = normalize_plate(plate)
         end = end or date.today()
         start = end - timedelta(days=6)
         days = {start + timedelta(days=i): [0, 0] for i in range(7)}
         if MOCK_DATA_ENABLED:
             for record in plate_service._mock_records:
                 day = date.fromisoformat(record.date)
-                if day in days and (not camera or record.camera == camera) and (not plate or plate in record.plate):
+                if day in days and (not camera or record.camera == camera) and (not plate or plate in normalize_plate(record.plate)):
                     if record.direction in ('entry', 'exit'):
                         days[day][record.direction == 'exit'] += 1
         else:
@@ -38,8 +40,8 @@ class DashboardService:
                 conditions.append("camera_id = %s")
                 params.append(camera)
             if plate:
-                conditions.append("strpos(COALESCE(plate_number, ''), %s) > 0")
-                params.append(plate)
+                conditions.append("strpos(regexp_replace(translate(COALESCE(plate_number, ''), %s, %s), '[[:space:]‌-]', '', 'g'), %s) > 0")
+                params.extend(['۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩يك', '01234567890123456789یک', plate])
             with get_connection(connect_timeout=5) as connection:
                 with connection.cursor() as cursor:
                     cursor.execute('SET TRANSACTION READ ONLY')

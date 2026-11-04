@@ -22,12 +22,13 @@ few classes instead of repeating this pattern.
 """
 
 import math
+import unicodedata
 from functools import lru_cache
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
+from reno.ui.components.bidi_input import BidiTextInput
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics import Color, RoundedRectangle, Line, Ellipse, InstructionGroup, Mesh
@@ -330,7 +331,7 @@ class DangerButton(_RoundedButtonBase):
         super().__init__(**kwargs)
 
 
-class RoundedTextInput(TextInput):
+class RoundedTextInput(BidiTextInput):
     """A single-line-styled TextInput with a rounded, bordered
     background that changes color when focused, instead of Kivy's
     default beveled image background."""
@@ -338,6 +339,8 @@ class RoundedTextInput(TextInput):
     radius = NumericProperty(RADIUS["sm"])
 
     def __init__(self, **kwargs):
+        kwargs.setdefault("halign", "right")
+        self._preferred_halign = kwargs["halign"]
         kwargs.setdefault("multiline", False)
         kwargs.setdefault("font_name", theme.APP_FONT_NAME)
         kwargs.setdefault("font_size", FONT_SIZE["body"])
@@ -362,7 +365,24 @@ class RoundedTextInput(TextInput):
         for instruction in (self._color, self._rect, self._border_color_instr, self._border):
             background.add(instruction)
         self.canvas.before.insert(0, background)
-        self.bind(pos=self._redraw, size=self._redraw, focus=self._redraw)
+        self.bind(pos=self._redraw, size=self._redraw, focus=self._redraw,
+                  text=self._sync_text_direction, password=self._sync_text_direction,
+                  input_filter=self._sync_text_direction)
+        self._sync_text_direction()
+
+    def _sync_text_direction(self, *_args):
+        # Apply to typed, pasted and programmatically populated values alike.
+        # Keep logical Unicode untouched for editing, copying and DB storage.
+        value = self.text.strip()
+        numeric_text = (any(char.isdecimal() for char in value)
+                        and all(char.isdecimal() or char in '+-−.,٫٬%٪/: '
+                                for char in value))
+        force_ltr = self.password or self.input_filter in ('int', 'float') or numeric_text
+        is_rtl = not force_ltr and any(
+            unicodedata.bidirectional(char) in ('R', 'AL') for char in self.text)
+        self.halign = 'left' if force_ltr else 'right' if is_rtl else self._preferred_halign
+        self.base_direction = 'rtl' if is_rtl else 'ltr'
+        self.text_language = 'fa' if is_rtl else None
 
     def _redraw(self, *args):
         self._rect.pos = self.pos

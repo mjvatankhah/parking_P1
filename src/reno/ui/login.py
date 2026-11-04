@@ -139,7 +139,7 @@ class LoginScreen(Screen):
 
         input_class = RoundedTextInput if is_password else UsernameInput
         text_input = input_class(password=is_password, size_hint_y=None, height=44,
-                                 halign="right" if is_password else "left")
+                                 halign="left")
         if not is_password:
             text_input.bind(input_error=lambda _, error: setattr(self._error_label, 'text', rtl(error)))
         setattr(self, f"_{field_key}_input", text_input)

@@ -63,8 +63,10 @@ from reno.ui.login import LoginScreen
 from reno.ui.dashboard import DashboardScreen
 from reno.ui.live_detection import LiveDetectionScreen
 from reno.ui.camera_settings import CameraSettingsScreen
-from reno.ui.placeholder_screen import PlaceholderScreen
+from reno.ui.reports import ReportsScreen
+from reno.ui.plate_registration import PlateRegistrationScreen
 from reno.services.camera_service import camera_service
+from reno.services.camera_health_service import CameraHealthMonitor
 
 # Kivy's window clears to white by default before anything else draws.
 # On a dark UI that shows up as a white flash on resize or on any gap
@@ -107,14 +109,10 @@ class RenoApp(App):
         dashboard_screen = DashboardScreen(name="dashboard", on_navigate=self._navigate)
         live_detection_screen = LiveDetectionScreen(name="live_detection", on_navigate=self._navigate)
         camera_settings_screen = CameraSettingsScreen(name="camera_settings", on_navigate=self._navigate)
-        # Reports stays an empty, navigable page until its feature is built.
-        reports_screen = PlaceholderScreen(
-            name="reports", page_key="reports", title="گزارش‌ها",
-            on_navigate=self._navigate,
-        )
+        reports_screen = ReportsScreen(name="reports", on_navigate=self._navigate)
 
         for screen in (login_screen, dashboard_screen, live_detection_screen, camera_settings_screen,
-                       reports_screen, GuardSettingsScreen(name="guard_settings", on_navigate=self._navigate)):
+                       reports_screen, PlateRegistrationScreen(name="plate_registration", on_navigate=self._navigate), GuardSettingsScreen(name="guard_settings", on_navigate=self._navigate)):
             self.screen_manager.add_widget(screen)
             # Keep every pre-built page sized even before its first transition.
             # A deferred layout may otherwise leave the first page at Kivy's
@@ -125,6 +123,7 @@ class RenoApp(App):
             page_root.size = screen.size
             screen.bind(size=page_root.setter("size"))
 
+        self.camera_health = CameraHealthMonitor(camera_service)
         self.screen_manager.current = "login"
         return self.screen_manager
 
@@ -152,6 +151,7 @@ class RenoApp(App):
         self._show_screen(screen_name)
 
     def on_start(self):
+        self.camera_health.start()
         self._refresh_camera_config()
         self._camera_config_poll = Clock.schedule_interval(self._refresh_camera_config, 1)
 
@@ -159,6 +159,7 @@ class RenoApp(App):
         camera_service.reload()
 
     def on_stop(self):
+        self.camera_health.stop()
         if self._camera_config_poll is not None:
             self._camera_config_poll.cancel()
             self._camera_config_poll = None

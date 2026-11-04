@@ -18,6 +18,8 @@ DIRECTION_LABELS = {
     DIRECTION_EXIT: "خروج",
 }
 
+ACCESS_LABELS = {'allowed':'مجاز','guest':'میهمان','blocked':'غیرمجاز','unknown':'نامشخص'}
+
 CLASS_LABELS = {
     0: "انسان",
     2: "خودرو",
@@ -43,6 +45,10 @@ class PlateRecord:
     class_id: int = 2
     direction: str = DIRECTION_ENTRY
     image_path: str = ""
+    access_status: str = "guest"
+
+    def access_label(self):
+        return ACCESS_LABELS.get(self.access_status,'نامشخص')
 
     def direction_label(self) -> str:
         return DIRECTION_LABELS.get(self.direction, self.direction)

@@ -96,7 +96,94 @@ class Selection:
                     coordinate_space='normalized')
 
 
-def save_geometry(path, camera, selection):
+@dataclass
+class GuidedSelection(Selection):
+    """Desktop wizard: reference line, required ROI, then parking side."""
+    stage: Stage = Stage.LINE
+
+    def click(self, point):
+        if not (0 <= point[0] < self.width and 0 <= point[1] < self.height):
+            raise ValueError('نقطه باید داخل تصویر باشد')
+        if self.stage == Stage.LINE:
+            if len(self.line) >= 3:
+                raise ValueError('حداکثر سه نقطه برای خط انتخاب کنید')
+            if self.line and point == self.line[-1]:
+                raise ValueError('دو نقطه خط نباید یکسان باشند')
+            self.line.append(point)
+        elif self.stage == Stage.ROI:
+            if len(self.roi) >= 4:
+                raise ValueError('چهار نقطه انتخاب شده است؛ برای تغییر، رسم مجدد را بزنید')
+            if point in self.roi:
+                raise ValueError('گوشه‌های محدوده باید متفاوت باشند')
+            self.roi.append(point)
+        else:
+            try:
+                self.select_side(point)
+            except ValueError as error:
+                raise ValueError('نقطه داخل پارکینگ نباید روی خط یا امتداد آن باشد') from error
+
+    def confirm(self):
+        if self.stage == Stage.LINE:
+            if len(self.line) < 2:
+                raise ValueError('ابتدا حداقل دو نقطه خط مرجع را انتخاب کنید')
+            self.stage = Stage.ROI
+        elif self.stage == Stage.ROI:
+            polygon = np.asarray(self.roi, np.float32)
+            if len(self.roi) != 4:
+                raise ValueError('چهار گوشه محدوده را انتخاب کنید')
+            if cv2.contourArea(polygon) <= 0 or not cv2.isContourConvex(polygon):
+                raise ValueError('چهار گوشه محدوده را به‌ترتیب دور شکل انتخاب کنید')
+            if any(cv2.pointPolygonTest(polygon, point, False) < 0 for point in self.line):
+                raise ValueError('محدوده باید خط مرجع را در بر بگیرد')
+            self.stage = Stage.SIDE
+        else:
+            self.geometry()
+
+    def geometry(self):
+        if self.stage != Stage.SIDE or self.inside_point is None:
+            raise ValueError('ابتدا سمت داخل پارکینگ را روی تصویر مشخص کنید')
+        return super().geometry()
+
+    def back(self):
+        self.inside_point = self.selected_point = None
+        self.stage = Stage.ROI if self.stage == Stage.SIDE else Stage.LINE
+
+    def reset_stage(self):
+        if self.stage == Stage.LINE:
+            self.line.clear()
+        elif self.stage == Stage.ROI:
+            self.roi.clear()
+        else:
+            self.inside_point = self.selected_point = None
+
+
+def annotated_frame(original, selection):
+    """Evidence thumbnail without OpenCV window chrome or instructions."""
+    image = original.copy()
+    thickness = max(2, round(min(selection.width, selection.height) / 220))
+    if len(selection.roi) == 4:
+        cv2.polylines(image, [np.asarray(selection.roi, np.int32)], True, (230, 185, 70), thickness)
+    for point in selection.roi:
+        cv2.circle(image, tuple(map(round, point)), thickness * 2, (230, 185, 70), -1)
+    if len(selection.line) > 1:
+        cv2.polylines(image, [np.asarray(selection.line, np.int32)], False, (60, 220, 255), thickness)
+    for point in selection.line:
+        cv2.circle(image, tuple(map(round, point)), thickness * 2, (60, 220, 255), -1)
+    if selection.inside_point is not None:
+        point = tuple(map(round, selection.inside_point))
+        cv2.circle(image, point, thickness * 4, (100, 240, 100), thickness)
+        # A local marker points to the selected parking side independently
+        # of the reference line and its endpoints.
+        offset = max(12, min(40, round(min(selection.width, selection.height) * .08)))
+        dx = offset if point[0] < selection.width / 2 else -offset
+        dy = offset if point[1] < selection.height / 2 else -offset
+        anchor = (max(0, min(selection.width-1, point[0]+dx)),
+                  max(0, min(selection.height-1, point[1]+dy)))
+        cv2.arrowedLine(image, anchor, point, (100, 240, 100), thickness, tipLength=.3)
+    return image
+
+
+def save_geometry(path, camera, selection, preview_path=None):
     """Preserve unrelated edits and reject changes to the selected source."""
     geometry = selection.geometry()
     latest = json.loads(path.read_text(encoding='utf-8'))
@@ -104,6 +191,8 @@ def save_geometry(path, camera, selection):
     if target is None or any(target.get(key) != camera.get(key) for key in ('source', 'dir', 'type')):
         raise ValueError('Camera settings changed; reopen the selector.')
     target.update(geometry)
+    if preview_path is not None:
+        target["geometry_preview"] = str(preview_path)
     temporary = path.with_suffix('.geometry.tmp')
     temporary.write_text(json.dumps(latest, ensure_ascii=False, indent=2), encoding='utf-8')
     temporary.replace(path)

@@ -69,6 +69,8 @@ class Camera:
     inside_point: list | None = None
     coordinate_space: str = "normalized"
     roi: list | None = None
+    gate_id: str = ""
+    geometry_preview: str = ""
 
     def source_type_label(self) -> str:
         return SOURCE_TYPE_LABELS.get(self.source_type, self.source_type)
@@ -83,6 +85,8 @@ class Camera:
         """Return the camera object in the pipeline's native JSON schema."""
         return {
             "id": self.id,
+            "gate_id": self.gate_id,
+            "geometry_preview": self.geometry_preview,
             "type": self.source_type,
             "source": self.source,
             "line": self.line,
@@ -96,6 +100,8 @@ class Camera:
     def from_dict(data: dict) -> "Camera":
         return Camera(
             id=data.get("id", ""),
+            gate_id=data.get("gate_id", ""),
+            geometry_preview=data.get("geometry_preview", ""),
             source_type=data.get("type", SOURCE_TYPE_RTSP),
             source=data.get("source", ""),
             role=data.get("dir", data.get("role", ROLE_ENTRY)),

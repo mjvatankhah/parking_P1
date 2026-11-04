@@ -13,14 +13,13 @@ from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 import cv2
 
-from reno.models.camera import Camera, STATUS_ONLINE, STATUS_OFFLINE
+from reno.models.camera import Camera
 from reno.ui import theme
 from reno.ui.theme import COLORS, FONT_SIZE, SPACING, rtl
 from reno.ui.components.common import Card, StatusDot
 from computer_vision_v2.preview import (
     PREVIEW_INTERVAL, PreviewSubscription, preview_path, read_preview,
 )
-from reno.services.camera_service import camera_service
 
 
 class CameraCard(Card):
@@ -104,6 +103,7 @@ class CameraCard(Card):
         self._video_surface.opacity = 0
 
     def _apply_state(self, state):
+        # Preview availability is separate from the global source health monitor.
         if self._state == state:
             return
         self._state = state
@@ -117,9 +117,6 @@ class CameraCard(Card):
             self._video_surface.opacity = 0
             self._message.opacity = 1
             self._message.text = rtl("منتظر تصویر پردازش‌شده؛ بک‌اند باید در حال اجرا باشد")
-        camera_service.set_status(
-            self.camera.id, STATUS_ONLINE if state == "online" else STATUS_OFFLINE,
-        )
 
     def _update_frame(self, _dt):
         self._preview_subscription.renew()

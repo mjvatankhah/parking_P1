@@ -4,6 +4,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 from reno.main import RenoApp
+from reno.ui.reports import ReportsScreen
+from reno.services.report_service import report_service, ReportPage
 from reno.services.auth_service import auth_service
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -31,6 +33,7 @@ class ReferenceUIContractTests(unittest.TestCase):
         cls.records = [PlateRecord('۱۲ب۳۴۵۶۷', '2026-10-02', '12:48:32', 'cam-1'),
                        PlateRecord('', '2026-10-02', '12:47:18', 'cam-2', class_id=0, direction='exit')]
         cls.patches = [
+            patch.object(report_service, 'page', return_value=ReportPage((),0,0,20)),
             patch.object(dashboard_service, 'get_statistics', return_value=DashboardStatistics(1248, 932, 2, 3, 3)),
             patch.object(dashboard_service, 'get_daily_flow', return_value=[('2026-10-02', 8, 2)]),
             patch.object(plate_service, 'get_recent_records', return_value=cls.records),
@@ -226,7 +229,7 @@ class ReferenceUIContractTests(unittest.TestCase):
         button._track_pointer(Window, (-100, -100))
         self.assertFalse(button.hovered)
     def test_four_destinations_and_logout_work(self):
-        expected = ['dashboard', 'live_detection', 'reports', 'camera_settings', 'logout']
+        expected = ['dashboard', 'live_detection', 'reports', 'camera_settings', 'plate_registration', 'logout']
         self.assertEqual(list(self.dashboard._shell.sidebar._items), expected)
         # Drive page navigation without polling the backend preview.
         with patch.object(CameraCard, 'ensure_stream_started'):
@@ -234,7 +237,7 @@ class ReferenceUIContractTests(unittest.TestCase):
                 self.dashboard._shell.sidebar._items[destination].dispatch('on_release')
                 self.assertEqual(self.root.current, 'login' if destination == 'logout' else destination)
         self.assertFalse(self.root.has_screen('cameras'))
-        self.assertEqual(len(self.root.get_screen('reports')._shell.main.children[0].children), 0)
+        self.assertIsInstance(self.root.get_screen('reports'), ReportsScreen)
 
 
 if __name__ == '__main__':
