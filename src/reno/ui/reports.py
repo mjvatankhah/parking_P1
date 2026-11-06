@@ -12,6 +12,7 @@ from reno.ui.components.page_shell import PageShell
 from reno.ui.components.traffic_record import TrafficRecordRow, detection_header
 from reno.ui.components.jalali_date_picker import JalaliDatePicker
 from reno.ui.components.export_dialog import ExportDialog
+from reno.ui.components.plate_input import PlateSearchInput
 from reno.services.report_service import ReportFilter, report_service
 
 _COUNTS={theme.rtl('۲۰ تردد'):20,theme.rtl('۳۰ تردد'):30,theme.rtl('۵۰ تردد'):50,theme.rtl('همه ترددها'):None}
@@ -43,9 +44,11 @@ class ReportsScreen(Screen):
         line.add_widget(self.apply_button)
         self.end=JalaliDatePicker(size_hint_y=None,height=42,font_size=12)
         self.start=JalaliDatePicker(size_hint_y=None,height=42,font_size=12)
-        self.plate=RoundedTextInput(hint_text=theme.rtl('مثلاً ۱۲ب۳۴۵۶۷'),size_hint_y=None,height=42)
+        self.plate=PlateSearchInput(hint_text=theme.rtl('مثلاً ۱۲ب۳۴۵۶۷'),size_hint_y=None,height=42)
         self.plate.bind(on_text_validate=self._apply)
-        for title,widget in [('تا تاریخ',self.end),('از تاریخ',self.start),('جست‌وجوی پلاک مشخص',self.plate)]:
+        self.camera=RoundedTextInput(hint_text=theme.rtl('نام دقیق دوربین'),size_hint_y=None,height=42)
+        self.camera.bind(on_text_validate=self._apply)
+        for title,widget in [('تا تاریخ',self.end),('از تاریخ',self.start),('نام دوربین',self.camera),('جست‌وجوی پلاک مشخص',self.plate)]:
             field=BoxLayout(orientation='vertical',spacing=6)
             field.add_widget(RTLLabel(text=title,font_size=12,size_hint_y=None,height=22))
             field.add_widget(widget)
@@ -115,7 +118,8 @@ class ReportsScreen(Screen):
         if self._busy or self._exporting:
             return
         try:
-            filters=ReportFilter(self.plate.text.strip(),self.start.selected,self.end.selected)
+            filters=ReportFilter(self.plate.text.strip(),self.start.selected,self.end.selected,
+                                 camera=self.camera.text.strip())
         except ValueError as exc:
             self.status.set_text(str(exc))
             return

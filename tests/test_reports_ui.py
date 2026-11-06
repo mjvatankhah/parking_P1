@@ -20,15 +20,32 @@ class ReportsUITests(unittest.TestCase):
     def tearDown(self):
         self.screen.on_leave()
 
+    def test_plate_search_formats_and_displays_groups_left_to_right(self):
+        field=self.screen.plate
+        for char in '۱۲الف۳۴۵۶۷':
+            field.insert_text(char)
+            Clock.tick()
+        self.assertEqual(field.text,'12 الف 345 67')
+        self.assertEqual(field.halign,'left')
+        self.assertEqual(field.base_direction,'ltr')
+        display,order,_=field._display_line(field.text,4)
+        self.assertTrue(display.startswith('12 '))
+        self.assertTrue(display.endswith(' 345 67'))
+        self.assertEqual(sorted(order),list(range(len(field.text))))
+        with patch.object(self.screen,'_load'):
+            self.screen._apply()
+        self.assertEqual(self.screen._filters.plate,'12 الف 345 67')
+
     def test_default_twenty_and_filters_are_intersected(self):
         self.assertEqual(self.screen.page_size,20)
         self.screen.plate.text='۱۲ب۳۴۵۶۷'
         self.screen.start.selected=date(2026,11,1)
         self.screen.end.selected=date(2026,11,4)
+        self.screen.camera.text='  gate-camera  '
         with patch.object(self.screen,'_load') as load:
             self.screen._apply()
             load.assert_called_once()
-        self.assertEqual(self.screen._filters,ReportFilter('۱۲ب۳۴۵۶۷',date(2026,11,1),date(2026,11,4)))
+        self.assertEqual(self.screen._filters,ReportFilter('۱۲ب۳۴۵۶۷',date(2026,11,1),date(2026,11,4),camera='gate-camera'))
         self.screen.start.selected=date(2026,11,5)
         with patch.object(self.screen,'_load') as load:
             self.screen._apply()

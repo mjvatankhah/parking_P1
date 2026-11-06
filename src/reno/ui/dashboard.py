@@ -22,7 +22,6 @@ from reno.ui.components.traffic_record import TrafficRecordRow, detection_header
 from reno.ui.components.week_picker import WeekPicker
 from reno.ui.components.jalali_calendar import week_bounds
 from reno.ui.components.camera_selector import build_camera_selector, ALL_CAMERAS_VALUE
-from reno.models.camera import STATUS_ONLINE
 from reno.services.camera_service import camera_service
 from reno.services.dashboard_service import dashboard_service
 from reno.services.plate_service import plate_service
@@ -52,13 +51,13 @@ class DashboardScreen(Screen):
         stats = BoxLayout(size_hint_y=None, height=112, spacing=13)
         self._today = StatCard('تردد امروز', 0, subtitle='مجموع ورود و خروج',
                                icon_name='car', gradient=GRADIENT_TEAL)
-        self._unique = StatCard('خودروهای یکتا', 0, subtitle='بر اساس پلاک شناسایی‌شده',
+        self._inside = StatCard('داخل محوطه', 0, subtitle='خودروهای واردشده بدون ثبت خروج',
                                 icon_name='shield', gradient=GRADIENT_BLUE)
-        self._online = StatCard('دوربین‌های فعال', 0, subtitle='در حال بررسی وضعیت دوربین‌ها',
-                                icon_name='camera', gradient=GRADIENT_CYAN, value_color=COLORS['primary'])
-        self._alerts = StatCard('هشدارها', 0, subtitle='پلاک ناخوانا و دوربین قطع',
+        self._guests = StatCard('خودروهای میهمان', 0, subtitle='پلاک‌های یکتای میهمان امروز',
+                                icon_name='car', gradient=GRADIENT_CYAN, value_color=COLORS['primary'])
+        self._blocked = StatCard('خودروهای غیرمجاز', 0, subtitle='پلاک‌های یکتای غیرمجاز امروز',
                                 icon_name='bell', gradient=GRADIENT_ORANGE, value_color=COLORS['warning'])
-        for card in (self._today, self._unique, self._online, self._alerts):
+        for card in (self._blocked, self._guests, self._inside, self._today):
             stats.add_widget(card)
         content.add_widget(stats)
 
@@ -135,19 +134,12 @@ class DashboardScreen(Screen):
         content.add_widget(footer)
         self._shell = PageShell('داشبورد کنترل تردد', 'dashboard', content, self._navigate)
         self.add_widget(self._shell)
-        self._set_camera_counts(camera_service.get_cameras())
 
     def _reset_filters(self, *_):
         self._search.text = ''
         self._camera_selector.text = theme.rtl('همه دوربین‌ها')
         self._date_picker.set_date(None)
         self._metric_selector.text = theme.rtl('ورود')
-
-    def _set_camera_counts(self, cameras):
-        online = sum(camera.status == STATUS_ONLINE for camera in cameras)
-        total = len(cameras)
-        self._online.set_value(online, total=total)
-        self._online.set_subtitle(f'{theme.fa_number(total-online)} دوربین قطع' if total else 'دوربینی ثبت نشده است')
 
     def _navigate(self, key):
         if self.on_navigate:
@@ -166,11 +158,9 @@ class DashboardScreen(Screen):
             self._timer = None
 
     def _on_cameras_changed(self, cameras):
-        self._set_camera_counts(cameras)
         self._filters_changed()
 
     def _on_status_changed(self, cameras):
-        self._set_camera_counts(cameras)
         self._request_refresh()
 
     def _select_camera(self, value):
@@ -221,13 +211,9 @@ class DashboardScreen(Screen):
             self._data_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
             return
         self._today.set_value(stats.today_total)
-        self._unique.set_value(stats.unique_vehicles)
-        self._online.set_value(stats.online_cameras, total=stats.total_cameras)
-        offline = max(0, stats.total_cameras-stats.online_cameras)
-        unread = max(0, stats.alerts-offline)
-        self._online.set_subtitle(f'{theme.fa_number(offline)} دوربین قطع' if stats.total_cameras else 'دوربینی ثبت نشده است')
-        self._alerts.set_subtitle(f'{theme.fa_number(unread)} پلاک ناخوانا · {theme.fa_number(offline)} دوربین قطع')
-        self._alerts.set_value(stats.alerts)
+        self._inside.set_value(stats.inside_vehicles)
+        self._guests.set_value(stats.guest_vehicles)
+        self._blocked.set_value(stats.blocked_vehicles)
         self._chart.set_data(flow)
         self._chart_status.set_text('ترددی در این بازه ثبت نشده است' if not any(a or b for _, a, b in flow) else 'بازهٔ هفتگی · تعداد رویدادهای ثبت‌شده')
         self._record_status.set_text(f'{theme.fa_number(len(records))} تردد')

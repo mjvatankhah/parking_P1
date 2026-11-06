@@ -16,6 +16,7 @@ class ReportFilter:
     plate: str = ''
     start: date | None = None
     end: date | None = None
+    camera: str = ''
 
     def __post_init__(self):
         if self.plate.strip() and not normalize_plate(self.plate):
@@ -44,6 +45,9 @@ def conditions(filters):
     if filters.end:
         clauses.append('captured_at < %s')
         params.append(datetime.combine(filters.end + timedelta(days=1), time.min).astimezone())
+    if filters.camera.strip():
+        clauses.append('camera_id = %s')
+        params.append(filters.camera.strip())
     return (' WHERE ' + ' AND '.join(clauses) if clauses else ''), params
 
 

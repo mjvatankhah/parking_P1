@@ -26,7 +26,7 @@ class RecordScrollTests(unittest.TestCase):
         screen._record_holder = BoxLayout(orientation='vertical')
         screen.add_widget(screen._record_holder)
         for name in ('_chart', '_chart_status', '_record_status', '_data_status',
-                     '_today', '_unique', '_online', '_alerts'):
+                     '_today', '_inside', '_guests', '_blocked'):
             setattr(screen, name, Mock())
 
     def setUp(self):

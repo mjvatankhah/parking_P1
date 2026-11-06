@@ -1,5 +1,5 @@
 """Dashboard aggregates from the event table and live camera state."""
-from computer_vision_v2.database.plate_access import normalize_plate
+from computer_vision_v2.database.plate_access import normalize_plate, ensure_schema
 
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -18,6 +18,9 @@ class DashboardStatistics:
     online_cameras: int
     total_cameras: int
     alerts: int
+    inside_vehicles: int = 0
+    guest_vehicles: int = 0
+    blocked_vehicles: int = 0
 
 
 class DashboardService:
@@ -57,27 +60,40 @@ class DashboardService:
         cameras = camera_service.get_cameras()
         online = sum(camera.status == STATUS_ONLINE for camera in cameras)
         if MOCK_DATA_ENABLED:
-            records = plate_service.get_recent_records(limit=1000)
+            records = plate_service._mock_records
             today = date.today().isoformat()
             day = [record for record in records if record.date == today]
             total = len(day)
             unique = len({record.plate for record in day if record.plate != 'خوانده نشد'})
             unread = sum(record.plate == 'خوانده نشد' for record in day)
+            valid = [r for r in records if r.plate not in ('خوانده نشد', 'نامطمئن', '')]
+            latest = {}
+            for record in sorted(valid, key=lambda r: (r.date, r.time)):
+                latest[normalize_plate(record.plate)] = record
+            inside = sum(r.direction == 'entry' for r in latest.values())
+            guests = len({normalize_plate(r.plate) for r in valid if r.date == today and r.access_status == 'guest'})
+            blocked = len({normalize_plate(r.plate) for r in valid if r.date == today and r.access_status == 'blocked'})
         else:
             with get_connection(connect_timeout=5) as connection:
+                ensure_schema(connection)
                 with connection.cursor() as cursor:
                     cursor.execute('SET TRANSACTION READ ONLY')
                     cursor.execute("SET LOCAL statement_timeout = '5s'")
                     cursor.execute('''SELECT count(*), count(DISTINCT plate_number),
-                                             count(*) FILTER (WHERE plate_number IS NULL)
+                                             count(*) FILTER (WHERE plate_number IS NULL),
+                                             count(DISTINCT plate_number) FILTER (WHERE access_status = 'guest'),
+                                             count(DISTINCT plate_number) FILTER (WHERE access_status = 'blocked')
                                       FROM event
                                       WHERE captured_at >= CURRENT_DATE
                                         AND captured_at < CURRENT_DATE + INTERVAL '1 day' ''')
-                    total, unique, unread = cursor.fetchone()
+                    total, unique, unread, guests, blocked = cursor.fetchone()
+                    cursor.execute("SELECT count(DISTINCT plate_number) FROM vehicle_session WHERE status = 'open'")
+                    inside = cursor.fetchone()[0]
         return DashboardStatistics(
             today_total=total, unique_vehicles=unique,
             online_cameras=online, total_cameras=len(cameras),
             alerts=unread + len(cameras) - online,
+            inside_vehicles=inside, guest_vehicles=guests, blocked_vehicles=blocked,
         )
 
 

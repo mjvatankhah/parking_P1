@@ -33,6 +33,23 @@ class ReportServiceTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             ReportFilter(start=date(2026,11,4),end=date(2026,11,1))
 
+    def test_camera_filter_is_optional_and_parameterized_for_page_and_export(self):
+        self.assertEqual(conditions(ReportFilter(camera='  ')),('',[]))
+        camera="ورودی ' %_"
+        filters=ReportFilter(camera=f'  {camera}  ')
+        self.assertEqual(conditions(filters),(' WHERE camera_id = %s',[camera]))
+        service,connection,cursor=self.connection()
+        cursor.fetchone.return_value=(1,)
+        cursor.fetchall.return_value=[ROW]
+        service.page(filters)
+        selects=[call.args for call in cursor.execute.call_args_list if call.args[0].startswith('SELECT')]
+        self.assertEqual(selects[0][1],[camera])
+        self.assertEqual(selects[1][1],(camera,20,0))
+        cursor.fetchmany.side_effect=[[ROW],[]]
+        with tempfile.TemporaryDirectory() as folder:
+            service.export(filters,Path(folder)/'report.xlsx')
+        self.assertEqual(cursor.execute.call_args.args[1],[camera])
+
     def test_latest_twenty_and_all_pagination_bounds(self):
         service,connection,cursor=self.connection()
         cursor.fetchone.return_value=(85,)

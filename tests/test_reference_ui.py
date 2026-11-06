@@ -34,7 +34,7 @@ class ReferenceUIContractTests(unittest.TestCase):
                        PlateRecord('', '2026-10-02', '12:47:18', 'cam-2', class_id=0, direction='exit')]
         cls.patches = [
             patch.object(report_service, 'page', return_value=ReportPage((),0,0,20)),
-            patch.object(dashboard_service, 'get_statistics', return_value=DashboardStatistics(1248, 932, 2, 3, 3)),
+            patch.object(dashboard_service, 'get_statistics', return_value=DashboardStatistics(1248, 932, 2, 3, 3, 42, 12, 3)),
             patch.object(dashboard_service, 'get_daily_flow', return_value=[('2026-10-02', 8, 2)]),
             patch.object(plate_service, 'get_recent_records', return_value=cls.records),
         ]
@@ -78,22 +78,23 @@ class ReferenceUIContractTests(unittest.TestCase):
             self.assertTrue(marks, screen_name)
             self.assertTrue(all(w.source == APP_ICON for w in marks))
 
-    def test_headline_copy_and_active_camera_semantics_match_reference(self):
+    def test_headline_copy_and_vehicle_counts(self):
         self.app._navigate('dashboard')
         layout()
         screen = self.dashboard
         expected = [(screen._today, 'تردد امروز', 'مجموع ورود و خروج'),
-                    (screen._unique, 'خودروهای یکتا', 'بر اساس پلاک شناسایی‌شده'),
-                    (screen._online, 'دوربین‌های فعال', '۱ دوربین قطع'),
-                    (screen._alerts, 'هشدارها', '۲ پلاک ناخوانا · ۱ دوربین قطع')]
+                    (screen._inside, 'داخل محوطه', 'خودروهای واردشده بدون ثبت خروج'),
+                    (screen._guests, 'خودروهای میهمان', 'پلاک‌های یکتای میهمان امروز'),
+                    (screen._blocked, 'خودروهای غیرمجاز', 'پلاک‌های یکتای غیرمجاز امروز')]
         for card, title, subtitle in expected:
             self.assertEqual(card._title_label.text, theme.rtl(title))
             self.assertEqual(card._subtitle_label.text, theme.rtl(subtitle))
         # Let the user-visible counter finish rather than checking its target.
         for _ in range(24):
             Clock.tick()
-        self.assertIn('۲ ', screen._online._value_label.text)
-        self.assertIn('/ ۳', screen._online._value_label.text)
+        self.assertEqual(screen._guests._value_label.text, '۱۲')
+        self.assertEqual(screen._inside._value_label.text, '۴۲')
+        self.assertEqual(screen._blocked._value_label.text, '۳')
         self.assertEqual(screen._today._value_label.text, '۱٬۲۴۸')
 
     def test_reference_layout_and_requested_panel_order_at_desktop_sizes(self):
@@ -101,13 +102,13 @@ class ReferenceUIContractTests(unittest.TestCase):
         for size in ((1000, 780), (1440, 1000)):
             self.root.size = size
             layout()
-            self.assertGreater(screen._shell.sidebar.x, screen._alerts.right)
-            self.assertLess(screen._today.x, screen._unique.x)
-            self.assertLess(screen._unique.x, screen._online.x)
-            self.assertLess(screen._online.x, screen._alerts.x)
+            self.assertGreater(screen._shell.sidebar.x, screen._today.right)
+            self.assertGreater(screen._today.x, screen._inside.x)
+            self.assertGreater(screen._inside.x, screen._guests.x)
+            self.assertGreater(screen._guests.x, screen._blocked.x)
             self.assertLess(screen._chart.right, screen._record_panel.x)
             self.assertGreaterEqual(screen._today.width, 160)
-            self.assertLessEqual(screen._alerts.right, screen._shell.frame.right)
+            self.assertLessEqual(screen._today.right, screen._shell.frame.right)
             self.assertFalse(any(isinstance(w, CameraCard) for w in screen.walk(restrict=True)))
         self.root.size = Window.size
         layout()
@@ -121,8 +122,8 @@ class ReferenceUIContractTests(unittest.TestCase):
         layout()
         cards = [w for w in self.dashboard.walk(restrict=True)
                  if isinstance(w, Card) and w._animated_border]
-        self.assertEqual(set(cards), {self.dashboard._today, self.dashboard._unique,
-                                      self.dashboard._online, self.dashboard._alerts})
+        self.assertEqual(set(cards), {self.dashboard._today, self.dashboard._inside,
+                                      self.dashboard._guests, self.dashboard._blocked})
         self.assertIsNone(self.dashboard._record_panel._frame)
         self.assertIsNone(self.dashboard._chart.parent._frame)
         with TemporaryDirectory() as directory:
