@@ -26,7 +26,7 @@ class RecordScrollTests(unittest.TestCase):
         screen._record_holder = BoxLayout(orientation='vertical')
         screen.add_widget(screen._record_holder)
         for name in ('_chart', '_chart_status', '_record_status', '_data_status',
-                     '_today', '_inside', '_guests', '_blocked'):
+                     '_today', '_inside', '_guests', '_blocked', '_breakdown'):
             setattr(screen, name, Mock())
 
     def setUp(self):
@@ -77,6 +77,14 @@ class RecordScrollTests(unittest.TestCase):
         self.refresh(None, stats=False)
         self.assertIn(self.scroll, self.screen._record_holder.children)
         self.assertAlmostEqual(self.scroll.scroll_y, .4)
+
+    def test_statistics_failure_does_not_hide_successfully_received_events(self):
+        newest = PlateRecord('12ب34567', '2026-11-06', '12:01:00', 'cam')
+        self.screen._apply(0, None, [newest], [], 0, errors=('statistics',))
+        layout()
+        self.assertEqual(len(self.screen._record_rows.children), 2)
+        self.assertEqual(self.screen._record_rows.children[0].record, newest)
+        self.screen._record_status.set_text.assert_called_with('۱ تردد')
 
     def test_growing_list_keeps_visible_row_at_same_position(self):
         rows = self.scroll.children[0]

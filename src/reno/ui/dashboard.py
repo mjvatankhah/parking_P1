@@ -10,17 +10,16 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.screenmanager import Screen
+from kivy.uix.popup import Popup
 from reno.ui import theme
-from reno.ui.theme import COLORS
-from reno.ui.components.common import Card, RTLLabel, EmptyState, RoundedTextInput, SecondaryButton, styled_spinner
+from reno.ui.components.common import Card, Divider, RTLLabel, EmptyState, SecondaryButton, styled_spinner
 from reno.ui.components.plate_input import PlateSearchInput
 from reno.ui.components.page_shell import PageShell
-from reno.ui.components.icons import Icon
-from reno.ui.components.stat_card import StatCard, GRADIENT_TEAL, GRADIENT_BLUE, GRADIENT_ORANGE, GRADIENT_CYAN
+from reno.ui.components.stat_card import StatCard
 from reno.ui.components.traffic_chart import TrafficChart
 from reno.ui.components.traffic_record import TrafficRecordRow, detection_header
-from reno.ui.components.week_picker import WeekPicker
-from reno.ui.components.jalali_calendar import week_bounds
+from reno.ui.components.jalali_date_picker import JalaliDatePicker
+from reno.ui.components.traffic_breakdown import TrafficBreakdown, StatusDot
 from reno.ui.components.camera_selector import build_camera_selector, ALL_CAMERAS_VALUE
 from reno.services.camera_service import camera_service
 from reno.services.dashboard_service import dashboard_service
@@ -36,7 +35,7 @@ class DashboardScreen(Screen):
         self._loading = False
         self._timer = None
         self._camera = ''
-        self._day = week_bounds(date.today())[1]
+        self._day = None  # None follows today across midnight; a selected date stays fixed.
         self._revision = 0
         self._record_scroll = None
         self._record_rows = None
@@ -47,99 +46,133 @@ class DashboardScreen(Screen):
         camera_service.subscribe_status(self._on_status_changed)
 
     def _build(self):
-        content = BoxLayout(orientation='vertical', spacing=16)
-        stats = BoxLayout(size_hint_y=None, height=112, spacing=13)
-        self._today = StatCard('تردد امروز', 0, subtitle='مجموع ورود و خروج',
-                               icon_name='car', gradient=GRADIENT_TEAL)
-        self._inside = StatCard('داخل محوطه', 0, subtitle='خودروهای واردشده بدون ثبت خروج',
-                                icon_name='shield', gradient=GRADIENT_BLUE)
-        self._guests = StatCard('خودروهای میهمان', 0, subtitle='پلاک‌های یکتای میهمان امروز',
-                                icon_name='car', gradient=GRADIENT_CYAN, value_color=COLORS['primary'])
-        self._blocked = StatCard('خودروهای غیرمجاز', 0, subtitle='پلاک‌های یکتای غیرمجاز امروز',
-                                icon_name='bell', gradient=GRADIENT_ORANGE, value_color=COLORS['warning'])
+        palette = theme.DASHBOARD_COLORS
+        self._content = content = BoxLayout(orientation='vertical', spacing=24,
+                                           size_hint_y=None, padding=[2, 2, 6, 4])
+        content.bind(minimum_height=content.setter('height'))
+        self._stats_grid = stats = GridLayout(cols=4, size_hint_y=None, height=118, spacing=13)
+        self._today = StatCard('کل تردد امروز', 0, icon_name='car',
+                              gradient=(palette['cyan'], '#246A83'))
+        self._inside = StatCard('خودروهای داخل محوطه', 0, icon_name='maximize',
+                               gradient=(palette['green'], '#246B52'))
+        self._guests = StatCard('میهمانان امروز', 0, icon_name='guard_add',
+                               gradient=(palette['amber'], '#8B6127'))
+        self._blocked = StatCard('خودروهای غیرمجاز امروز', 0, icon_name='shield',
+                                gradient=(palette['red'], '#8A384A'))
         for card in (self._blocked, self._guests, self._inside, self._today):
             stats.add_widget(card)
         content.add_widget(stats)
 
-        panels = BoxLayout(spacing=18)
-        chart_panel = Card(orientation='vertical', padding=[17, 13, 17, 14], spacing=10, size_hint_x=.42)
-        heading = BoxLayout(size_hint_y=None, height=28, spacing=8)
-        heading.add_widget(RTLLabel(text='شنبه تا جمعه', font_size=11,
-                                    color=theme.rgba(COLORS['text_secondary']), halign='left', padding=[0, 0]))
-        heading.add_widget(RTLLabel(text='تردد هفتگی', font_size=14, padding=[0, 0]))
-        heading.add_widget(Icon(name='reports', size_hint=(None, None), size=(16, 16),
-                                pos_hint={'center_y': .5}, color=theme.rgba(COLORS['primary'])))
-        chart_panel.add_widget(heading)
-        self._chart = TrafficChart()
+        panel_style = dict(orientation='vertical', padding=0, spacing=0, radius=14,
+                           hover_effect=False, bg_color=theme.rgba(palette['surface']),
+                           border_color=theme.rgba(palette['border']), size_hint_y=None)
+        self._chart_panel = chart_panel = Card(height=356, **panel_style)
+        chart_heading = BoxLayout(size_hint_y=None, height=46, padding=[16, 0, 16, 0], spacing=7)
+        legend = BoxLayout(size_hint_x=None, width=92, spacing=16)
+        for title, color in (('خروج', palette['amber']), ('ورود', palette['cyan'])):
+            item = BoxLayout(spacing=6)
+            item.add_widget(RTLLabel(text=title, font_size=11, padding=[0, 0],
+                                     color=theme.rgba(palette['muted'])))
+            item.add_widget(StatusDot(color, pos_hint={'center_y': .5}))
+            legend.add_widget(item)
+        chart_heading.add_widget(legend)
+        chart_heading.add_widget(RTLLabel(text='نمودار تردد ساعتی', font_size=13, bold=True, padding=[0, 0]))
+        chart_panel.add_widget(chart_heading)
+        chart_panel.add_widget(Divider(line_color=theme.rgba(palette['border'])))
+        self._chart = TrafficChart(period='hourly')
+        self._chart.set_metric('both')
         chart_panel.add_widget(self._chart)
-        self._chart_status = RTLLabel(text='در حال دریافت اطلاعات…', font_size=11,
-                                      color=theme.rgba(COLORS['text_secondary']),
-                                      size_hint_y=None, height=26, padding=[0, 0])
-        chart_panel.add_widget(self._chart_status)
-        controls = BoxLayout(orientation='vertical', size_hint_y=None, height=76, spacing=6)
-        self._date_picker = WeekPicker(self._select_day, font_size=11, size_hint_y=None, height=34)
-        controls.add_widget(self._date_picker)
-        selectors = BoxLayout(spacing=6)
-        self._metric_selector = styled_spinner(initial=theme.rtl('ورود'),
-            values=[theme.rtl(v) for v in ('ورود','خروج','هر دو')])
-        self._metric_selector.size_hint=(.35,1)
-        self._metric_selector.font_size=12
+        controls = BoxLayout(size_hint_y=None, height=36, spacing=10, padding=[18, 0, 18, 0])
+        self._metric_selector = styled_spinner(initial=theme.rtl('هر دو'),
+            values=[theme.rtl(v) for v in ('ورود', 'خروج', 'هر دو')])
+        self._metric_selector.size_hint_x = .25
+        self._metric_selector.font_size = 12
         self._metric_selector.bind(text=lambda _, text: self._chart.set_metric(
-            {theme.rtl('ورود'):'entry',theme.rtl('خروج'):'exit',theme.rtl('هر دو'):'both'}[text]))
-        selectors.add_widget(self._metric_selector)
+            {theme.rtl('ورود'): 'entry', theme.rtl('خروج'): 'exit', theme.rtl('هر دو'): 'both'}[text]))
+        controls.add_widget(self._metric_selector)
         self._camera_selector = build_camera_selector(self._select_camera)
-        self._camera_selector.size_hint=(.65,1)
-        self._camera_selector.font_size=12
-        selectors.add_widget(self._camera_selector)
-        controls.add_widget(selectors)
-        chart_panel.add_widget(controls)
-        panels.add_widget(chart_panel)
+        self._camera_selector.size_hint_x = .45
+        self._camera_selector.font_size = 12
+        controls.add_widget(self._camera_selector)
+        self._date_picker = JalaliDatePicker(font_size=12, size_hint_x=.3)
+        self._date_picker.text = theme.rtl('امروز')
+        self._date_picker.bind(text=lambda *_: self._select_day(self._date_picker.selected))
+        controls.add_widget(self._date_picker)
+        filter_content = Card(orientation='vertical', padding=18, spacing=10, hover_effect=False,
+                              bg_color=theme.rgba(palette['surface']), border_color=theme.rgba(palette['border']))
+        filter_content.add_widget(RTLLabel(text='فیلتر نمودار و جست‌وجوی آخرین ترددها', font_size=14,
+                                           size_hint_y=None, height=28))
+        filter_content.add_widget(controls)
+        self._chart_status = RTLLabel(text='در حال دریافت اطلاعات…', font_size=11,
+                                      color=theme.rgba(palette['muted']),
+                                      size_hint_y=None, height=32, padding=[18, 0])
+        filter_content.add_widget(self._chart_status)
+        content.add_widget(chart_panel)
 
-        self._record_panel = record_panel = Card(size_hint_x=.58, orientation='vertical',
-            padding=[10, 13, 10, 14], spacing=8)
-        heading = BoxLayout(size_hint_y=None, height=28, spacing=8, padding=[7, 0, 7, 0])
+        self._breakdown = TrafficBreakdown(size_hint_y=None, height=350)
+        content.add_widget(self._breakdown)
+
+        self._record_panel = record_panel = Card(height=420, **panel_style)
+        heading = BoxLayout(size_hint_y=None, height=46, spacing=10, padding=[18, 0, 18, 0])
+        self._view_all = SecondaryButton(text=theme.rtl('‹  مشاهده همه'), size_hint_x=None, width=105,
+            font_size=12, bg_color_normal=(0, 0, 0, 0), border_color=(0, 0, 0, 0),
+            color=theme.rgba(palette['cyan']))
+        self._view_all.bind(on_release=lambda *_: self._navigate('reports'))
+        heading.add_widget(self._view_all)
         self._record_status = RTLLabel(text='در حال دریافت…', font_size=11,
-            color=theme.rgba(COLORS['text_secondary']), halign='left', padding=[0, 0], size_hint_x=None, width=110)
+            color=theme.rgba(palette['muted']), halign='left', padding=[0, 0])
         heading.add_widget(self._record_status)
-        heading.add_widget(RTLLabel(text='آخرین شناسایی‌ها', font_size=14, padding=[0, 0]))
-        heading.add_widget(Icon(name='log', size_hint=(None, None), size=(16, 16),
-                                pos_hint={'center_y': .5}, color=theme.rgba(COLORS['primary'])))
+        heading.add_widget(RTLLabel(text='آخرین ترددها', font_size=14, bold=True, padding=[0, 0]))
         record_panel.add_widget(heading)
-        self._record_holder = BoxLayout(orientation='vertical')
+        record_panel.add_widget(Divider(line_color=theme.rgba(palette['border'])))
+        toolbar = BoxLayout(size_hint_y=None, height=60, spacing=10, padding=[18, 10, 18, 10])
+        reset = SecondaryButton(text=theme.rtl('بازنشانی'), size_hint_x=None, width=80,
+                                 font_size=11, bg_color_normal=(0, 0, 0, 0), border_color=(0, 0, 0, 0),
+                                 color=theme.rgba(palette['cyan']))
+        reset.bind(on_release=self._reset_filters)
+        toolbar.add_widget(reset)
+        self._search = PlateSearchInput(hint_text=theme.rtl('جست‌وجوی شماره پلاک…'),
+                                        halign='left', multiline=False, font_size=12)
+        self._search.bind(text=self._filters_changed)
+        toolbar.add_widget(self._search)
+        filter_content.add_widget(toolbar)
+        self._record_holder = BoxLayout(orientation='vertical', padding=[10, 0, 10, 0])
         self._record_holder.add_widget(EmptyState(icon_name='log', title='در حال دریافت رویدادها',
                                                   subtitle='اطلاعات تردد در این بخش نمایش داده می‌شود'))
         record_panel.add_widget(self._record_holder)
         record_panel.add_widget(RTLLabel(text='جزئیات هر تردد با کلیک روی ردیف', font_size=11,
-            color=theme.rgba(COLORS['text_secondary']), size_hint_y=None, height=23))
-        panels.add_widget(record_panel)
-        content.add_widget(panels)
-
-        toolbar = BoxLayout(size_hint_y=None, height=41, spacing=10)
-        reset = SecondaryButton(text=theme.rtl('بازنشانی'), size_hint_x=None, width=60,
-                                 font_size=10, bg_color_normal=(0, 0, 0, 0), border_color=(0, 0, 0, 0),
-                                 color=theme.rgba(COLORS['primary']))
-        reset.bind(on_release=self._reset_filters)
-        toolbar.add_widget(reset)
-        self._search = PlateSearchInput(hint_text=theme.rtl('جست‌وجوی شماره پلاک…'),
-                                        halign='left', multiline=False, font_size=11)
-        self._search.bind(text=self._filters_changed)
-        toolbar.add_widget(self._search)
-        content.add_widget(toolbar)
+            color=theme.rgba(palette['muted']), size_hint_y=None, height=30, padding=[18, 0]))
+        content.add_widget(record_panel)
         footer = BoxLayout(size_hint_y=None, height=20)
         footer.add_widget(RTLLabel(text='PLAKINO', font_size=11, halign='left',
-                                   color=theme.rgba(COLORS['text_secondary']), padding=[0, 0]))
+                                   color=theme.rgba(palette['muted']), padding=[0, 0]))
         self._data_status = RTLLabel(text='رویدادهای ثبت‌شدهٔ سامانه', font_size=11,
-                                     color=theme.rgba(COLORS['text_secondary']), padding=[0, 0])
+                                     color=theme.rgba(palette['muted']), padding=[0, 0])
         footer.add_widget(self._data_status)
         content.add_widget(footer)
-        self._shell = PageShell('داشبورد کنترل تردد', 'dashboard', content, self._navigate)
+        self._dashboard_scroll = ScrollView(do_scroll_x=False, bar_width=4, scroll_type=['bars', 'content'])
+        self._dashboard_scroll.add_widget(content)
+        self._shell = PageShell('داشبورد کنترل تردد', 'dashboard', self._dashboard_scroll, self._navigate)
+        self._shell.frame.bg_color = theme.rgba(palette['background'])
+        self._filters_popup = Popup(title='', separator_height=0, content=filter_content,
+                                    size_hint=(.8, None), height=294, background='',
+                                    background_color=(0, 0, 0, 0))
+        close_filters = SecondaryButton(text=theme.rtl('بستن'), size_hint_y=None, height=36, font_size=12)
+        close_filters.bind(on_release=lambda *_: self._filters_popup.dismiss())
+        filter_content.add_widget(close_filters)
+        self._filter_button = SecondaryButton(text=theme.rtl('جست‌وجو و فیلتر'), font_size=12,
+                                              size_hint=(None, None), size=(136, 36), pos_hint={'center_y': .5})
+        self._filter_button.bind(on_release=lambda *_: self._filters_popup.open())
+        self._shell.header.add_widget(self._filter_button, index=len(self._shell.header.children)-1)
         self.add_widget(self._shell)
 
     def _reset_filters(self, *_):
         self._search.text = ''
         self._camera_selector.text = theme.rtl('همه دوربین‌ها')
-        self._date_picker.set_date(None)
-        self._metric_selector.text = theme.rtl('ورود')
+        self._date_picker.selected = None
+        self._date_picker.text = theme.rtl('امروز')
+        self._select_day(None)
+        self._metric_selector.text = theme.rtl('هر دو')
 
     def _navigate(self, key):
         if self.on_navigate:
@@ -153,6 +186,8 @@ class DashboardScreen(Screen):
 
     def on_leave(self, *_):
         self._active = False
+        if hasattr(self, '_filters_popup'):
+            self._filters_popup.dismiss()
         if self._timer is not None:
             self._timer.cancel()
             self._timer = None
@@ -183,42 +218,62 @@ class DashboardScreen(Screen):
                          daemon=True, name='reno-dashboard-data').start()
 
     def _load(self, revision, camera, day, plate):
+        day = day or date.today()
+        logger = logging.getLogger(__name__)
+        stats = records = flow = None
+        errors = []
+        # Recent events are independent of the chart's date and camera controls.
+        # A failed aggregate must never hide a successful event query.
+        try:
+            records = plate_service.get_recent_records(limit=50, plate=plate)
+        except Exception:
+            logger.exception('Dashboard recent events read failed')
+            errors.append('records')
         try:
             stats = dashboard_service.get_statistics()
-            records = plate_service.get_recent_records(limit=50, plate=plate)
-            flow = dashboard_service.get_daily_flow(end=day, camera=camera, plate=plate)
         except Exception:
-            logging.getLogger(__name__).exception('Dashboard database read failed')
-            Clock.schedule_once(partial(self._apply, revision, None, None, None), 0)
-        else:
-            Clock.schedule_once(partial(self._apply, revision, stats, records, flow), 0)
+            logger.exception('Dashboard statistics read failed')
+            errors.append('statistics')
+        try:
+            flow = dashboard_service.get_hourly_flow(day=day, camera=camera, plate=plate)
+        except Exception:
+            logger.exception('Dashboard hourly flow read failed')
+            errors.append('flow')
+        Clock.schedule_once(partial(self._apply, revision, stats, records, flow, errors=tuple(errors)), 0)
 
-    def _apply(self, revision, stats, records, flow, _dt):
+    def _apply(self, revision, stats, records, flow, _dt, errors=()):
         self._loading = False
         if not self._active:
             return
         if revision != self._revision:
             self._request_refresh()
             return
-        if stats is None:
-            self._chart.set_data([])
-            self._chart_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
-            self._record_status.set_text('خطای دریافت')
+        if stats is not None:
+            self._today.set_value(stats.today_total)
+            self._inside.set_value(stats.inside_vehicles)
+            self._guests.set_value(stats.guest_vehicles)
+            self._blocked.set_value(stats.blocked_vehicles)
+            self._breakdown.set_data(stats.access_counts)
+        if flow is not None:
+            self._chart.set_data(flow)
+            self._chart_status.set_text('ترددی در این بازه ثبت نشده است' if not any(a or b for _, a, b in flow)
+                                        else 'ورود و خروج به تفکیک ساعت')
+        elif 'flow' in errors:
+            self._chart_status.set_text('دریافت نمودار ناموفق بود؛ تلاش مجدد خودکار')
+        if records is not None:
+            self._record_status.set_text(f'{theme.fa_number(len(records))} تردد')
+            self._set_records(records)
+        else:
+            self._record_status.set_text('خطای دریافت ترددها')
             if self._record_scroll is None:
                 self._record_holder.clear_widgets()
                 self._record_holder.add_widget(EmptyState(icon_name='log', title='دریافت رویدادها ناموفق بود',
                                                           subtitle='تلاش مجدد به‌صورت خودکار انجام می‌شود'))
-            self._data_status.set_text('دریافت داده ناموفق بود؛ تلاش مجدد خودکار')
-            return
-        self._today.set_value(stats.today_total)
-        self._inside.set_value(stats.inside_vehicles)
-        self._guests.set_value(stats.guest_vehicles)
-        self._blocked.set_value(stats.blocked_vehicles)
-        self._chart.set_data(flow)
-        self._chart_status.set_text('ترددی در این بازه ثبت نشده است' if not any(a or b for _, a, b in flow) else 'بازهٔ هفتگی · تعداد رویدادهای ثبت‌شده')
-        self._record_status.set_text(f'{theme.fa_number(len(records))} تردد')
-        self._data_status.set_text('حالت نمایشی · داده‌های آزمایشی' if MOCK_DATA_ENABLED else 'رویدادهای ثبت‌شدهٔ سامانه')
-        self._set_records(records)
+        if errors or stats is None or records is None or flow is None:
+            self._data_status.set_text('دریافت بخشی از اطلاعات ناموفق بود؛ تلاش مجدد خودکار')
+        else:
+            self._data_status.set_text('حالت نمایشی · داده‌های آزمایشی' if MOCK_DATA_ENABLED
+                                       else 'رویدادهای ثبت‌شدهٔ سامانه')
 
     def _set_records(self, records):
         keys = [astuple(record) for record in records]
@@ -228,9 +283,12 @@ class DashboardScreen(Screen):
             self._record_holder.clear_widgets()
             self._record_scroll = self._record_rows = None
             self._record_keys = []
+            search = getattr(self, '_search', None)
+            filtered = bool(search and search.text.strip())
             self._record_holder.add_widget(EmptyState(
-                icon_name='reports', title='هنوز ترددی ثبت نشده است',
-                subtitle='رویدادهای ثبت‌شده اینجا نمایش داده می‌شوند'))
+                icon_name='reports', title='ترددی با این پلاک پیدا نشد' if filtered else 'هنوز ترددی ثبت نشده است',
+                subtitle='عبارت جست‌وجو را تغییر دهید یا فیلتر را بازنشانی کنید' if filtered
+                         else 'رویدادهای ثبت‌شده اینجا نمایش داده می‌شوند'))
             return
         if self._record_scroll is None:
             self._record_holder.clear_widgets()

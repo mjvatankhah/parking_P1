@@ -86,6 +86,19 @@ COLORS = {
 PAGE_BG_TOP = "#141920"
 PAGE_BG_BOTTOM = "#101419"
 
+# Dashboard reference: dark neutral panels with clear status accents.
+DASHBOARD_COLORS = {
+    'background': '#0A0F12',
+    'surface': '#10161C',
+    'inset': '#161D23',
+    'border': '#293139',
+    'muted': '#94A3B8',
+    'cyan': '#23CED1',
+    'green': '#39C77F',
+    'amber': '#FFBC38',
+    'red': '#FF575D',
+}
+
 
 
 def rgba(hex_color: str, alpha: float = 1.0):

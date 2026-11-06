@@ -34,8 +34,8 @@ class ReferenceUIContractTests(unittest.TestCase):
                        PlateRecord('', '2026-10-02', '12:47:18', 'cam-2', class_id=0, direction='exit')]
         cls.patches = [
             patch.object(report_service, 'page', return_value=ReportPage((),0,0,20)),
-            patch.object(dashboard_service, 'get_statistics', return_value=DashboardStatistics(1248, 932, 2, 3, 3, 42, 12, 3)),
-            patch.object(dashboard_service, 'get_daily_flow', return_value=[('2026-10-02', 8, 2)]),
+            patch.object(dashboard_service, 'get_statistics', return_value=DashboardStatistics(1248, 932, 2, 3, 3, 42, 12, 3, (1000, 200, 45, 3))),
+            patch.object(dashboard_service, 'get_hourly_flow', return_value=[(hour, 8, 2) for hour in range(24)]),
             patch.object(plate_service, 'get_recent_records', return_value=cls.records),
         ]
         for p in cls.patches:
@@ -82,13 +82,13 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.app._navigate('dashboard')
         layout()
         screen = self.dashboard
-        expected = [(screen._today, 'تردد امروز', 'مجموع ورود و خروج'),
-                    (screen._inside, 'داخل محوطه', 'خودروهای واردشده بدون ثبت خروج'),
-                    (screen._guests, 'خودروهای میهمان', 'پلاک‌های یکتای میهمان امروز'),
-                    (screen._blocked, 'خودروهای غیرمجاز', 'پلاک‌های یکتای غیرمجاز امروز')]
-        for card, title, subtitle in expected:
+        expected = [(screen._today, 'کل تردد امروز'),
+                    (screen._inside, 'خودروهای داخل محوطه'),
+                    (screen._guests, 'میهمانان امروز'),
+                    (screen._blocked, 'خودروهای غیرمجاز امروز')]
+        for card, title in expected:
             self.assertEqual(card._title_label.text, theme.rtl(title))
-            self.assertEqual(card._subtitle_label.text, theme.rtl(subtitle))
+            self.assertIsNone(card._subtitle_label.parent)
         # Let the user-visible counter finish rather than checking its target.
         for _ in range(24):
             Clock.tick()
@@ -96,22 +96,58 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.assertEqual(screen._inside._value_label.text, '۴۲')
         self.assertEqual(screen._blocked._value_label.text, '۳')
         self.assertEqual(screen._today._value_label.text, '۱٬۲۴۸')
+        self.assertEqual(screen._breakdown.ring.counts, (1000, 200, 45, 3))
+        self.assertEqual(screen._breakdown.ring.total_label.text, '۱٬۲۴۸')
 
     def test_reference_layout_and_requested_panel_order_at_desktop_sizes(self):
         screen = self.dashboard
+        original_size = Window.size
+        self.addCleanup(setattr, Window, 'size', original_size)
         for size in ((1000, 780), (1440, 1000)):
+            Window.size = size
             self.root.size = size
             layout()
             self.assertGreater(screen._shell.sidebar.x, screen._today.right)
             self.assertGreater(screen._today.x, screen._inside.x)
             self.assertGreater(screen._inside.x, screen._guests.x)
             self.assertGreater(screen._guests.x, screen._blocked.x)
-            self.assertLess(screen._chart.right, screen._record_panel.x)
+            for card in (screen._inside, screen._guests, screen._blocked):
+                self.assertAlmostEqual(screen._today.y, card.y)
+                self.assertAlmostEqual(screen._today.height, card.height)
+            self.assertLess(screen._chart_panel.top, screen._guests.y)
+            self.assertLess(screen._breakdown.top, screen._chart_panel.y)
+            self.assertLess(screen._record_panel.top, screen._breakdown.y)
+            self.assertAlmostEqual(screen._chart_panel.width, screen._record_panel.width)
+            self.assertGreater(screen._content.height, screen._dashboard_scroll.height)
             self.assertGreaterEqual(screen._today.width, 160)
             self.assertLessEqual(screen._today.right, screen._shell.frame.right)
             self.assertFalse(any(isinstance(w, CameraCard) for w in screen.walk(restrict=True)))
-        self.root.size = Window.size
+        Window.size = original_size
+        self.root.size = original_size
         layout()
+
+    def test_view_all_opens_reports_and_reset_restores_hourly_defaults(self):
+        screen = self.dashboard
+        with patch.object(screen, '_navigate') as navigate:
+            screen._view_all.dispatch('on_release')
+            navigate.assert_called_once_with('reports')
+        screen._search.insert_text('12ب34567')
+        screen._metric_selector.text = theme.rtl('خروج')
+        screen._reset_filters()
+        self.assertEqual(screen._search.text, '')
+        self.assertEqual(screen._chart.metric, 'both')
+        self.assertEqual(screen._chart.period, 'hourly')
+        self.assertIsNone(screen._date_picker.selected)
+
+    def test_status_breakdown_clears_previous_counts_for_empty_day(self):
+        from reno.ui.components.traffic_breakdown import TrafficBreakdown
+
+        panel = TrafficBreakdown()
+        panel.set_data((10, 3, 2, 1))
+        self.assertEqual(panel.ring.total_label.text, '۱۶')
+        panel.set_data((0, 0, 0, 0))
+        self.assertEqual(panel.ring.total_label.text, '۰')
+        self.assertTrue(all(value.text == '۰' for value in panel.values.values()))
 
     def test_dashboard_neon_frames_are_visible_and_move(self):
         from tempfile import TemporaryDirectory
