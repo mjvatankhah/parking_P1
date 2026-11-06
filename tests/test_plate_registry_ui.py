@@ -35,6 +35,30 @@ class PlateRegistryUITests(unittest.TestCase):
             row=TrafficRecordRow(PlateRecord('12ب34567','2026-11-04','12:00','cam',access_status=status))
             self.assertEqual(row._access_label.text,theme.rtl(title))
 
+    def test_plate_entry_and_edit_use_report_search_format(self):
+        screen=PlateRegistrationScreen()
+        field=screen.plate
+        for char in '۱۲الف۳۴۵۶۷':
+            field.insert_text(char)
+            Clock.tick()
+        self.assertEqual(field.text,'12 الف 345 67')
+        self.assertEqual(field.halign,'left')
+        self.assertEqual(field.base_direction,'ltr')
+        display,order,_=field._display_line(field.text,4)
+        self.assertTrue(display.startswith('12 '))
+        self.assertTrue(display.endswith(' 345 67'))
+        self.assertEqual(sorted(order),list(range(len(field.text))))
+        screen._edit('98ب76543')
+        self.assertEqual(field.text,'98 ب 765 43')
+        field.select_all()
+        field.insert_text('۱۲ب۳۴۵۶۷')
+        with patch('reno.ui.plate_registration.Thread') as thread,patch('reno.ui.plate_registration.plate_registry_service.save') as save,patch.object(screen,'_load'):
+            screen._save()
+            thread.call_args.kwargs['target']()
+            Clock.tick()
+            save.assert_called_once_with('12 ب 345 67','allowed')
+        screen.on_leave()
+
     def test_chart_has_two_fading_areas_with_original_data(self):
         chart=TrafficChart(size=(600,320))
         chart.set_metric('both')
