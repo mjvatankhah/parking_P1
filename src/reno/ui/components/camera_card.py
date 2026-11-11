@@ -8,7 +8,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, RoundedRectangle, Rectangle
+from kivy.graphics import Color, RoundedRectangle, Rectangle, Line
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 import cv2
@@ -42,7 +42,7 @@ class CameraCard(Card):
         row = BoxLayout(orientation="horizontal", size_hint_y=None, height=24, spacing=6)
 
         name_label = Label(
-            text=camera.id,
+            text=rtl(camera.id),
             font_name=theme.APP_FONT_NAME,
             font_size=FONT_SIZE["body"],
             bold=True,
@@ -50,10 +50,14 @@ class CameraCard(Card):
             halign="right",
             valign="middle",
             size_hint_x=1,
+            shorten=True,
+            shorten_from="left",
+            max_lines=1,
         )
         name_label.bind(size=lambda w, *_: setattr(w, "text_size", w.size))
 
-        self._dot = StatusDot(dot_color=theme.rgba(COLORS["warning"]), pulse=False)
+        self._dot = StatusDot(dot_color=theme.rgba(COLORS["warning"]), pulse=False,
+                              pos_hint={"center_y": .5})
         self._status_label = Label(
             text=rtl("در حال اتصال"),
             font_name=theme.APP_FONT_NAME,
@@ -63,9 +67,11 @@ class CameraCard(Card):
             width=100,
         )
 
-        row.add_widget(name_label)
-        row.add_widget(self._status_label)
+        # BoxLayout places children left to right: keep the camera title at
+        # the right edge and the connection indicator together on the left.
         row.add_widget(self._dot)
+        row.add_widget(self._status_label)
+        row.add_widget(name_label)
         return row
 
     def _build_video_area(self, camera: Camera):
@@ -73,7 +79,12 @@ class CameraCard(Card):
         # FloatLayout sizes children automatically, but only positions them
         # when pos_hint is set. Keep the video inside its tile when the
         # camera grid is laid out, scrolled, or resized.
-        self._video_surface = _VideoSurface(pos_hint={"x": 0, "y": 0})
+        # Normalized geometry can be drawn directly over any preview size,
+        # including frames from an already-running backend without overlays.
+        # Legacy pixel geometry is drawn by the backend before resizing.
+        reference_points = camera.line if camera.coordinate_space == 'normalized' else []
+        self._video_surface = _VideoSurface(
+            reference_points=reference_points, pos_hint={"x": 0, "y": 0})
         self._message = Label(
             text=rtl("در حال اتصال به دوربین…"),
             font_name=theme.APP_FONT_NAME,
@@ -151,12 +162,17 @@ class CameraCard(Card):
 class _VideoSurface(Widget):
     """Draw a live Texture directly, avoiding Image provider/cache behavior."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, reference_points=(), **kwargs):
         super().__init__(**kwargs)
         self._texture = None
+        self._reference_points = reference_points or ()
         with self.canvas:
             Color(1, 1, 1, 1)
             self._frame_rect = Rectangle(pos=self.pos, size=self.size)
+            Color(0, 0, 0, 1)
+            self._reference_outline = Line(points=[], width=3)
+            Color(1, .9, 0, 1)
+            self._reference_line = Line(points=[], width=1.5)
         self.bind(pos=self._redraw, size=self._redraw)
 
     @property
@@ -186,6 +202,11 @@ class _VideoSurface(Widget):
             self.x + (self.width - draw_width) / 2,
             self.y + (self.height - draw_height) / 2,
         )
+        x, y = self._frame_rect.pos
+        points = [value for px, py in self._reference_points
+                  for value in (x + px * draw_width, y + (1 - py) * draw_height)]
+        self._reference_outline.points = points
+        self._reference_line.points = points
 
 
 class _RoundedArea(FloatLayout):

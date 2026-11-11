@@ -7,7 +7,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from reno.ui import theme
 from reno.ui.components.common import Card,RTLLabel,PrimaryButton,SecondaryButton,styled_spinner
-from reno.ui.components.plate_input import PlateSearchInput, format_plate
+from reno.ui.components.plate_input import PLATE_HINT, PlateSearchInput, format_plate
 from reno.ui.components.page_shell import PageShell
 from reno.ui.components.iranian_plate import PlainPlate
 from reno.services.plate_registry_service import plate_registry_service
@@ -34,7 +34,7 @@ class PlateRegistrationScreen(Screen):
         self.permission.size_hint_x=None
         self.permission.width=150
         controls.add_widget(self.permission)
-        self.plate=PlateSearchInput(hint_text=theme.rtl('مثلاً ۱۲ب۳۴۵۶۷'))
+        self.plate=PlateSearchInput(hint_text=PLATE_HINT)
         controls.add_widget(self.plate)
         form.add_widget(controls)
         form.add_widget(RTLLabel(text='پلاک ثبت‌نشده میهمان است؛ تغییر دسته‌بندی، وضعیت ترددهای گذشته را تغییر نمی‌دهد.',font_size=12))

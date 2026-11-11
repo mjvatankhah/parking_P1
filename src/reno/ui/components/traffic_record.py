@@ -40,9 +40,11 @@ class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
         self._access_label = RTLLabel(text=record.access_label(), font_size=12, size_hint_x=.14,
                                       halign='center', padding=[0,0],
                                       color=theme.rgba({'allowed':'#48B78A','guest':'#D8B45F','blocked':'#F87171'}.get(record.access_status,'#A5B1C0')))
-        self.add_widget(self._access_label)
+        if record.class_id != 0:
+            self.add_widget(self._access_label)
         self._plate = PlainPlate(record.plate, size_hint_x=.24)
-        self.add_widget(self._plate)
+        if record.class_id != 0:
+            self.add_widget(self._plate)
         self._thumbnail = Card(size_hint_x=.22, padding=1, radius=4, hover_effect=False,
             bg_color=theme.rgba(theme.COLORS['background']), border_color=theme.rgba(theme.COLORS['border'],.5))
         if self.image_path:
@@ -60,6 +62,11 @@ class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
             self._thumbnail.add_widget(RTLLabel(text='بدون تصویر', font_size=10, halign='center', padding=[0,0],
                                                 color=theme.rgba(theme.COLORS['text_secondary'])))
         self.add_widget(self._thumbnail)
+        if record.class_id == 0:
+            self._camera.size_hint_x = .2
+            stamp.size_hint_x = .3
+            self._event_label.size_hint_x = .2
+            self._thumbnail.size_hint_x = .3
         self.bind(hovered=self._hover, on_release=self._open_detail)
 
     def _hover(self, *_):
@@ -88,9 +95,10 @@ class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
         self.detail_dialog.open()
 
 
-def detection_header():
+def detection_header(class_id=2):
     row = BoxLayout(size_hint_y=None, height=26, padding=[8,0,8,0], spacing=8)
-    for label, ratio in [('دوربین',.12),('تاریخ / ساعت',.18),('رویداد',.1),('وضعیت پلاک',.14),('شماره پلاک',.24),('تصویر',.22)]:
+    columns = [('دوربین',.2),('تاریخ / ساعت',.3),('رویداد',.2),('تصویر',.3)] if class_id == 0 else [('دوربین',.12),('تاریخ / ساعت',.18),('رویداد',.1),('وضعیت پلاک',.14),('شماره پلاک',.24),('تصویر',.22)]
+    for label, ratio in columns:
         row.add_widget(RTLLabel(text=label, font_size=10, size_hint_x=ratio, halign='center',
                                padding=[0,0], color=theme.rgba(theme.COLORS['text_secondary'])))
     return row

@@ -47,8 +47,28 @@ class ChartSmoothingTests(unittest.TestCase):
         axes=chart._figure.axes[0]
         self.assertEqual(chart.data,data)
         self.assertEqual(len(axes.lines),2)
-        for line,column,color in zip(axes.lines,(1,2),('cyan','amber')):
+        for line,column,color in zip(axes.lines,(1,2),('cyan','exit')):
             np.testing.assert_array_equal(line.get_xdata()[::32],range(24))
             np.testing.assert_array_equal(line.get_ydata()[::32],[row[column] for row in data])
             self.assertEqual(line.get_color(),theme.DASHBOARD_COLORS[color])
         self.assertIn(23,axes.get_xticks())
+
+    def test_hourly_view_defaults_to_working_hours_and_scrolls_across_full_day(self):
+        theme.register_app_font()
+        chart = TrafficChart(period='hourly', size=(700, 280))
+        chart.set_metric('both')
+        data = [(hour, hour, 23-hour) for hour in range(24)]
+        chart.set_data(data)
+        chart._draw()
+        np.testing.assert_allclose(chart._figure.axes[0].get_xlim(), (6.5, 18.5))
+        for scroll, limits in ((0, (-.5, 11.5)), (1, (11.5, 23.5))):
+            chart.hour_scroll.scroll_x = scroll
+            chart._draw()
+            np.testing.assert_allclose(chart._figure.axes[0].get_xlim(), limits)
+            self.assertEqual(chart.data, data)
+        chart.set_data(data)
+        chart.size = (1000, 300)
+        chart._draw()
+        np.testing.assert_allclose(chart._figure.axes[0].get_xlim(), (11.5, 23.5))
+        self.assertFalse(chart.hour_scroll.do_scroll_y)
+        self.assertTrue(chart.hour_scroll.do_scroll_x)

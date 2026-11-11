@@ -29,7 +29,7 @@ class PlateService:
         if MOCK_DATA_ENABLED:
             self._mock_records = self._generate_mock_records(count=50)
 
-    def get_recent_records(self, limit: int = 50, plate: str = "", camera: str = "", day: str = "") -> List[PlateRecord]:
+    def get_recent_records(self, limit: int = 50, plate: str = "", camera: str = "", day: str = "", class_id: int | None = None) -> List[PlateRecord]:
         """Return the most recent `limit` records, newest first."""
         plate = normalize_plate(plate)
         if limit <= 0:
@@ -37,8 +37,11 @@ class PlateService:
         if MOCK_DATA_ENABLED:
             return [r for r in self._mock_records
                     if (not plate or plate in normalize_plate(r.plate)) and (not camera or r.camera == camera)
-                    and (not day or r.date == day)][:limit]
+                    and (not day or r.date == day) and (class_id is None or r.class_id == class_id)][:limit]
         conditions, params = [], []
+        if class_id is not None:
+            conditions.append("class_id = %s")
+            params.append(class_id)
         if plate:
             conditions.append("strpos(regexp_replace(translate(COALESCE(plate_number, ''), %s, %s), '[[:space:]‌-]', '', 'g'), %s) > 0")
             params.extend(['۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩يك', '01234567890123456789یک', plate])

@@ -1,5 +1,6 @@
 """Filtered traffic reports with bounded tables and asynchronous XLSX export."""
 from threading import Thread
+from dataclasses import astuple, replace
 from kivy.clock import Clock
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
@@ -9,10 +10,11 @@ from kivy.uix.popup import Popup
 from reno.ui import theme
 from reno.ui.components.common import Card, RTLLabel, RoundedTextInput, PrimaryButton, SecondaryButton, styled_spinner
 from reno.ui.components.page_shell import PageShell
+from reno.ui.components.frame_work import FrameWork
 from reno.ui.components.traffic_record import TrafficRecordRow, detection_header
 from reno.ui.components.jalali_date_picker import JalaliDatePicker
 from reno.ui.components.export_dialog import ExportDialog
-from reno.ui.components.plate_input import PlateSearchInput
+from reno.ui.components.plate_input import PLATE_HINT, PlateSearchInput
 from reno.services.report_service import ReportFilter, report_service
 
 _COUNTS={theme.rtl('۲۰ تردد'):20,theme.rtl('۳۰ تردد'):30,theme.rtl('۵۰ تردد'):50,theme.rtl('همه ترددها'):None}
@@ -21,7 +23,7 @@ _COUNTS={theme.rtl('۲۰ تردد'):20,theme.rtl('۳۰ تردد'):30,theme.rtl('
 class ReportsScreen(Screen):
     def __init__(self,on_navigate=None,**kwargs):
         super().__init__(**kwargs)
-        self._filters=ReportFilter()
+        self._filters=ReportFilter(class_id=2)
         self._offset=0
         self._total=0
         self._busy=False
@@ -29,6 +31,8 @@ class ReportsScreen(Screen):
         self._generation=0
         self._data_popup=None
         self._destination_dialog=None
+        self._table_key=None
+        self._row_work = FrameWork()
         content=BoxLayout(orientation='vertical',spacing=16)
         action_style=dict(bg_color_normal=theme.rgba('#25898E'),bg_color_hover=theme.rgba('#309DA2'),
                           bg_color_down=theme.rgba('#1B6D72'),border_color=theme.rgba('#25898E'),
@@ -44,7 +48,7 @@ class ReportsScreen(Screen):
         line.add_widget(self.apply_button)
         self.end=JalaliDatePicker(size_hint_y=None,height=42,font_size=12)
         self.start=JalaliDatePicker(size_hint_y=None,height=42,font_size=12)
-        self.plate=PlateSearchInput(hint_text=theme.rtl('مثلاً ۱۲ب۳۴۵۶۷'),size_hint_y=None,height=42)
+        self.plate=PlateSearchInput(hint_text=PLATE_HINT,size_hint_y=None,height=42)
         self.plate.bind(on_text_validate=self._apply)
         self.camera=RoundedTextInput(hint_text=theme.rtl('نام دقیق دوربین'),size_hint_y=None,height=42)
         self.camera.bind(on_text_validate=self._apply)
@@ -62,6 +66,11 @@ class ReportsScreen(Screen):
         self.count.width=160
         self.count.bind(text=self._count_changed)
         heading.add_widget(self.count)
+        self.kind=styled_spinner(values=[theme.rtl("خودرو"),theme.rtl("انسان")],initial=theme.rtl("خودرو"))
+        self.kind.size_hint_x=None
+        self.kind.width=130
+        self.kind.bind(text=self._kind_changed)
+        heading.add_widget(self.kind)
         heading.add_widget(RTLLabel(text='ترددهای اخیر',font_size=18))
         table.add_widget(heading)
         self.status=RTLLabel(text='',size_hint_y=None,height=28,font_size=12)
@@ -79,7 +88,7 @@ class ReportsScreen(Screen):
         table.add_widget(footer)
         content.add_widget(table)
         self._shell=PageShell('گزارشات تردد','reports',content,on_navigate,
-                              subtitle='جست‌وجو و خروجی گرفتن از سوابق تردد خودروها')
+                              subtitle='جست‌وجو و خروجی گرفتن از سوابق تردد انسان و خودرو')
         self._shell.header.remove_widget(self._shell.header.ticket_button)
         self._shell.header.add_widget(self.export_button,index=len(self._shell.header.children))
         self.add_widget(self._shell)
@@ -93,6 +102,7 @@ class ReportsScreen(Screen):
         self._load()
 
     def on_leave(self,*_):
+        self._row_work.cancel()
         self._generation+=1
         self._busy=False
         self._controls()
@@ -105,6 +115,7 @@ class ReportsScreen(Screen):
         busy=self._busy or self._exporting
         self.apply_button.disabled=busy
         self.count.disabled=busy
+        self.kind.disabled=busy
         self.export_button.disabled=busy
         all_rows=_COUNTS[self.count.text] is None
         self.footer.height=38 if all_rows else 0
@@ -119,12 +130,23 @@ class ReportsScreen(Screen):
             return
         try:
             filters=ReportFilter(self.plate.text.strip(),self.start.selected,self.end.selected,
-                                 camera=self.camera.text.strip())
+                                 camera=self.camera.text.strip(), class_id=self._filters.class_id)
         except ValueError as exc:
             self.status.set_text(str(exc))
             return
         self._filters=filters
         self._offset=0
+        self._load()
+
+    def _kind_changed(self,*_):
+        class_id=0 if self.kind.text==theme.rtl("انسان") else 2
+        self.plate.disabled=class_id==0
+        if class_id==0:
+            self.plate.text=""
+        self._filters=replace(self._filters,class_id=class_id,plate="" if class_id==0 else self._filters.plate)
+        self._offset=0
+        self.table_holder.clear_widgets()
+        self._table_key=None
         self._load()
 
     def _count_changed(self,*_):
@@ -160,8 +182,8 @@ class ReportsScreen(Screen):
     def _loaded(self,generation,result,error):
         if generation!=self._generation:
             return
+        self._row_work.cancel()
         self._busy=False
-        self.table_holder.clear_widgets()
         if error:
             self._total=0
             self.status.set_text(error)
@@ -170,18 +192,32 @@ class ReportsScreen(Screen):
             self._total,self._offset=result.total,result.offset
             self.status.color=theme.rgba(theme.COLORS['text_secondary'])
             self.status.set_text(f'{theme.fa_number(len(result.records))} تردد از {theme.fa_number(result.total)} نتیجه')
+            key = (self._filters.class_id, tuple(astuple(record) for record in result.records))
+            if key == self._table_key:
+                self._controls()
+                return
+            self._table_key = None
+            self.table_holder.clear_widgets()
             if not result.records:
                 self.table_holder.add_widget(RTLLabel(text='ترددی با این فیلتر پیدا نشد',halign='center'))
+                self._table_key = key
             else:
                 scroll=ScrollView(do_scroll_x=True,scroll_x=1,bar_width=4)
                 rows=GridLayout(cols=1,size_hint=(None,None),spacing=4,width=760)
                 rows.bind(minimum_height=rows.setter('height'))
-                rows.add_widget(detection_header())
+                rows.add_widget(detection_header(self._filters.class_id))
                 scroll.bind(width=lambda w,v:setattr(rows,'width',max(760,v)))
-                for record in result.records:
-                    rows.add_widget(TrafficRecordRow(record))
                 scroll.add_widget(rows)
                 self.table_holder.add_widget(scroll)
+                self._busy = True
+                def populate():
+                    for record in result.records:
+                        rows.add_widget(TrafficRecordRow(record))
+                        yield
+                    self._table_key = key
+                    self._busy = False
+                    self._controls()
+                self._row_work.start(populate())
         self._controls()
 
     def _choose_export(self,*_):

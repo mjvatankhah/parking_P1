@@ -53,9 +53,21 @@ class DashboardPlateSearchTests(unittest.TestCase):
              patch('reno.ui.dashboard.Clock.schedule_once'):
             screen._load(0, 'gate', date(2026, 11, 6), '12 ب 345 67')
         plates.get_recent_records.assert_called_once_with(
-            limit=50, plate='12 ب 345 67')
+            limit=50, plate='12 ب 345 67', class_id=2)
         stats.get_hourly_flow.assert_called_once_with(
             day=date(2026, 11, 6), camera='gate', plate='12 ب 345 67')
+
+    def test_dashboard_person_selection_queries_people(self):
+        screen = DashboardScreen()
+        screen._search.text = '12 ب 345 67'
+        screen._record_kind.text = theme.rtl('انسان')
+        self.assertEqual(screen._search.text, '')
+        self.assertTrue(screen._search.disabled)
+        with patch('reno.ui.dashboard.dashboard_service'), \
+             patch('reno.ui.dashboard.plate_service') as plates, \
+             patch('reno.ui.dashboard.Clock.schedule_once'):
+            screen._load(0, '', None, '', class_id=0)
+        plates.get_recent_records.assert_called_once_with(limit=50, plate='', class_id=0)
     def test_database_queries_normalize_both_input_and_stored_plate(self):
         connection = MagicMock()
         connection.__enter__.return_value = connection

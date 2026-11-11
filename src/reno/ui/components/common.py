@@ -165,6 +165,22 @@ class Card(BoxLayout):
             self._update_gradient_frame()
 
     def _update_gradient_frame(self):
+        key = (*self.pos, *self.size, self.radius, self._hover_amount)
+        if key != getattr(self, '_gradient_frame_key', None):
+            self._gradient_meshes = self._build_gradient_frame()
+            self._gradient_frame_key = key
+            for mesh, _vertices, indices in self._gradient_meshes:
+                mesh.indices = indices
+        # The spotlight moves along the perimeter; its geometry stays fixed.
+        # Reuse positions/normals/indices and update only texture coordinates.
+        phase = self._border_phase / math.tau
+        for mesh, vertices, _indices in self._gradient_meshes:
+            shifted = vertices.copy()
+            for index in range(3, len(shifted), 4):
+                shifted[index] += phase
+            mesh.vertices = shifted
+
+    def _build_gradient_frame(self):
         """Draw a neutral hairline plus one feathered highlight on the perimeter."""
         radius = min(self.radius, self.width/2, self.height/2)
         right, top = self.x+self.width, self.y+self.height
@@ -212,7 +228,7 @@ class Card(BoxLayout):
                                     (abs(y-top), 0, 1))
                 length = max(.0001, math.hypot(dx, dy))
                 distance = distances[index] if index < len(points) else perimeter
-                texture_v = distance/perimeter + self._border_phase/math.tau
+                texture_v = distance/perimeter
                 for inset in (0, thickness):
                     vertices.extend((x-dx/length*inset, y-dy/length*inset,
                                      .5, texture_v))
@@ -223,9 +239,10 @@ class Card(BoxLayout):
             return vertices, indices
 
         thickness = (1.1 if self._animated_border else 1.15) + .2*self._hover_amount
-        self._frame.vertices, self._frame.indices = ring_geometry(thickness)
+        meshes = [(self._frame, *ring_geometry(thickness))]
         if self._halo is not None:
-            self._halo.vertices, self._halo.indices = ring_geometry(4.5)
+            meshes.append((self._halo, *ring_geometry(4.5)))
+        return meshes
 
 class HoverBehavior:
     """Adds a desktop hover state without changing touch behavior."""

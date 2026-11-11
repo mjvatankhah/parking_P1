@@ -68,7 +68,7 @@ def _has_viewer(path):
     return active
 
 
-def annotate_frame(frame):
+def annotate_frame(frame, camera=None):
     image = frame.image.copy()
     height, width = image.shape[:2]
     for detection in frame.detections:
@@ -82,6 +82,15 @@ def annotate_frame(frame):
         cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
         cv2.putText(image, label, (x1, max(18, y1 - 7)),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 2)
+    if camera is not None and camera.get('line'):
+        points = np.asarray(camera['line'], dtype=np.float64)
+        if camera.get('coordinate_space', 'pixels') == 'normalized':
+            points = points * [width, height]
+        points = np.rint(points).astype(np.int32)
+        points[:, 0] = np.clip(points[:, 0], 0, width - 1)
+        points[:, 1] = np.clip(points[:, 1], 0, height - 1)
+        cv2.polylines(image, [points], False, (0, 0, 0), 6, cv2.LINE_AA)
+        cv2.polylines(image, [points], False, (0, 230, 255), 3, cv2.LINE_AA)
     if width > 1280:
         image = cv2.resize(image, (1280, max(1, round(height * 1280 / width))))
     return image
@@ -89,6 +98,7 @@ def annotate_frame(frame):
 
 class PreviewPublisher:
     def __init__(self, cameras):
+        self._cameras = {c['id']: c for c in cameras}
         self._paths = {c['id']: preview_path(c['id'], c['source']) for c in cameras}
         self._pending = {}
         self._active = set()
@@ -138,14 +148,15 @@ class PreviewPublisher:
                 if camera_id not in active:
                     continue
                 try:
-                    self._write(self._paths[camera_id], frame, received_at)
+                    self._write(self._paths[camera_id], frame, received_at,
+                                self._cameras.get(camera_id))
                 except Exception:
                     # Preview failures must never interrupt recognition/OCR.
                     logging.getLogger(__name__).exception("Preview failed for %s", camera_id)
 
     @staticmethod
-    def _write(path, frame, received_at):
-        ok, encoded = cv2.imencode(".jpg", annotate_frame(frame), [cv2.IMWRITE_JPEG_QUALITY, 85])
+    def _write(path, frame, received_at, camera=None):
+        ok, encoded = cv2.imencode(".jpg", annotate_frame(frame, camera), [cv2.IMWRITE_JPEG_QUALITY, 85])
         if not ok:
             return
         path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)

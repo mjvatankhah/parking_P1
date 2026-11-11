@@ -23,6 +23,15 @@ Then apply `migrations/001_timestamptz.sql` with `psql -X -v ON_ERROR_STOP=1 -f`
 The migration preserves rows and interprets old wall-clock values in the
 database's configured time zone. It does not invent or change gate IDs.
 
+Run this migration using the **original server timezone**, before starting the
+updated application. Configure the database default with
+`ALTER DATABASE parking_db SET timezone TO 'Asia/Tehran';` and reconnect.
+Application connections inherit this setting so day boundaries, `CURRENT_DATE`,
+and hourly buckets agree with the parking site's calendar.
+Changing the connection timezone alone does not repair legacy
+`TIMESTAMP` values. For example, November 6 at 21:00 in Los Angeles represents
+November 7 at 08:30 in Tehran; the migration preserves that instant.
+
 The writer sends timezone-aware system timestamps for events and vehicle
 sessions. Apply `migrations/002_system_event_time.sql` to remove the database
 clock defaults from an existing database; existing timestamps are preserved.

@@ -96,6 +96,7 @@ DASHBOARD_COLORS = {
     'cyan': '#23CED1',
     'green': '#39C77F',
     'amber': '#FFBC38',
+    'exit': '#B94E3C',
     'red': '#FF575D',
 }
 

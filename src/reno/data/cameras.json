@@ -4,29 +4,29 @@
   "plate_sampling": {},
   "cameras": [
     {
-      "id": "cam2",
-      "gate_id": "",
-      "geometry_preview": "",
+      "id": "cam001",
+      "gate_id": "tst1",
+      "geometry_preview": "/home/MJR/parking_P1/src/reno/data/geometry_previews/cc003a5807ab4a55b74978718e677514.png",
       "type": "video",
-      "source": "src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
+      "source": "/home/MJR/parking_P1/src/computer_vision_v2/video/InShot_20261012_210725035.mp4",
       "line": [
         [
-          0.027083333333333334,
+          0.04010416666666667,
           0.7379629629629629
         ],
         [
-          0.5005208333333333,
-          0.5888888888888889
+          0.5604166666666667,
+          0.6453703703703704
         ],
         [
-          0.4828125,
-          0.262037037037037
+          0.5145833333333333,
+          0.27870370370370373
         ]
       ],
       "dir": "entry_exit",
       "inside_point": [
-        0.6333333333333333,
-        0.6962962962962963
+        0.7817708333333333,
+        0.7240740740740741
       ],
       "coordinate_space": "normalized",
       "roi": null

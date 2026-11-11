@@ -62,6 +62,24 @@ class ReferenceUIContractTests(unittest.TestCase):
     def tearDown(self):
         auth_service.logout()
 
+    def test_navigation_uses_cached_menus_and_updates_role_permissions(self):
+        from contextlib import ExitStack
+        from reno.services.camera_service import camera_service
+        with ExitStack() as stack:
+            stack.enter_context(patch.object(camera_service, 'reload',
+                side_effect=AssertionError('Navigation must not reload configuration')))
+            for screen in self.root.screens:
+                stack.enter_context(patch.object(screen, 'walk',
+                    side_effect=AssertionError('Navigation must not scan page widgets')))
+            self.app._navigate('camera_settings')
+            self.assertEqual(self.root.current, 'camera_settings')
+            auth_service.current_role = 'admin'
+            self.app._navigate('camera_settings')
+            self.assertTrue(all('guard_settings' in menu._items for menu in self.app._sidebars))
+            self.app._navigate('logout')
+            self.assertEqual(self.root.current, 'login')
+            self.assertTrue(all('guard_settings' not in menu._items for menu in self.app._sidebars))
+
     def test_icons_share_lucide_sources_and_application_brand(self):
         for filename in _ICON_FILES.values():
             self.assertTrue(filename.startswith(('lucide/', 'google/')))
@@ -96,8 +114,8 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.assertEqual(screen._inside._value_label.text, '۴۲')
         self.assertEqual(screen._blocked._value_label.text, '۳')
         self.assertEqual(screen._today._value_label.text, '۱٬۲۴۸')
-        self.assertEqual(screen._breakdown.ring.counts, (1000, 200, 45, 3))
-        self.assertEqual(screen._breakdown.ring.total_label.text, '۱٬۲۴۸')
+        self.assertEqual(screen._breakdown.ring.counts, (1000, 200, 3))
+        self.assertEqual(screen._breakdown.ring.total_label.text, '۱٬۲۰۳')
 
     def test_reference_layout_and_requested_panel_order_at_desktop_sizes(self):
         screen = self.dashboard
@@ -144,7 +162,7 @@ class ReferenceUIContractTests(unittest.TestCase):
 
         panel = TrafficBreakdown()
         panel.set_data((10, 3, 2, 1))
-        self.assertEqual(panel.ring.total_label.text, '۱۶')
+        self.assertEqual(panel.ring.total_label.text, '۱۴')
         panel.set_data((0, 0, 0, 0))
         self.assertEqual(panel.ring.total_label.text, '۰')
         self.assertTrue(all(value.text == '۰' for value in panel.values.values()))

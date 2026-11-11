@@ -25,7 +25,7 @@ class DashboardLoadingTests(unittest.TestCase):
 
     def test_chart_date_and_camera_do_not_silently_filter_latest_records(self):
         _, recent, _ = self.load()
-        recent.assert_called_once_with(limit=50, plate='12 ب')
+        recent.assert_called_once_with(limit=50, plate='12 ب', class_id=2)
 
     def test_statistics_failure_still_delivers_successful_records(self):
         apply, _, record = self.load(statistics_error=True)

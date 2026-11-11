@@ -10,6 +10,58 @@ from reno.ui.components.traffic_record import TrafficRecordRow
 
 
 class ReportsUITests(unittest.TestCase):
+    def test_large_report_yields_between_rows_and_stops_when_leaving(self):
+        record = PlateRecord('12ب34567', '2026-11-04', '12:30:00', 'cam')
+        with patch('reno.ui.reports.TrafficRecordRow', wraps=TrafficRecordRow) as build:
+            self.screen._loaded(0, ReportPage((record,) * 50, 50, 0, 50), '')
+            self.assertEqual(build.call_count, 0)
+            Clock.tick()
+            self.assertEqual(build.call_count, 1)
+            self.screen.on_leave()
+            Clock.tick()
+            self.assertEqual(build.call_count, 1)
+            self.assertIsNone(self.screen._row_work._event)
+
+    def finish_rows(self):
+        for _ in range(55):
+            Clock.tick()
+            Clock.tick_draw()
+            if self.screen._row_work._event is None:
+                return
+        self.fail('Report rows did not finish')
+
+    def test_returning_to_unchanged_report_preserves_rows_and_scroll(self):
+        record = PlateRecord('12ب34567', '2026-11-04', '12:30:00', 'cam')
+        page = ReportPage((record,) * 20, 20, 0, 20)
+        self.screen._loaded(0, page, '')
+        self.finish_rows()
+        scroll = self.screen.table_holder.children[0]
+        scroll.scroll_y = .4
+        rows = list(scroll.children[0].children)
+        self.screen.on_leave()
+        with patch('reno.ui.reports.TrafficRecordRow', wraps=TrafficRecordRow) as build:
+            self.screen._loaded(self.screen._generation, page, '')
+        self.assertEqual(build.call_count, 0)
+        self.assertIs(self.screen.table_holder.children[0], scroll)
+        self.assertEqual(scroll.children[0].children, rows)
+        self.assertAlmostEqual(scroll.scroll_y, .4)
+
+    def test_person_selection_resets_page_and_removes_plate_filter_and_columns(self):
+        self.screen._offset = 30
+        self.screen._filters = ReportFilter(plate='12ب34567', class_id=2)
+        with patch.object(self.screen, '_load') as load:
+            self.screen.kind.text = theme.rtl('انسان')
+            load.assert_called_once()
+        self.assertEqual(self.screen._filters, ReportFilter(class_id=0))
+        self.assertEqual(self.screen._offset, 0)
+        self.assertTrue(self.screen.plate.disabled)
+        person = PlateRecord('', '2026-11-04', '12:30:00', 'cam', class_id=0)
+        self.screen._loaded(self.screen._generation, ReportPage((person,), 1, 0, 20), '')
+        self.finish_rows()
+        row = next(w for w in self.screen.table_holder.walk() if isinstance(w, TrafficRecordRow))
+        self.assertIsNone(row._plate.parent)
+        self.assertIsNone(row._access_label.parent)
+
     @classmethod
     def setUpClass(cls):
         theme.register_app_font()
@@ -45,7 +97,7 @@ class ReportsUITests(unittest.TestCase):
         with patch.object(self.screen,'_load') as load:
             self.screen._apply()
             load.assert_called_once()
-        self.assertEqual(self.screen._filters,ReportFilter('۱۲ب۳۴۵۶۷',date(2026,11,1),date(2026,11,4),camera='gate-camera'))
+        self.assertEqual(self.screen._filters,ReportFilter('۱۲ب۳۴۵۶۷',date(2026,11,1),date(2026,11,4),camera='gate-camera',class_id=2))
         self.screen.start.selected=date(2026,11,5)
         with patch.object(self.screen,'_load') as load:
             self.screen._apply()
@@ -69,6 +121,7 @@ class ReportsUITests(unittest.TestCase):
     def test_table_uses_dashboard_rows_and_stale_results_are_ignored(self):
         record=PlateRecord('12ب34567','2026-11-04','12:30:00','cam')
         self.screen._loaded(0,ReportPage((record,)*20,100,0,20),'')
+        self.finish_rows()
         self.assertEqual(len([w for w in self.screen.table_holder.walk() if isinstance(w,TrafficRecordRow)]),20)
         self.screen.on_leave()
         self.screen._loaded(0,ReportPage((),0,0,20),'')

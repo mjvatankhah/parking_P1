@@ -17,8 +17,11 @@ class ReportFilter:
     start: date | None = None
     end: date | None = None
     camera: str = ''
+    class_id: int | None = None
 
     def __post_init__(self):
+        if self.class_id not in (None, 0, 2):
+            raise ValueError('نوع تردد معتبر نیست')
         if self.plate.strip() and not normalize_plate(self.plate):
             raise ValueError('شماره پلاک معتبر وارد کنید')
         if self.start and self.end and self.start > self.end:
@@ -35,6 +38,9 @@ class ReportPage:
 
 def conditions(filters):
     clauses, params = [], []
+    if filters.class_id is not None:
+        clauses.append('class_id = %s')
+        params.append(filters.class_id)
     plate = normalize_plate(filters.plate)
     if plate:
         clauses.append("regexp_replace(translate(COALESCE(plate_number, ''), %s, %s), '[[:space:]‌-]', '', 'g') = %s")
@@ -105,14 +111,17 @@ class ReportService:
                 with connection.cursor(name='traffic_report_export') as cursor:
                     cursor.execute('SELECT ' + _COLUMNS + ' FROM event' + where + _ORDER, params)
                     def rows():
-                        yield ('شماره پلاک','تاریخ شمسی','تاریخ میلادی','ساعت','دوربین','نوع','رویداد','وضعیت پلاک')
+                        people = filters.class_id == 0
+                        yield (('تاریخ شمسی','تاریخ میلادی','ساعت','دوربین','نوع','رویداد') if people else
+                               ('شماره پلاک','تاریخ شمسی','تاریخ میلادی','ساعت','دوربین','نوع','رویداد','وضعیت پلاک'))
                         while batch := cursor.fetchmany(1000):
                             for raw in batch:
                                 record = record_from_row(raw)
                                 day = date.fromisoformat(record.date)
                                 jalali = Jalaali.to_jalaali(day.year,day.month,day.day)
-                                yield (record.plate, f"{jalali['jy']:04}/{jalali['jm']:02}/{jalali['jd']:02}",
-                                       record.date,record.time,record.camera,record.class_label(),record.direction_label(),record.access_label())
+                                values = (f"{jalali['jy']:04}/{jalali['jm']:02}/{jalali['jd']:02}",
+                                          record.date,record.time,record.camera,record.class_label(),record.direction_label())
+                                yield values if people else (record.plate, *values, record.access_label())
                     count = write_xlsx(temporary, rows())
             temporary.replace(destination)
             return count

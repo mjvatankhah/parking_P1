@@ -12,6 +12,18 @@ ROW=('12ب34567',datetime(2026,11,4,12,30,tzinfo=timezone.utc),'gate-camera','en
 
 
 class ReportServiceTests(unittest.TestCase):
+    def test_class_filter_applies_before_pagination(self):
+        for class_id in (0, 2):
+            filters = ReportFilter(class_id=class_id)
+            self.assertEqual(conditions(filters), (' WHERE class_id = %s', [class_id]))
+            service, connection, cursor = self.connection()
+            cursor.fetchone.return_value = (1,)
+            cursor.fetchall.return_value = [ROW]
+            service.page(filters)
+            queries = [c.args for c in cursor.execute.call_args_list if c.args[0].startswith('SELECT')]
+            self.assertIn('WHERE class_id = %s', queries[0][0])
+            self.assertEqual(queries[1][1], (class_id, 20, 0))
+
     def connection(self):
         factory=MagicMock()
         connection=factory.return_value.__enter__.return_value
@@ -93,6 +105,21 @@ class ReportServiceTests(unittest.TestCase):
                 service.export(ReportFilter(),path)
             self.assertEqual(path.read_bytes(),b'previous')
             self.assertEqual(list(Path(folder).iterdir()),[path])
+
+    def test_person_export_filters_people_and_omits_plate_columns(self):
+        service, connection, cursor = self.connection()
+        person = (None, ROW[1], 'camera', 'exit', 0, None, 'read')
+        cursor.fetchmany.side_effect = [[person], []]
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'people.xlsx'
+            self.assertEqual(service.export(ReportFilter(class_id=0), path), 1)
+            query = next(c.args for c in cursor.execute.call_args_list if c.args[0].startswith('SELECT'))
+            self.assertIn('WHERE class_id = %s', query[0])
+            self.assertEqual(query[1], [0])
+            with ZipFile(path) as archive:
+                xml = archive.read('xl/worksheets/sheet1.xml').decode()
+                self.assertIn('انسان', xml)
+                self.assertNotIn('شماره پلاک', xml)
 
     def test_formula_like_camera_names_stay_text_and_xml_is_escaped(self):
         with tempfile.TemporaryDirectory() as folder:

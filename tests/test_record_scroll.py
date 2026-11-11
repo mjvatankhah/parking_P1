@@ -53,6 +53,11 @@ class RecordScrollTests(unittest.TestCase):
 
     def refresh(self, records, stats=True):
         self.screen._apply(0, self.stats if stats else None, records, [], 0)
+        for _ in range(30):
+            if self.screen._row_work._event is None:
+                break
+            Clock.tick()
+        self.assertIsNone(self.screen._row_work._event)
         layout()
 
     def test_periodic_refresh_preserves_scroll_and_rows_for_unchanged_records(self):
@@ -104,3 +109,71 @@ class RecordScrollTests(unittest.TestCase):
         self.refresh(self.records)
         self.assertIsNotNone(self.screen._record_scroll)
         self.assertEqual(len(self.screen._record_rows.children), 21)
+
+    def test_refreshes_during_vehicle_row_build_do_not_keep_table_empty(self):
+        self.refresh([])
+        records = [PlateRecord(str(i), '2026-11-07', '12:00:00', 'cam')
+                   for i in range(50)]
+        self.screen._set_records(records)
+        for frame in range(60):
+            if frame % 5 == 0:
+                self.screen._set_records([replace(record) for record in records])
+            Clock.tick()
+        self.assertEqual(len(self.screen._record_rows.children), 51)
+        self.assertIsNone(self.screen._row_work._event)
+
+    def test_first_vehicle_is_visible_before_the_full_batch_finishes(self):
+        self.refresh([])
+        self.screen._set_records(self.records)
+        Clock.tick()
+        self.assertEqual(len(self.screen._record_rows.children), 2)
+        self.assertEqual(self.screen._record_rows.children[0].record, self.records[0])
+        self.assertIsNotNone(self.screen._row_work._event)
+
+    def test_changed_snapshots_are_coalesced_without_losing_latest_vehicle(self):
+        self.refresh([])
+        self.screen._set_records(self.records)
+        for frame in range(25):
+            latest = [replace(self.records[0], plate=f'new-{frame}')] + self.records[1:]
+            self.screen._set_records(latest)
+            Clock.tick()
+        for _ in range(30):
+            Clock.tick()
+        displayed = [row.record for row in reversed(self.screen._record_rows.children)
+                     if hasattr(row, 'record')]
+        self.assertEqual(displayed, latest)
+        self.assertIsNone(self.screen._row_work._event)
+        self.assertIsNone(self.screen._queued_records)
+
+    def test_person_selection_cancels_unfinished_vehicle_batch_and_queued_refresh(self):
+        self.refresh([])
+        self.screen._set_records(self.records)
+        Clock.tick()
+        self.screen._set_records([replace(self.records[0], plate='new')] + self.records[1:])
+        self.screen._search = Mock()
+        self.screen._record_kind = Mock(text=theme.rtl('انسان'))
+        with patch.object(self.screen, '_filters_changed'):
+            self.screen._record_kind_changed()
+        person = PlateRecord('', '2026-11-07', '12:00:00', 'cam', class_id=0)
+        self.screen._set_records([person])
+        layout()
+        self.assertEqual(len(self.screen._record_rows.children), 2)
+        self.assertEqual(self.screen._record_rows.children[0].record, person)
+        self.assertIsNone(self.screen._queued_records)
+
+    def test_leaving_mid_build_keeps_visible_rows_and_returning_finishes_list(self):
+        self.refresh([])
+        self.screen._set_records(self.records)
+        for _ in range(3):
+            Clock.tick()
+        first_row = list(reversed(self.screen._record_rows.children))[1]
+        self.screen._set_records([replace(self.records[0], plate='queued')] + self.records[1:])
+        self.screen.on_leave()
+        layout()
+        self.assertIsNone(self.screen._queued_records)
+        self.assertIsNone(self.screen._building_record_keys)
+        self.screen._active = True
+        self.refresh(self.records)
+        displayed = list(reversed(self.screen._record_rows.children))[1:]
+        self.assertIs(displayed[0], first_row)
+        self.assertEqual([row.record for row in displayed], self.records)

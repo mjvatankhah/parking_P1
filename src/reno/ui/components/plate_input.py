@@ -3,6 +3,12 @@ import re
 from computer_vision_v2.database.plate_access import normalize_plate
 from reno.ui.components.common import RoundedTextInput
 from reno.ui.components.bidi_input import visual_line
+from reno.ui.theme import rtl
+
+
+# Hints are already display-ready in BidiTextInput. Shape only the letter:
+# applying RTL to the entire example would reorder the physical plate groups.
+PLATE_HINT = '۱۲ ' + rtl('ب') + ' ۳۴۵ | ۶۷'
 
 
 def format_plate(value):

@@ -34,8 +34,6 @@ class GuidedGeometryTests(unittest.TestCase):
         selection.click((160,100))
         selection.confirm()
         self.assertEqual(selection.stage, Stage.ROI)
-        with self.assertRaises(ValueError):
-            selection.confirm()
         for point in ((10,10),(190,10),(190,190),(10,190)):
             selection.click(point)
         selection.confirm()
@@ -46,6 +44,16 @@ class GuidedGeometryTests(unittest.TestCase):
             selection.click((80,100))
         selection.click((80,60))
         self.assertEqual(selection.geometry()['inside_point'], [.4,.3])
+
+    def test_empty_roi_can_be_skipped_and_saved_as_full_frame(self):
+        selection = GuidedSelection(200, 200)
+        selection.click((40, 100))
+        selection.click((160, 100))
+        selection.confirm()
+        selection.confirm()
+        self.assertEqual(selection.stage, Stage.SIDE)
+        selection.click((80, 60))
+        self.assertIsNone(selection.geometry()['roi'])
 
     def test_roi_must_contain_line_and_back_allows_correction(self):
         selection = self.selection()

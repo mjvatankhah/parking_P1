@@ -104,6 +104,8 @@ class RenoApp(App):
         # screens and also stall OpenCV's first video decode. A direct desktop
         # page switch is stable and keeps all button hover/press animations.
         self.screen_manager = ScreenManager(transition=InstantTransition())
+        self._sidebars = []
+        self._sidebar_admin = None
 
         login_screen = LoginScreen(name="login", on_login_success=self._go_to_dashboard)
         dashboard_screen = DashboardScreen(name="dashboard", on_navigate=self._navigate)
@@ -122,6 +124,8 @@ class RenoApp(App):
             page_root = screen.children[0]
             page_root.size = screen.size
             screen.bind(size=page_root.setter("size"))
+            self._sidebars.extend(widget for widget in screen.walk(restrict=True)
+                                  if isinstance(widget, Sidebar))
 
         self.camera_health = CameraHealthMonitor(camera_service)
         self.screen_manager.current = "login"
@@ -136,11 +140,12 @@ class RenoApp(App):
             name = "login"
         if name == "guard_settings" and not auth_service.is_admin:
             name = "dashboard" if auth_service.current_role else "login"
-        for screen in self.screen_manager.screens:
-            for widget in screen.walk():
-                if isinstance(widget, Sidebar):
-                    widget.set_admin_access(auth_service.is_admin)
-        camera_service.reload()
+        if self._sidebar_admin != auth_service.is_admin:
+            for sidebar in self._sidebars:
+                sidebar.set_admin_access(auth_service.is_admin)
+            self._sidebar_admin = auth_service.is_admin
+        # Configuration already has a periodic refresh. Navigation should not
+        # read files or traverse every report row just to find the sidebars.
         self.screen_manager.current = name
 
     def _navigate(self, screen_name: str):

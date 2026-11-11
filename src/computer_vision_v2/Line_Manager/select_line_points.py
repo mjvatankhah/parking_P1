@@ -98,7 +98,7 @@ class Selection:
 
 @dataclass
 class GuidedSelection(Selection):
-    """Desktop wizard: reference line, required ROI, then parking side."""
+    """Desktop wizard: reference line, optional ROI, then parking side."""
     stage: Stage = Stage.LINE
 
     def click(self, point):
@@ -128,6 +128,9 @@ class GuidedSelection(Selection):
                 raise ValueError('ابتدا حداقل دو نقطه خط مرجع را انتخاب کنید')
             self.stage = Stage.ROI
         elif self.stage == Stage.ROI:
+            if not self.roi:
+                self.stage = Stage.SIDE
+                return
             polygon = np.asarray(self.roi, np.float32)
             if len(self.roi) != 4:
                 raise ValueError('چهار گوشه محدوده را انتخاب کنید')

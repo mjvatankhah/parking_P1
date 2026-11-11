@@ -15,6 +15,7 @@ from reno.ui import theme
 from reno.ui.components.common import Card, Divider, RTLLabel, EmptyState, SecondaryButton, styled_spinner
 from reno.ui.components.plate_input import PlateSearchInput
 from reno.ui.components.page_shell import PageShell
+from reno.ui.components.frame_work import FrameWork
 from reno.ui.components.stat_card import StatCard
 from reno.ui.components.traffic_chart import TrafficChart
 from reno.ui.components.traffic_record import TrafficRecordRow, detection_header
@@ -40,6 +41,10 @@ class DashboardScreen(Screen):
         self._record_scroll = None
         self._record_rows = None
         self._record_keys = []
+        self._row_work = FrameWork()
+        self._building_record_keys = None
+        self._queued_records = None
+        self._queued_record_refresh = Clock.create_trigger(self._flush_records, 0)
         self._refresh_trigger = Clock.create_trigger(self._request_refresh, .3)
         self._build()
         camera_service.subscribe(self._on_cameras_changed)
@@ -69,7 +74,7 @@ class DashboardScreen(Screen):
         self._chart_panel = chart_panel = Card(height=356, **panel_style)
         chart_heading = BoxLayout(size_hint_y=None, height=46, padding=[16, 0, 16, 0], spacing=7)
         legend = BoxLayout(size_hint_x=None, width=92, spacing=16)
-        for title, color in (('خروج', palette['amber']), ('ورود', palette['cyan'])):
+        for title, color in (('خروج', palette['exit']), ('ورود', palette['cyan'])):
             item = BoxLayout(spacing=6)
             item.add_widget(RTLLabel(text=title, font_size=11, padding=[0, 0],
                                      color=theme.rgba(palette['muted'])))
@@ -119,6 +124,11 @@ class DashboardScreen(Screen):
             color=theme.rgba(palette['cyan']))
         self._view_all.bind(on_release=lambda *_: self._navigate('reports'))
         heading.add_widget(self._view_all)
+        self._record_kind = styled_spinner(values=[theme.rtl("خودرو"), theme.rtl("انسان")], initial=theme.rtl("خودرو"))
+        self._record_kind.size_hint_x = None
+        self._record_kind.width = 120
+        self._record_kind.bind(text=self._record_kind_changed)
+        heading.add_widget(self._record_kind)
         self._record_status = RTLLabel(text='در حال دریافت…', font_size=11,
             color=theme.rgba(palette['muted']), halign='left', padding=[0, 0])
         heading.add_widget(self._record_status)
@@ -185,6 +195,7 @@ class DashboardScreen(Screen):
             self._timer = Clock.schedule_interval(self._request_refresh, 5)
 
     def on_leave(self, *_):
+        self._cancel_record_build()
         self._active = False
         if hasattr(self, '_filters_popup'):
             self._filters_popup.dismiss()
@@ -206,6 +217,15 @@ class DashboardScreen(Screen):
         self._day = value
         self._filters_changed()
 
+    def _record_kind_changed(self, *_):
+        self._cancel_record_build()
+        self._search.disabled = self._record_kind.text == theme.rtl("انسان")
+        self._search.text = ""
+        self._record_holder.clear_widgets()
+        self._record_scroll = self._record_rows = None
+        self._record_keys = []
+        self._filters_changed()
+
     def _filters_changed(self, *_):
         self._revision += 1
         self._refresh_trigger()
@@ -214,10 +234,11 @@ class DashboardScreen(Screen):
         if not self._active or self._loading:
             return
         self._loading = True
-        threading.Thread(target=self._load, args=(self._revision, self._camera, self._day, self._search.text.strip()),
+        threading.Thread(target=self._load, args=(self._revision, self._camera, self._day, self._search.text.strip(),
+                                                     0 if self._record_kind.text == theme.rtl("انسان") else 2),
                          daemon=True, name='reno-dashboard-data').start()
 
-    def _load(self, revision, camera, day, plate):
+    def _load(self, revision, camera, day, plate, class_id=2):
         day = day or date.today()
         logger = logging.getLogger(__name__)
         stats = records = flow = None
@@ -225,7 +246,7 @@ class DashboardScreen(Screen):
         # Recent events are independent of the chart's date and camera controls.
         # A failed aggregate must never hide a successful event query.
         try:
-            records = plate_service.get_recent_records(limit=50, plate=plate)
+            records = plate_service.get_recent_records(limit=50, plate=plate, class_id=class_id)
         except Exception:
             logger.exception('Dashboard recent events read failed')
             errors.append('records')
@@ -275,9 +296,32 @@ class DashboardScreen(Screen):
             self._data_status.set_text('حالت نمایشی · داده‌های آزمایشی' if MOCK_DATA_ENABLED
                                        else 'رویدادهای ثبت‌شدهٔ سامانه')
 
+    def _cancel_record_build(self):
+        self._row_work.cancel()
+        self._building_record_keys = None
+        self._queued_records = None
+        self._queued_record_refresh.cancel()
+
+    def _flush_records(self, *_):
+        records = self._queued_records
+        self._queued_records = None
+        if records is not None:
+            self._set_records(records)
+
     def _set_records(self, records):
+        records = list(records)
         keys = [astuple(record) for record in records]
-        if keys == self._record_keys and self._record_scroll is not None:
+        if not records:
+            self._cancel_record_build()
+        elif self._building_record_keys is not None:
+            # Polling/health updates may arrive before a large batch finishes.
+            # Finish that batch, then apply only the newest snapshot; restarting
+            # here can permanently starve the 50-row vehicle list.
+            self._queued_records = records if keys != self._building_record_keys else None
+            return
+        self._queued_record_refresh.cancel()
+        self._queued_records = None
+        if records and keys == self._record_keys and self._record_scroll is not None:
             return
         if not records:
             self._record_holder.clear_widgets()
@@ -301,40 +345,58 @@ class DashboardScreen(Screen):
             self._record_holder.add_widget(scroll)
 
         scroll, rows = self._record_scroll, self._record_rows
-        at_top = scroll.scroll_y >= .999
-        offset = (1 - scroll.scroll_y) * max(0, rows.height - scroll.height)
         old_widgets = list(reversed(rows.children))
         old_data_rows = old_widgets[1:]
-        # Anchor to the first surviving row at/after the visible top. Each
-        # data row occupies 56 pixels plus 3 pixels of spacing after the header.
-        first_visible = max(0, int((offset - 29) // 59))
-        if not at_top:
-            for index in range(first_visible, len(self._record_keys)):
-                key = self._record_keys[index]
-                if key in keys:
-                    offset += (keys.index(key) - index) * 59
-                    break
-
         available = {}
         for key, row in zip(self._record_keys, old_data_rows):
             available.setdefault(key, []).append(row)
-        new_rows = []
-        for key, record in zip(keys, records):
-            matches = available.get(key)
-            if matches:
-                row = matches.pop(0)
-                row.record = record
-            else:
-                row = TrafficRecordRow(record)
-            new_rows.append(row)
-        rows.clear_widgets()
-        rows.add_widget(old_widgets[0] if old_widgets else detection_header())
-        for row in new_rows:
-            rows.add_widget(row)
-        self._record_keys = keys
-        # Resolve height before restoring the scroll so a later layout does
-        # not apply an obsolete normalized position to the updated content.
-        rows.height = 26 + len(records) * 59
-        rows.do_layout()
-        extent = max(0, rows.height - scroll.height)
-        scroll.scroll_y = 1 if at_top or not extent else 1 - min(extent, max(0, offset)) / extent
+        initial_build = not old_widgets
+        if initial_build:
+            rows.add_widget(detection_header(records[0].class_id))
+        self._building_record_keys = keys
+        def populate():
+            new_rows = []
+            for key, record in zip(keys, records):
+                matches = available.get(key)
+                created = not matches
+                if matches:
+                    row = matches.pop(0)
+                    row.record = record
+                else:
+                    row = TrafficRecordRow(record)
+                new_rows.append(row)
+                if initial_build:
+                    # Show the first vehicle immediately instead of waiting
+                    # for every row (and every thumbnail) to be prepared.
+                    rows.add_widget(row)
+                    self._record_keys.append(key)
+                if created:
+                    yield
+            at_top = scroll.scroll_y >= .999
+            offset = (1 - scroll.scroll_y) * max(0, rows.height - scroll.height)
+            # Anchor to the first surviving row at/after the visible top. Each
+            # data row occupies 56 pixels plus 3 pixels of spacing after the header.
+            first_visible = max(0, int((offset - 29) // 59))
+            if not at_top:
+                for index in range(first_visible, len(self._record_keys)):
+                    key = self._record_keys[index]
+                    if key in keys:
+                        offset += (keys.index(key) - index) * 59
+                        break
+
+            if not initial_build:
+                rows.clear_widgets()
+                rows.add_widget(old_widgets[0])
+                for row in new_rows:
+                    rows.add_widget(row)
+            self._record_keys = keys
+            # Resolve height before restoring the scroll so a later layout does
+            # not apply an obsolete normalized position to the updated content.
+            rows.height = 26 + len(records) * 59
+            rows.do_layout()
+            extent = max(0, rows.height - scroll.height)
+            scroll.scroll_y = 1 if at_top or not extent else 1 - min(extent, max(0, offset)) / extent
+            self._building_record_keys = None
+            if self._queued_records is not None:
+                self._queued_record_refresh()
+        self._row_work.start(populate())

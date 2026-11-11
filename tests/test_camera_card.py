@@ -16,6 +16,21 @@ from computer_vision_v2.tracking.frame_info import TrackedFrame
 
 
 class CameraCardTests(unittest.TestCase):
+    def test_reference_line_overlays_preview_without_backend_line(self):
+        register_app_font()
+        camera = Camera(id='line-overlay', line=[[.2, .6], [.8, .7]])
+        card = CameraCard(camera, size_hint=(None, None))
+        card._render_frame(np.zeros((720, 1280, 3), dtype=np.uint8))
+        surface = card._video_surface
+        for position, size in [((0, 0), (400, 300)), ((80, 120), (600, 240))]:
+            surface.pos, surface.size = position, size
+            surface._redraw()
+            x, y = surface._frame_rect.pos
+            w, h = surface._frame_rect.size
+            np.testing.assert_allclose(surface._reference_line.points,
+                                       [x + .2*w, y + .4*h, x + .8*w, y + .3*h])
+        card.stop_stream()
+
     def test_live_page_subscription_displays_then_stops_and_resumes_preview(self):
         from kivy.uix.screenmanager import Screen, ScreenManager
         from reno.main import InstantTransition

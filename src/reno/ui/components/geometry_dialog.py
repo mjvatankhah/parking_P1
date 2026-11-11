@@ -110,7 +110,7 @@ class GeometryDialog(Popup):
         stage = self.selection.stage
         instructions = {
             Stage.LINE: 'خط مرجع را با دو نقطه رسم کنید؛ برای خط شکسته، نقطه سوم را انتخاب کنید.',
-            Stage.ROI: 'چهار گوشه ROI را به‌ترتیب انتخاب کنید؛ شکل با نقطه چهارم بسته می‌شود.',
+            Stage.ROI: 'محدوده اختیاری است؛ برای پردازش کل تصویر «مرحله بعد» را بزنید، یا چهار گوشه انتخاب کنید.',
             Stage.SIDE: 'روی سمت داخل پارکینگ کلیک کنید، سپس «ثبت» را بزنید.',
         }
         self.instruction.text = theme.rtl(instructions[stage])
