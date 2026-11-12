@@ -1,0 +1,21 @@
+[0;93m2026-11-12 13:19:44.529270383 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+{'event': 416, 'status': 'uncertain', 'votes': {}, 'samples': 13, 'accepted': 1, 'ocr': 2, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 417, 'status': 'read', 'votes': {'64ه49645': 3, '64ه49445': 1}, 'samples': 10, 'accepted': 4, 'ocr': 7, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 418, 'status': 'uncertain', 'votes': {}, 'samples': 42, 'accepted': 17, 'ocr': 9, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 419, 'status': 'read', 'votes': {'17و62745': 3}, 'samples': 32, 'accepted': 24, 'ocr': 6, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 420, 'status': 'uncertain', 'votes': {'89ط57345': 1}, 'samples': 71, 'accepted': 25, 'ocr': 10, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 423, 'status': 'read', 'votes': {'71م59445': 1, '21م59445': 5}, 'samples': 25, 'accepted': 25, 'ocr': 10, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 425, 'status': 'uncertain', 'votes': {}, 'samples': 56, 'accepted': 29, 'ocr': 9, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 426, 'status': 'uncertain', 'votes': {}, 'samples': 33, 'accepted': 29, 'ocr': 5, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 427, 'status': 'uncertain', 'votes': {}, 'samples': 8, 'accepted': 2, 'ocr': 2, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 429, 'status': 'uncertain', 'votes': {}, 'samples': 13, 'accepted': 1, 'ocr': 1, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 430, 'status': 'uncertain', 'votes': {}, 'samples': 9, 'accepted': 1, 'ocr': 2, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 432, 'status': 'read', 'votes': {'55ه19545': 3}, 'samples': 24, 'accepted': 24, 'ocr': 7, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 433, 'status': 'uncertain', 'votes': {}, 'samples': 6, 'accepted': 1, 'ocr': 1, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+{'event': 434, 'status': 'uncertain', 'votes': {}, 'samples': 14, 'accepted': 4, 'ocr': 4, 'dropped': 0, 'omitted_images': 0, 'omitted_samples': 0}
+PASS: 14 archived decisions and OCR validity results reproduced; 10 uncertain, 4 read.
+Traceback (most recent call last):
+  File "/home/mjr/plakino/reports/uncertain_review_20261112/replay.py", line 36, in <module>
+    if '--require-read' in sys.argv:assert all(r['status']=='read' for r in rows),'Archived uncertain passages remain uncertain'
+                                           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Archived uncertain passages remain uncertain

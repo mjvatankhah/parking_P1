@@ -1,3 +1,4 @@
+from computer_vision_v2.site_time import TEHRAN
 """Choose a local XLSX destination with explicit overwrite confirmation."""
 from datetime import datetime
 from pathlib import Path
@@ -17,7 +18,7 @@ class ExportDialog(Popup):
         directory=home/'Downloads' if (home/'Downloads').is_dir() else home
         self.chooser=FileChooserListView(path=str(directory),dirselect=True)
         root.add_widget(self.chooser)
-        self.filename=RoundedTextInput(text=f'traffic-report-{datetime.now():%Y%m%d-%H%M%S}.xlsx',
+        self.filename=RoundedTextInput(text=f'traffic-report-{datetime.now(TEHRAN):%Y%m%d-%H%M%S}.xlsx',
                                        size_hint_y=None,height=44,halign='left')
         root.add_widget(self.filename)
         self.error=RTLLabel(text='',size_hint_y=None,height=36,color=theme.rgba(theme.COLORS['offline']))

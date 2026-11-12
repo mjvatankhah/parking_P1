@@ -36,6 +36,9 @@ def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
                     result['image_path'] = str(path)
                 except Exception:
                     logger.exception('Could not save crossing image')
+            trace = item.get('trace')
+            if trace is not None:
+                result['diagnostics_path'] = trace.save(event, result, item['candidates'])
             offer_event(db_queue, {**event, **result}, 'database', stopping=not running_flag())
         finally:
             ocr_queue.task_done()

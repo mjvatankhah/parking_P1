@@ -1,3 +1,4 @@
+from computer_vision_v2.site_time import today as site_today
 """Dashboard totals count vehicles rather than repeated detections."""
 import unittest
 from datetime import date, timedelta
@@ -8,8 +9,8 @@ from reno.services.dashboard_service import DashboardService
 
 class DashboardStatisticsTests(unittest.TestCase):
     def test_occupancy_includes_earlier_entries_and_daily_categories_are_unique(self):
-        today = date.today().isoformat()
-        yesterday = (date.today() - timedelta(days=1)).isoformat()
+        today = site_today().isoformat()
+        yesterday = (site_today() - timedelta(days=1)).isoformat()
         records = [
             PlateRecord('12ب34567', yesterday, '10:00:00', 'cam'),
             PlateRecord('22ب34567', today, '09:00:00', 'cam'),

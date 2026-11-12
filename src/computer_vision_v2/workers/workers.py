@@ -10,7 +10,7 @@ def _offer_passages(passages, ocr_queue, is_running):
         event = passage.event
         logger.info('Vehicle evidence complete camera=%s track=%s candidates=%s',
                     event['camera_id'], event['track_id'], len(passage.candidates))
-        offer_event(ocr_queue, {'event':event, 'candidates':passage.candidates, 'person':None},
+        offer_event(ocr_queue, {'event':event, 'candidates':passage.candidates, 'person':None, 'trace':getattr(passage, 'trace', None)},
                     'ocr', stopping=not is_running())
 
 

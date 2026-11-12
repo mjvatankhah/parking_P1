@@ -1,4 +1,5 @@
 """Jalali month picker selecting whole Saturday–Friday weeks."""
+from computer_vision_v2.site_time import today
 from datetime import date, timedelta
 from reno.ui.vendor.jalaali import Jalaali
 from kivy.uix.boxlayout import BoxLayout
@@ -11,13 +12,13 @@ from reno.ui.components.jalali_calendar import MONTHS, WEEKDAYS, week_bounds, we
 
 class WeekPicker(SecondaryButton):
     def __init__(self, on_select, **kwargs):
-        self.selected = week_bounds(date.today())[0]
+        self.selected = week_bounds(today())[0]
         self.on_select = on_select
         super().__init__(text=theme.rtl(week_text(self.selected)), **kwargs)
         self.bind(on_release=self._open)
 
     def set_date(self, value):
-        self.selected = week_bounds(value or date.today())[0]
+        self.selected = week_bounds(value or today())[0]
         self.text = theme.rtl(week_text(self.selected))
         self.on_select(week_bounds(self.selected)[1])
 
@@ -38,7 +39,7 @@ class WeekPicker(SecondaryButton):
         self._grid = GridLayout(cols=7, spacing=4)
         root.add_widget(self._grid)
         current = SecondaryButton(text=theme.rtl('هفتهٔ جاری'), size_hint_y=None, height=36)
-        current.bind(on_release=lambda *_: self._select(date.today()))
+        current.bind(on_release=lambda *_: self._select(today()))
         root.add_widget(current)
         self._popup = Popup(title='', separator_height=0, background='', background_color=(0,0,0,0),
                             content=root, size_hint=(None,None), size=(460,420))

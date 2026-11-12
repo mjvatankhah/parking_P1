@@ -39,3 +39,6 @@ desktop.ini
 # Offline UI textures must ship with the desktop application.
 !src/reno/assets/icons/lucide/*.png
 !src/reno/assets/icons/google/*.png
+
+# Local passage diagnostic images and recognition metadata
+/reports/crop_diagnostics/

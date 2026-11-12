@@ -26,6 +26,7 @@ def get_connection(*, connect_timeout=5):
         user=DB_USER,
         password=DB_PASSWORD,
         connect_timeout=connect_timeout,
+        options="-c timezone=Asia/Tehran",
     )
 
     return connection

@@ -1,4 +1,5 @@
 """Filtered traffic queries and streaming Excel export; no UI dependencies."""
+from computer_vision_v2.site_time import TEHRAN
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
@@ -47,10 +48,10 @@ def conditions(filters):
         params.extend(['۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩يك', '01234567890123456789یک', plate])
     if filters.start:
         clauses.append('captured_at >= %s')
-        params.append(datetime.combine(filters.start, time.min).astimezone())
+        params.append(datetime.combine(filters.start, time.min, tzinfo=TEHRAN))
     if filters.end:
         clauses.append('captured_at < %s')
-        params.append(datetime.combine(filters.end + timedelta(days=1), time.min).astimezone())
+        params.append(datetime.combine(filters.end + timedelta(days=1), time.min, tzinfo=TEHRAN))
     if filters.camera.strip():
         clauses.append('camera_id = %s')
         params.append(filters.camera.strip())
@@ -64,7 +65,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 def record_from_row(row):
     plate, stamp, camera, direction, class_id, image, status = row[:7]
-    stamp = stamp.astimezone()
+    stamp = stamp.astimezone(TEHRAN)
     if image:
         path = Path(image)
         image = str(path if path.is_absolute() else _PROJECT_ROOT / path)

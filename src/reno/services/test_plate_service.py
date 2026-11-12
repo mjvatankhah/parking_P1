@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from reno.services import plate_service as module
+from computer_vision_v2.site_time import TEHRAN
 
 
 class PlateServiceTests(unittest.TestCase):
@@ -21,8 +22,8 @@ class PlateServiceTests(unittest.TestCase):
 
     def test_event_rows_map_to_dashboard_records(self):
         self.cursor.fetchall.return_value = [
-            ('12ب345', datetime(2026, 9, 14, 13, 4, 5), 'cam2', 'exit', 2, 'captured_plates/test.jpg', 'read'),
-            (None, datetime(2026, 9, 14, 12, 1, 2), 'cam1', 'entry', 0, None, 'unread'),
+            ('12ب345', datetime(2026, 9, 14, 13, 4, 5, tzinfo=TEHRAN), 'cam2', 'exit', 2, 'captured_plates/test.jpg', 'read'),
+            (None, datetime(2026, 9, 14, 12, 1, 2, tzinfo=TEHRAN), 'cam1', 'entry', 0, None, 'unread'),
         ]
         records = self.service.get_recent_records(50)
         self.assertEqual(len(records), 2)
@@ -48,13 +49,13 @@ class PlateServiceTests(unittest.TestCase):
         self.assertEqual(self.service.get_recent_records()[0].plate,'نامطمئن')
 
     @unittest.skipUnless(hasattr(time, 'tzset'), 'Requires system timezone control')
-    def test_database_timestamp_is_displayed_in_system_timezone(self):
+    def test_database_timestamp_is_displayed_in_tehran_on_other_host(self):
         self.cursor.fetchall.return_value = [
             (None, datetime(2026, 10, 10, 23, 45, tzinfo=timezone.utc),
              'cam2', 'entry', 0, None, 'unread'),
         ]
         try:
-            with patch.dict(os.environ, {'TZ': 'Asia/Tehran'}):
+            with patch.dict(os.environ, {'TZ': 'America/Los_Angeles'}):
                 time.tzset()
                 record = self.service.get_recent_records()[0]
                 self.assertEqual(record.date, '2026-10-11')

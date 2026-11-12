@@ -1,6 +1,6 @@
 import tempfile
 from pathlib import Path
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timezone, timedelta
 from unittest.mock import MagicMock
 import unittest
 from zipfile import ZipFile
@@ -40,6 +40,14 @@ class ReportServiceTests(unittest.TestCase):
         self.assertEqual(params[-2].date(),date(2026,11,1))
         self.assertEqual(normalize_plate('١٢ب٣٤٥٦٧'),'12ب34567')
         self.assertEqual(normalize_plate('۱۲ي۳۴۵۶۷'),'12ی34567')
+
+    def test_report_boundaries_and_display_use_tehran(self):
+        from reno.services.report_service import record_from_row
+        _, params = conditions(ReportFilter(start=date(2026, 11, 11), end=date(2026, 11, 11)))
+        self.assertEqual(params[0].utcoffset(), timedelta(hours=3, minutes=30))
+        self.assertEqual(params[0].astimezone(timezone.utc), datetime(2026, 11, 10, 20, 30, tzinfo=timezone.utc))
+        record = record_from_row((None, datetime(2026, 11, 10, 23, tzinfo=timezone.utc), 'cam', 'entry', 0, None, 'unread'))
+        self.assertEqual((record.date, record.time), ('2026-11-11', '02:30:00'))
 
     def test_bad_dates_are_rejected(self):
         with self.assertRaises(ValueError):

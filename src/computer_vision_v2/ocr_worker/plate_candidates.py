@@ -8,6 +8,8 @@ import threading
 import cv2
 from computer_vision_v2.inference.plate_geometry import prepare_plate
 
+from .crop_diagnostics import EvidenceTrace
+
 logger = logging.getLogger(__name__)
 
 @dataclass(eq=False)
@@ -26,6 +28,11 @@ class VehicleSample:
     image: object
     ts: float
     frame_idx: int
+    trace: object = None
+    vehicle_bbox: object = None
+    detector_bbox: object = None
+    frame_shape: object = None
+    predicted: bool = False
 
 
 class CandidateBuffer(list):
@@ -63,20 +70,22 @@ class TrackEvidence:
     pending: list = field(default_factory=list)
     in_flight: bool = False
     retiring: bool = False
+    trace: object = None
 
 
 @dataclass
 class CompletedPassage:
     event: dict
     candidates: list
+    trace: object = None
 
 
 class PlateCandidates:
     def __init__(self, reader, interval=0.1, capacity=6, near=0.09, stale=5.0,
                  exit_delay=0.75, reid_gap=0.5, reid_iou=0.35,
-                 deferred=False, vehicle_margin=0.2, sample_capacity=30):
+                 deferred=False, vehicle_margin=0.2, sample_capacity=50, diagnostics=None):
         if (not all(math.isfinite(v) for v in (interval, near, stale, exit_delay, reid_gap, reid_iou))
-                or interval <= 0 or near < 0 or stale <= 0 or exit_delay <= 0
+                or interval < 0 or near < 0 or stale <= 0 or exit_delay <= 0
                 or reid_gap <= 0 or reid_gap > exit_delay or not 0 < reid_iou <= 1
                 or isinstance(capacity, bool) or not isinstance(capacity, int) or capacity < 1):
             raise ValueError('Invalid candidate buffer limits')
@@ -84,6 +93,7 @@ class PlateCandidates:
                 or isinstance(sample_capacity, bool) or not isinstance(sample_capacity, int)
                 or sample_capacity < 2):
             raise ValueError('Invalid raw sample limits')
+        self.diagnostics = diagnostics or {}
         self.deferred, self.vehicle_margin = deferred, vehicle_margin
         self.sample_capacity = sample_capacity
         self.pending_bytes = 0
@@ -131,6 +141,8 @@ class PlateCandidates:
             if match is None:
                 match = key
                 self.tracks[match] = TrackEvidence(frame.ts, tuple(det.bbox))
+                if self.diagnostics.get("enabled", False):
+                    self.tracks[match].trace = EvidenceTrace(root=self.diagnostics.get("directory"))
             self.aliases[key] = match
             self.tracks[match].aliases.add(key)
             assigned.add(match)
@@ -153,9 +165,14 @@ class PlateCandidates:
                 'geometry': state.candidates.groups(),
                 'raw': state.raw_candidates.groups(),
             })
-        return CompletedPassage(state.event, crops)
+        if state.trace is not None:
+            if not isinstance(crops, PassageCandidates):
+                crops = PassageCandidates(crops, {})
+            crops.trace = state.trace
+        return CompletedPassage(state.event, crops, state.trace)
 
     def _sample(self, frame, det, state):
+        # interval=0 disables time-based sampling for full-frame comparisons.
         predicted = getattr(det, 'is_predicted', False)
         elapsed = frame.ts - state.sampled
         # Prefer current detector boxes; use optical flow after a longer gap.
@@ -179,7 +196,8 @@ class PlateCandidates:
         vehicle = frame.image[b:d, a:c]
         if not vehicle.size:
             return
-        sample = VehicleSample(vehicle.copy(), frame.ts, frame.frame_idx)
+        sample = VehicleSample(vehicle.copy(), frame.ts, frame.frame_idx, state.trace,
+                               expanded, tuple(det.bbox), tuple(frame.image.shape), predicted)
         if not self.deferred:
             self._store_candidate(state, self._detect_sample(sample))
             return
@@ -202,18 +220,27 @@ class PlateCandidates:
             index = 0
         self.pending_bytes -= state.pending.pop(index).image.nbytes
         self.dropped_samples += 1
+        if state.trace is not None:
+            state.trace.dropped_pending += 1
 
     def _detect_sample(self, sample):
         try:
             detection = self.reader.detect_plate(sample.image)
         except Exception:
             logger.exception('Plate detection failed at frame %s', sample.frame_idx)
+            if sample.trace is not None:
+                sample.trace.sample(sample, None, reason='detection_exception')
             return None
+        details = getattr(self.reader, "last_detection_details", None)
         if detection is None:
+            if sample.trace is not None:
+                sample.trace.sample(sample, None, details, reason="no_accepted_plate_detection")
             return None
         crop, confidence, context = detection
         ph, pw = crop.shape[:2]
         if ph < 8 or pw < 30:
+            if sample.trace is not None:
+                sample.trace.sample(sample, None, details, reason="below_minimum_size")
             return None
         gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
         sharp = float(cv2.Laplacian(gray, cv2.CV_32F).var())
@@ -226,6 +253,8 @@ class PlateCandidates:
                 candidate.prepared = prepare_plate(context if context is not None else crop)
             except Exception:
                 logger.exception('Plate geometry failed at frame %s', sample.frame_idx)
+        if sample.trace is not None:
+            sample.trace.sample(sample, candidate, details)
         return candidate
 
     def _keep(self, candidates, candidate):
@@ -265,12 +294,18 @@ class PlateCandidates:
             return
         ph,pw = candidate.crop.shape[:2]
         if 1.15 <= pw / ph <= 8:
-            self._keep(state.raw_candidates, candidate)
+            decision = self._keep(state.raw_candidates, candidate)
+            if state.trace is not None:
+                state.trace.decision(candidate.frame_idx, "raw", decision)
         if candidate.prepared is None:
             if state.fallback is None or candidate.quality > state.fallback.quality:
                 state.fallback = candidate
+                if state.trace is not None:
+                    state.trace.decision(candidate.frame_idx, "fallback", "replace_best_fallback")
             return
-        self._keep(state.candidates, candidate)
+        decision = self._keep(state.candidates, candidate)
+        if state.trace is not None:
+            state.trace.decision(candidate.frame_idx, "geometry", decision)
 
     def process_pending(self, timeout=0.):
         """One detector worker drains samples fairly; observation never waits for inference."""
@@ -334,6 +369,8 @@ class PlateCandidates:
             canonical = self.aliases.get(key)
             if canonical is not None and self.tracks[canonical].event is None:
                 self.tracks[canonical].event = event
+                if self.tracks[canonical].trace is not None:
+                    self.tracks[canonical].trace.crossing(frame, event)
         for det in detections:
             key = (frame.camera_id, det.track_id)
             if key in self.closed:

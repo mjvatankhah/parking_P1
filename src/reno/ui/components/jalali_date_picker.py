@@ -1,4 +1,5 @@
 """Single-day Jalali picker; selected values are Gregorian date objects."""
+from computer_vision_v2.site_time import today
 from datetime import date, timedelta
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -16,7 +17,7 @@ class JalaliDatePicker(SecondaryButton):
         self.bind(on_release=self._open)
 
     def _open(self, *_):
-        day = self.selected or date.today()
+        day = self.selected or today()
         value = Jalaali.to_jalaali(day.year,day.month,day.day)
         self._year,self._month = value['jy'],value['jm']
         root = Card(orientation='vertical',padding=16,spacing=8,hover_effect=False)

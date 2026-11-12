@@ -1,4 +1,5 @@
 """Gregorian calendar picker with an explicit calendar label and clear action."""
+from computer_vision_v2.site_time import today
 import calendar
 from datetime import date
 from kivy.uix.boxlayout import BoxLayout
@@ -16,7 +17,7 @@ class DatePicker(SecondaryButton):
         self.bind(on_release=self._open)
 
     def _open(self, *_):
-        current = self.selected or date.today()
+        current = self.selected or today()
         self._month = current.replace(day=1)
         root = BoxLayout(orientation='vertical', spacing=8, padding=10)
         nav = BoxLayout(size_hint_y=None, height=40)

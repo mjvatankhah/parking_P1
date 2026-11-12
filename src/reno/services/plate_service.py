@@ -1,4 +1,5 @@
 """Read committed plate events from the pipeline's PostgreSQL database."""
+from computer_vision_v2.site_time import TEHRAN
 from computer_vision_v2.database.plate_access import normalize_plate
 
 from computer_vision_v2.database.plate_access import ensure_schema
@@ -71,7 +72,7 @@ class PlateService:
         for row in rows:
             plate, captured_at, camera_id, direction, class_id, image_path, status = row[:7]
             access_status = row[7] if len(row)>7 else "guest"
-            captured_at = captured_at.astimezone()
+            captured_at = captured_at.astimezone(TEHRAN)
             if image_path:
                 path = Path(image_path)
                 image_path = str(path if path.is_absolute() else _PROJECT_ROOT / path)
@@ -88,7 +89,7 @@ class PlateService:
         camera_ids = [c.id for c in cameras] or ["camera-1"]
 
         records = []
-        now = datetime.now()
+        now = datetime.now(TEHRAN)
         for i in range(count):
             when = now - timedelta(minutes=i * 7)
             plate = "{:02d}{}{:03d}".format(

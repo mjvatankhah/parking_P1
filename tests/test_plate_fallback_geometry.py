@@ -34,6 +34,36 @@ class FallbackTests(unittest.TestCase):
         self.assertEqual(result[0].shape, (25, 100, 3))
         self.assertEqual(session.call_count, 1)
 
+    def test_end_to_end_xyxy_plate_is_not_expanded_to_vehicle_boundary(self):
+        primary = detector()
+        primary.get_modelmeta.return_value.custom_metadata_map = {'end2end': 'True'}
+        output = np.zeros((1, 300, 6), np.float32)
+        output[0, 0] = [160, 280, 480, 360, .9, 0]
+        primary.run.return_value = [output]
+        reader, session = self.reader(primary, detector())
+        result = reader.detect_plate(np.zeros((100, 200, 3), np.uint8))
+        self.assertIsNotNone(result)
+        self.assertEqual(result[0].shape, (25, 100, 3))
+        self.assertEqual(reader.last_detection_details['attempts'][0]['plate_bbox_in_vehicle'],
+                         [50, 37, 150, 62])
+        self.assertEqual(session.call_count, 1)
+
+    def test_end_to_end_class_index_is_not_confidence(self):
+        primary = detector()
+        primary.get_modelmeta.return_value.custom_metadata_map = {'end2end': 'True'}
+        output = np.zeros((1, 300, 6), np.float32)
+        output[0, 0] = [160, 280, 480, 360, .1, 1]
+        primary.run.return_value = [output]
+        reader, _ = self.reader(primary, detector())
+        self.assertIsNone(reader.detect_plate(np.zeros((100, 200, 3), np.uint8)))
+
+    def test_diagnostic_empty_passage_returns_unread_without_exception(self):
+        from computer_vision_v2.ocr_worker.plate_candidates import PassageCandidates
+        reader, _ = self.reader(detector(), detector())
+        result = reader.recognize_candidates(PassageCandidates([], {}))
+        self.assertEqual(result['recognition_status'], 'unread')
+        self.assertEqual(result['readings'], [])
+
     def test_miss_loads_once_and_uses_fallback_input_name(self):
         fallback = detector(True, 'fallback_input')
         reader, session = self.reader(detector(), fallback)

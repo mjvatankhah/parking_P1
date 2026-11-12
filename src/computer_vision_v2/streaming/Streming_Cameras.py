@@ -10,8 +10,8 @@ from computer_vision_v2.tracking.tracker import CameraTracker
 
 
 logger = logging.getLogger(__name__)
-MAX_READ_FAILURES = 30
-MAX_RETRY_DELAY = 30
+MAX_READ_FAILURES = 2
+MAX_RETRY_DELAY = 5
 
 
 class CapturedFrame(NamedTuple):
@@ -93,7 +93,6 @@ class StreamManager:
                 try:
                     source = self._create_source()
                     source.connect()
-                    retry_delay = 1
                     failures = 0
                     while not self._stop.is_set():
                         ok, image = source.get_frame()
@@ -104,6 +103,8 @@ class StreamManager:
                             self._stop.wait(0.1)
                             continue
 
+                        # An opened connection is not healthy until it delivers a frame.
+                        retry_delay = 1
                         failures = 0
                         captured_at = time.monotonic()
                         with self._condition:

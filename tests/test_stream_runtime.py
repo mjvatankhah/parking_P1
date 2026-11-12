@@ -118,7 +118,7 @@ class StreamRuntimeTests(unittest.TestCase):
             finally:
                 stream.stop()
 
-    def test_reconnect_delay_progression_caps_at_thirty_seconds(self):
+    def test_reconnect_delay_progression_caps_at_five_seconds(self):
         tracker = FakeTracker()
         with patch("computer_vision_v2.streaming.Streming_Cameras.CameraTracker", return_value=tracker):
             stream = StreamManager("cam", "rtsp://camera", "rtsp", "unused")
@@ -140,7 +140,48 @@ class StreamRuntimeTests(unittest.TestCase):
         with patch.object(stream._stop, "wait", side_effect=record_wait), \
              self.assertLogs("computer_vision_v2.streaming.Streming_Cameras", level="WARNING"):
             stream._capture_loop()
-        self.assertEqual(delays, [1, 2, 4, 8, 16, 30, 30])
+        self.assertEqual(delays, [1, 2, 4, 5, 5, 5, 5])
+
+    def test_failed_reads_reopen_and_only_healthy_frames_reset_backoff(self):
+        with patch("computer_vision_v2.streaming.Streming_Cameras.CameraTracker"):
+            stream = StreamManager("cam", "rtsp://camera", "rtsp", "unused")
+
+        sources = []
+        delays = []
+
+        class Source:
+            def __init__(self):
+                self.reads = 0
+                self.released = False
+                self.healthy = len(sources) == 3
+                sources.append(self)
+
+            def connect(self):
+                pass
+
+            def get_frame(self):
+                self.reads += 1
+                if self.healthy and self.reads == 1:
+                    return True, object()
+                return False, None
+
+            def disconnect(self):
+                self.released = True
+
+        def record_wait(delay):
+            if delay == 0.1:
+                return False
+            delays.append(delay)
+            return len(delays) == 4
+
+        stream._create_source = Source
+        with patch.object(stream._stop, "wait", side_effect=record_wait), \
+             self.assertLogs("computer_vision_v2.streaming.Streming_Cameras", level="WARNING"):
+            stream._capture_loop()
+
+        self.assertEqual([source.reads for source in sources], [2, 2, 2, 3])
+        self.assertTrue(all(source.released for source in sources))
+        self.assertEqual(delays, [1, 2, 4, 1])
 
     def test_offline_camera_does_not_stop_another_camera(self):
         tracker = FakeTracker()

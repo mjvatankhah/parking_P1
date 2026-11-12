@@ -1,4 +1,5 @@
 """Dashboard aggregates from the event table and live camera state."""
+from computer_vision_v2.site_time import today
 from computer_vision_v2.database.plate_access import normalize_plate, ensure_schema
 
 from dataclasses import dataclass
@@ -27,7 +28,7 @@ class DashboardStatistics:
 class DashboardService:
     def get_hourly_flow(self, day=None, camera="", plate=""):
         """24 hourly buckets for one day, with the same camera/plate filters as the table."""
-        day = day or date.today()
+        day = day or today()
         plate = normalize_plate(plate)
         hours = [[0, 0] for _ in range(24)]
         if MOCK_DATA_ENABLED:
@@ -61,7 +62,7 @@ class DashboardService:
     def get_daily_flow(self, end=None, camera="", plate=""):
         """Seven calendar days including end, zero-filled without truncating events."""
         plate = normalize_plate(plate)
-        end = end or date.today()
+        end = end or today()
         start = end - timedelta(days=6)
         days = {start + timedelta(days=i): [0, 0] for i in range(7)}
         if MOCK_DATA_ENABLED:
@@ -95,8 +96,8 @@ class DashboardService:
         online = sum(camera.status == STATUS_ONLINE for camera in cameras)
         if MOCK_DATA_ENABLED:
             records = plate_service._mock_records
-            today = date.today().isoformat()
-            day = [record for record in records if record.date == today]
+            today_string = today().isoformat()
+            day = [record for record in records if record.date == today_string]
             total = len(day)
             unique = len({record.plate for record in day if record.plate != 'خوانده نشد'})
             unread = sum(record.plate == 'خوانده نشد' for record in day)
@@ -105,8 +106,8 @@ class DashboardService:
             for record in sorted(valid, key=lambda r: (r.date, r.time)):
                 latest[normalize_plate(record.plate)] = record
             inside = sum(r.direction == 'entry' for r in latest.values())
-            guests = len({normalize_plate(r.plate) for r in valid if r.date == today and r.access_status == 'guest'})
-            blocked = len({normalize_plate(r.plate) for r in valid if r.date == today and r.access_status == 'blocked'})
+            guests = len({normalize_plate(r.plate) for r in valid if r.date == today_string and r.access_status == 'guest'})
+            blocked = len({normalize_plate(r.plate) for r in valid if r.date == today_string and r.access_status == 'blocked'})
             allowed_events = sum(r.access_status == 'allowed' for r in day)
             guest_events = sum(r.access_status == 'guest' for r in day)
             blocked_events = sum(r.access_status == 'blocked' for r in day)

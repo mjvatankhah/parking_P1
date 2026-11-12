@@ -1,11 +1,13 @@
 """Persist recognized crossings using the schema's vehicle and session tables."""
 
+from computer_vision_v2.site_time import TEHRAN
 import logging
 import json
 from datetime import datetime
 
 from computer_vision_v2.database.connection import get_connection
 from computer_vision_v2.database import queries
+from computer_vision_v2.ocr_worker.crop_diagnostics import link_event
 from computer_vision_v2.database.plate_access import ensure_schema
 
 
@@ -13,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def _save_event(cursor, item):
-    captured_at = datetime.now().astimezone()
+    captured_at = datetime.now().astimezone(TEHRAN)
     status = item.get('recognition_status', 'read' if item['plate_text'] else 'unread')
     plate_number = (item["plate_text"] or None) if status == 'read' else None
     if plate_number is not None:
@@ -61,6 +63,7 @@ def database_worker(db_queue, running_flag):
                     logger.info("Database connection established")
                 event_id = _save_event(cursor, item)
                 connection.commit()
+                link_event(item.get("diagnostics_path"), event_id)
                 logger.info("Saved event %s from camera %s", event_id, item["camera_id"])
             except Exception:
                 logger.exception("Could not save event from camera %s", item.get("camera_id"))

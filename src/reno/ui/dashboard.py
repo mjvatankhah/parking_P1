@@ -1,5 +1,6 @@
 """Reference-inspired Kivy dashboard backed by the RENO services."""
 
+from computer_vision_v2.site_time import today
 import logging
 import threading
 from datetime import date
@@ -239,7 +240,7 @@ class DashboardScreen(Screen):
                          daemon=True, name='reno-dashboard-data').start()
 
     def _load(self, revision, camera, day, plate, class_id=2):
-        day = day or date.today()
+        day = day or today()
         logger = logging.getLogger(__name__)
         stats = records = flow = None
         errors = []

@@ -1,4 +1,5 @@
 """Admin-only guard registration and account list; DB work stays off the UI thread."""
+from computer_vision_v2.site_time import TEHRAN
 from threading import Thread
 from kivy.clock import Clock
 from kivy.animation import Animation
@@ -35,7 +36,7 @@ class DeleteGuardButton(ButtonBehavior, Card):
 def guard_date(value):
     if value is None:
         return 'ثبت نشده'
-    local = value.astimezone()
+    local = value.astimezone(TEHRAN)
     return f"{jalali_text(local.date().isoformat())}  ·  {theme.fa_number(local.strftime('%H:%M'))}"
 
 

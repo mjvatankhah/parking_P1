@@ -100,6 +100,7 @@ class PlateReader:
     
     # ---------- تشخیص پلاک --------
     def detect_plate(self, vehicle_crop):
+        self.last_detection_details = {"attempts": []}
         result = self._detect_plate(vehicle_crop, self.detector, self.det_input)
         if result is not None:
             return result
@@ -118,31 +119,42 @@ class PlateReader:
                                   self._fallback_detector.get_inputs()[0].name)
 
     def _detect_plate(self, vehicle_crop, detector, input_name):
+        details = {"model": "primary" if detector is self.detector else "fallback",
+                   "vehicle_shape": list(vehicle_crop.shape), "reason": "no_detection"}
+        if isinstance(getattr(self, "last_detection_details", None), dict):
+            self.last_detection_details["attempts"].append(details)
         img, scale, dx, dy = _letterbox(vehicle_crop, self.det_size)
         blob = img[:, :, ::-1].transpose(2, 0, 1)[None].astype(np.float32) / 255.0
         out = detector.run(None, {input_name: blob})[0]
         pred = np.squeeze(out)
         if pred.ndim != 2:
             return None
-        # خروجی yolov8: (4+nc, N) -> ترانهاده
-        if pred.shape[0] < pred.shape[1]:
-            pred = pred.T
-        boxes_xywh = pred[:, :4]
-        scores = pred[:, 4:].max(axis=1) if pred.shape[1] > 4 else pred[:, 4]
+        # End-to-end exports return xyxy/confidence/class rows; legacy YOLO
+        # exports return center-xywh plus per-class scores. Class IDs are not scores.
+        end_to_end = detector.get_modelmeta().custom_metadata_map.get('end2end') == 'True'
+        if end_to_end:
+            xy = pred[:, :4]
+            scores = pred[:, 4]
+        else:
+            if pred.shape[0] < pred.shape[1]:
+                pred = pred.T
+            boxes_xywh = pred[:, :4]
+            scores = pred[:, 4:].max(axis=1)
+            xy = np.empty_like(boxes_xywh)
+            xy[:, 0] = boxes_xywh[:, 0] - boxes_xywh[:, 2] / 2
+            xy[:, 1] = boxes_xywh[:, 1] - boxes_xywh[:, 3] / 2
+            xy[:, 2] = boxes_xywh[:, 0] + boxes_xywh[:, 2] / 2
+            xy[:, 3] = boxes_xywh[:, 1] + boxes_xywh[:, 3] / 2
         mask = scores > self.conf_thr
         if not mask.any():
             return None
-        boxes_xywh, scores = boxes_xywh[mask], scores[mask]
-
-        xy = np.empty_like(boxes_xywh)
-        xy[:, 0] = boxes_xywh[:, 0] - boxes_xywh[:, 2] / 2
-        xy[:, 1] = boxes_xywh[:, 1] - boxes_xywh[:, 3] / 2
-        xy[:, 2] = boxes_xywh[:, 0] + boxes_xywh[:, 2] / 2
-        xy[:, 3] = boxes_xywh[:, 1] + boxes_xywh[:, 3] / 2
+        xy, scores = xy[mask], scores[mask]
 
         keep = _nms(xy, scores)
         plausible = [i for i in keep if 1.15 <= (xy[i,2]-xy[i,0])/max(xy[i,3]-xy[i,1],1) <= 8]
         best = plausible[0] if plausible else keep[0]
+        details.update(plausible_count=len(plausible), detection_count=len(keep),
+                       confidence=float(scores[best]), used_implausible_fallback=not bool(plausible))
         x1, y1, x2, y2 = xy[best]
         x1 = (x1 - dx) / scale
         x2 = (x2 - dx) / scale
@@ -152,8 +164,11 @@ class PlateReader:
         h, w = vehicle_crop.shape[:2]
         x1, y1 = max(0, int(x1)), max(0, int(y1))
         x2, y2 = min(w, int(x2)), min(h, int(y2))
+        details["plate_bbox_in_vehicle"] = [x1,y1,x2,y2]
         if x2 <= x1 or y2 <= y1 or x1 == 0 or y1 == 0 or x2 == w or y2 == h:
+            details["reason"] = "empty_or_touches_vehicle_boundary"
             return None
+        details["reason"] = "accepted"
         plate_crop = vehicle_crop[y1:y2, x1:x2].copy()
 
         # A minimum context margin keeps small glyphs away from the rotation edge.
@@ -212,7 +227,7 @@ class PlateReader:
                     logging.getLogger(__name__).exception('Plate geometry failed during recognition')
             prepared.append((candidate, result))
         geometric = [pair for pair in prepared if pair[1] is not None]
-        groups = getattr(candidates, 'selection_groups', None)
+        groups = getattr(candidates, 'selection_groups', None) or None
         if groups is not None:
             geometry = self._select_reserved(
                 geometric, groups['geometry'], lambda pair: pair[0].confidence * pair[1].quality)
@@ -240,6 +255,9 @@ class PlateReader:
                     alternatives=[reading.copy()],
                 ))
                 images.append(image)
+                trace = getattr(candidates, "trace", None)
+                if trace is not None:
+                    trace.ocr(readings[-1], image)
         votes = Counter(r['text'] for r in readings if r['valid'] and r['confidence'] >= .8)
         ranked = votes.most_common()
         winner, count = ranked[0] if ranked else (None, 0)

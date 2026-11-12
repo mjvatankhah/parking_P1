@@ -31,7 +31,9 @@ class Pipeline:
         self.camera_manager = CameraManager(self.config) 
         self.lines = LineDetectorManager(self.config) 
         self.plate_reader = PlateReader() 
-        self.candidates = PlateCandidates(self.plate_reader, **{'deferred': True, **config.get('plate_sampling', {})})
+        self.candidates = PlateCandidates(self.plate_reader, **{'deferred': True,
+            'diagnostics': config.get('crop_diagnostics', {'enabled': True}),
+            **config.get('plate_sampling', {})})
 
         self.frame_queue = queue.Queue(maxsize=30)
         self.ocr_queue = queue.Queue(maxsize=16)
