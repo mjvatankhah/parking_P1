@@ -30,7 +30,7 @@ class CandidateTests(unittest.TestCase):
         for i in range(100):
             self.pool.observe(self.frame(i*.1))
         state = self.pool.tracks[('cam',1)]
-        self.assertLessEqual(len(state.candidates),12)
+        self.assertLessEqual(len(state.candidates),18)
         for a in state.candidates:
             for b in state.candidates:
                 if a is not b:

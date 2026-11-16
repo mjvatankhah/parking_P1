@@ -149,8 +149,29 @@ def _rectify_plate(roi):
     return best[2]
 
 
+def has_text_support(image):
+    """Reject border/bumper bands lacking distributed character-sized marks.
+
+    This is a conservative image check, not OCR or proof of a complete plate.
+    Raw crops remain available when a geometric proposal is rejected.
+    """
+    h, w = image.shape[:2]
+    if h < 8 or w < 30:
+        return False
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    _, ink = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    count, _, stats, centers = cv2.connectedComponentsWithStats(ink)
+    glyphs = [i for i in range(1, count)
+              if .3*h <= stats[i, cv2.CC_STAT_HEIGHT] <= .95*h
+              and 1 <= stats[i, cv2.CC_STAT_WIDTH] <= .22*w
+              and stats[i, cv2.CC_STAT_AREA] >= 3]
+    return len(glyphs) >= 4 and np.ptp(centers[glyphs, 0]) >= .45*w
+
+
 def prepare_plate(roi):
     original = _prepare_deskew(roi)
+    if original is not None and not has_text_support(original.image):
+        original = None
     rectified = _rectify_plate(roi)
     if rectified is None:
         return original
@@ -159,7 +180,7 @@ def prepare_plate(roi):
     padded = cv2.copyMakeBorder(rectified, h//2, h//2, w//8, w//8,
                                cv2.BORDER_REPLICATE)
     result = _prepare_deskew(padded)
-    if result is None:
+    if result is None or not has_text_support(result.image):
         return original
     if original is not None:
         result.quality = original.quality

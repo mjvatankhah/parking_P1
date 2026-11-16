@@ -5,6 +5,7 @@ import numpy as np
 
 from .frame_info import Detection, TrackedFrame
 from .optical_flow import OpticalFlow
+from .measured_tracker import MeasuredTracker
 
 
 VEHICLE_CLASSES = [0, 2]
@@ -27,6 +28,7 @@ class CameraTracker:
             self.roi = points
         # Keep the deployed backend/size unchanged for this tracking change.
         self.model = YOLO(model_path, task="detect")
+        self.association = MeasuredTracker()
         self.detection_interval = detection_interval
         self.detection_period = detection_period
         self.max_tracking_gap = max_tracking_gap
@@ -39,21 +41,14 @@ class CameraTracker:
         self.flow_fallbacks = 0
 
     def _detect(self, image):
-        results = self.model.track(
-            image, persist=True, classes=VEHICLE_CLASSES, verbose=False,
-            tracker="bytetrack.yaml", imgsz=(384,640),
+        results = self.model.predict(
+            image, classes=VEHICLE_CLASSES, verbose=False,
+            conf=0.1, batch=1, imgsz=(384,640),
         )
         self.yolo_calls += 1
-        if not results or results[0].boxes is None or results[0].boxes.id is None:
+        if not results or results[0].boxes is None:
             return []
-        boxes = results[0].boxes
-        return [
-            Detection(track_id=track_id, bbox=tuple(box), class_id=class_id, confidence=confidence)
-            for box, track_id, class_id, confidence in zip(
-                boxes.xyxy.cpu().numpy(), boxes.id.int().cpu().tolist(),
-                boxes.cls.int().cpu().tolist(), boxes.conf.cpu().tolist(),
-            )
-        ]
+        return self.association.update(results[0].boxes, image)
 
     def process(self, frame_idx, ts, image):
         print(f"[FRAME] camera={self.camera_id} frame={frame_idx} processing", flush=True)

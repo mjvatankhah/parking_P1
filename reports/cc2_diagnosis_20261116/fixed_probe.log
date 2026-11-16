@@ -1,0 +1,14 @@
+Loading src/models/vehicle/yolo26n_openvino_model for OpenVINO inference...
+WARNING:root:Failed to create openvino_telemetry file. Please allow write access to the following directory: /home/mjr
+WARNING:root:Could not create directory for storing client ID. No data will be sent.
+Using OpenVINO LATENCY mode for batch=1 inference on CPU...
+40 raw [665.2, 0.4, 1017.4, 115.0] track [676.7, 0.3, 1016.9, 106.0] width ratio 0.97
+45 raw [604.1, 0.0, 986.8, 165.5] track [623.5, 0.1, 994.9, 146.0] width ratio 0.97
+50 raw [549.1, 0.0, 955.9, 221.1] track [563.5, 0.0, 964.1, 197.2] width ratio 0.98
+60 raw [480.9, 1.9, 898.5, 358.5] track [479.1, 1.9, 902.6, 327.8] width ratio 1.01
+70 raw [480.4, 31.9, 916.9, 503.4] track [462.4, 19.2, 900.5, 474.0] width ratio 1.0
+75 raw [509.5, 79.1, 979.3, 615.9] track [483.5, 54.5, 947.1, 571.2] width ratio 0.99
+80 raw [526.3, 131.9, 1082.0, 722.4] track [503.2, 100.8, 1031.6, 675.3] width ratio 0.95
+85 raw [549.0, 192.7, 1224.4, 858.1] track [525.1, 156.9, 1152.7, 799.9] width ratio 0.93
+90 raw [595.2, 260.0, 1403.1, 995.2] track [561.9, 220.7, 1309.6, 933.6] width ratio 0.93
+95 raw [658.5, 334.2, 1592.6, 1070.4] track [615.4, 292.0, 1488.4, 1034.5] width ratio 0.93

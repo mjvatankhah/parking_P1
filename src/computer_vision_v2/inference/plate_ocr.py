@@ -53,6 +53,20 @@ def _nms(boxes, scores, iou_thr=0.45):
         idxs = rest[iou < iou_thr]
     return keep
 
+def _pad_ocr_crop(image):
+    """Give edge characters breathing room without cutting or inventing pixels."""
+    h, w = image.shape[:2]
+    return cv.copyMakeBorder(image, max(2, h//10), max(2, h//10),
+                             max(3, w//10), max(3, w//10), cv.BORDER_REPLICATE)
+
+
+def _confirmed(readings):
+    ranked = Counter(r['text'] for r in readings
+                     if r['valid'] and r['confidence'] >= .8).most_common()
+    return (bool(ranked) and ranked[0][1] >= 2
+            and (len(ranked) == 1 or ranked[0][1] > ranked[1][1]))
+
+
 class PlateReader:
     def __init__(
         self,
@@ -208,8 +222,10 @@ class PlateReader:
         return self.ocr.recognize(images)
 
     def recognize_candidates(self, candidates):
-        """Read up to five raw and five geometry images in separate batches.
+        """Read five images per variant, then up to twelve temporal rescue views.
 
+        Temporal and margin rescue run only while the decision is unresolved.
+        Margin rescue retries at most 17 non-voting raw views.
         Each selected image casts its own vote if its format is valid and its
         OCR confidence reaches 0.8, including two versions of the same frame.
         """
@@ -238,8 +254,9 @@ class PlateReader:
                               reverse=True)[:5]
             raw = sorted(prepared, key=lambda pair: pair[0].quality, reverse=True)[:5]
         readings, images = [], []
-        for source, selected in (('raw', raw), ('geometry', geometry)):
-            batch_images = [c.crop if source == 'raw' else result.image
+        def read_selected(source, selected):
+            batch_images = [(c.crop if source == 'raw' else _pad_ocr_crop(c.crop))
+                            if source != 'geometry' else result.image
                             for c, result in selected]
             decoded = self._recognize_batch(batch_images)
             for (candidate, _), image, (text, confidence) in zip(selected, batch_images, decoded):
@@ -247,7 +264,7 @@ class PlateReader:
                 valid = (len(text) >= 8 and text[:2].isdigit() and text[-5:].isdigit()
                          and letter in self.labels and not letter.isdigit())
                 reading = dict(text=text, confidence=confidence, valid=valid, source=source)
-                reserve_groups = groups[source] if groups is not None else {}
+                reserve_groups = groups['raw' if source == 'padded' else source] if groups is not None else {}
                 readings.append(dict(
                     reading, frame_idx=candidate.frame_idx, conflict=False,
                     reserves=[name for name, frames in reserve_groups.items()
@@ -258,6 +275,29 @@ class PlateReader:
                 trace = getattr(candidates, "trace", None)
                 if trace is not None:
                     trace.ocr(readings[-1], image)
+        read_selected('raw', raw)
+        read_selected('geometry', geometry)
+        # Pay for additional OCR only when the cheap first pass is unresolved.
+        # These are independent middle-of-passage views, not retries of the same
+        # image. Keep every reading (including conflicts) in the final vote.
+        if not _confirmed(readings) and groups is not None:
+            for source, pairs in (('raw', prepared), ('geometry', geometric)):
+                temporal_ids = set(groups[source].get('temporal', []))
+                seen = {r['frame_idx'] for r in readings if r['source'] == source}
+                extra = sorted((p for p in pairs if p[0].frame_idx in temporal_ids
+                                and p[0].frame_idx not in seen), key=lambda p: p[0].ts)[:12]
+                if extra:
+                    read_selected(source, extra)
+        # Tight crops can lose an edge digit during model resizing. Retry only
+        # raw views that did not already cast a valid vote; never let padding
+        # manufacture a second vote from the same successful raw image.
+        if not _confirmed(readings) and groups is not None and 'temporal' in groups['raw']:
+            retry_ids = {r['frame_idx'] for r in readings if r['source'] == 'raw'
+                         and not (r['valid'] and r['confidence'] >= .8)}
+            retry = sorted((p for p in prepared if p[0].frame_idx in retry_ids),
+                           key=lambda p: p[0].ts)[:17]
+            if retry:
+                read_selected('padded', retry)
         votes = Counter(r['text'] for r in readings if r['valid'] and r['confidence'] >= .8)
         ranked = votes.most_common()
         winner, count = ranked[0] if ranked else (None, 0)

@@ -29,3 +29,14 @@ List recent reports without opening their images:
 ```bash
 .venv/bin/python scripts/list_crop_diagnostics.py --direction exit --limit 10
 ```
+
+Recognition now keeps a bounded temporal reserve in addition to quality/recent
+reserves (12 temporal slots per raw/geometry branch at default capacity). It
+first reads up to five images per variant; unresolved results can read up to
+12 additional temporal views per variant, then up to 17 padded raw views whose
+original OCR did not qualify for a vote. `source: padded` identifies the exact
+margin-expanded OCR input; it does not duplicate a successful raw vote. All
+readings remain visible in the manifest. Confidence and voting thresholds are
+unchanged. Geometry proposals without distributed character-sized components
+are rejected; raw crops remain available. ROI configuration is not included in
+older manifests, so a current camera setting cannot prove a historical ROI.

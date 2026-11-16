@@ -114,7 +114,7 @@ class EvidenceTrace:
         for row in self.rows:
             frame = row['frame_idx']
             row['retained_for_recognition'] = frame in retained
-            row['ocr_sources'] = [source for source in ('raw','geometry') if (frame,source) in selected]
+            row['ocr_sources'] = [source for source in ('raw','geometry','padded') if (frame,source) in selected]
             row['final_reserves'] = {source: [name for name, ids in reserves.items() if frame in ids]
                                      for source, reserves in groups.items()}
             if row['reason'] in ('candidate', 'geometry_unavailable') and frame not in retained:

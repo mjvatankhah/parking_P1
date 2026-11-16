@@ -1,0 +1,1201 @@
+[
+  {
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.8096482157707214,
+    "readings": [
+      {
+        "text": "8م8724",
+        "confidence": 0.8154057860374451,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 334,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "8م8724",
+            "confidence": 0.8154057860374451,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "8م8724",
+        "confidence": 0.7112298011779785,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 288,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "8م8724",
+            "confidence": 0.7112298011779785,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "88734",
+        "confidence": 0.7920839190483093,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 326,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "88734",
+            "confidence": 0.7920839190483093,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "8م87245",
+        "confidence": 0.838784396648407,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 343,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "8م87245",
+            "confidence": 0.838784396648407,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "8م87245",
+        "confidence": 0.7652108073234558,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 352,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "8م87245",
+            "confidence": 0.7652108073234558,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "58م82345",
+        "confidence": 0.7452518939971924,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 250,
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "58م82345",
+            "confidence": 0.7452518939971924,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "58م8445",
+        "confidence": 0.8008103966712952,
+        "valid": false,
+        "source": "geometry",
+        "frame_idx": 253,
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "58م8445",
+            "confidence": 0.8008103966712952,
+            "valid": false,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "58م82345",
+        "confidence": 0.8096482157707214,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 245,
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "58م82345",
+            "confidence": 0.8096482157707214,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      }
+    ],
+    "event": 435,
+    "retained": 9
+  },
+  {
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.8938850164413452,
+    "readings": [
+      {
+        "text": "13ه334",
+        "confidence": 0.824051558971405,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 895,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه334",
+            "confidence": 0.824051558971405,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "13ه3م345",
+        "confidence": 0.7393666505813599,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 907,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه3م345",
+            "confidence": 0.7393666505813599,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "123334",
+        "confidence": 0.8685736060142517,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 946,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "123334",
+            "confidence": 0.8685736060142517,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "13ه33345",
+        "confidence": 0.7362205982208252,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 882,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه33345",
+            "confidence": 0.7362205982208252,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "12ه3334",
+        "confidence": 0.794972836971283,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 994,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه3334",
+            "confidence": 0.794972836971283,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "13ه43345",
+        "confidence": 0.8938850164413452,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 876,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه43345",
+            "confidence": 0.8938850164413452,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "12ه33345",
+        "confidence": 0.7842176556587219,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 984,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه33345",
+            "confidence": 0.7842176556587219,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "13ه33445",
+        "confidence": 0.8263483047485352,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 903,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه33445",
+            "confidence": 0.8263483047485352,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "12ه3334",
+        "confidence": 0.9257014393806458,
+        "valid": false,
+        "source": "geometry",
+        "frame_idx": 955,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه3334",
+            "confidence": 0.9257014393806458,
+            "valid": false,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "2ه33345",
+        "confidence": 0.8816355466842651,
+        "valid": false,
+        "source": "geometry",
+        "frame_idx": 994,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "2ه33345",
+            "confidence": 0.8816355466842651,
+            "valid": false,
+            "source": "geometry"
+          }
+        ]
+      }
+    ],
+    "event": 436,
+    "retained": 10
+  },
+  {
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.9411899447441101,
+    "readings": [
+      {
+        "text": "3و62745",
+        "confidence": 0.9514793157577515,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1626,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "3و62745",
+            "confidence": 0.9514793157577515,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "3و63745",
+        "confidence": 0.8407908082008362,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1623,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "3و63745",
+            "confidence": 0.8407908082008362,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "83و62745",
+        "confidence": 0.9411899447441101,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 1619,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "83و62745",
+            "confidence": 0.9411899447441101,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "82و63745",
+        "confidence": 0.9073633551597595,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 1603,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "82و63745",
+            "confidence": 0.9073633551597595,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "9د55",
+        "confidence": 0.4148755967617035,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1657,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "9د55",
+            "confidence": 0.4148755967617035,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      }
+    ],
+    "event": 437,
+    "retained": 6
+  },
+  {
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "1ط2954",
+        "confidence": 0.821960985660553,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2134,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "1ط2954",
+            "confidence": 0.821960985660553,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "1ط79545",
+        "confidence": 0.8925538659095764,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2131,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "1ط79545",
+            "confidence": 0.8925538659095764,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "1ط7954",
+        "confidence": 0.8982117772102356,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2139,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "1ط7954",
+            "confidence": 0.8982117772102356,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "117954",
+        "confidence": 0.7502278685569763,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2162,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "117954",
+            "confidence": 0.7502278685569763,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      }
+    ],
+    "event": 438,
+    "retained": 4
+  },
+  {
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.8783635497093201,
+    "readings": [
+      {
+        "text": "8م8734",
+        "confidence": 0.811155378818512,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 336,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "8م8734",
+            "confidence": 0.811155378818512,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "8م8724",
+        "confidence": 0.8240788578987122,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 322,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "8م8724",
+            "confidence": 0.8240788578987122,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "58م87345",
+        "confidence": 0.8118821382522583,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 308,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "58م87345",
+            "confidence": 0.8118821382522583,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "34هم8",
+        "confidence": 0.5128653645515442,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 441,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "34هم8",
+            "confidence": 0.5128653645515442,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "8ه44",
+        "confidence": 0.7172195315361023,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 455,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "8ه44",
+            "confidence": 0.7172195315361023,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "58م87245",
+        "confidence": 0.9731172323226929,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 403,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "58م87245",
+            "confidence": 0.9731172323226929,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "58م87345",
+        "confidence": 0.9448449611663818,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 394,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "58م87345",
+            "confidence": 0.9448449611663818,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "58م87245",
+        "confidence": 0.8968176245689392,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 385,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "58م87245",
+            "confidence": 0.8968176245689392,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "8م834و",
+        "confidence": 0.7229813933372498,
+        "valid": false,
+        "source": "geometry",
+        "frame_idx": 441,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "8م834و",
+            "confidence": 0.7229813933372498,
+            "valid": false,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "8م835و",
+        "confidence": 0.7327558398246765,
+        "valid": false,
+        "source": "geometry",
+        "frame_idx": 455,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "8م835و",
+            "confidence": 0.7327558398246765,
+            "valid": false,
+            "source": "geometry"
+          }
+        ]
+      }
+    ],
+    "event": 439,
+    "retained": 9
+  },
+  {
+    "plate_text": "13ه33345",
+    "recognition_status": "read",
+    "confidence": 0.9150899648666382,
+    "readings": [
+      {
+        "text": "13ه33445",
+        "confidence": 0.7658496499061584,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 905,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه33445",
+            "confidence": 0.7658496499061584,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "2ه2234",
+        "confidence": 0.8098989129066467,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1037,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "2ه2234",
+            "confidence": 0.8098989129066467,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "12ه33345",
+        "confidence": 0.7837408781051636,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 934,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه33345",
+            "confidence": 0.7837408781051636,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "2ه3334",
+        "confidence": 0.8756839632987976,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1122,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "2ه3334",
+            "confidence": 0.8756839632987976,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "2ه3333",
+        "confidence": 0.9263502955436707,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1129,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "2ه3333",
+            "confidence": 0.9263502955436707,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "12ه33345",
+        "confidence": 0.9163808822631836,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 1001,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه33345",
+            "confidence": 0.9163808822631836,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "13ه33345",
+        "confidence": 0.8936001062393188,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 932,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه33345",
+            "confidence": 0.8936001062393188,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "13ه33345",
+        "confidence": 0.9365798234939575,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 904,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "13ه33345",
+            "confidence": 0.9365798234939575,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "12ه33245",
+        "confidence": 0.9005129933357239,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 1043,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه33245",
+            "confidence": 0.9005129933357239,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "12ه33335",
+        "confidence": 0.8551381826400757,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 1064,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "12ه33335",
+            "confidence": 0.8551381826400757,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      }
+    ],
+    "event": 440,
+    "retained": 12
+  },
+  {
+    "plate_text": "83و63745",
+    "recognition_status": "read",
+    "confidence": 0.936259001493454,
+    "readings": [
+      {
+        "text": "3و62745",
+        "confidence": 0.850585401058197,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1626,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "3و62745",
+            "confidence": 0.850585401058197,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "3و63745",
+        "confidence": 0.9243031740188599,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1623,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "3و63745",
+            "confidence": 0.9243031740188599,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "84و634",
+        "confidence": 0.770043671131134,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1766,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "84و634",
+            "confidence": 0.770043671131134,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "9و6474",
+        "confidence": 0.7705047130584717,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1787,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "9و6474",
+            "confidence": 0.7705047130584717,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "846و6664",
+        "confidence": 0.5851441025733948,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 1800,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "846و6664",
+            "confidence": 0.5851441025733948,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "83و63745",
+        "confidence": 0.9126839637756348,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 1569,
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "83و63745",
+            "confidence": 0.9126839637756348,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "83و63745",
+        "confidence": 0.9598340392112732,
+        "valid": true,
+        "source": "geometry",
+        "frame_idx": 1581,
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "83و63745",
+            "confidence": 0.9598340392112732,
+            "valid": true,
+            "source": "geometry"
+          }
+        ]
+      },
+      {
+        "text": "8364745",
+        "confidence": 0.836286723613739,
+        "valid": false,
+        "source": "geometry",
+        "frame_idx": 1515,
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "8364745",
+            "confidence": 0.836286723613739,
+            "valid": false,
+            "source": "geometry"
+          }
+        ]
+      }
+    ],
+    "event": 441,
+    "retained": 9
+  },
+  {
+    "plate_text": null,
+    "recognition_status": "uncertain",
+    "confidence": 0.0,
+    "readings": [
+      {
+        "text": "1ط7954",
+        "confidence": 0.8571802973747253,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2133,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "1ط7954",
+            "confidence": 0.8571802973747253,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "81ط7954",
+        "confidence": 0.8929146528244019,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2116,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "81ط7954",
+            "confidence": 0.8929146528244019,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "81ط79545",
+        "confidence": 0.7847126722335815,
+        "valid": true,
+        "source": "raw",
+        "frame_idx": 2121,
+        "conflict": false,
+        "reserves": [
+          "quality"
+        ],
+        "alternatives": [
+          {
+            "text": "81ط79545",
+            "confidence": 0.7847126722335815,
+            "valid": true,
+            "source": "raw"
+          }
+        ]
+      },
+      {
+        "text": "98",
+        "confidence": 0.5683455467224121,
+        "valid": false,
+        "source": "raw",
+        "frame_idx": 2174,
+        "conflict": false,
+        "reserves": [
+          "recent"
+        ],
+        "alternatives": [
+          {
+            "text": "98",
+            "confidence": 0.5683455467224121,
+            "valid": false,
+            "source": "raw"
+          }
+        ]
+      }
+    ],
+    "event": 442,
+    "retained": 4
+  }
+]

@@ -36,16 +36,18 @@ class VehicleSample:
 
 
 class CandidateBuffer(list):
-    """Unique view of independent quality and recent candidate reserves."""
+    """Unique view of quality, recent and whole-passage temporal reserves."""
 
     def __init__(self):
         super().__init__()
         self.best = []
         self.recent = []
+        self.temporal = []
 
     def groups(self):
         return {'quality': [c.frame_idx for c in self.best],
-                'recent': [c.frame_idx for c in self.recent]}
+                'recent': [c.frame_idx for c in self.recent],
+                'temporal': [c.frame_idx for c in self.temporal]}
 
 
 class PassageCandidates(list):
@@ -104,6 +106,7 @@ class PlateCandidates:
         self.reader = reader
         self.interval, self.capacity, self.near, self.stale = interval, capacity, near, stale
         # Split the default six slots into three quality and three recent.
+        self.temporal_capacity = 2 * capacity
         self.recent_capacity = capacity // 2
         self.quality_capacity = capacity - self.recent_capacity
         self.exit_delay, self.reid_gap, self.reid_iou = exit_delay, reid_gap, reid_iou
@@ -281,9 +284,23 @@ class PlateCandidates:
                 if len(spaced) == self.recent_capacity:
                     break
             recent[:] = sorted(spaced, key=lambda c: c.ts)
+        # Preserve a bounded view of the whole passage independently of the
+        # quality/recent reserves. Remove the most redundant interior view;
+        # endpoints survive and quality only breaks temporal-density ties.
+        temporal = candidates.temporal
+        if not any(c.frame_idx == candidate.frame_idx for c in temporal):
+            temporal.append(candidate)
+            temporal.sort(key=lambda c: (c.ts, c.frame_idx))
+        while len(temporal) > self.temporal_capacity:
+            index = min(range(1, len(temporal)-1), key=lambda i: (
+                round(temporal[i+1].ts-temporal[i-1].ts, 6), temporal[i].quality))
+            temporal.pop(index)
         best_frames = {c.frame_idx for c in best}
         candidates[:] = best + [c for c in recent if c.frame_idx not in best_frames]
+        retained = {c.frame_idx for c in candidates}
+        candidates.extend(c for c in temporal if c.frame_idx not in retained)
         return {
+            'temporal': 'keep' if candidate in temporal else 'reject_temporal_density',
             'quality': ('reject_near_quality' if blocked else
                         'keep' if candidate in best else 'reject_capacity_quality'),
             'recent': 'keep' if candidate in recent else 'outside_recent_reserve',
