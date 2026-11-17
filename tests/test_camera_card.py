@@ -9,9 +9,9 @@ import numpy as np
 from kivy.clock import Clock
 
 from computer_vision_v2.preview import PreviewPublisher
-from reno.models.camera import Camera
-from reno.ui.theme import register_app_font
-from reno.ui.components.camera_card import CameraCard
+from plakino_ui.models.camera import Camera
+from plakino_ui.ui.theme import register_app_font
+from plakino_ui.ui.components.camera_card import CameraCard
 from computer_vision_v2.tracking.frame_info import TrackedFrame
 
 
@@ -33,8 +33,8 @@ class CameraCardTests(unittest.TestCase):
 
     def test_live_page_subscription_displays_then_stops_and_resumes_preview(self):
         from kivy.uix.screenmanager import Screen, ScreenManager
-        from reno.main import InstantTransition
-        from reno.ui.live_detection import LiveDetectionScreen
+        from plakino_ui.main import InstantTransition
+        from plakino_ui.ui.live_detection import LiveDetectionScreen
         register_app_font()
         camera = Camera(id='preview-lifecycle', source='unused')
         frame = TrackedFrame(camera.id, 1, 0,
@@ -50,9 +50,9 @@ class CameraCardTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'preview.jpg'
             with patch('computer_vision_v2.preview.preview_path', return_value=path), \
-                 patch('reno.ui.components.camera_card.preview_path', return_value=path), \
-                 patch('reno.ui.live_detection.camera_service.get_cameras', return_value=[camera]), \
-                 patch('reno.ui.live_detection.camera_service.subscribe'):
+                 patch('plakino_ui.ui.components.camera_card.preview_path', return_value=path), \
+                 patch('plakino_ui.ui.live_detection.camera_service.get_cameras', return_value=[camera]), \
+                 patch('plakino_ui.ui.live_detection.camera_service.subscribe'):
                 publisher = PreviewPublisher([{'id': camera.id, 'source': camera.source}])
                 screen = LiveDetectionScreen(name='live')
             manager = ScreenManager(transition=InstantTransition())

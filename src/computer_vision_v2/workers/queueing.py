@@ -17,5 +17,6 @@ def offer_event(destination, item, stage, *, stopping=False):
         logger.error(
             "%s queue full; dropped camera=%s track=%s",
             stage, event.get("camera_id"), event.get("track_id"),
+            extra={"event": "event_dropped", "stage": stage, "camera_id": event.get("camera_id"), "track_id": event.get("track_id"), "passage_id": event.get("passage_id")},
         )
         return False

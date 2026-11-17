@@ -1,8 +1,8 @@
 """Geometry contracts for the dashboard's status breakdown."""
 import unittest
 from kivy.clock import Clock
-from reno.ui import theme
-from reno.ui.components.traffic_breakdown import TrafficBreakdown
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.traffic_breakdown import TrafficBreakdown
 
 
 class TrafficBreakdownTests(unittest.TestCase):

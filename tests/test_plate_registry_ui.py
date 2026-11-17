@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import patch
 from kivy.clock import Clock
-from reno.ui import theme
-from reno.ui.plate_registration import PlateRegistrationScreen
-from reno.services.plate_registry_service import RegistryPage
-from reno.models.plate_record import PlateRecord
-from reno.ui.components.traffic_record import TrafficRecordRow,detection_header
-from reno.ui.components.common import RTLLabel
-from reno.ui.components.traffic_chart import TrafficChart
+from plakino_ui.ui import theme
+from plakino_ui.ui.plate_registration import PlateRegistrationScreen
+from plakino_ui.services.plate_registry_service import RegistryPage
+from plakino_ui.models.plate_record import PlateRecord
+from plakino_ui.ui.components.traffic_record import TrafficRecordRow,detection_header
+from plakino_ui.ui.components.common import RTLLabel
+from plakino_ui.ui.components.traffic_chart import TrafficChart
 
 
 class PlateRegistryUITests(unittest.TestCase):
@@ -20,7 +20,7 @@ class PlateRegistryUITests(unittest.TestCase):
         self.assertEqual(set(screen.tabs),{'allowed','guest','blocked'})
         screen.plate.text='۱۲ب۳۴۵۶۷'
         screen.permission.text=theme.rtl('غیرمجاز')
-        with patch('reno.ui.plate_registration.Thread') as thread,patch('reno.ui.plate_registration.plate_registry_service.save') as save,patch.object(screen,'_load'):
+        with patch('plakino_ui.ui.plate_registration.Thread') as thread,patch('plakino_ui.ui.plate_registration.plate_registry_service.save') as save,patch.object(screen,'_load'):
             screen._save()
             thread.call_args.kwargs['target']()
             Clock.tick()
@@ -52,7 +52,7 @@ class PlateRegistryUITests(unittest.TestCase):
         self.assertEqual(field.text,'98 ب 765 43')
         field.select_all()
         field.insert_text('۱۲ب۳۴۵۶۷')
-        with patch('reno.ui.plate_registration.Thread') as thread,patch('reno.ui.plate_registration.plate_registry_service.save') as save,patch.object(screen,'_load'):
+        with patch('plakino_ui.ui.plate_registration.Thread') as thread,patch('plakino_ui.ui.plate_registration.plate_registry_service.save') as save,patch.object(screen,'_load'):
             screen._save()
             thread.call_args.kwargs['target']()
             Clock.tick()

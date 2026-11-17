@@ -1,3 +1,4 @@
+from computer_vision_v2.storage.storage_worker import storage_worker
 import unittest
 import queue
 import json
@@ -103,7 +104,10 @@ class HybridTrackingTests(unittest.TestCase):
                 reader.recognize_candidates.return_value = dict(plate_text='TEST-PLATE',confidence=.95,
                     recognition_status='read',readings=[],image=None)
                 ocr_q.put(None)
-                ocr_worker(ocr_q, db_q, reader, lambda: True)
+                storage_q = queue.Queue()
+                ocr_worker(ocr_q, storage_q, reader, lambda: True)
+                storage_q.put(None)
+                storage_worker(storage_q, db_q, lambda: True)
                 self.assertEqual(db_q.qsize(), 1)
                 record = db_q.get_nowait()
                 self.assertEqual(record['track_id'], 7)
@@ -195,7 +199,7 @@ class HybridTrackingTests(unittest.TestCase):
         self.assertAlmostEqual(y2 - y1, 60, delta=2)
 
     def test_ui_save_preserves_detection_interval(self):
-        from reno.services.camera_service import CameraService
+        from plakino_ui.services.camera_service import CameraService
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'cameras.json'
             path.write_text(json.dumps({'model_path': 'test.pt', 'detection_interval': 1, 'cameras': []}))

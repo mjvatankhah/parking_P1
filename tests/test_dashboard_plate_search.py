@@ -3,11 +3,11 @@ import unittest
 from unittest.mock import patch, MagicMock
 from datetime import date
 from kivy.clock import Clock
-from reno.ui import theme
-from reno.ui.dashboard import DashboardScreen
-from reno.models.plate_record import PlateRecord
-from reno.services.plate_service import PlateService
-from reno.services.dashboard_service import DashboardService
+from plakino_ui.ui import theme
+from plakino_ui.ui.dashboard import DashboardScreen
+from plakino_ui.models.plate_record import PlateRecord
+from plakino_ui.services.plate_service import PlateService
+from plakino_ui.services.dashboard_service import DashboardService
 
 
 class DashboardPlateSearchTests(unittest.TestCase):
@@ -30,7 +30,7 @@ class DashboardPlateSearchTests(unittest.TestCase):
         self.assertEqual(sorted(order), list(range(len(field.text))))
 
     def test_paste_backspace_and_selection_preserve_format(self):
-        from reno.ui.components.plate_input import PlateSearchInput
+        from plakino_ui.ui.components.plate_input import PlateSearchInput
         field = PlateSearchInput()
         field.insert_text('۱۲ الف ۳۴۵ ۶۷')
         self.assertEqual(field.text, '12 الف 345 67')
@@ -48,9 +48,9 @@ class DashboardPlateSearchTests(unittest.TestCase):
 
     def test_dashboard_load_keeps_chart_filters_separate_from_recent_records(self):
         screen = DashboardScreen()
-        with patch('reno.ui.dashboard.dashboard_service') as stats, \
-             patch('reno.ui.dashboard.plate_service') as plates, \
-             patch('reno.ui.dashboard.Clock.schedule_once'):
+        with patch('plakino_ui.ui.dashboard.dashboard_service') as stats, \
+             patch('plakino_ui.ui.dashboard.plate_service') as plates, \
+             patch('plakino_ui.ui.dashboard.Clock.schedule_once'):
             screen._load(0, 'gate', date(2026, 11, 6), '12 ب 345 67')
         plates.get_recent_records.assert_called_once_with(
             limit=50, plate='12 ب 345 67', class_id=2)
@@ -63,9 +63,9 @@ class DashboardPlateSearchTests(unittest.TestCase):
         screen._record_kind.text = theme.rtl('انسان')
         self.assertEqual(screen._search.text, '')
         self.assertTrue(screen._search.disabled)
-        with patch('reno.ui.dashboard.dashboard_service'), \
-             patch('reno.ui.dashboard.plate_service') as plates, \
-             patch('reno.ui.dashboard.Clock.schedule_once'):
+        with patch('plakino_ui.ui.dashboard.dashboard_service'), \
+             patch('plakino_ui.ui.dashboard.plate_service') as plates, \
+             patch('plakino_ui.ui.dashboard.Clock.schedule_once'):
             screen._load(0, '', None, '', class_id=0)
         plates.get_recent_records.assert_called_once_with(limit=50, plate='', class_id=0)
     def test_database_queries_normalize_both_input_and_stored_plate(self):
@@ -73,14 +73,14 @@ class DashboardPlateSearchTests(unittest.TestCase):
         connection.__enter__.return_value = connection
         cursor = connection.cursor.return_value.__enter__.return_value
         cursor.fetchall.return_value = []
-        with patch('reno.services.plate_service.MOCK_DATA_ENABLED', False), \
-             patch('reno.services.plate_service.ensure_schema'):
+        with patch('plakino_ui.services.plate_service.MOCK_DATA_ENABLED', False), \
+             patch('plakino_ui.services.plate_service.ensure_schema'):
             PlateService(connection_factory=lambda: connection).get_recent_records(plate='۱۲ الف ۳۴۵ ۶۷')
         sql, params = cursor.execute.call_args.args
         self.assertIn('regexp_replace(translate', sql)
         self.assertEqual(params[-2:], ('12الف34567', 50))
-        with patch('reno.services.dashboard_service.MOCK_DATA_ENABLED', False), \
-             patch('reno.services.dashboard_service.get_connection', return_value=connection):
+        with patch('plakino_ui.services.dashboard_service.MOCK_DATA_ENABLED', False), \
+             patch('plakino_ui.services.dashboard_service.get_connection', return_value=connection):
             DashboardService().get_daily_flow(plate='۱۲ الف ۳۴۵ ۶۷')
         sql, params = cursor.execute.call_args.args
         self.assertIn('regexp_replace(translate', sql)
@@ -91,8 +91,8 @@ class DashboardPlateSearchTests(unittest.TestCase):
                              time='12:00:00', camera='c1', direction='entry')
         service = PlateService()
         service._mock_records = [record]
-        with patch('reno.services.plate_service.MOCK_DATA_ENABLED', True):
+        with patch('plakino_ui.services.plate_service.MOCK_DATA_ENABLED', True):
             self.assertEqual(service.get_recent_records(plate='۱۲ الف ۳۴۵ ۶۷'), [record])
-        with patch('reno.services.dashboard_service.MOCK_DATA_ENABLED', True), \
-             patch('reno.services.dashboard_service.plate_service', service):
+        with patch('plakino_ui.services.dashboard_service.MOCK_DATA_ENABLED', True), \
+             patch('plakino_ui.services.dashboard_service.plate_service', service):
             self.assertEqual(DashboardService().get_daily_flow(plate='۱۲ الف ۳۴۵ ۶۷')[-1][1:], (1, 0))

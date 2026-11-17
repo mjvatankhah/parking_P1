@@ -1,0 +1,133 @@
+"""Recent-event presentation and detail dialog share the same event and plate image."""
+from pathlib import Path
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.widget import Widget
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.image import Image
+from kivy.uix.popup import Popup
+from kivy.animation import Animation
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.common import Card, RTLLabel, SecondaryButton, HoverBehavior
+from plakino_ui.ui.components.iranian_plate import PlainPlate
+from plakino_ui.ui.components.jalali_calendar import jalali_text
+from plakino_ui.services.auth_service import auth_service
+from plakino_ui.services.diagnostic_report_service import eligible
+
+
+class TrafficRecordRow(HoverBehavior, ButtonBehavior, Card):
+    def __init__(self, record, **kwargs):
+        self.record = record
+        super().__init__(size_hint_y=None, height=56, padding=[8, 8, 8, 8], spacing=8,
+                         radius=5, bg_color=theme.rgba('#202832', .7),
+                         border_color=theme.rgba(theme.COLORS['border'], .45), hover_effect=False, **kwargs)
+        self.image_path = record.image_path if record.image_path and Path(record.image_path).is_file() else ''
+        # Physical left-to-right insertion gives an RTL grid with image at far right.
+        self._camera = RTLLabel(text=record.camera, font_size=11, halign='center',
+                               padding=[0,0], size_hint_x=.12, shorten=True,
+                               color=theme.rgba(theme.COLORS['text_secondary']))
+        self.add_widget(self._camera)
+        stamp = BoxLayout(orientation='vertical', spacing=1, size_hint_x=.18)
+        self._date_label = RTLLabel(text=jalali_text(record.date), font_size=13, halign='center', padding=[0,0])
+        stamp.add_widget(self._date_label)
+        stamp.add_widget(RTLLabel(text=theme.fa_number(record.time), font_size=13, halign='center',
+                                 padding=[0,0], color=theme.rgba(theme.COLORS['text_secondary'])))
+        self.add_widget(stamp)
+        event_color = 'entry' if record.direction == 'entry' else 'exit'
+        self._event_label = RTLLabel(text=record.direction_label(), font_size=13,
+                                     size_hint_x=.1,
+                                     color=theme.rgba(theme.COLORS[event_color+'_text']),
+                                     halign='center', padding=[0,0])
+        self.add_widget(self._event_label)
+        self._access_label = RTLLabel(text=record.access_label(), font_size=12, size_hint_x=.14,
+                                      halign='center', padding=[0,0],
+                                      color=theme.rgba({'allowed':'#48B78A','guest':'#D8B45F','blocked':'#F87171'}.get(record.access_status,'#A5B1C0')))
+        if record.class_id != 0:
+            self.add_widget(self._access_label)
+        self._plate = PlainPlate(record.plate, size_hint_x=.24)
+        self._plate_holder = BoxLayout(orientation='vertical', size_hint_x=.24, spacing=1)
+        self._plate.size_hint_x = 1
+        self.diagnostic_button = None
+        self.diagnostic_dialog = None
+        if record.class_id != 0:
+            self._plate_holder.add_widget(self._plate)
+            self.add_widget(self._plate_holder)
+        self.refresh_access()
+        self._thumbnail = Card(size_hint_x=.22, padding=1, radius=4, hover_effect=False,
+            bg_color=theme.rgba(theme.COLORS['background']), border_color=theme.rgba(theme.COLORS['border'],.5))
+        if self.image_path:
+            image_holder = AnchorLayout()
+            self._plate_image = Image(source=self.image_path, fit_mode='scale-down',
+                                      size_hint=(None, None))
+            def fit_thumbnail(holder, *_):
+                self._plate_image.size = (min(160, max(0, holder.width)),
+                                          min(40, max(0, holder.height)))
+            image_holder.bind(size=fit_thumbnail)
+            image_holder.add_widget(self._plate_image)
+            fit_thumbnail(image_holder)
+            self._thumbnail.add_widget(image_holder)
+        else:
+            self._thumbnail.add_widget(RTLLabel(text='بدون تصویر', font_size=10, halign='center', padding=[0,0],
+                                                color=theme.rgba(theme.COLORS['text_secondary'])))
+        self.add_widget(self._thumbnail)
+        if record.class_id == 0:
+            self._camera.size_hint_x = .2
+            stamp.size_hint_x = .3
+            self._event_label.size_hint_x = .2
+            self._thumbnail.size_hint_x = .3
+        self.bind(hovered=self._hover, on_release=self._open_detail)
+
+    def refresh_access(self):
+        allowed = auth_service.is_superadmin and eligible(self.record)
+        if self.diagnostic_dialog is not None:
+            self.diagnostic_dialog.dismiss()
+            self.diagnostic_dialog = None
+        if allowed and self.diagnostic_button is None:
+            self.diagnostic_button = SecondaryButton(text=theme.rtl('گزارش تشخیص'),
+                font_size=10, size_hint_y=None, height=21, padding=[2, 0])
+            self.diagnostic_button.bind(on_release=self._open_diagnostics)
+            self._plate_holder.add_widget(self.diagnostic_button)
+        elif not allowed and self.diagnostic_button is not None:
+            self._plate_holder.remove_widget(self.diagnostic_button)
+            self.diagnostic_button = None
+
+    def _open_diagnostics(self, *_):
+        if not auth_service.is_superadmin or not eligible(self.record):
+            return
+        from plakino_ui.ui.components.diagnostic_report_dialog import DiagnosticReportDialog
+        self.diagnostic_dialog = DiagnosticReportDialog(self.record)
+        self.diagnostic_dialog.open()
+
+    def _hover(self, *_):
+        Animation.cancel_all(self, 'bg_color', 'border_color')
+        Animation(bg_color=theme.rgba('#293545', 1) if self.hovered else theme.rgba('#202832', .8),
+                  border_color=theme.rgba('#45566C', .9) if self.hovered else (0, 0, 0, 0),
+                  duration=.12).start(self)
+
+    def _open_detail(self, *_):
+        content = Card(orientation='vertical', padding=22, spacing=12, bg_color=theme.rgba('#191F27'))
+        content.add_widget(RTLLabel(text='جزئیات رویداد تردد', font_size=19, size_hint_y=None, height=32))
+        if self.image_path:
+            content.add_widget(Image(source=self.image_path, fit_mode='contain'))
+        else:
+            content.add_widget(RTLLabel(text='تصویری برای این رویداد ثبت نشده است', halign='center'))
+        if self.record.class_id != 0:
+            content.add_widget(PlainPlate(self.record.plate))
+        for text in [f'{self.record.class_label()} · {self.record.direction_label()}',
+                     f'{jalali_text(self.record.date)}  ·  {theme.fa_number(self.record.time)}', self.record.camera]:
+            content.add_widget(RTLLabel(text=text, font_size=13, size_hint_y=None, height=28))
+        close = SecondaryButton(text=theme.rtl('بستن'), size_hint_y=None, height=38)
+        content.add_widget(close)
+        self.detail_dialog = Popup(title='', separator_height=0, background='', background_color=(0, 0, 0, 0),
+                                   content=content, size_hint=(None, None), size=(460, 450))
+        close.bind(on_release=lambda *_: self.detail_dialog.dismiss())
+        self.detail_dialog.open()
+
+
+def detection_header(class_id=2):
+    row = BoxLayout(size_hint_y=None, height=26, padding=[8,0,8,0], spacing=8)
+    columns = [('دوربین',.2),('تاریخ / ساعت',.3),('رویداد',.2),('تصویر',.3)] if class_id == 0 else [('دوربین',.12),('تاریخ / ساعت',.18),('رویداد',.1),('وضعیت پلاک',.14),('شماره پلاک',.24),('تصویر',.22)]
+    for label, ratio in columns:
+        row.add_widget(RTLLabel(text=label, font_size=10, size_hint_x=ratio, halign='center',
+                               padding=[0,0], color=theme.rgba(theme.COLORS['text_secondary'])))
+    return row

@@ -4,18 +4,18 @@ import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
-from reno.models.camera import Camera
-from reno.services.camera_setup_service import register_and_check
+from plakino_ui.models.camera import Camera
+from plakino_ui.services.camera_setup_service import register_and_check
 
 
 class CameraSetupTests(unittest.TestCase):
     def setUp(self):
-        self.db = patch('reno.services.camera_setup_service.get_connection')
+        self.db = patch('plakino_ui.services.camera_setup_service.get_connection')
         self.connect = self.db.start()
         self.addCleanup(self.db.stop)
         self.cursor = self.connect.return_value.__enter__.return_value.cursor.return_value.__enter__.return_value
         self.cursor.fetchone.side_effect = [None, ('ورودی',)]
-        self.probe = patch('reno.services.camera_setup_service.subprocess.run')
+        self.probe = patch('plakino_ui.services.camera_setup_service.subprocess.run')
         self.run = self.probe.start()
         self.addCleanup(self.probe.stop)
         self.run.return_value.returncode = 0
@@ -74,7 +74,7 @@ class CameraSetupTests(unittest.TestCase):
     def test_real_video_probe_reads_a_frame(self):
         import cv2
         import numpy as np
-        from reno.services.source_probe import main
+        from plakino_ui.services.source_probe import main
         from io import StringIO
         import json
         with tempfile.TemporaryDirectory() as folder:
@@ -103,7 +103,7 @@ class CameraSetupTests(unittest.TestCase):
         self.assertEqual(self.camera.gate_id, 'gate:نام انتخابی')
 
     def test_registration_does_not_probe_offline_camera(self):
-        from reno.services.camera_setup_service import register_camera
+        from plakino_ui.services.camera_setup_service import register_camera
         self.camera.source = 'rtsp://192.0.2.1/unavailable'
         result = register_camera(self.camera, 'ورودی')
         self.assertTrue(result.success)
@@ -111,7 +111,7 @@ class CameraSetupTests(unittest.TestCase):
         self.run.assert_not_called()
 
     def test_connection_check_does_not_write_database(self):
-        from reno.services.camera_setup_service import check_connection
+        from plakino_ui.services.camera_setup_service import check_connection
         result = check_connection(self.camera)
         self.assertTrue(result.success)
         self.connect.assert_not_called()

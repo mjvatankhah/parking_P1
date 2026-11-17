@@ -9,7 +9,9 @@ import logging
 import cv2
 
 logger = logging.getLogger(__name__)
-DEFAULT_ROOT = Path(__file__).resolve().parents[3] / 'reports' / 'crop_diagnostics'
+from computer_vision_v2.storage.diagnostic_paths import ARCHIVE_ROOT
+
+DEFAULT_ROOT = ARCHIVE_ROOT
 
 
 def guarded(fn):
@@ -22,7 +24,7 @@ def guarded(fn):
 
 
 class EvidenceTrace:
-    def __init__(self, root=None, max_samples=80, max_bytes=12_000_000):
+    def __init__(self, root=None, max_samples=80, max_bytes=12_000_000, runtime=None):
         self.root = Path(root) if root else DEFAULT_ROOT
         self.token = uuid4().hex
         self.max_samples = max_samples
@@ -36,6 +38,16 @@ class EvidenceTrace:
         self.ocr_rows = []
         self.dropped_pending = 0
         self.decisions = []
+        self.runtime = runtime
+
+    def discard(self):
+        """Release provisional evidence when the passage needs no report."""
+        self.images.clear()
+        self.rows.clear()
+        self.ocr_rows.clear()
+        self.decisions.clear()
+        self.scene = None
+        self.bytes = 0
 
     def _image(self, name, image, *, jpeg=False):
         if image is None or not image.size:
@@ -58,6 +70,7 @@ class EvidenceTrace:
         if self.scene is not None:
             return
         self.scene = {'frame_idx': frame.frame_idx, 'shape': list(frame.image.shape),
+                      'observed_at': datetime.now(timezone.utc).isoformat(),
                       'bbox': event.get('bbox'),
                       'detections': [{'track_id': d.track_id, 'bbox': list(d.bbox),
                                       'class_id': d.class_id} for d in frame.detections],
@@ -92,10 +105,11 @@ class EvidenceTrace:
             self.decisions.append({"frame_idx": frame_idx, "branch": branch, "outcome": outcome})
 
     @guarded
-    def ocr(self, reading, image):
+    def ocr(self, reading, image, *, model_input=None):
         # Exact images used by OCR, including any geometry recomputed at recognition.
-        self.ocr_rows.append({**reading, 'image': self._image(
-            f'ocr-{len(self.ocr_rows):02d}-{reading["source"]}-{reading["frame_idx"]}', image)})
+        prefix = f'ocr-{len(self.ocr_rows):02d}-{reading["source"]}-{reading["frame_idx"]}'
+        self.ocr_rows.append({**reading, 'image': self._image(prefix, image),
+                              'model_input': self._image(prefix+'-model-input', model_input)})
 
     @guarded
     def save(self, event, result, candidates):
@@ -121,9 +135,10 @@ class EvidenceTrace:
                 row['selection_outcome'] = 'not_in_final_reserves: quality/time_spacing/capacity'
             else:
                 row['selection_outcome'] = 'sent_to_ocr' if row['ocr_sources'] else 'not_sent_to_ocr'
-        manifest = {'version': 1, 'diagnostic_id': self.token,
+        manifest = {'version': 2, 'diagnostic_id': self.token,
                     'created_at': datetime.now(timezone.utc).isoformat(),
                     'database_event_id': None, 'event': event,
+                    'runtime': self.runtime,
                     'result': {k: v for k,v in result.items() if k != 'image'},
                     'crossing': self.scene, 'samples': self.rows, 'ocr_inputs': self.ocr_rows,
                     'selection_groups': groups, 'selection_decisions': self.decisions,

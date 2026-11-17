@@ -7,8 +7,8 @@ import unittest
 import cv2
 import numpy as np
 from computer_vision_v2.Line_Manager.select_line_points import GuidedSelection, Stage
-from reno.models.camera import Camera
-from reno.services.geometry_service import capture_frame, persist_selection
+from plakino_ui.models.camera import Camera
+from plakino_ui.services.geometry_service import capture_frame, persist_selection
 
 
 class GuidedGeometryTests(unittest.TestCase):

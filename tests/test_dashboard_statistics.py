@@ -3,8 +3,8 @@ from computer_vision_v2.site_time import today as site_today
 import unittest
 from datetime import date, timedelta
 from unittest.mock import MagicMock, patch
-from reno.models.plate_record import PlateRecord
-from reno.services.dashboard_service import DashboardService
+from plakino_ui.models.plate_record import PlateRecord
+from plakino_ui.services.dashboard_service import DashboardService
 
 
 class DashboardStatisticsTests(unittest.TestCase):
@@ -19,9 +19,9 @@ class DashboardStatisticsTests(unittest.TestCase):
             PlateRecord('32ب34567', today, '12:00:00', 'cam', access_status='blocked'),
             PlateRecord('خوانده نشد', today, '13:00:00', 'cam', access_status='unknown'),
         ]
-        with patch('reno.services.dashboard_service.MOCK_DATA_ENABLED', True), \
-             patch('reno.services.dashboard_service.plate_service') as plates, \
-             patch('reno.services.dashboard_service.camera_service.get_cameras', return_value=[]):
+        with patch('plakino_ui.services.dashboard_service.MOCK_DATA_ENABLED', True), \
+             patch('plakino_ui.services.dashboard_service.plate_service') as plates, \
+             patch('plakino_ui.services.dashboard_service.camera_service.get_cameras', return_value=[]):
             plates._mock_records = records
             stats = DashboardService().get_statistics()
         self.assertEqual(stats.today_total, 5)
@@ -36,10 +36,10 @@ class DashboardStatisticsTests(unittest.TestCase):
         connection.__enter__.return_value = connection
         cursor = connection.cursor.return_value.__enter__.return_value
         cursor.fetchone.side_effect = [(10, 6, 1, 3, 2, 3, 4, 2), (4,)]
-        with patch('reno.services.dashboard_service.MOCK_DATA_ENABLED', False), \
-             patch('reno.services.dashboard_service.get_connection', return_value=connection), \
-             patch('reno.services.dashboard_service.ensure_schema'), \
-             patch('reno.services.dashboard_service.camera_service.get_cameras', return_value=[]):
+        with patch('plakino_ui.services.dashboard_service.MOCK_DATA_ENABLED', False), \
+             patch('plakino_ui.services.dashboard_service.get_connection', return_value=connection), \
+             patch('plakino_ui.services.dashboard_service.ensure_schema'), \
+             patch('plakino_ui.services.dashboard_service.camera_service.get_cameras', return_value=[]):
             stats = DashboardService().get_statistics()
         self.assertEqual((stats.today_total, stats.inside_vehicles, stats.guest_vehicles, stats.blocked_vehicles), (10, 4, 3, 2))
         self.assertIn("WHERE status = 'open'", cursor.execute.call_args.args[0])
@@ -54,8 +54,8 @@ class DashboardStatisticsTests(unittest.TestCase):
             PlateRecord('22ب34567', day.isoformat(), '12:00:00', 'cam'),
             PlateRecord('12ب34567', '2026-11-05', '12:00:00', 'cam'),
         ]
-        with patch('reno.services.dashboard_service.MOCK_DATA_ENABLED', True), \
-             patch('reno.services.dashboard_service.plate_service') as plates:
+        with patch('plakino_ui.services.dashboard_service.MOCK_DATA_ENABLED', True), \
+             patch('plakino_ui.services.dashboard_service.plate_service') as plates:
             plates._mock_records = records
             flow = DashboardService().get_hourly_flow(day, 'cam', '۱۲ ب ۳۴۵ ۶۷')
         self.assertEqual(len(flow), 24)
@@ -69,8 +69,8 @@ class DashboardStatisticsTests(unittest.TestCase):
         cursor = connection.cursor.return_value.__enter__.return_value
         cursor.fetchall.return_value = [(8, 5, 2), (23, 0, 1)]
         day = date(2026, 11, 6)
-        with patch('reno.services.dashboard_service.MOCK_DATA_ENABLED', False), \
-             patch('reno.services.dashboard_service.get_connection', return_value=connection):
+        with patch('plakino_ui.services.dashboard_service.MOCK_DATA_ENABLED', False), \
+             patch('plakino_ui.services.dashboard_service.get_connection', return_value=connection):
             flow = DashboardService().get_hourly_flow(day, 'cam', '۱۲ ب ۳۴۵ ۶۷')
         sql, params = cursor.execute.call_args.args
         self.assertIn('EXTRACT(HOUR FROM captured_at)', sql)

@@ -7,8 +7,8 @@ import unittest
 from unittest.mock import Mock, patch
 
 from kivy.clock import Clock
-from reno.models.camera import Camera, STATUS_ONLINE, STATUS_OFFLINE
-from reno.services.camera_health_service import CameraHealthMonitor, CHECK_INTERVAL
+from plakino_ui.models.camera import Camera, STATUS_ONLINE, STATUS_OFFLINE
+from plakino_ui.services.camera_health_service import CameraHealthMonitor, CHECK_INTERVAL
 
 
 class CameraHealthTests(unittest.TestCase):
@@ -30,7 +30,7 @@ class CameraHealthTests(unittest.TestCase):
     def test_periodic_schedule_and_cleanup(self):
         service,_=self.service()
         monitor=CameraHealthMonitor(service)
-        with patch.object(monitor,'poll') as poll, patch('reno.services.camera_health_service.Clock.schedule_interval') as schedule:
+        with patch.object(monitor,'poll') as poll, patch('plakino_ui.services.camera_health_service.Clock.schedule_interval') as schedule:
             monitor.start()
             monitor.start()
             poll.assert_called_once()

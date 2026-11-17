@@ -64,7 +64,7 @@ def database_worker(db_queue, running_flag):
                 event_id = _save_event(cursor, item)
                 connection.commit()
                 link_event(item.get("diagnostics_path"), event_id)
-                logger.info("Saved event %s from camera %s", event_id, item["camera_id"])
+                logger.info("Saved event", extra={"event": "database_saved", "event_id": event_id, "camera_id": item["camera_id"], "passage_id": item.get("passage_id")})
             except Exception:
                 logger.exception("Could not save event from camera %s", item.get("camera_id"))
                 if connection is not None:

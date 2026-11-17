@@ -175,7 +175,7 @@ def run(config, output, max_frames=None):
 
 if __name__ == '__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--config',type=Path,default=Path('src/reno/data/cameras.json'))
+    parser.add_argument('--config',type=Path,default=Path('src/plakino_ui/data/cameras.json'))
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--max-frames',type=int)
     args=parser.parse_args()

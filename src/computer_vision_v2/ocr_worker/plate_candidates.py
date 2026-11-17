@@ -1,5 +1,6 @@
 """Keep one crossing open while its vehicle remains visible in the ROI."""
 from dataclasses import dataclass, field
+from uuid import uuid4
 import logging
 import math
 from collections import deque
@@ -73,6 +74,7 @@ class TrackEvidence:
     in_flight: bool = False
     retiring: bool = False
     trace: object = None
+    passage_id: str = field(default_factory=lambda: uuid4().hex)
 
 
 @dataclass
@@ -145,7 +147,8 @@ class PlateCandidates:
                 match = key
                 self.tracks[match] = TrackEvidence(frame.ts, tuple(det.bbox))
                 if self.diagnostics.get("enabled", False):
-                    self.tracks[match].trace = EvidenceTrace(root=self.diagnostics.get("directory"))
+                    self.tracks[match].trace = EvidenceTrace(root=self.diagnostics.get("directory"),
+                        runtime=self.diagnostics.get('runtime_by_camera', {}).get(frame.camera_id))
             self.aliases[key] = match
             self.tracks[match].aliases.add(key)
             assigned.add(match)
@@ -385,6 +388,7 @@ class PlateCandidates:
             key = (event['camera_id'], event['track_id'])
             canonical = self.aliases.get(key)
             if canonical is not None and self.tracks[canonical].event is None:
+                event["passage_id"] = self.tracks[canonical].passage_id
                 self.tracks[canonical].event = event
                 if self.tracks[canonical].trace is not None:
                     self.tracks[canonical].trace.crossing(frame, event)

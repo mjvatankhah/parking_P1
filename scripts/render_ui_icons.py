@@ -7,7 +7,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 from extract_reference_icons import render
 
-ROOT = Path(__file__).resolve().parents[1] / 'src/reno/assets/icons'
+ROOT = Path(__file__).resolve().parents[1] / 'src/plakino_ui/assets/icons'
 
 
 def main():

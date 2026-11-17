@@ -1,44 +1,39 @@
-"""Recognize crossing evidence and persist only the final preview image."""
+"""Recognize passages and hand off disk I/O to the storage worker."""
+import time
 import logging
-from pathlib import Path
-from uuid import uuid4
-import cv2
 from computer_vision_v2.workers.queueing import offer_event
 
 logger = logging.getLogger(__name__)
-PERSON_IMAGE_DIR = Path(__file__).resolve().parents[2] / 'captured_persons'
-PLATE_IMAGE_DIR = Path(__file__).resolve().parents[2] / 'captured_plates'
 
 
-def ocr_worker(ocr_queue, db_queue, plate_reader, running_flag):
+def ocr_worker(ocr_queue, storage_queue, plate_reader, running_flag):
     while True:
         item = ocr_queue.get()
         try:
             if item is None:
                 return
             event = item['event']
+            started = time.monotonic()
             result = {'plate_text':None, 'confidence':float(event.get('confidence',0.)) if event['class_id']==0 else 0., 'recognition_status':'unread',
                       'readings':[], 'image':item.get('person')}
             if event['class_id'] == 2:
                 try:
                     result = plate_reader.recognize_candidates(item['candidates'])
-                except Exception:
+                except Exception as exc:
+                    result['recognition_error'] = type(exc).__name__
                     logger.exception('OCR failed for %s/%s', event['camera_id'], event['track_id'])
-            image = result.pop('image')
-            result['image_path'] = None
-            if image is not None and image.size:
-                directory = PERSON_IMAGE_DIR if event['class_id']==0 else PLATE_IMAGE_DIR
-                try:
-                    directory.mkdir(parents=True, exist_ok=True)
-                    path = directory / f'{uuid4().hex}.jpg'
-                    if not cv2.imwrite(str(path), image):
-                        raise OSError('Image write failed')
-                    result['image_path'] = str(path)
-                except Exception:
-                    logger.exception('Could not save crossing image')
             trace = item.get('trace')
-            if trace is not None:
-                result['diagnostics_path'] = trace.save(event, result, item['candidates'])
-            offer_event(db_queue, {**event, **result}, 'database', stopping=not running_flag())
+            if trace is not None and result['recognition_status'] == 'read':
+                trace.discard()
+                trace = None
+            logger.info('ocr completed', extra={'event': 'ocr_completed',
+                'camera_id': event.get('camera_id'), 'track_id': event.get('track_id'),
+                'passage_id': event.get('passage_id'), 'status': result['recognition_status'],
+                'duration_ms': round((time.monotonic()-started)*1000, 2),
+                'candidates': len(item.get('candidates', [])), 'readings': len(result.get('readings', []))})
+            offer_event(storage_queue, {'event': event, 'result': result,
+                        'trace': trace, 'candidates': item['candidates'] if trace is not None else []},
+                        'storage', stopping=not running_flag())
         finally:
+            item = result = trace = None
             ocr_queue.task_done()

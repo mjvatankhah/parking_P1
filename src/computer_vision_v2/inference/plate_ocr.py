@@ -77,6 +77,8 @@ class PlateReader:
         conf_thr=0.35,
     ):
         self.conf_thr = conf_thr
+        self.detector_path = Path(detector_path)
+        self.ocr_model_directory = Path(ocr_model_directory)
 
         self._fallback_path = fallback_detector_path
         self._fallback_detector = None
@@ -89,6 +91,7 @@ class PlateReader:
             if fallback_detector_path is None:
                 raise
             self.detector = _session(fallback_detector_path)
+            self.detector_path = Path(fallback_detector_path)
             self._fallback_attempted = True
 
         self.ocr = HezarOCR(ocr_model_directory)
@@ -215,10 +218,12 @@ class PlateReader:
                 seen.add(pair[0].frame_idx)
         return selected
 
-    def _recognize_batch(self, images):
+    def _recognize_batch(self, images, *, input_observer=None):
         """Read crops through the configured OCR model boundary."""
         if not images:
             return []
+        if input_observer is not None:
+            return self.ocr.recognize(images, input_observer=input_observer)
         return self.ocr.recognize(images)
 
     def recognize_candidates(self, candidates):
@@ -258,8 +263,13 @@ class PlateReader:
             batch_images = [(c.crop if source == 'raw' else _pad_ocr_crop(c.crop))
                             if source != 'geometry' else result.image
                             for c, result in selected]
-            decoded = self._recognize_batch(batch_images)
-            for (candidate, _), image, (text, confidence) in zip(selected, batch_images, decoded):
+            trace = getattr(candidates, "trace", None)
+            model_inputs = []
+            if trace is not None and isinstance(getattr(self, 'ocr', None), HezarOCR):
+                decoded = self._recognize_batch(batch_images, input_observer=model_inputs.extend)
+            else:
+                decoded = self._recognize_batch(batch_images)
+            for index, ((candidate, _), image, (text, confidence)) in enumerate(zip(selected, batch_images, decoded)):
                 letter = text[2:-5]
                 valid = (len(text) >= 8 and text[:2].isdigit() and text[-5:].isdigit()
                          and letter in self.labels and not letter.isdigit())
@@ -272,9 +282,11 @@ class PlateReader:
                     alternatives=[reading.copy()],
                 ))
                 images.append(image)
-                trace = getattr(candidates, "trace", None)
                 if trace is not None:
-                    trace.ocr(readings[-1], image)
+                    if len(model_inputs) == len(batch_images):
+                        trace.ocr(readings[-1], image, model_input=model_inputs[index])
+                    else:
+                        trace.ocr(readings[-1], image)
         read_selected('raw', raw)
         read_selected('geometry', geometry)
         # Pay for additional OCR only when the cheap first pass is unresolved.

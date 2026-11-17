@@ -1,7 +1,7 @@
 """Animating a border should change UVs without rebuilding its shape."""
 import unittest
 from unittest.mock import patch
-from reno.ui.components.common import Card
+from plakino_ui.ui.components.common import Card
 
 
 class CardAnimationPerformanceTests(unittest.TestCase):
@@ -10,7 +10,7 @@ class CardAnimationPerformanceTests(unittest.TestCase):
                     border_gradient=('#39F5D0', '#247DAD'))
         try:
             before = list(card._frame.vertices)
-            with patch('reno.ui.components.common.math.cos', wraps=__import__('math').cos) as cosine:
+            with patch('plakino_ui.ui.components.common.math.cos', wraps=__import__('math').cos) as cosine:
                 card._border_phase = 1
                 self.assertEqual(cosine.call_count, 0)
                 after = list(card._frame.vertices)

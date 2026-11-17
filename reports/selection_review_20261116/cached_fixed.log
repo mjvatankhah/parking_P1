@@ -1,9 +1,0 @@
-[0;93m2026-11-16 12:58:06.520998531 [W:onnxruntime:Default, telemetry.cc:800 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
-435 read 58م87245 readings 30 Counter({'58م87245': 4, '88م87245': 1, '88م87345': 1})
-436 read 12ه33345 readings 28 Counter({'12ه33345': 4, '13ه43345': 1, '13ه33445': 1, '13ه33345': 1, '12ه34445': 1, '12ه33245': 1})
-437 read 83و62745 readings 14 Counter({'83و62745': 3, '82و63745': 1, '83و63745': 1})
-438 read 81ط79545 readings 26 Counter({'81ط79545': 10, '11ط79545': 1, '11م79545': 1})
-439 read 58م87245 readings 21 Counter({'58م87245': 4, '58م87345': 2})
-440 read 13ه33345 readings 10 Counter({'13ه33345': 2, '12ه33345': 1, '12ه33245': 1, '12ه33335': 1})
-441 read 83و63745 readings 8 Counter({'83و63745': 2})
-442 read 81ط79545 readings 25 Counter({'81ط79545': 9, '11م79545': 2, '81ط29545': 1})

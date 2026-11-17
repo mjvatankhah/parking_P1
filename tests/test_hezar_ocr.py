@@ -3,7 +3,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import numpy as np
 import torch
@@ -14,6 +14,27 @@ from computer_vision_v2.inference.hezar_ocr import (
 
 
 class HezarOCRTests(unittest.TestCase):
+    def test_diagnostic_image_comes_from_actual_tensor_and_does_not_change_reading(self):
+        reader = HezarOCR.__new__(HezarOCR)
+        reader._model = Mock()
+        reader._model.config.blank_id = 0
+        config = SimpleNamespace(mean=[.5], std=[.2], rescale=1/255)
+        reader._model.preprocessor.image_processor.config = config
+        pixels = torch.tensor([[[[0., 30., 80.], [120., 180., 255.]]]])
+        tensor = (pixels/255-.5)/.2
+        reader._model.preprocess.return_value = {'pixel_values': tensor}
+        reader._model.return_value = {'logits': torch.tensor([[[0., 2.]]])}
+        reader._model.post_process.return_value = [SimpleNamespace(text='۱۲ب۳۴۵۶۷', score=.91)]
+        reader._decode = Mock()
+        crops = [np.zeros((20,60,3), dtype=np.uint8)]
+        baseline = reader.recognize(crops)
+        previews = []
+        self.assertEqual(reader.recognize(crops, input_observer=previews.extend), baseline)
+        np.testing.assert_array_equal(previews[0], pixels.numpy()[0,0].astype(np.uint8))
+        torch.testing.assert_close(reader._model.call_args.kwargs['pixel_values'], tensor)
+        with self.assertLogs('computer_vision_v2.inference.hezar_ocr', level='ERROR'):
+            self.assertEqual(reader.recognize(crops, input_observer=Mock(side_effect=OSError('disk'))), baseline)
+
     def test_canonical_digits_and_alef_match_existing_plate_format(self):
         self.assertEqual(canonical_plate_text('۵۸م۸۷۲۴۵'), '58م87245')
         self.assertEqual(canonical_plate_text('١٢ا٣٤٥٦٧'), '12الف34567')

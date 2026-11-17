@@ -177,3 +177,11 @@ encryption and can be reverse engineered; this is not absolute source protection
 Run focused tests with `python -m unittest discover -s tests`.
 # T_project
 # T_project
+
+### گزارش تشخیص تردد
+
+آرشیو تصاویر و نتایج تشخیص ترددهای نامطمئن یا ناخوانا در
+`report_traffic/archives/` و سندهای قابل مشاهده در مرورگر در
+`report_traffic/documents/` ذخیره می‌شوند. این مسیرها از پوشهٔ
+`reports/` مربوط به بررسی‌های توسعه مستقل‌اند. حذف `reports/` گزارش‌های
+جدید را حذف نمی‌کند؛ آرشیوهای قدیمی به محل جدید منتقل نشده‌اند.

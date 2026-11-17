@@ -3,22 +3,22 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from reno.main import RenoApp
-from reno.ui.reports import ReportsScreen
-from reno.services.report_service import report_service, ReportPage
-from reno.services.auth_service import auth_service
+from plakino_ui.main import RenoApp
+from plakino_ui.ui.reports import ReportsScreen
+from plakino_ui.services.report_service import report_service, ReportPage
+from plakino_ui.services.auth_service import auth_service
 from kivy.clock import Clock
 from kivy.core.window import Window
-from reno.ui import theme
-from reno.ui.components.icons import _ICON_FILES, APP_ICON
-from reno.ui.components.brand import BrandMark
-from reno.ui.components.camera_card import CameraCard
-from reno.ui.components.traffic_record import TrafficRecordRow
-from reno.models.plate_record import PlateRecord
-from reno.services.dashboard_service import DashboardStatistics, dashboard_service
-from reno.services.plate_service import plate_service
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.icons import _ICON_FILES, APP_ICON
+from plakino_ui.ui.components.brand import BrandMark
+from plakino_ui.ui.components.camera_card import CameraCard
+from plakino_ui.ui.components.traffic_record import TrafficRecordRow
+from plakino_ui.models.plate_record import PlateRecord
+from plakino_ui.services.dashboard_service import DashboardStatistics, dashboard_service
+from plakino_ui.services.plate_service import plate_service
 
-APP_PATH = Path(__file__).resolve().parents[1] / 'src/reno'
+APP_PATH = Path(__file__).resolve().parents[1] / 'src/plakino_ui'
 
 
 def layout():
@@ -64,7 +64,7 @@ class ReferenceUIContractTests(unittest.TestCase):
 
     def test_navigation_uses_cached_menus_and_updates_role_permissions(self):
         from contextlib import ExitStack
-        from reno.services.camera_service import camera_service
+        from plakino_ui.services.camera_service import camera_service
         with ExitStack() as stack:
             stack.enter_context(patch.object(camera_service, 'reload',
                 side_effect=AssertionError('Navigation must not reload configuration')))
@@ -158,7 +158,7 @@ class ReferenceUIContractTests(unittest.TestCase):
         self.assertIsNone(screen._date_picker.selected)
 
     def test_status_breakdown_clears_previous_counts_for_empty_day(self):
-        from reno.ui.components.traffic_breakdown import TrafficBreakdown
+        from plakino_ui.ui.components.traffic_breakdown import TrafficBreakdown
 
         panel = TrafficBreakdown()
         panel.set_data((10, 3, 2, 1))
@@ -170,7 +170,7 @@ class ReferenceUIContractTests(unittest.TestCase):
     def test_dashboard_neon_frames_are_visible_and_move(self):
         from tempfile import TemporaryDirectory
         from PIL import Image, ImageChops
-        from reno.ui.components.common import Card
+        from plakino_ui.ui.components.common import Card
 
         self.app._navigate('dashboard')
         layout()
@@ -205,7 +205,7 @@ class ReferenceUIContractTests(unittest.TestCase):
                     self.assertGreaterEqual(max(high for low, high in difference.getextrema()), 30)
 
     def test_neon_hairline_keeps_its_width_on_wide_cards(self):
-        from reno.ui.components.common import Card
+        from plakino_ui.ui.components.common import Card
 
         card = Card(size_hint=(None, None), size=(360, 112),
                     border_gradient=('#39F5D0', '#247DAD'),

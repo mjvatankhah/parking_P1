@@ -1,3 +1,4 @@
+from computer_vision_v2.storage.storage_worker import storage_worker
 import queue
 import threading
 import unittest
@@ -52,7 +53,10 @@ class CrossingRetentionTests(unittest.TestCase):
         reader = Mock()
         reader.recognize_candidates.return_value = dict(plate_text=None,confidence=0.,
             recognition_status='unread',readings=[],image=None)
-        ocr_worker(ocr_q, db_q, reader, lambda: True)
+        storage_q = queue.Queue()
+        ocr_worker(ocr_q, storage_q, reader, lambda: True)
+        storage_q.put(None)
+        storage_worker(storage_q, db_q, lambda: True)
         reader.read.assert_not_called()
         item = db_q.get_nowait()
         self.assertIsNone(item['plate_text'])

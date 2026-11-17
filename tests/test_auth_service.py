@@ -1,13 +1,13 @@
 import unittest
 from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock
-from reno.services.auth_service import AuthService, hash_password, verify_password
+from plakino_ui.services.auth_service import AuthService, hash_password, verify_password
 
 
 class AuthTests(unittest.TestCase):
     def setUp(self):
         self.service = AuthService()
-        self.connection = patch('reno.services.auth_service.get_connection')
+        self.connection = patch('plakino_ui.services.auth_service.get_connection')
         self.connect = self.connection.start()
         self.addCleanup(self.connection.stop)
         self.cursor = self.connect.return_value.__enter__.return_value.cursor.return_value.__enter__.return_value
@@ -23,6 +23,34 @@ class AuthTests(unittest.TestCase):
         self.connect.assert_not_called()
         self.service.logout()
         self.assertFalse(self.service.is_admin)
+
+    def test_three_roles_and_failed_login_revoke_owner_access(self):
+        encoded = hash_password('owner-password')
+        for role in ('guard', 'admin', 'superadmin'):
+            self.cursor.fetchone.return_value = (encoded, role)
+            before = self.service.session_version
+            self.assertEqual(self.service.login('account', 'owner-password').role, role)
+            self.assertEqual(self.service.is_admin, role in ('admin', 'superadmin'))
+            self.assertEqual(self.service.is_superadmin, role == 'superadmin')
+            self.assertEqual(self.service.current_username, 'account')
+            self.assertGreater(self.service.session_version, before)
+        self.assertFalse(self.service.login('account', 'incorrect').success)
+        self.assertFalse(self.service.is_superadmin)
+        self.assertEqual(self.service.current_username, '')
+
+    def test_superadmin_inherits_guard_management_without_exposing_other_roles(self):
+        self.service.current_role = 'superadmin'
+        self.cursor.fetchall.return_value = []
+        self.assertTrue(self.service.list_guards().success)
+        self.assertIn("role = 'guard'", self.cursor.execute.call_args.args[0])
+        self.cursor.fetchone.return_value = ('g',)
+        self.assertTrue(self.service.create_guard('g', 'p', 'p').success)
+        self.assertTrue(self.service.delete_guard('g').success)
+        self.assertFalse(self.service.create_guard('superadmin', 'p', 'p').success)
+
+    def test_unknown_database_role_cannot_authenticate(self):
+        self.cursor.fetchone.return_value = (hash_password('password'), 'root')
+        self.assertFalse(self.service.login('account', 'password').success)
 
     def test_registration_permission_and_validation(self):
         self.assertFalse(self.service.create_guard('g', 'p', 'p').success)

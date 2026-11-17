@@ -1,8 +1,8 @@
 from pathlib import Path
 import unittest
 from unittest.mock import MagicMock,patch
-from reno.services.plate_registry_service import PlateRegistryService
-from reno.services.report_service import record_from_row
+from plakino_ui.services.plate_registry_service import PlateRegistryService
+from plakino_ui.services.report_service import record_from_row
 from datetime import datetime,timezone
 
 
@@ -11,7 +11,7 @@ class PlateRegistryTests(unittest.TestCase):
         self.connect=MagicMock()
         self.cursor=self.connect.return_value.__enter__.return_value.cursor.return_value.__enter__.return_value
         self.service=PlateRegistryService(self.connect)
-        self.schema=patch('reno.services.plate_registry_service.ensure_schema')
+        self.schema=patch('plakino_ui.services.plate_registry_service.ensure_schema')
         self.schema.start()
         self.addCleanup(self.schema.stop)
 

@@ -1,5 +1,6 @@
 """One camera's capture, tracking, and reconnection lifecycle."""
 
+from plakino_logging import FrameMetrics
 import logging
 import threading
 import time
@@ -22,6 +23,7 @@ class CapturedFrame(NamedTuple):
 
 class StreamManager:
     def __init__(self, camera_id, source, source_type, model_path, detection_interval=3, roi=None):
+        self.capture_metrics = FrameMetrics(camera_id, "rtsp_capture")
         self.camera_id = camera_id
         self.source = source
         self.source_type = source_type
@@ -93,6 +95,7 @@ class StreamManager:
                 try:
                     source = self._create_source()
                     source.connect()
+                    logger.info("Camera connected", extra={"event": "camera_connected", "camera_id": self.camera_id})
                     failures = 0
                     while not self._stop.is_set():
                         ok, image = source.get_frame()
@@ -108,6 +111,7 @@ class StreamManager:
                         failures = 0
                         captured_at = time.monotonic()
                         with self._condition:
+                            self.capture_metrics.add(received=1, replaced=int(self._latest_capture is not None))
                             self._capture_index += 1
                             self._latest_capture = CapturedFrame(
                                 self._capture_index, captured_at, image
@@ -115,7 +119,7 @@ class StreamManager:
                             self._condition.notify()
                 except Exception as exc:
                     # OpenCV errors can contain an RTSP URL with credentials.
-                    logger.warning("Camera %s disconnected (%s)", self.camera_id, type(exc).__name__)
+                    logger.warning("Camera %s disconnected (%s)", self.camera_id, type(exc).__name__, extra={"event": "camera_disconnected", "camera_id": self.camera_id})
                 finally:
                     with self._condition:
                         self._latest_capture = None

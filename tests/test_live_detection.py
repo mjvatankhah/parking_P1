@@ -7,11 +7,11 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from reno.main import RenoApp
-from reno.services.camera_service import CameraService
-from reno.ui.components.camera_card import CameraCard
-from reno.ui.live_detection import LiveDetectionScreen
-from reno.ui.theme import register_app_font
+from plakino_ui.main import RenoApp
+from plakino_ui.services.camera_service import CameraService
+from plakino_ui.ui.components.camera_card import CameraCard
+from plakino_ui.ui.live_detection import LiveDetectionScreen
+from plakino_ui.ui.theme import register_app_font
 
 
 class LiveDetectionTests(unittest.TestCase):
@@ -26,11 +26,11 @@ class LiveDetectionTests(unittest.TestCase):
                 ]}), encoding='utf-8')
 
             write('old.mp4')
-            with patch('reno.services.camera_service.os.path.join',
+            with patch('plakino_ui.services.camera_service.os.path.join',
                        return_value=str(path)):
                 service = CameraService()
-            with patch('reno.main.camera_service', service), \
-                 patch('reno.ui.live_detection.camera_service', service), \
+            with patch('plakino_ui.main.camera_service', service), \
+                 patch('plakino_ui.ui.live_detection.camera_service', service), \
                  patch.object(CameraCard, 'ensure_stream_started') as start, \
                  patch.object(CameraCard, 'stop_stream') as stop:
                 screen = LiveDetectionScreen(name='live_detection')
@@ -58,7 +58,7 @@ class LiveDetectionTests(unittest.TestCase):
     def test_app_starts_and_cancels_config_poll(self):
         app = SimpleNamespace(camera_health=Mock(), _refresh_camera_config=Mock(), _camera_config_poll=None,
                               screen_manager=Mock())
-        with patch('reno.main.Clock.schedule_interval') as schedule:
+        with patch('plakino_ui.main.Clock.schedule_interval') as schedule:
             RenoApp.on_start(app)
             app._refresh_camera_config.assert_called_once_with()
             schedule.assert_called_once_with(app._refresh_camera_config, 1)

@@ -3,17 +3,17 @@ import unittest
 from datetime import date
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
-from reno.ui.dashboard import DashboardScreen
-from reno.models.plate_record import PlateRecord
+from plakino_ui.ui.dashboard import DashboardScreen
+from plakino_ui.models.plate_record import PlateRecord
 
 
 class DashboardLoadingTests(unittest.TestCase):
     def load(self, *, statistics_error=False, chart_error=False):
         screen = SimpleNamespace(_apply=Mock())
         record = PlateRecord('12ب34567', '2026-11-06', '10:00:00', 'gate')
-        with patch('reno.ui.dashboard.dashboard_service') as service, \
-             patch('reno.ui.dashboard.plate_service') as plates, \
-             patch('reno.ui.dashboard.Clock.schedule_once') as schedule:
+        with patch('plakino_ui.ui.dashboard.dashboard_service') as service, \
+             patch('plakino_ui.ui.dashboard.plate_service') as plates, \
+             patch('plakino_ui.ui.dashboard.Clock.schedule_once') as schedule:
             plates.get_recent_records.return_value = [record]
             if statistics_error:
                 service.get_statistics.side_effect = RuntimeError('statistics unavailable')

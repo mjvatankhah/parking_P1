@@ -1,3 +1,4 @@
+from computer_vision_v2.storage.storage_worker import storage_worker
 import json
 import queue
 import tempfile
@@ -11,12 +12,26 @@ import numpy as np
 from computer_vision_v2.ocr_worker.crop_diagnostics import EvidenceTrace, link_event
 from computer_vision_v2.ocr_worker.plate_candidates import PlateCandidates
 from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
-from computer_vision_v2.inference.plate_ocr import PlateReader
+from computer_vision_v2.inference.plate_ocr import PlateReader, _pad_ocr_crop
 from computer_vision_v2.inference.plate_geometry import PreparedPlate
 from computer_vision_v2.tracking.frame_info import Detection, TrackedFrame
 
 
 class CropDiagnosticsTests(unittest.TestCase):
+    def test_model_input_and_runtime_are_saved_without_loss(self):
+        with tempfile.TemporaryDirectory() as directory:
+            trace = EvidenceTrace(directory, runtime={'camera': {'type': 'rtsp'}})
+            crop = np.zeros((30,78,3), dtype=np.uint8)
+            model_input = np.arange(32*384, dtype=np.uint8).reshape(32,384)
+            trace.ocr({'frame_idx':1, 'source':'raw', 'text':'123', 'confidence':.9, 'valid':False},
+                      crop, model_input=model_input)
+            path = Path(trace.save({'camera_id':'cam'}, {'recognition_status':'uncertain'}, []))
+            manifest = json.loads((path/'manifest.json').read_text())
+            self.assertEqual(manifest['version'], 2)
+            self.assertEqual(manifest['runtime']['camera']['type'], 'rtsp')
+            np.testing.assert_array_equal(cv2.imread(str(path/manifest['ocr_inputs'][0]['model_input']),
+                                                     cv2.IMREAD_GRAYSCALE), model_input)
+
     def passage(self, directory, enabled=True):
         raw=np.random.default_rng(13).integers(0,255,(30,120,3),dtype=np.uint8)
         geometry=raw[2:-2,3:-3].copy()
@@ -38,13 +53,17 @@ class CropDiagnosticsTests(unittest.TestCase):
     def test_exit_archive_contains_exact_ocr_images_and_database_link(self):
         with tempfile.TemporaryDirectory() as directory:
             passage,reader,raw,geometry=self.passage(directory)
+            reader._recognize_batch=lambda images:[('12ب34567',.6) for _ in images]
             incoming,outgoing=queue.Queue(),queue.Queue()
             incoming.put({'event':passage.event,'candidates':passage.candidates,'trace':passage.trace})
             incoming.put(None)
-            with patch('computer_vision_v2.ocr_worker.ocr_worker_v2.PLATE_IMAGE_DIR',Path(directory)/'previews'):
-                ocr_worker(incoming,outgoing,reader,lambda:True)
+            with patch('computer_vision_v2.storage.storage_worker.PLATE_IMAGE_DIR',Path(directory)/'previews'):
+                storage_q = queue.Queue()
+                ocr_worker(incoming,storage_q,reader,lambda:True)
+                storage_q.put(None)
+                storage_worker(storage_q, outgoing, lambda: True)
             saved=outgoing.get_nowait()
-            self.assertEqual(saved['recognition_status'],'read')
+            self.assertEqual(saved['recognition_status'],'uncertain')
             report=Path(saved['diagnostics_path'])
             link_event(report,987)
             manifest=json.loads((report/'manifest.json').read_text())
@@ -53,16 +72,41 @@ class CropDiagnosticsTests(unittest.TestCase):
             self.assertTrue(manifest['crossing']['image'])
             self.assertTrue(manifest['selection_decisions'])
             self.assertTrue(manifest['samples'][0]['vehicle_bbox'])
-            self.assertEqual({r['source'] for r in manifest['ocr_inputs']},{'raw','geometry'})
+            self.assertEqual({r['source'] for r in manifest['ocr_inputs']},{'raw','geometry','padded'})
             for row in manifest['ocr_inputs']:
-                expected=raw if row['source']=='raw' else geometry
+                expected={'raw':raw,'geometry':geometry,'padded':_pad_ocr_crop(raw)}[row['source']]
                 np.testing.assert_array_equal(cv2.imread(str(report/row['image'])),expected)
             self.assertIn('987',(report/'index.html').read_text())
             # Instrumentation cannot affect text, status, or votes.
             other,reader2,_,_=self.passage(directory,enabled=False)
+            reader2._recognize_batch=reader._recognize_batch
             baseline=reader2.recognize_candidates(other.candidates)
             self.assertEqual(saved['readings'],baseline['readings'])
             self.assertEqual(saved['plate_text'],baseline['plate_text'])
+
+    def test_confirmed_plate_keeps_preview_but_discards_diagnostics(self):
+        with tempfile.TemporaryDirectory() as directory:
+            passage,reader,_,_=self.passage(directory)
+            incoming,outgoing=queue.Queue(),queue.Queue()
+            incoming.put({'event':passage.event,'candidates':passage.candidates,'trace':passage.trace})
+            incoming.put(None)
+            with patch('computer_vision_v2.storage.storage_worker.PLATE_IMAGE_DIR',Path(directory)/'previews'), \
+                 patch.object(passage.trace,'save',wraps=passage.trace.save) as save:
+                storage_q = queue.Queue()
+                ocr_worker(incoming,storage_q,reader,lambda:True)
+                storage_q.put(None)
+                storage_worker(storage_q, outgoing, lambda: True)
+            saved=outgoing.get_nowait()
+            self.assertEqual(saved['recognition_status'],'read')
+            self.assertEqual(saved['plate_text'],'12ب34567')
+            self.assertTrue(Path(saved['image_path']).is_file())
+            self.assertNotIn('diagnostics_path',saved)
+            save.assert_not_called()
+            self.assertFalse((Path(directory)/passage.trace.token).exists())
+            self.assertFalse(passage.trace.images)
+            self.assertFalse(passage.trace.rows)
+            self.assertFalse(passage.trace.ocr_rows)
+            self.assertEqual(passage.trace.bytes,0)
 
     def test_failed_plate_detection_is_preserved(self):
         with tempfile.TemporaryDirectory() as directory:

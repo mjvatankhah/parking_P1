@@ -2,13 +2,13 @@
 import unittest
 from datetime import date, timedelta
 from kivy.clock import Clock
-from reno.ui import theme
-from reno.ui.components.jalali_calendar import week_bounds, week_text, jalali_text, WEEKDAYS
-from reno.ui.components.week_picker import WeekPicker
-from reno.ui.components.iranian_plate import PlainPlate, IranianPlate
-from reno.ui.components.traffic_record import TrafficRecordRow
-from reno.ui.components.traffic_chart import TrafficChart
-from reno.models.plate_record import PlateRecord
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.jalali_calendar import week_bounds, week_text, jalali_text, WEEKDAYS
+from plakino_ui.ui.components.week_picker import WeekPicker
+from plakino_ui.ui.components.iranian_plate import PlainPlate, IranianPlate
+from plakino_ui.ui.components.traffic_record import TrafficRecordRow
+from plakino_ui.ui.components.traffic_chart import TrafficChart
+from plakino_ui.models.plate_record import PlateRecord
 
 
 def layout():

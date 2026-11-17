@@ -1,8 +1,8 @@
 """Panning must reuse the raster instead of blocking input with an Agg draw."""
 import unittest
 from unittest.mock import patch
-from reno.ui import theme
-from reno.ui.components.traffic_chart import TrafficChart, render_chart
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.traffic_chart import TrafficChart, render_chart
 
 
 class ChartPanPerformanceTests(unittest.TestCase):
@@ -14,7 +14,7 @@ class ChartPanPerformanceTests(unittest.TestCase):
         texture_id = chart._image.texture.id
         margins = (chart._left_margin.texture, chart._right_margin.texture)
         try:
-            with patch('reno.ui.components.traffic_chart.render_chart', wraps=render_chart) as draw:
+            with patch('plakino_ui.ui.components.traffic_chart.render_chart', wraps=render_chart) as draw:
                 for position in (0, .25, .5, 1):
                     chart.hour_scroll.scroll_x = position
                     chart._draw()

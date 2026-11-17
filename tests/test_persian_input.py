@@ -1,9 +1,9 @@
 """Persian alignment policy applies to shared inputs without rewriting user data."""
 import unittest
 from kivy.clock import Clock
-from reno.ui import theme
-from reno.ui.components.common import RoundedTextInput
-from reno.ui.components.username_input import UsernameInput
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.common import RoundedTextInput
+from plakino_ui.ui.components.username_input import UsernameInput
 
 
 class PersianInputTests(unittest.TestCase):

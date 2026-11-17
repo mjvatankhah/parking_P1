@@ -7,7 +7,8 @@ from unittest.mock import Mock, patch
 import cv2
 import numpy as np
 
-from computer_vision_v2.ocr_worker import ocr_worker_v2 as worker
+from computer_vision_v2.storage import storage_worker as worker
+from computer_vision_v2.ocr_worker.ocr_worker_v2 import ocr_worker
 from computer_vision_v2.database.database_worker import _save_event
 
 
@@ -21,7 +22,10 @@ class PersonCropTests(unittest.TestCase):
         })
         input_queue.put(None)
         reader = Mock()
-        worker.ocr_worker(input_queue, db_queue, reader, lambda: True)
+        storage_queue = queue.Queue()
+        ocr_worker(input_queue, storage_queue, reader, lambda: True)
+        storage_queue.put(None)
+        worker.storage_worker(storage_queue, db_queue, lambda: True)
         reader.read.assert_not_called()
         self.assertEqual(input_queue.unfinished_tasks, 0)
         return db_queue.get_nowait()

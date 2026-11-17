@@ -51,7 +51,7 @@ class CameraTracker:
         return self.association.update(results[0].boxes, image)
 
     def process(self, frame_idx, ts, image):
-        print(f"[FRAME] camera={self.camera_id} frame={frame_idx} processing", flush=True)
+
         original = image
         offset_x = offset_y = 0
         polygon = None

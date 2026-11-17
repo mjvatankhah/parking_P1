@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1]/'reports'/'crop_diagnostics')
+parser.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1]/'report_traffic'/'archives')
 parser.add_argument('--direction',choices=['entry','exit'])
 parser.add_argument('--event',type=int)
 parser.add_argument('--limit',type=int,default=10)

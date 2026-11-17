@@ -9,7 +9,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-APP = ROOT / 'src/reno'
+APP = ROOT / 'src/plakino_ui'
 OUTPUT = APP / 'assets/icons/reference'
 
 

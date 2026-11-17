@@ -6,11 +6,11 @@ from unittest.mock import patch
 
 from kivy.clock import Clock
 from kivy.uix.screenmanager import Screen, ScreenManager
-from reno.main import InstantTransition
-from reno.ui import theme
-from reno.ui.components.background_raster import BackgroundRaster
-from reno.ui.components.traffic_chart import TrafficChart
-from reno.ui.components.traffic_breakdown import StatusRing
+from plakino_ui.main import InstantTransition
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.background_raster import BackgroundRaster
+from plakino_ui.ui.components.traffic_chart import TrafficChart
+from plakino_ui.ui.components.traffic_breakdown import StatusRing
 
 
 def pump_until(condition, timeout=5):

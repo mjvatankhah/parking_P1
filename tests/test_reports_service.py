@@ -5,8 +5,8 @@ from unittest.mock import MagicMock
 import unittest
 from zipfile import ZipFile
 from xml.etree import ElementTree as ET
-from reno.services.report_service import ReportService,ReportFilter,conditions,normalize_plate
-from reno.services.xlsx_export import write_xlsx
+from plakino_ui.services.report_service import ReportService,ReportFilter,conditions,normalize_plate
+from plakino_ui.services.xlsx_export import write_xlsx
 
 ROW=('12ب34567',datetime(2026,11,4,12,30,tzinfo=timezone.utc),'gate-camera','entry',2,None,'read')
 
@@ -42,7 +42,7 @@ class ReportServiceTests(unittest.TestCase):
         self.assertEqual(normalize_plate('۱۲ي۳۴۵۶۷'),'12ی34567')
 
     def test_report_boundaries_and_display_use_tehran(self):
-        from reno.services.report_service import record_from_row
+        from plakino_ui.services.report_service import record_from_row
         _, params = conditions(ReportFilter(start=date(2026, 11, 11), end=date(2026, 11, 11)))
         self.assertEqual(params[0].utcoffset(), timedelta(hours=3, minutes=30))
         self.assertEqual(params[0].astimezone(timezone.utc), datetime(2026, 11, 10, 20, 30, tzinfo=timezone.utc))

@@ -6,8 +6,8 @@ from kivy.input.motionevent import MotionEvent
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
-from reno.ui import theme
-from reno.ui.components.traffic_chart import TrafficChart
+from plakino_ui.ui import theme
+from plakino_ui.ui.components.traffic_chart import TrafficChart
 
 
 class Pointer(MotionEvent):

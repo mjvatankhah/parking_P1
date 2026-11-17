@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from reno.ui.components.traffic_chart import smooth_series,TrafficChart
-from reno.ui import theme
+from plakino_ui.ui.components.traffic_chart import smooth_series,TrafficChart
+from plakino_ui.ui import theme
 
 
 class ChartSmoothingTests(unittest.TestCase):

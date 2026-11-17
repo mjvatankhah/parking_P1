@@ -4,11 +4,11 @@ from unittest.mock import patch
 from pathlib import Path
 from kivy.uix.screenmanager import ScreenManager, NoTransition
 from kivy.clock import Clock
-from reno.ui.theme import register_app_font
-from reno.ui.guard_settings import GuardSettingsScreen, DeleteGuardButton, guard_date
-from reno.ui.components.icons import APP_ICON, Icon
-from reno.ui.components.common import DangerButton
-from reno.services.auth_service import auth_service, GuardListResult, LoginResult, GuardAccount
+from plakino_ui.ui.theme import register_app_font
+from plakino_ui.ui.guard_settings import GuardSettingsScreen, DeleteGuardButton, guard_date
+from plakino_ui.ui.components.icons import APP_ICON, Icon
+from plakino_ui.ui.components.common import DangerButton
+from plakino_ui.services.auth_service import auth_service, GuardListResult, LoginResult, GuardAccount
 
 
 class GuardSettingsTests(unittest.TestCase):
@@ -74,7 +74,7 @@ class GuardSettingsTests(unittest.TestCase):
         self.assertTrue(Path(APP_ICON).is_file())
 
     def test_cancel_does_not_delete_and_leaving_closes_confirmation(self):
-        from reno.ui.components.common import SecondaryButton
+        from plakino_ui.ui.components.common import SecondaryButton
         with patch.object(self.screen, '_delete') as delete:
             self.screen._confirm_delete('guard1')
             popup = self.screen._confirmation
@@ -91,14 +91,14 @@ class GuardSettingsTests(unittest.TestCase):
         self.assertIs(self.screen.rows.parent.children[-1], self.screen.refresh.parent)
 
     def test_password_mismatch_is_red(self):
-        from reno.ui import theme
+        from plakino_ui.ui import theme
         self.screen._saved(LoginResult(False, 'تکرار رمز عبور یکسان نیست'))
         self.assertEqual(tuple(self.screen.message.color), theme.rgba('#F87171'))
         self.assertEqual(self.screen.message.text, theme.rtl('تکرار رمز عبور یکسان نیست'))
 
     def test_username_rejects_persian_typing_and_mixed_paste_then_accepts_english(self):
-        from reno.ui.login import LoginScreen
-        from reno.ui.components.username_input import UsernameInput
+        from plakino_ui.ui.login import LoginScreen
+        from plakino_ui.ui.components.username_input import UsernameInput
         login = LoginScreen(name='login')
         for field in (login._username_input, self.screen.fields[0]):
             self.assertIsInstance(field, UsernameInput)

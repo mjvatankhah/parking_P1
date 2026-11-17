@@ -1,11 +1,11 @@
 """Settings must validate the gate and publish configuration only after a good probe."""
 import unittest
 from unittest.mock import patch
-from reno.ui.theme import register_app_font
-from reno.ui.camera_settings import CameraSettingsScreen
-from reno.services.camera_service import camera_service
-from reno.services.camera_setup_service import CameraSetupResult
-from reno.models.camera import Camera
+from plakino_ui.ui.theme import register_app_font
+from plakino_ui.ui.camera_settings import CameraSettingsScreen
+from plakino_ui.services.camera_service import camera_service
+from plakino_ui.services.camera_setup_service import CameraSetupResult
+from plakino_ui.models.camera import Camera
 
 
 class CameraSetupUITests(unittest.TestCase):
@@ -26,7 +26,7 @@ class CameraSetupUITests(unittest.TestCase):
     def test_gate_required_before_any_worker_starts(self):
         self.screen._id_input.text = 'دوربین'
         self.screen._source_input.text = 'rtsp://127.0.0.1/live'
-        with patch('reno.ui.camera_settings.Thread') as worker:
+        with patch('plakino_ui.ui.camera_settings.Thread') as worker:
             self.screen._save()
             worker.assert_not_called()
             self.assertTrue(self.screen._error_label.text)
@@ -35,7 +35,7 @@ class CameraSetupUITests(unittest.TestCase):
         self.screen._gate_input.text = 'ورودی'
         self.screen._id_input.text = 'دوربین تست جدید'
         self.screen._source_input.text = 'rtsp://127.0.0.1/live'
-        with patch('reno.ui.camera_settings.Thread') as worker:
+        with patch('plakino_ui.ui.camera_settings.Thread') as worker:
             self.screen._save()
             self.screen._save()
             worker.assert_called_once()
@@ -51,7 +51,7 @@ class CameraSetupUITests(unittest.TestCase):
 
     def test_success_publishes_gate_mapping_and_keeps_form_for_geometry(self):
         camera = Camera('دوربین', source='rtsp://127.0.0.1/live', gate_id='ورودی')
-        with patch.object(camera_service, 'add_camera') as add, patch('reno.ui.camera_settings.show_toast'):
+        with patch.object(camera_service, 'add_camera') as add, patch('plakino_ui.ui.camera_settings.show_toast'):
             self.screen._setup_finished(camera, True, CameraSetupResult(True, 'موفق', True))
             add.assert_called_once_with(camera)
             self.assertEqual(self.screen._editing_camera_id, camera.id)
@@ -61,7 +61,7 @@ class CameraSetupUITests(unittest.TestCase):
         self.screen._gate_input.text = 'ورودی'
         self.screen._id_input.text = ' ورودی '
         self.screen._source_input.text = 'rtsp://127.0.0.1/live'
-        with patch('reno.ui.camera_settings.Thread') as worker:
+        with patch('plakino_ui.ui.camera_settings.Thread') as worker:
             self.screen._save()
             worker.assert_not_called()
             self.assertTrue(self.screen._error_label.text)
@@ -79,8 +79,8 @@ class CameraSetupUITests(unittest.TestCase):
         self.assertFalse(hasattr(self.screen, '_inside_point_inputs'))
 
     def test_result_waits_for_okay_for_all_outcomes(self):
-        from reno.ui import theme
-        from reno.ui.components.common import PrimaryButton
+        from plakino_ui.ui import theme
+        from plakino_ui.ui.components.common import PrimaryButton
         for success, message in ((True, 'اتصال برقرار شد'), (False, 'دوربین ثبت شد ولی اتصال برقرار نشد')):
             with self.subTest(success=success):
                 self.screen._show_connection_result(message, success)
@@ -98,7 +98,7 @@ class CameraSetupUITests(unittest.TestCase):
         self.assertEqual(self.screen._connection_state, 'initial')
         self.assertTrue(self.screen._geometry_button.disabled)
         self.assertIsNone(self.screen._geometry_details.parent)
-        with patch('reno.ui.camera_settings.GeometryDialog') as dialog:
+        with patch('plakino_ui.ui.camera_settings.GeometryDialog') as dialog:
             self.screen._select_geometry()
             dialog.assert_not_called()
         with patch.object(self.screen, '_show_connection_result'):
@@ -116,7 +116,7 @@ class CameraSetupUITests(unittest.TestCase):
         self.assertEqual(self.screen._connection_state, 'success')
         self.assertFalse(self.screen._geometry_button.disabled)
         self.assertGreater(self.screen._connection_button.bg_color_normal[1], self.screen._connection_button.bg_color_normal[0])
-        with patch.object(camera_service,'get_camera',return_value=camera), patch('reno.ui.camera_settings.GeometryDialog') as dialog:
+        with patch.object(camera_service,'get_camera',return_value=camera), patch('plakino_ui.ui.camera_settings.GeometryDialog') as dialog:
             self.screen._select_geometry()
             dialog.return_value.open.assert_called_once()
         self.screen._source_input.text = 'rtsp://127.0.0.1/other'
@@ -140,18 +140,18 @@ class CameraSetupUITests(unittest.TestCase):
         from pathlib import Path
         import cv2
         import numpy as np
-        from reno.ui import theme
+        from plakino_ui.ui import theme
         self.assertIsNone(self.screen._geometry_details.parent)
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)/'preview.png'
             cv2.imwrite(str(path), np.zeros((48,64,3),np.uint8))
-            with patch.object(camera_service,'reload'), patch('reno.ui.camera_settings.Clock.schedule_once') as schedule:
+            with patch.object(camera_service,'reload'), patch('plakino_ui.ui.camera_settings.Clock.schedule_once') as schedule:
                 self.screen._geometry_saved(str(path))
             self.assertIsNone(self.screen._geometry_details.parent)
             schedule.call_args.args[0](0)
             popup=self.screen._connection_popup
             self.assertFalse(popup.auto_dismiss)
-            from reno.ui.components.common import PrimaryButton
+            from plakino_ui.ui.components.common import PrimaryButton
             okay=next(w for w in popup.content.walk() if isinstance(w,PrimaryButton))
             okay.dispatch('on_release')
             self.assertIs(self.screen._geometry_details.parent,self.screen._geometry_section)
@@ -166,9 +166,9 @@ class CameraSetupUITests(unittest.TestCase):
         self.screen._gate_input.text = 'ورودی'
         self.screen._id_input.text = 'دوربین جدید'
         self.screen._source_input.text = 'rtsp://192.0.2.1/offline'
-        with patch('reno.ui.camera_settings.Thread') as worker, \
-             patch('reno.ui.camera_settings.register_camera', return_value=CameraSetupResult(True,'ثبت شد',True)) as register, \
-             patch('reno.ui.camera_settings.check_connection') as check, \
+        with patch('plakino_ui.ui.camera_settings.Thread') as worker, \
+             patch('plakino_ui.ui.camera_settings.register_camera', return_value=CameraSetupResult(True,'ثبت شد',True)) as register, \
+             patch('plakino_ui.ui.camera_settings.check_connection') as check, \
              patch.object(camera_service,'add_camera'), patch.object(self.screen,'_show_connection_result'):
             self.screen._save()
             worker.call_args.kwargs['target']()
@@ -183,9 +183,9 @@ class CameraSetupUITests(unittest.TestCase):
         camera=Camera('cam',source='rtsp://127.0.0.1/live',gate_id='گیت')
         self.screen._start_edit_mode(camera)
         with patch.object(camera_service,'get_camera',return_value=camera), \
-             patch('reno.ui.camera_settings.Thread') as worker, \
-             patch('reno.ui.camera_settings.register_camera') as register, \
-             patch('reno.ui.camera_settings.check_connection',return_value=CameraSetupResult(True,'متصل')) as check, \
+             patch('plakino_ui.ui.camera_settings.Thread') as worker, \
+             patch('plakino_ui.ui.camera_settings.register_camera') as register, \
+             patch('plakino_ui.ui.camera_settings.check_connection',return_value=CameraSetupResult(True,'متصل')) as check, \
              patch.object(self.screen,'_show_connection_result'):
             self.screen._check_connection()
             worker.call_args.kwargs['target']()
@@ -195,9 +195,9 @@ class CameraSetupUITests(unittest.TestCase):
         self.assertFalse(self.screen._geometry_button.disabled)
 
     def test_status_cells_are_colored_text_without_badges(self):
-        from reno.ui.components.common import RTLLabel, Badge
-        from reno.models.camera import STATUS_ONLINE, STATUS_OFFLINE
-        from reno.ui import theme
+        from plakino_ui.ui.components.common import RTLLabel, Badge
+        from plakino_ui.models.camera import STATUS_ONLINE, STATUS_OFFLINE
+        from plakino_ui.ui import theme
         for state,color in ((STATUS_ONLINE,'#36B37E'),(STATUS_OFFLINE,'#F87171')):
             camera=Camera('cam',status=state)
             row=self.screen._build_table_row(camera)
@@ -207,8 +207,8 @@ class CameraSetupUITests(unittest.TestCase):
 
     def test_operations_column_is_leftmost_and_icons_are_centered(self):
         from kivy.clock import Clock
-        from reno.ui import theme
-        from reno.ui.camera_settings import _IconOnlyButton
+        from plakino_ui.ui import theme
+        from plakino_ui.ui.camera_settings import _IconOnlyButton
         header=self.screen._build_table_header()
         row=self.screen._build_table_row(Camera('cam'))
         header.size=(800,36)
@@ -226,8 +226,8 @@ class CameraSetupUITests(unittest.TestCase):
 
     def test_geometry_button_spans_form_and_preview_and_register_are_below(self):
         from kivy.clock import Clock
-        from reno.ui.components.common import RTLLabel, PrimaryButton
-        from reno.ui import theme
+        from plakino_ui.ui.components.common import RTLLabel, PrimaryButton
+        from plakino_ui.ui import theme
         self.screen._geometry_section.size=(800,46)
         for _ in range(3):
             Clock.tick()
@@ -242,7 +242,7 @@ class CameraSetupUITests(unittest.TestCase):
 
     def test_geometry_caption_stays_inside_button_when_form_moves(self):
         from kivy.clock import Clock
-        from reno.ui.components.common import RTLLabel
+        from plakino_ui.ui.components.common import RTLLabel
         self.screen.size=(1200,900)
         button=self.screen._geometry_button
         self.screen._geometry_section.pos=(80,240)

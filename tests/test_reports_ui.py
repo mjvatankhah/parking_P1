@@ -2,17 +2,17 @@ from datetime import date
 import unittest
 from unittest.mock import patch
 from kivy.clock import Clock
-from reno.ui import theme
-from reno.ui.reports import ReportsScreen,_COUNTS
-from reno.services.report_service import ReportFilter,ReportPage
-from reno.models.plate_record import PlateRecord
-from reno.ui.components.traffic_record import TrafficRecordRow
+from plakino_ui.ui import theme
+from plakino_ui.ui.reports import ReportsScreen,_COUNTS
+from plakino_ui.services.report_service import ReportFilter,ReportPage
+from plakino_ui.models.plate_record import PlateRecord
+from plakino_ui.ui.components.traffic_record import TrafficRecordRow
 
 
 class ReportsUITests(unittest.TestCase):
     def test_large_report_yields_between_rows_and_stops_when_leaving(self):
         record = PlateRecord('12ب34567', '2026-11-04', '12:30:00', 'cam')
-        with patch('reno.ui.reports.TrafficRecordRow', wraps=TrafficRecordRow) as build:
+        with patch('plakino_ui.ui.reports.TrafficRecordRow', wraps=TrafficRecordRow) as build:
             self.screen._loaded(0, ReportPage((record,) * 50, 50, 0, 50), '')
             self.assertEqual(build.call_count, 0)
             Clock.tick()
@@ -39,7 +39,7 @@ class ReportsUITests(unittest.TestCase):
         scroll.scroll_y = .4
         rows = list(scroll.children[0].children)
         self.screen.on_leave()
-        with patch('reno.ui.reports.TrafficRecordRow', wraps=TrafficRecordRow) as build:
+        with patch('plakino_ui.ui.reports.TrafficRecordRow', wraps=TrafficRecordRow) as build:
             self.screen._loaded(self.screen._generation, page, '')
         self.assertEqual(build.call_count, 0)
         self.assertIs(self.screen.table_holder.children[0], scroll)
@@ -129,7 +129,7 @@ class ReportsUITests(unittest.TestCase):
 
     def test_export_uses_applied_filters_and_does_not_limit_to_page(self):
         self.screen._filters=ReportFilter('12ب34567')
-        with patch('reno.ui.reports.Thread') as worker,patch('reno.ui.reports.report_service.export',return_value=85) as export,patch.object(self.screen,'_exported') as done:
+        with patch('plakino_ui.ui.reports.Thread') as worker,patch('plakino_ui.ui.reports.report_service.export',return_value=85) as export,patch.object(self.screen,'_exported') as done:
             self.screen._export('/tmp/report-test.xlsx')
             worker.call_args.kwargs['target']()
             Clock.tick()
@@ -137,9 +137,9 @@ class ReportsUITests(unittest.TestCase):
             done.assert_called_once_with('/tmp/report-test.xlsx',85,'')
 
     def test_calendar_selects_single_day_and_can_clear_date(self):
-        from reno.ui.components.jalali_calendar import jalali_text
+        from plakino_ui.ui.components.jalali_calendar import jalali_text
         picker=self.screen.start
-        with patch('reno.ui.components.jalali_date_picker.Popup'):
+        with patch('plakino_ui.ui.components.jalali_date_picker.Popup'):
             picker._open()
             picker._select(date(2026,11,4))
             self.assertEqual(picker.selected,date(2026,11,4))
@@ -152,7 +152,7 @@ class ReportsUITests(unittest.TestCase):
         from pathlib import Path
         import tempfile
         from unittest.mock import Mock
-        from reno.ui.components.export_dialog import ExportDialog
+        from plakino_ui.ui.components.export_dialog import ExportDialog
         with tempfile.TemporaryDirectory() as folder:
             path=Path(folder)/'report.xlsx'
             path.write_bytes(b'old')

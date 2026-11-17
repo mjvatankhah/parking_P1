@@ -6,9 +6,9 @@ from unittest.mock import Mock, patch
 import numpy as np
 from kivy.clock import Clock
 from kivy.core.window import Window
-from reno.ui.theme import register_app_font
-from reno.ui.components.geometry_dialog import GeometryDialog, DrawingImage, frame_texture
-from reno.models.camera import Camera
+from plakino_ui.ui.theme import register_app_font
+from plakino_ui.ui.components.geometry_dialog import GeometryDialog, DrawingImage, frame_texture
+from plakino_ui.models.camera import Camera
 from computer_vision_v2.Line_Manager.select_line_points import Stage
 
 
@@ -44,7 +44,7 @@ class GeometryDialogTests(unittest.TestCase):
             self.assertEqual(dialog.selection.stage,Stage.SIDE)
             self.assertIsNone(json.loads(path.read_text())['cameras'][0]['roi'])
             dialog._point((80,60))
-            with patch('reno.ui.components.geometry_dialog.Thread') as worker:
+            with patch('plakino_ui.ui.components.geometry_dialog.Thread') as worker:
                 dialog._advance()
                 worker.call_args.kwargs['target']()
             Clock.tick()

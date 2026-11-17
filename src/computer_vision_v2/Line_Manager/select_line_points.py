@@ -285,7 +285,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--camera', help='Camera ID; defaults to the first configured camera')
     parser.add_argument('--config', type=Path,
-                        default=Path(__file__).resolve().parents[2] / 'reno/data/cameras.json')
+                        default=Path(__file__).resolve().parents[2] / 'plakino_ui/data/cameras.json')
     args = parser.parse_args()
     config = json.loads(args.config.read_text(encoding='utf-8'))
     camera = next((c for c in config.get('cameras', [])
