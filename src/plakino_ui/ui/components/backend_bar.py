@@ -1,4 +1,5 @@
 """Shared processing controls and persistent per-camera fault visibility."""
+import logging
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 
@@ -8,6 +9,8 @@ from plakino_ui.ui.components.backend_status_dialog import (
     BackendStatusDialog, STATES, CAMERA_STATES, BAD_STATES,
 )
 from plakino_ui.ui import theme
+
+logger = logging.getLogger(__name__)
 
 
 class BackendBar(BoxLayout):
@@ -26,13 +29,10 @@ class BackendBar(BoxLayout):
             bg_color_normal=theme.rgba(theme.COLORS['action']), bg_color_hover=theme.rgba(theme.COLORS['action_hover']),
             bg_color_down=theme.rgba(theme.COLORS['primary_dark']), border_color=theme.rgba(theme.COLORS['action']),
             color=theme.rgba(theme.COLORS['text_on_primary']))
-        self.license_button = SecondaryButton(text=theme.rtl('لایسنس'), size_hint_x=None, width=88)
-        self.license_button.bind(on_release=self._license)
         self.label = RTLLabel(text='', font_size=12)
         self.add_widget(self.start_button)
         self.add_widget(self.stop_button)
         self.add_widget(self.details_button)
-        self.add_widget(self.license_button)
         self.add_widget(self.label)
         self.start_button.bind(on_release=lambda *_: self._command('start'))
         self.stop_button.bind(on_release=lambda *_: self._command('stop'))
@@ -61,32 +61,33 @@ class BackendBar(BoxLayout):
         elif state == 'running':
             count = sum(c['state'] == 'processing' for c in cameras)
             message += f' — {count}/{len(cameras)} دوربین در حال پردازش'
-        license_status = snapshot.get('license')
-        if license_status and not license_status.get('valid'):
-            from plakino_ui.ui.components.license_dialog import license_message
-            message = license_message(license_status)
         self.label.set_text(message)
         self.label.color = theme.rgba(theme.COLORS['offline' if bad or state in ('error', 'unavailable') else 'text_primary'])
         signed_in = bool(auth_service.current_role)
-        self.start_button.disabled = busy or not signed_in or state not in ('stopped', 'unavailable') or bool(license_status and not license_status.get('valid'))
+        self.start_button.disabled = busy or not signed_in or state not in ('stopped', 'unavailable')
         self.stop_button.disabled = busy or not signed_in or state not in ('running', 'starting', 'error')
         self.start_button.text = theme.rtl('راه‌اندازی…' if state == 'starting' else 'اجرا')
         self.stop_button.text = theme.rtl('توقف…' if state == 'stopping' else 'توقف')
         if self._popup is not None:
             self._refresh_details()
 
-    def _license(self, *_):
-        from plakino_ui.ui.components.license_dialog import LicenseDialog
-        LicenseDialog().open()
-
     def _details(self, *_):
         if self._popup is not None:
             return
-        self._popup = BackendStatusDialog()
-        self._rows = self._popup.rows
-        self._popup.bind(on_dismiss=self._dismissed)
-        self._refresh_details()
-        self._popup.open()
+        popup = None
+        try:
+            popup = BackendStatusDialog()
+            popup.update(self.snapshot)
+            popup.bind(on_dismiss=self._dismissed)
+            popup.open()
+        except Exception:
+            logger.exception('Cannot open backend status dialog')
+            if popup is not None:
+                popup.dismiss(animation=False)
+            self.label.set_text('نمایش وضعیت انجام نشد؛ دوباره تلاش کنید')
+            return
+        self._popup = popup
+        self._rows = popup.rows
 
     def _dismissed(self, *_):
         self._popup = None

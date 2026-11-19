@@ -44,13 +44,21 @@ class BackendMonitor:
             return False
         self.busy = True
         self.snapshot = self.snapshot | {'state': 'starting' if action == 'start' else 'stopping'}
-        self.callback(self.snapshot, True)
+        self._notify(self.snapshot, True)
         if self._in_flight:
             # Keep a user command behind the bounded status request, never drop it.
             self._pending_command = action
         else:
             self._request(action)
         return True
+
+    def _notify(self, snapshot, busy):
+        # A failed status widget must not prevent a user's command from reaching
+        # the backend, or leave the monitor stuck waiting for an unsent request.
+        try:
+            self.callback(snapshot, busy)
+        except Exception:
+            logger.exception('Backend status display failed', extra={'event': 'backend_display_failed'})
 
     def _request(self, action):
         if self._in_flight:
@@ -86,4 +94,4 @@ class BackendMonitor:
                     current.get('state') in ('processing', 'stalled', 'waiting') and
                     current.get('received_age') is not None and current['received_age'] <= 10)
             self.cameras.set_status(camera.id, STATUS_ONLINE if live else STATUS_OFFLINE)
-        self.callback(result, False)
+        self._notify(result, False)

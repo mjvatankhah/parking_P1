@@ -110,9 +110,6 @@ class BackendStatusDialog(Popup):
             active = sum(c.get('state') == 'processing' for c in cameras) if state == 'running' else 0
             description = (f'{theme.fa_number(active)} از {theme.fa_number(len(cameras))} دوربین در حال پردازش'
                            '  ·  به‌روزرسانی خودکار')
-        if snapshot.get('license') and not snapshot['license'].get('valid'):
-            from plakino_ui.ui.components.license_dialog import license_message
-            description = license_message(snapshot['license'])
         self.description.set_text(description)
         ids = tuple(str(camera['id']) for camera in cameras)
         if ids != self._camera_ids:

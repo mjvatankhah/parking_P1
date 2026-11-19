@@ -11,7 +11,7 @@ import tempfile
 import threading
 import time
 import unittest
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 
 from computer_vision_v2.runtime.controller import BackendController
 from computer_vision_v2.runtime.control import BackendClient, ControlServer, ControlUnavailable
@@ -57,7 +57,7 @@ class BackendLifecycleTests(unittest.TestCase):
             pipeline = FakePipeline()
             self.pipelines.append(pipeline)
             return pipeline
-        self.controller = BackendController(factory, self.path, license_service=Mock(status=lambda: dict(valid=True, code='valid')))
+        self.controller = BackendController(factory, self.path)
         self.addCleanup(self.controller.close)
 
     def test_start_is_idempotent_and_restart_reads_new_configuration(self):
@@ -188,11 +188,10 @@ class Pipeline:
     def start(self): pass
     def stop(self): return True
     def failed_workers(self): return []
-from unittest.mock import Mock
-serve(BackendController(lambda *_: Pipeline(), {str(config)!r}, license_service=Mock(status=lambda: dict(valid=True, code='valid'))))
+serve(BackendController(lambda *_: Pipeline(), {str(config)!r}))
 '''
             launcher = f'''
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 import subprocess, sys
 from computer_vision_v2.runtime.control import BackendClient
 original = subprocess.Popen

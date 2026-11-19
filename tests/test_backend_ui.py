@@ -68,37 +68,44 @@ class BackendUITests(unittest.TestCase):
         bar.update(snapshot)
         self.assertTrue(bar.stop_button.disabled)
 
-    def test_expired_license_disables_start_but_keeps_activation_available(self):
+    def test_status_and_start_work_with_snapshot_from_previous_backend(self):
         auth_service.current_role = 'guard'
         bar = BackendBar()
-        bar.update(dict(state='stopped', cameras=[], license=dict(valid=False, code='expired')))
-        self.assertTrue(bar.start_button.disabled)
-        self.assertFalse(bar.license_button.disabled)
-        bar.update(dict(state='stopped', cameras=[], license=dict(valid=True, code='valid')))
-        self.assertFalse(bar.start_button.disabled)
+        legacy = dict(state='stopped', cameras=[], license=dict(valid=False, code='missing'))
+        self.monitor.snapshot = legacy
+        self.monitor.callback = bar.update
+        bar.update(legacy)
+        try:
+            bar.details_button.dispatch('on_release')
+            self.assertIsNotNone(bar._popup.parent)
+            with patch('plakino_ui.ui.components.backend_bar.App.get_running_app', return_value=SimpleNamespace(backend_monitor=self.monitor)), \
+                    patch('plakino_ui.services.backend_service.Thread') as thread:
+                bar.start_button.dispatch('on_release')
+                thread.assert_called_once()
+                self.assertTrue(self.monitor.busy)
+        finally:
+            if bar._popup is not None:
+                bar._popup.dismiss(animation=False)
 
-    def test_activation_dialog_exports_and_imports_through_backend(self):
-        import json
-        import tempfile
-        from pathlib import Path
-        from plakino_ui.ui.components.license_dialog import LicenseDialog
-        client = Mock()
-        client.license_request.return_value = dict(device_id='a' * 64)
-        client.install_license.return_value = dict(valid=True, code='valid')
-        with patch.object(LicenseDialog, '_work'):
-            popup = LicenseDialog(client=client)
-        with tempfile.TemporaryDirectory() as directory:
-            popup.chooser.path = directory
-            popup._work = lambda operation: operation()
-            popup._export()
-            path = Path(directory) / ('device-request-' + 'a' * 12 + '.json')
-            self.assertEqual(json.loads(path.read_text()), client.license_request.return_value)
-            license_path = Path(directory) / 'customer.plakino'
-            license_path.write_text('{"payload": {}, "signature": "test"}')
-            popup.chooser.selection = [str(license_path)]
-            popup._import()
-            client.install_license.assert_called_once_with(dict(payload={}, signature='test'))
-            client.start.assert_not_called()
+    def test_status_popup_can_retry_after_refresh_failure(self):
+        bar = BackendBar()
+        from plakino_ui.ui.components.backend_status_dialog import BackendStatusDialog
+        with patch.object(BackendStatusDialog, 'update', side_effect=RuntimeError('render failed')):
+            with self.assertLogs('plakino_ui.ui.components.backend_bar', level='ERROR'):
+                bar.details_button.dispatch('on_release')
+        self.assertIsNone(bar._popup)
+        bar.details_button.dispatch('on_release')
+        try:
+            self.assertIsNotNone(bar._popup.parent)
+        finally:
+            bar._popup.dismiss(animation=False)
+
+    def test_render_failure_does_not_drop_start_command(self):
+        self.monitor.callback = Mock(side_effect=RuntimeError('render failed'))
+        with patch('plakino_ui.services.backend_service.Thread') as thread:
+            with self.assertLogs('plakino_ui.services.backend_service', level='ERROR'):
+                self.assertTrue(self.monitor.command('start'))
+            thread.assert_called_once()
 
     def test_no_overlapping_status_requests(self):
         with patch('plakino_ui.services.backend_service.Thread') as thread:

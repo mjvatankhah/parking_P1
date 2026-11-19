@@ -41,7 +41,7 @@ class BackendClient:
         connection = HTTPConnection('127.0.0.1', self.port, timeout=self.timeout)
         try:
             token = (self.directory / 'control.token').read_text(encoding='ascii')
-            connection.request('GET' if action in ('status', 'license-request') else 'POST', '/' + action,
+            connection.request('GET' if action == 'status' else 'POST', '/' + action,
                                body=json.dumps(payload).encode() if payload is not None else None,
                                headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
             response = connection.getresponse()
@@ -95,14 +95,6 @@ class BackendClient:
         self.ensure_host()
         return self.request('start')
 
-    def license_request(self):
-        self.ensure_host()
-        return self.request('license-request')['request']
-
-    def install_license(self, document):
-        self.ensure_host()
-        return self.request('license-install', document)['license']
-
     def stop(self):
         return self.request('stop')
 
@@ -153,22 +145,13 @@ class ControlHandler(BaseHTTPRequestHandler):
         if self.headers.get('Origin') or not hmac.compare_digest(self.headers.get('Authorization', ''), expected):
             self.send_error(403)
             return
-        allowed = ('status', 'license-request') if self.command == 'GET' else ('start', 'stop', 'license-install')
+        allowed = ('status',) if self.command == 'GET' else ('start', 'stop')
         if self.path != '/' + action or action not in allowed:
             self.send_error(404)
             return
         try:
-            if action == 'license-install':
-                length = int(self.headers.get('Content-Length', '0'))
-                if not 0 < length <= 65536:
-                    raise ValueError('Invalid length')
-                document = json.loads(self.rfile.read(length))
-                result = {'license': self.server.controller.install_license(document)}
-            elif action == 'license-request':
-                result = {'request': self.server.controller.license_request()}
-            else:
-                result = (self.server.controller.snapshot() if action == 'status'
-                          else self.server.controller.command(action))
+            result = (self.server.controller.snapshot() if action == 'status'
+                      else self.server.controller.command(action))
         except (ValueError, OSError, TypeError):
             self.send_error(400)
             return
