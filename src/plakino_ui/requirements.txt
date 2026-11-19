@@ -16,3 +16,6 @@ psycopg[binary]>=3.3.5
 
 # Non-interactive, high-resolution dashboard chart rendering.
 matplotlib>=3.11.1,<4
+
+# Offline license signature verification.
+cryptography>=44,<47

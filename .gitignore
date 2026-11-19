@@ -49,3 +49,7 @@ desktop.ini
 /report_traffic/
 
 /logs/
+
+# Private license issuer keys must never be committed.
+*.private.pem
+/license-issuer/

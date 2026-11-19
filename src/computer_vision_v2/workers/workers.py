@@ -19,7 +19,7 @@ def plate_detection_worker(candidates, ocr_queue, is_running):
         _offer_passages(candidates.process_pending(timeout=.05), ocr_queue, is_running)
 
 
-def observation_worker(frame_queue, ocr_queue, lines, candidates, is_running):
+def observation_worker(frame_queue, ocr_queue, lines, candidates, is_running, health=None):
     while True:
         frame = frame_queue.get()
         try:
@@ -35,6 +35,8 @@ def observation_worker(frame_queue, ocr_queue, lines, candidates, is_running):
                 offer_event(ocr_queue, {'event':event, 'candidates':[], 'person':person},
                             'ocr', stopping=not is_running())
             _offer_passages(completed, ocr_queue, is_running)
+            if health is not None:
+                health.processed(frame.camera_id)
         except Exception:
             logger.exception('Observation failed')
         finally:

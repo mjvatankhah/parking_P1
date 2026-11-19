@@ -4,6 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from plakino_ui.ui.components.ambient_background import AmbientBackground
 from plakino_ui.ui.components.common import Card
 from plakino_ui.ui.components.sidebar import Sidebar
+from plakino_ui.ui.components.backend_bar import BackendBar
 from plakino_ui.ui.components.app_header import AppHeader, WindowControls
 from plakino_ui.ui import theme
 
@@ -20,6 +21,8 @@ class PageShell(FloatLayout):
         self.header = AppHeader(title, **({'subtitle': subtitle} if subtitle is not None else {}))
         self.main.add_widget(self.header)
         self.main.add_widget(content)
+        self.backend_bar = BackendBar()
+        self.main.add_widget(self.backend_bar)
         self.frame.add_widget(self.main)
         self.frame.add_widget(self.sidebar)
         self.add_widget(self.frame)

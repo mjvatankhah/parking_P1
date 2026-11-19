@@ -1,0 +1,1518 @@
+[
+  {
+    "id": 208,
+    "captured_at": "2026-11-18 14:42:10.543810+03:30",
+    "direction": "entry",
+    "status": "read",
+    "plate": "53ن15545",
+    "confidence": "0.891",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/d4e83aff428141119f698e86c044b460.jpg",
+    "readings": [
+      {
+        "text": "315545",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 18567,
+        "confidence": 0.9631751179695129,
+        "alternatives": [
+          {
+            "text": "315545",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.9631751179695129
+          }
+        ]
+      },
+      {
+        "text": "83ن15545",
+        "valid": true,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 18538,
+        "confidence": 0.8684634566307068,
+        "alternatives": [
+          {
+            "text": "83ن15545",
+            "valid": true,
+            "source": "raw",
+            "confidence": 0.8684634566307068
+          }
+        ]
+      },
+      {
+        "text": "3ن1ق545",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 18510,
+        "confidence": 0.8686531186103821,
+        "alternatives": [
+          {
+            "text": "3ن1ق545",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8686531186103821
+          }
+        ]
+      },
+      {
+        "text": "53ن15545",
+        "valid": true,
+        "source": "geometry",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 18510,
+        "confidence": 0.9518589973449707,
+        "alternatives": [
+          {
+            "text": "53ن15545",
+            "valid": true,
+            "source": "geometry",
+            "confidence": 0.9518589973449707
+          }
+        ]
+      },
+      {
+        "text": "215ق545",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 18493,
+        "confidence": 0.6927963495254517,
+        "alternatives": [
+          {
+            "text": "215ق545",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.6927963495254517
+          }
+        ]
+      },
+      {
+        "text": "52ن15545",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 18493,
+        "confidence": 0.9375452399253845,
+        "alternatives": [
+          {
+            "text": "52ن15545",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.9375452399253845
+          }
+        ]
+      },
+      {
+        "text": "53ن15545",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 18510,
+        "confidence": 0.8750928640365601,
+        "alternatives": [
+          {
+            "text": "53ن15545",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.8750928640365601
+          }
+        ]
+      },
+      {
+        "text": "53ن15545",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 18567,
+        "confidence": 0.8470120429992676,
+        "alternatives": [
+          {
+            "text": "53ن15545",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.8470120429992676
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 209,
+    "captured_at": "2026-11-18 14:49:21.066077+03:30",
+    "direction": "exit",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.940",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/24dce758e6ae4402ad3270cad2b03cdd.jpg",
+    "readings": [
+      {
+        "text": "4ی14845",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 31740,
+        "confidence": 0.8893345594406128,
+        "alternatives": [
+          {
+            "text": "4ی14845",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8893345594406128
+          }
+        ]
+      },
+      {
+        "text": "1ی1284",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 31756,
+        "confidence": 0.8191695213317871,
+        "alternatives": [
+          {
+            "text": "1ی1284",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8191695213317871
+          }
+        ]
+      },
+      {
+        "text": "14ی14845",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 31740,
+        "confidence": 0.9401846528053284,
+        "alternatives": [
+          {
+            "text": "14ی14845",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.9401846528053284
+          }
+        ]
+      },
+      {
+        "text": "14ی1484",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 31756,
+        "confidence": 0.9101034998893738,
+        "alternatives": [
+          {
+            "text": "14ی1484",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.9101034998893738
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 210,
+    "captured_at": "2026-11-18 14:59:24.488267+03:30",
+    "direction": "entry",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.000",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/b2086ccba4004bb1b89f0ab98bf502b5.jpg",
+    "readings": [
+      {
+        "text": "165375",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 49678,
+        "confidence": 0.7732687592506409,
+        "alternatives": [
+          {
+            "text": "165375",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7732687592506409
+          }
+        ]
+      },
+      {
+        "text": "8886567",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 49644,
+        "confidence": 0.7107025980949402,
+        "alternatives": [
+          {
+            "text": "8886567",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7107025980949402
+          }
+        ]
+      },
+      {
+        "text": "865672",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "temporal"
+        ],
+        "frame_idx": 49600,
+        "confidence": 0.6491790413856506,
+        "alternatives": [
+          {
+            "text": "865672",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.6491790413856506
+          }
+        ]
+      },
+      {
+        "text": "867",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 49712,
+        "confidence": 0.7354446053504944,
+        "alternatives": [
+          {
+            "text": "867",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7354446053504944
+          }
+        ]
+      },
+      {
+        "text": "816567",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 49615,
+        "confidence": 0.7271099090576172,
+        "alternatives": [
+          {
+            "text": "816567",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7271099090576172
+          }
+        ]
+      },
+      {
+        "text": "6ل65629",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "temporal"
+        ],
+        "frame_idx": 49600,
+        "confidence": 0.8052981495857239,
+        "alternatives": [
+          {
+            "text": "6ل65629",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8052981495857239
+          }
+        ]
+      },
+      {
+        "text": "5ل65675",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 49615,
+        "confidence": 0.7133208513259888,
+        "alternatives": [
+          {
+            "text": "5ل65675",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.7133208513259888
+          }
+        ]
+      },
+      {
+        "text": "5ل65675",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 49644,
+        "confidence": 0.8709712028503418,
+        "alternatives": [
+          {
+            "text": "5ل65675",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8709712028503418
+          }
+        ]
+      },
+      {
+        "text": "565675",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 49678,
+        "confidence": 0.9340720772743225,
+        "alternatives": [
+          {
+            "text": "565675",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.9340720772743225
+          }
+        ]
+      },
+      {
+        "text": "675",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 49712,
+        "confidence": 0.8459306359291077,
+        "alternatives": [
+          {
+            "text": "675",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8459306359291077
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 211,
+    "captured_at": "2026-11-18 15:34:26.076418+03:30",
+    "direction": "exit",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.810",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/ce53e53bbeaa48f49d5d4b584a77d698.jpg",
+    "readings": [
+      {
+        "text": "76ب87454",
+        "valid": true,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 111121,
+        "confidence": 0.8096596002578735,
+        "alternatives": [
+          {
+            "text": "76ب87454",
+            "valid": true,
+            "source": "raw",
+            "confidence": 0.8096596002578735
+          }
+        ]
+      },
+      {
+        "text": "2687454",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 111142,
+        "confidence": 0.8480691909790039,
+        "alternatives": [
+          {
+            "text": "2687454",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8480691909790039
+          }
+        ]
+      },
+      {
+        "text": "67454",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 111097,
+        "confidence": 0.922099232673645,
+        "alternatives": [
+          {
+            "text": "67454",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.922099232673645
+          }
+        ]
+      },
+      {
+        "text": "57454",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 111080,
+        "confidence": 0.5544714331626892,
+        "alternatives": [
+          {
+            "text": "57454",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.5544714331626892
+          }
+        ]
+      },
+      {
+        "text": "257454",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 111080,
+        "confidence": 0.8927991986274719,
+        "alternatives": [
+          {
+            "text": "257454",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8927991986274719
+          }
+        ]
+      },
+      {
+        "text": "7674545",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 111097,
+        "confidence": 0.8713142275810242,
+        "alternatives": [
+          {
+            "text": "7674545",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8713142275810242
+          }
+        ]
+      },
+      {
+        "text": "26874545",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 111142,
+        "confidence": 0.7775087356567383,
+        "alternatives": [
+          {
+            "text": "26874545",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.7775087356567383
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 212,
+    "captured_at": "2026-11-18 15:38:42.219251+03:30",
+    "direction": "entry",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.828",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/8567ded03ea840a5bc81bddd662e286e.jpg",
+    "readings": [
+      {
+        "text": "3ه79745",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 118785,
+        "confidence": 0.8498951196670532,
+        "alternatives": [
+          {
+            "text": "3ه79745",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8498951196670532
+          }
+        ]
+      },
+      {
+        "text": "3ه79745",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 118771,
+        "confidence": 0.8287160992622375,
+        "alternatives": [
+          {
+            "text": "3ه79745",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8287160992622375
+          }
+        ]
+      },
+      {
+        "text": "42ه79745",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 118771,
+        "confidence": 0.8282585144042969,
+        "alternatives": [
+          {
+            "text": "42ه79745",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.8282585144042969
+          }
+        ]
+      },
+      {
+        "text": "43ه79745",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 118785,
+        "confidence": 0.9153701066970825,
+        "alternatives": [
+          {
+            "text": "43ه79745",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.9153701066970825
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 213,
+    "captured_at": "2026-11-18 15:43:18.653339+03:30",
+    "direction": "exit",
+    "status": "read",
+    "plate": "22و29445",
+    "confidence": "0.945",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/8834a1c833ed43adb308a4cfd043b711.jpg",
+    "readings": [
+      {
+        "text": "2و2943",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 126194,
+        "confidence": 0.8369960784912109,
+        "alternatives": [
+          {
+            "text": "2و2943",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8369960784912109
+          }
+        ]
+      },
+      {
+        "text": "22و2943",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "temporal"
+        ],
+        "frame_idx": 126161,
+        "confidence": 0.8164912462234497,
+        "alternatives": [
+          {
+            "text": "22و2943",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8164912462234497
+          }
+        ]
+      },
+      {
+        "text": "22و2944",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 126236,
+        "confidence": 0.8964467644691467,
+        "alternatives": [
+          {
+            "text": "22و2944",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8964467644691467
+          }
+        ]
+      },
+      {
+        "text": "22و29445",
+        "valid": true,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 126270,
+        "confidence": 0.9325942397117615,
+        "alternatives": [
+          {
+            "text": "22و29445",
+            "valid": true,
+            "source": "raw",
+            "confidence": 0.9325942397117615
+          }
+        ]
+      },
+      {
+        "text": "252944",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126015,
+        "confidence": 0.8286663889884949,
+        "alternatives": [
+          {
+            "text": "252944",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8286663889884949
+          }
+        ]
+      },
+      {
+        "text": "22و29135",
+        "valid": true,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126041,
+        "confidence": 0.8524649739265442,
+        "alternatives": [
+          {
+            "text": "22و29135",
+            "valid": true,
+            "source": "raw",
+            "confidence": 0.8524649739265442
+          }
+        ]
+      },
+      {
+        "text": "22و2225",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126071,
+        "confidence": 0.7950740456581116,
+        "alternatives": [
+          {
+            "text": "22و2225",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7950740456581116
+          }
+        ]
+      },
+      {
+        "text": "22و211",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126118,
+        "confidence": 0.7917940616607666,
+        "alternatives": [
+          {
+            "text": "22و211",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7917940616607666
+          }
+        ]
+      },
+      {
+        "text": "22و29445",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126015,
+        "confidence": 0.7957093715667725,
+        "alternatives": [
+          {
+            "text": "22و29445",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.7957093715667725
+          }
+        ]
+      },
+      {
+        "text": "22و29245",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126071,
+        "confidence": 0.8589211106300354,
+        "alternatives": [
+          {
+            "text": "22و29245",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.8589211106300354
+          }
+        ]
+      },
+      {
+        "text": "22و2913",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 126118,
+        "confidence": 0.8106181025505066,
+        "alternatives": [
+          {
+            "text": "22و2913",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8106181025505066
+          }
+        ]
+      },
+      {
+        "text": "22و29445",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "temporal"
+        ],
+        "frame_idx": 126161,
+        "confidence": 0.9591076374053955,
+        "alternatives": [
+          {
+            "text": "22و29445",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.9591076374053955
+          }
+        ]
+      },
+      {
+        "text": "72و29435",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 126194,
+        "confidence": 0.9443620443344116,
+        "alternatives": [
+          {
+            "text": "72و29435",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.9443620443344116
+          }
+        ]
+      },
+      {
+        "text": "22و29445",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 126236,
+        "confidence": 0.9421019554138184,
+        "alternatives": [
+          {
+            "text": "22و29445",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.9421019554138184
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 214,
+    "captured_at": "2026-11-18 16:04:43.112037+03:30",
+    "direction": "exit",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.815",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/ba9be691178a4b4ca2a114edbde8b915.jpg",
+    "readings": [
+      {
+        "text": "111954",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 3316,
+        "confidence": 0.709583580493927,
+        "alternatives": [
+          {
+            "text": "111954",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.709583580493927
+          }
+        ]
+      },
+      {
+        "text": "519545",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 3360,
+        "confidence": 0.9552144408226013,
+        "alternatives": [
+          {
+            "text": "519545",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.9552144408226013
+          }
+        ]
+      },
+      {
+        "text": "5د99545",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 3405,
+        "confidence": 0.6640532612800598,
+        "alternatives": [
+          {
+            "text": "5د99545",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.6640532612800598
+          }
+        ]
+      },
+      {
+        "text": "8ه423",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 3280,
+        "confidence": 0.6220112442970276,
+        "alternatives": [
+          {
+            "text": "8ه423",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.6220112442970276
+          }
+        ]
+      },
+      {
+        "text": "8ه324",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 3280,
+        "confidence": 0.6700867414474487,
+        "alternatives": [
+          {
+            "text": "8ه324",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.6700867414474487
+          }
+        ]
+      },
+      {
+        "text": "1519545",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 3316,
+        "confidence": 0.824550211429596,
+        "alternatives": [
+          {
+            "text": "1519545",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.824550211429596
+          }
+        ]
+      },
+      {
+        "text": "519545",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 3360,
+        "confidence": 0.9672219753265381,
+        "alternatives": [
+          {
+            "text": "519545",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.9672219753265381
+          }
+        ]
+      },
+      {
+        "text": "55ه19545",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 3405,
+        "confidence": 0.8150032758712769,
+        "alternatives": [
+          {
+            "text": "55ه19545",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.8150032758712769
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 215,
+    "captured_at": "2026-11-18 16:05:33.732215+03:30",
+    "direction": "exit",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.000",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/2fad943b6a8340f6a869f903cfd96aac.jpg",
+    "readings": [
+      {
+        "text": "44944",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 5314,
+        "confidence": 0.9912145733833313,
+        "alternatives": [
+          {
+            "text": "44944",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.9912145733833313
+          }
+        ]
+      },
+      {
+        "text": "449614",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 5282,
+        "confidence": 0.914107620716095,
+        "alternatives": [
+          {
+            "text": "449614",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.914107620716095
+          }
+        ]
+      },
+      {
+        "text": "484964",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 5253,
+        "confidence": 0.7603262066841125,
+        "alternatives": [
+          {
+            "text": "484964",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.7603262066841125
+          }
+        ]
+      },
+      {
+        "text": "99",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 5237,
+        "confidence": 0.5705487728118896,
+        "alternatives": [
+          {
+            "text": "99",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.5705487728118896
+          }
+        ]
+      },
+      {
+        "text": "999",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "temporal"
+        ],
+        "frame_idx": 5237,
+        "confidence": 0.6421487927436829,
+        "alternatives": [
+          {
+            "text": "999",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.6421487927436829
+          }
+        ]
+      },
+      {
+        "text": "4849644",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 5253,
+        "confidence": 0.7154036164283752,
+        "alternatives": [
+          {
+            "text": "4849644",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.7154036164283752
+          }
+        ]
+      },
+      {
+        "text": "6449649",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 5282,
+        "confidence": 0.8312252759933472,
+        "alternatives": [
+          {
+            "text": "6449649",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8312252759933472
+          }
+        ]
+      },
+      {
+        "text": "6484944",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 5314,
+        "confidence": 0.849084198474884,
+        "alternatives": [
+          {
+            "text": "6484944",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.849084198474884
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  },
+  {
+    "id": 216,
+    "captured_at": "2026-11-18 16:11:16.763812+03:30",
+    "direction": "exit",
+    "status": "uncertain",
+    "plate": null,
+    "confidence": "0.843",
+    "image_path": "/home/MJR/parking_P1/src/captured_plates/534a2ef1ca4c4310b7fc7b3d51313c12.jpg",
+    "readings": [
+      {
+        "text": "8341414",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 15185,
+        "confidence": 0.8113545775413513,
+        "alternatives": [
+          {
+            "text": "8341414",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8113545775413513
+          }
+        ]
+      },
+      {
+        "text": "821694",
+        "valid": false,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 15213,
+        "confidence": 0.8524636626243591,
+        "alternatives": [
+          {
+            "text": "821694",
+            "valid": false,
+            "source": "raw",
+            "confidence": 0.8524636626243591
+          }
+        ]
+      },
+      {
+        "text": "82م16149",
+        "valid": true,
+        "source": "raw",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 15171,
+        "confidence": 0.7816879749298096,
+        "alternatives": [
+          {
+            "text": "82م16149",
+            "valid": true,
+            "source": "raw",
+            "confidence": 0.7816879749298096
+          }
+        ]
+      },
+      {
+        "text": "82م16145",
+        "valid": true,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 15171,
+        "confidence": 0.8432128429412842,
+        "alternatives": [
+          {
+            "text": "82م16145",
+            "valid": true,
+            "source": "padded",
+            "confidence": 0.8432128429412842
+          }
+        ]
+      },
+      {
+        "text": "83414145",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 15185,
+        "confidence": 0.8444363474845886,
+        "alternatives": [
+          {
+            "text": "83414145",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8444363474845886
+          }
+        ]
+      },
+      {
+        "text": "821694",
+        "valid": false,
+        "source": "padded",
+        "conflict": false,
+        "reserves": [
+          "quality",
+          "recent",
+          "temporal"
+        ],
+        "frame_idx": 15213,
+        "confidence": 0.8644635081291199,
+        "alternatives": [
+          {
+            "text": "821694",
+            "valid": false,
+            "source": "padded",
+            "confidence": 0.8644635081291199
+          }
+        ]
+      }
+    ],
+    "class_id": 2
+  }
+]

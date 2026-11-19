@@ -66,7 +66,8 @@ from plakino_ui.ui.camera_settings import CameraSettingsScreen
 from plakino_ui.ui.reports import ReportsScreen
 from plakino_ui.ui.plate_registration import PlateRegistrationScreen
 from plakino_ui.services.camera_service import camera_service
-from plakino_ui.services.camera_health_service import CameraHealthMonitor
+from plakino_ui.services.backend_service import BackendMonitor
+from plakino_ui.ui.components.backend_bar import BackendBar
 from plakino_ui.ui.components.traffic_record import TrafficRecordRow
 
 # Kivy's window clears to white by default before anything else draws.
@@ -131,7 +132,9 @@ class RenoApp(App):
             self._sidebars.extend(widget for widget in screen.walk(restrict=True)
                                   if isinstance(widget, Sidebar))
 
-        self.camera_health = CameraHealthMonitor(camera_service)
+        self._backend_bars = [widget for screen in self.screen_manager.screens
+                              for widget in screen.walk(restrict=True) if isinstance(widget, BackendBar)]
+        self.backend_monitor = BackendMonitor(camera_service, self._backend_updated)
         self.screen_manager.current = "login"
         return self.screen_manager
 
@@ -169,20 +172,28 @@ class RenoApp(App):
         self._show_screen(screen_name)
 
     def on_start(self):
-        self.camera_health.start()
+        self.backend_monitor.start()
         self._refresh_camera_config()
         self._camera_config_poll = Clock.schedule_interval(self._refresh_camera_config, 1)
+
+    def _backend_updated(self, snapshot, busy=False):
+        for bar in self._backend_bars:
+            bar.update(snapshot, busy)
 
     def _refresh_camera_config(self, *_args):
         camera_service.reload()
 
     def on_stop(self):
-        self.camera_health.stop()
+        self.backend_monitor.stop()
         if self._camera_config_poll is not None:
             self._camera_config_poll.cancel()
             self._camera_config_poll = None
         self.screen_manager.get_screen("live_detection").on_leave()
 
 
-if __name__ == "__main__":
+def main():
     RenoApp().run()
+
+
+if __name__ == "__main__":
+    main()

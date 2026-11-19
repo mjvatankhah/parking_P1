@@ -9,7 +9,8 @@ logger = logging.getLogger(__name__)
 
 class CameraManager:
 
-    def __init__(self, config_file):
+    def __init__(self, config_file, health=None):
+        self.health = health
         self.config = config_file
         self.streams = {}
         self.last_idx = {}
@@ -24,9 +25,12 @@ class CameraManager:
                     camera['id'], camera["source"], camera['type'], model_path,
                     detection_interval=self.config.get('detection_interval', 3),
                     roi=camera.get('roi'),
+                    **({'health': self.health} if self.health is not None else {}),
                 )
                 stream_manager.start()
             except Exception as exc:
+                if self.health is not None:
+                    self.health.connection(camera['id'], 'error')
                 logger.error("Camera %s could not start: %s", camera['id'], exc)
                 continue
 

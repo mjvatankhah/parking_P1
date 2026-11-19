@@ -4,7 +4,6 @@ import queue
 import logging
 import threading
 import time
-from pathlib import Path
 import os
 # پابتورچ میخواهد برای سریع شدن بعضی از پزدازش ها از(nnpack)
 # استفاده کند اما سخت افزار فعلی این قابلیت رو ندارد 
@@ -28,12 +27,13 @@ logger = logging.getLogger(__name__)
 
 
 class Pipeline:
-    def __init__(self, config):
+    def __init__(self, config, health=None):
         configure_logging('pipeline')
         self._frame_metrics = {}
+        self.health = health
         self.config = config
         self.preview = PreviewPublisher(self.config["cameras"])
-        self.camera_manager = CameraManager(self.config) 
+        self.camera_manager = CameraManager(self.config, health=health)
         self.lines = LineDetectorManager(self.config) 
         self.plate_reader = PlateReader() 
         self.candidates = PlateCandidates(self.plate_reader, **{'deferred': True,
@@ -76,7 +76,7 @@ class Pipeline:
         alive = lambda: self.running 
 
         self._worker_stages = [
-            (self.frame_queue, self._start_workers(observation_worker, (self.frame_queue, self.ocr_queue, self.lines, self.candidates, alive))),
+            (self.frame_queue, self._start_workers(observation_worker, (self.frame_queue, self.ocr_queue, self.lines, self.candidates, alive, self.health))),
             (self.ocr_queue, self._start_workers(ocr_worker, (self.ocr_queue, self.storage_queue, self.plate_reader, alive))),
             (self.storage_queue, self._start_workers(storage_worker, (self.storage_queue, self.db_queue, alive))),
             (self.db_queue, self._start_workers(database_worker, (self.db_queue, alive))),
@@ -126,6 +126,11 @@ class Pipeline:
             my_queue.put_nowait(frame)
         return dropped
 
+    def failed_workers(self):
+        workers = [thread for _, thread in self._worker_stages]
+        workers += [self._dispatch_thread, self._detection_thread]
+        return [thread.name for thread in workers if thread is not None and not thread.is_alive()]
+
     def stop(self):
         self.running = False
         if self._dispatch_thread is not None:
@@ -136,7 +141,7 @@ class Pipeline:
                 self._dispatch_thread = None
 
         self.camera_manager.stop_all()
-        self.preview.stop()
+        preview_stopped = self.preview.stop()
 
         # Stop the added detector before shutting down its downstream OCR worker.
         detection_thread = getattr(self, '_detection_thread', None)
@@ -144,7 +149,7 @@ class Pipeline:
             detection_thread.join(timeout=30)
             if detection_thread.is_alive():
                 logger.error('Plate detector did not stop; downstream workers remain available')
-                return
+                return False
             self._detection_thread = None
 
         # هر مرحله تمام شود، سپس مرحله بعد سیگنال پایان بگیرد.
@@ -164,24 +169,15 @@ class Pipeline:
                 break
 
         self._worker_stages = still_running
-        logger.info("Pipeline stop completed", extra={"event": "pipeline_stopped", "status": "incomplete" if still_running else "stopped"})
+        complete = not (still_running or self.camera_manager.streams or self._dispatch_thread or preview_stopped is False)
+        logger.info("Pipeline stop completed", extra={"event": "pipeline_stopped", "status": "stopped" if complete else "incomplete"})
+        return complete
 
 #  راه اندازی سیستم از طریق یک کامند
 def main():
-    BASE_DIR = Path(__file__).resolve().parent
-    CONFIG_PATH = BASE_DIR.parent / "plakino_ui" / "data" / "cameras.json"
-
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-        config = json.load(f)
-
-    pipeline = Pipeline(config=config)
-    pipeline.start()
-
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        pipeline.stop()
+    # Keep the legacy command under the same single-instance controller as the UI.
+    from computer_vision_v2.runtime.control import BackendClient
+    print(json.dumps(BackendClient().start(), ensure_ascii=False))
 
 # راه اندازی سیتم زمان اجرا مستقیم ماژول
 if __name__ == "__main__":

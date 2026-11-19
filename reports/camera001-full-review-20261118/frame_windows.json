@@ -1,0 +1,266 @@
+[
+  {
+    "event": 208,
+    "anchor": "2026-11-18T14:42:10.543810+03:30",
+    "anchor_type": "db_saved",
+    "status": "read",
+    "rtsp_capture": {
+      "received": 880,
+      "replaced": 847,
+      "replacement_percent": 96.25,
+      "window_seconds": 30.01,
+      "end": "2026-11-18T11:12:11.975857+00:00",
+      "fps": 29.324
+    },
+    "observation_queue": {
+      "received": 33,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.03,
+      "end": "2026-11-18T11:12:29.380005+00:00",
+      "fps": 1.099
+    }
+  },
+  {
+    "event": 209,
+    "anchor": "2026-11-18T11:19:15.412084+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 900,
+      "replaced": 851,
+      "replacement_percent": 94.56,
+      "window_seconds": 30.06,
+      "end": "2026-11-18T11:19:42.346237+00:00",
+      "fps": 29.94
+    },
+    "observation_queue": {
+      "received": 48,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.03,
+      "end": "2026-11-18T11:19:35.505668+00:00",
+      "fps": 1.598
+    }
+  },
+  {
+    "event": 210,
+    "anchor": "2026-11-18T11:29:12.145203+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 898,
+      "replaced": 843,
+      "replacement_percent": 93.88,
+      "window_seconds": 30.03,
+      "end": "2026-11-18T11:29:12.659233+00:00",
+      "fps": 29.903
+    },
+    "observation_queue": {
+      "received": 55,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 31.19,
+      "end": "2026-11-18T11:29:14.631694+00:00",
+      "fps": 1.763
+    }
+  },
+  {
+    "event": 211,
+    "anchor": "2026-11-18T12:04:16.987227+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 904,
+      "replaced": 850,
+      "replacement_percent": 94.03,
+      "window_seconds": 30.03,
+      "end": "2026-11-18T12:04:46.352487+00:00",
+      "fps": 30.103
+    },
+    "observation_queue": {
+      "received": 53,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.16,
+      "end": "2026-11-18T12:04:41.515517+00:00",
+      "fps": 1.757
+    }
+  },
+  {
+    "event": 212,
+    "anchor": "2026-11-18T12:08:33.514869+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 900,
+      "replaced": 847,
+      "replacement_percent": 94.11,
+      "window_seconds": 30.02,
+      "end": "2026-11-18T12:08:46.462819+00:00",
+      "fps": 29.98
+    },
+    "observation_queue": {
+      "received": 54,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.29,
+      "end": "2026-11-18T12:08:43.724303+00:00",
+      "fps": 1.783
+    }
+  },
+  {
+    "event": 213,
+    "anchor": "2026-11-18T15:43:18.653339+03:30",
+    "anchor_type": "db_saved",
+    "status": "read",
+    "rtsp_capture": {
+      "received": 983,
+      "replaced": 954,
+      "replacement_percent": 97.05,
+      "window_seconds": 30.04,
+      "end": "2026-11-18T12:13:46.744564+00:00",
+      "fps": 32.723
+    },
+    "observation_queue": {
+      "received": 29,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.35,
+      "end": "2026-11-18T12:13:47.473715+00:00",
+      "fps": 0.956
+    }
+  },
+  {
+    "event": 214,
+    "anchor": "2026-11-18T12:34:20.308323+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 894,
+      "replaced": 851,
+      "replacement_percent": 95.19,
+      "window_seconds": 30.03,
+      "end": "2026-11-18T12:34:26.704325+00:00",
+      "fps": 29.77
+    },
+    "observation_queue": {
+      "received": 35,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.18,
+      "end": "2026-11-18T12:34:33.968033+00:00",
+      "fps": 1.16
+    }
+  },
+  {
+    "event": 215,
+    "anchor": "2026-11-18T12:35:25.675987+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 895,
+      "replaced": 838,
+      "replacement_percent": 93.63,
+      "window_seconds": 30.01,
+      "end": "2026-11-18T12:35:26.731462+00:00",
+      "fps": 29.823
+    },
+    "observation_queue": {
+      "received": 51,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.23,
+      "end": "2026-11-18T12:35:34.392446+00:00",
+      "fps": 1.687
+    }
+  },
+  {
+    "event": 216,
+    "anchor": "2026-11-18T12:41:08.598442+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 899,
+      "replaced": 855,
+      "replacement_percent": 95.11,
+      "window_seconds": 30.04,
+      "end": "2026-11-18T12:41:26.886897+00:00",
+      "fps": 29.927
+    },
+    "observation_queue": {
+      "received": 49,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.43,
+      "end": "2026-11-18T12:41:37.613725+00:00",
+      "fps": 1.61
+    }
+  },
+  {
+    "event": 217,
+    "anchor": "2026-11-18T12:55:55.972700+00:00",
+    "anchor_type": "crossing",
+    "status": "unread",
+    "rtsp_capture": {
+      "received": 727,
+      "replaced": 692,
+      "replacement_percent": 95.19,
+      "window_seconds": 30.02,
+      "end": "2026-11-18T12:56:06.702210+00:00",
+      "fps": 24.217
+    },
+    "observation_queue": {
+      "received": 35,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.01,
+      "end": "2026-11-18T12:56:07.207208+00:00",
+      "fps": 1.166
+    }
+  },
+  {
+    "event": 218,
+    "anchor": "2026-11-18T13:05:12.510829+00:00",
+    "anchor_type": "crossing",
+    "status": "unread",
+    "rtsp_capture": {
+      "received": 919,
+      "replaced": 882,
+      "replacement_percent": 95.97,
+      "window_seconds": 30.42,
+      "end": "2026-11-18T13:05:38.006691+00:00",
+      "fps": 30.21
+    },
+    "observation_queue": {
+      "received": 36,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 31.02,
+      "end": "2026-11-18T13:05:13.950909+00:00",
+      "fps": 1.161
+    }
+  },
+  {
+    "event": 219,
+    "anchor": "2026-11-18T13:06:04.573446+00:00",
+    "anchor_type": "crossing",
+    "status": "uncertain",
+    "rtsp_capture": {
+      "received": 906,
+      "replaced": 870,
+      "replacement_percent": 96.03,
+      "window_seconds": 30.0,
+      "end": "2026-11-18T13:06:08.010679+00:00",
+      "fps": 30.2
+    },
+    "observation_queue": {
+      "received": 40,
+      "replaced": 0,
+      "replacement_percent": 0.0,
+      "window_seconds": 30.29,
+      "end": "2026-11-18T13:06:14.575940+00:00",
+      "fps": 1.321
+    }
+  }
+]

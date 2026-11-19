@@ -122,7 +122,7 @@ class PreviewPublisher:
             self._thread.join(timeout=5)
             if self._thread.is_alive():
                 logging.getLogger(__name__).error("Preview writer did not stop within five seconds")
-                return
+                return False
         with self._lock:
             self._pending.clear()
             self._active.clear()
@@ -131,6 +131,7 @@ class PreviewPublisher:
                 path.unlink(missing_ok=True)
             except OSError:
                 logging.getLogger(__name__).warning("Could not remove preview %s", path)
+        return True
 
     def _run(self):
         while not self._stop.wait(PREVIEW_INTERVAL):

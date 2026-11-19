@@ -6,73 +6,49 @@
   },
   "cameras": [
     {
-      "id": "دوربین ۱",
-      "gate_id": "گیت کارخونه",
-      "geometry_preview": "/home/mjr/plakino/src/plakino_ui/data/geometry_previews/daac29539dfe413985797a5ffc696549.png",
-      "type": "rtsp",
-      "source": "rtsp://User1:SADgk%401133@172.16.254.8:554/cam/realmonitor?channel=1&subtype=0",
+      "id": "cam22",
+      "gate_id": "test002",
+      "geometry_preview": "/home/MJR/parking_P1/src/plakino_ui/data/geometry_previews/63b464f0adcf496f825b0c77e13a7ebb.png",
+      "type": "video",
+      "source": "/mnt/c/Users/MJ/Videos/vlc-record-2026-11-19-08h20m22s-rtsp___172.16.254.8_554_cam_realmonitor-.avi",
       "line": [
         [
-          0.051041666666666666,
-          0.6240740740740741
+          0.07395833333333333,
+          0.5046296296296297
         ],
         [
-          0.5359375,
-          0.46944444444444444
+          0.4640625,
+          0.38055555555555554
         ],
         [
-          0.48125,
-          0.27314814814814814
+          0.45416666666666666,
+          0.2759259259259259
         ]
       ],
       "dir": "entry_exit",
       "inside_point": [
-        0.5041666666666667,
-        0.674074074074074
+        0.41041666666666665,
+        0.575925925925926
       ],
       "coordinate_space": "normalized",
       "roi": [
         [
-          0.030729166666666665,
-          0.24537037037037038
+          0.08697916666666666,
+          0.2212962962962963
         ],
         [
-          0.6166666666666667,
-          0.17314814814814813
+          0.4947916666666667,
+          0.1787037037037037
         ],
         [
-          0.8151041666666666,
-          0.9574074074074074
+          0.5390625,
+          0.6953703703703704
         ],
         [
-          0.022916666666666665,
-          0.9666666666666667
+          0.0078125,
+          0.7481481481481481
         ]
       ]
-    },
-    {
-      "id": "vv21",
-      "gate_id": "vv2",
-      "geometry_preview": "/home/mjr/plakino/src/plakino_ui/data/geometry_previews/94a693f2401b4e80ba00a51de60ca815.png",
-      "type": "video",
-      "source": "/home/mjr/plakino/src/computer_vision_v2/video/VID_20261116_150153_880.mp4",
-      "line": [
-        [
-          0.29492455418381347,
-          0.006481481481481481
-        ],
-        [
-          0.2544581618655693,
-          0.9314814814814815
-        ]
-      ],
-      "dir": "entry_exit",
-      "inside_point": [
-        0.42935528120713307,
-        0.5287037037037037
-      ],
-      "coordinate_space": "normalized",
-      "roi": null
     }
   ]
 }

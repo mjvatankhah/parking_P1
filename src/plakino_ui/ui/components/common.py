@@ -286,6 +286,8 @@ class _RoundedButtonBase(HoverBehavior, ButtonBehavior, Label):
             self._animated_color = list(self.bg_color_normal)
         self.bind(pos=self._reposition, size=self._reposition,
                   state=self._redraw, disabled=self._redraw, hovered=self._redraw)
+        self._enabled_color = list(self.color)
+        self._redraw()
 
     def _reposition(self, *args):
         self._rect.pos = self.pos
@@ -298,6 +300,7 @@ class _RoundedButtonBase(HoverBehavior, ButtonBehavior, Label):
             target = theme.rgba(COLORS["disabled_bg"])
             self.color = theme.rgba(COLORS["disabled_text"])
         else:
+            self.color = self._enabled_color
             if self.state == "down":
                 target = self.bg_color_down
             elif self.hovered:

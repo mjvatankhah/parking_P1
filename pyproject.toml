@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "cryptography>=44,<47",
     "arabic-reshaper>=3.0.1",
     "hezar==1.0.0",
     "transformers>=4.30,<5",
@@ -25,14 +26,15 @@ dependencies = [
 ]
 
 [project.scripts]
-plakino = "computer_vision_v2.main_v2:main"
+plakino = "plakino_ui.main:main"
+plakino-backend = "computer_vision_v2.runtime.control:main"
 
 [build-system]
 requires = ["uv_build>=0.12.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = ["computer_vision_v2", "plakino_ui", "plakino_logging"]
+module-name = ["computer_vision_v2", "plakino_ui", "plakino_logging", "plakino_license"]
 
 [tool.uv.sources]
 torch = { index = "pytorch-cpu" }

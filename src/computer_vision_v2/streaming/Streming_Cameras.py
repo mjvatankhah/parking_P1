@@ -22,7 +22,8 @@ class CapturedFrame(NamedTuple):
 
 
 class StreamManager:
-    def __init__(self, camera_id, source, source_type, model_path, detection_interval=3, roi=None):
+    def __init__(self, camera_id, source, source_type, model_path, detection_interval=3, roi=None, health=None):
+        self.health = health
         self.capture_metrics = FrameMetrics(camera_id, "rtsp_capture")
         self.camera_id = camera_id
         self.source = source
@@ -75,13 +76,19 @@ class StreamManager:
             while not self._stop.is_set():
                 ok, image = source.get_frame()
                 if not ok:
+                    if self.health is not None:
+                        self.health.connection(self.camera_id, 'ended')
                     return
+                if self.health is not None:
+                    self.health.received(self.camera_id)
                 self._capture_index += 1
                 fps = getattr(source, 'fps', 25.)
                 tracked = self.tracker.process(self._capture_index, self._capture_index/fps, image)
                 with self._condition:
                     self._latest_tracked = tracked
         except Exception:
+            if self.health is not None:
+                self.health.connection(self.camera_id, 'error')
             logger.exception("Camera %s video playback failed", self.camera_id)
         finally:
             if source is not None:
@@ -109,6 +116,8 @@ class StreamManager:
                         # An opened connection is not healthy until it delivers a frame.
                         retry_delay = 1
                         failures = 0
+                        if self.health is not None:
+                            self.health.received(self.camera_id)
                         captured_at = time.monotonic()
                         with self._condition:
                             self.capture_metrics.add(received=1, replaced=int(self._latest_capture is not None))
@@ -118,6 +127,8 @@ class StreamManager:
                             )
                             self._condition.notify()
                 except Exception as exc:
+                    if self.health is not None and not self._stop.is_set():
+                        self.health.connection(self.camera_id, 'disconnected')
                     # OpenCV errors can contain an RTSP URL with credentials.
                     logger.warning("Camera %s disconnected (%s)", self.camera_id, type(exc).__name__, extra={"event": "camera_disconnected", "camera_id": self.camera_id})
                 finally:
